@@ -14,7 +14,8 @@ Specification: `HANDOFF.md` copied byte-for-byte from the supplied attachment. E
 | Foundation local checks | `make check` passed on CPython 3.12.12 (14 Markdown documents); `make doctor` passed prerequisite inventory; both scripts compiled | Documentation integrity only |
 | Negative prerequisite check | System Python 3.9.6 correctly rejected by `scripts/check_foundation.py` with exit 1 | Required-version enforcement only |
 | Git hygiene | Secret/data/build ignore paths verified; handoff attachment SHA-256 matches `7106492044e15f27aa784db3f33a7de40106c8322918c0ce00898fd8f6df2fa6` | No external telemetry included |
-| Publication | Prepared for public `TravisMa07/ResponseForge`; remote verification follows the seed commit | Public repository seed only |
+| Publication | [Public repository](https://github.com/TravisMa07/ResponseForge) verified via `gh repo view`; default branch `main`; `git ls-remote` matched seed `2264efd95899cb6581be1c6f7346941671e2016f` | Public repository seed only |
+| Hosted CI | Workflow committed; no run returned by `gh run list` immediately after seed push | Hosted CI result not yet verified |
 
 No product tests exist yet: RF-01 introduces the application test harness with independent expectations. Phase 0 full acceptance remains open because vendor runtime/image/security qualification and remaining scenario evidence are not complete. This is intentional scope control for the initial repository request, not a claim that those requirements passed.
 
@@ -27,3 +28,5 @@ RF-01 is next ready for design/expectation freeze. RF-02/03/04 can become indepe
 RF-01 through RF-09: planned, not implemented, not locally verified, not runtime-qualified, not owner-accepted or merged. No releases, branch protection or required status checks are configured or claimed.
 
 Reproduce local checks with `make check doctor PYTHON="uv run --no-project --python 3.12 python"` and `uv run --no-project --python 3.12 python -m py_compile scripts/check_foundation.py scripts/doctor.py`. Evidence applies to the foundation artifact containing this record; the initial Git commit identifies the exact files. Remote CI results, if available, are recorded separately after publication.
+
+Seed revision: `2264efd95899cb6581be1c6f7346941671e2016f`. This follow-up ledger entry records publication evidence without rewriting that revision. Local foundation checks were rerun for this documentation update.
