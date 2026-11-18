@@ -23,9 +23,9 @@ Independent read-only review by `dependency_review` found no foundation blockers
 
 ## Ownership and gates
 
-RF-01 is next ready for design/expectation freeze. RF-02/03/04 can become independent lanes after RF-01 contracts are integrated at a recorded SHA. The integration owner owns shared contracts, lockfiles, CI and status; migration and runtime tests are serialized. Later assignments must replace planned lane names with actual owners and exact base revisions.
+Historical foundation status: RF-01 was next ready for design/expectation freeze; current progress is recorded below. RF-02/03/04 can become independent lanes after RF-01 contracts are integrated at a recorded SHA. The integration owner owns shared contracts, lockfiles, CI and status; migration and runtime tests are serialized. Later assignments must replace planned lane names with actual owners and exact base revisions.
 
-RF-01 through RF-09: planned, not implemented, not locally verified, not runtime-qualified, not owner-accepted or merged. No releases, branch protection or required status checks are configured or claimed.
+At the foundation checkpoint RF-01 through RF-09 were planned and unimplemented; the RF-01 update below supersedes only its contract/policy status. No releases, branch protection or required status checks are configured or claimed.
 
 Reproduce local checks with `make check doctor PYTHON="uv run --no-project --python 3.12 python"` and `uv run --no-project --python 3.12 python -m py_compile scripts/check_foundation.py scripts/doctor.py`. Evidence applies to the foundation artifact containing this record; the initial Git commit identifies the exact files. Remote CI results, if available, are recorded separately after publication.
 
@@ -46,3 +46,16 @@ Validation: inspected every rewritten commit tree for handoff filenames, confirm
 ## Analyst effort measurement
 
 The owner requested tracking hands-on analyst time saved per eligible case. RF-01 defines the case readiness events and RF-09 collects the evidence using the [measurement plan](implementation-plan.md#measure-analyst-time-saved). A timed lab comparison is preferred. A documented estimate is an acceptable fallback and stays labeled as estimated. Collection is planned.
+
+## RF-01 kickoff
+
+Verified PR #10 merged on 2026-11-18; base `b6a44d6` on main. RF-01 branch `feat/rf-01-contracts`. [Design](rf-01-design.md) and [independent expectations](expectations/rf-01.md) freeze before code. Contracts/provider writer, policy writer and independent test writer have disjoint paths; primary owns tooling, CI, shared docs and qualification. No deployment or live action authorized or performed. RF-02/03 implementation and RF-04 investigation await proven contracts.
+
+
+## RF-01 local qualification and next ownership
+
+[PR #11](https://github.com/TravisMa07/ResponseForge/pull/11), issue [#1](https://github.com/TravisMa07/ResponseForge/issues/1), targets main because PR #10 already merged. Freeze `402ebb7`; implementation/proven contract base `6d8b4ecb025f254d1809eb5e53730bbc3973eacc`. Contracts/protocol writer `contracts`, policy writer `policy`, independent test writer `tests`; read-only artifact reviewer `review`. Primary owns integration, lock, CI, schemas/examples and status. Agent edits were disjoint and centrally reviewed.
+
+At clean implementation revision `6d8b4ec`, `make qualify`, `uv lock --check --offline`, `uv build --offline --no-build-isolation` and `git diff --check` passed on macOS ARM64 / CPython 3.12.12 / uv 0.13.6. **278 tests pass**. Red failures, correction, review scope and limitations are in the [RF-01 ledger](rf-01-ledger.md). No API/storage/replay/provider runtime is qualified. Owner acceptance, merge authorization and merged-revision qualification remain open; no release performed. Issue #1 stays open until the authorized merge.
+
+RF-02/03 implementation and RF-04 investigation have [prepared bounded assignments](next-packages.md) from that proven revision. Their actual agents are not assigned yet; their own designs/expectations and cross-lane durable interfaces must freeze before code. Real RF-04 runtime still depends on RF-02/03 and approved execution isolation. License, infrastructure and endpoint decisions do not block these offline design lanes.

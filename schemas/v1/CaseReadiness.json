@@ -1,0 +1,62 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "audit_event_id": {
+      "minLength": 1,
+      "title": "Audit Event Id",
+      "type": "string"
+    },
+    "evidence_refs": {
+      "items": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Evidence Refs",
+      "type": "array"
+    },
+    "known_gaps": {
+      "items": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "title": "Known Gaps",
+      "type": "array"
+    },
+    "no_action_reason": {
+      "anyOf": [
+        {
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "No Action Reason"
+    },
+    "proposal_ids": {
+      "items": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "title": "Proposal Ids",
+      "type": "array"
+    },
+    "schema_version": {
+      "const": "1.0",
+      "default": "1.0",
+      "title": "Schema Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "evidence_refs",
+    "known_gaps",
+    "proposal_ids",
+    "audit_event_id"
+  ],
+  "title": "CaseReadiness",
+  "type": "object"
+}

@@ -23,4 +23,4 @@ Assign base revision and file ownership; freeze shared contracts before parallel
 
 Foundation: `make check` validates local Markdown links and required populated documents; `make doctor` inventories prerequisites without installing anything. These are documentation/tooling checks only.
 
-RF-01 introduces locked Python dependencies, pytest, Ruff and typing. RF-02/03 add offline behavioral tests; RF-04 adds `docker compose config` and real runtime smoke tests. RF-05/06 add exported workflow regression and all scenario acceptance tests. RF-07/08 add captured Wazuh contracts and separately authorized VM tests. Run relevant tests for every change and required broader gates before integration.
+RF-01 provides locked Python dependencies, pytest, Ruff and typing: see [testing](testing.md). RF-02/03 add offline behavioral tests; RF-04 adds `docker compose config` and real runtime smoke tests. RF-05/06 add exported workflow regression and all scenario acceptance tests. RF-07/08 add captured Wazuh contracts and separately authorized VM tests. Run relevant tests for every change and required broader gates before integration.

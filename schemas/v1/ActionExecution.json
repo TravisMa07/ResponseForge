@@ -1,0 +1,149 @@
+{
+  "$defs": {
+    "Mode": {
+      "enum": [
+        "replay",
+        "live"
+      ],
+      "title": "Mode",
+      "type": "string"
+    },
+    "VerificationResult": {
+      "additionalProperties": false,
+      "properties": {
+        "checked_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Checked At"
+        },
+        "detail": {
+          "minLength": 1,
+          "title": "Detail",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "1.0",
+          "default": "1.0",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "simulated": {
+          "title": "Simulated",
+          "type": "boolean"
+        },
+        "status": {
+          "enum": [
+            "pending",
+            "verified",
+            "failed",
+            "timeout",
+            "unsupported"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "verified_live": {
+          "title": "Verified Live",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "status",
+        "simulated",
+        "verified_live",
+        "detail"
+      ],
+      "title": "VerificationResult",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "dispatch_state": {
+      "enum": [
+        "pending",
+        "dispatched",
+        "acknowledged",
+        "uncertain",
+        "failed"
+      ],
+      "title": "Dispatch State",
+      "type": "string"
+    },
+    "error": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Error"
+    },
+    "execution_id": {
+      "minLength": 1,
+      "title": "Execution Id",
+      "type": "string"
+    },
+    "incident_id": {
+      "minLength": 1,
+      "title": "Incident Id",
+      "type": "string"
+    },
+    "mode": {
+      "$ref": "#/$defs/Mode"
+    },
+    "proposal_id": {
+      "minLength": 1,
+      "title": "Proposal Id",
+      "type": "string"
+    },
+    "provider": {
+      "minLength": 1,
+      "title": "Provider",
+      "type": "string"
+    },
+    "requested_at": {
+      "format": "date-time",
+      "title": "Requested At",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "1.0",
+      "default": "1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "updated_at": {
+      "format": "date-time",
+      "title": "Updated At",
+      "type": "string"
+    },
+    "verification": {
+      "$ref": "#/$defs/VerificationResult"
+    }
+  },
+  "required": [
+    "execution_id",
+    "proposal_id",
+    "incident_id",
+    "provider",
+    "mode",
+    "dispatch_state",
+    "requested_at",
+    "updated_at",
+    "verification"
+  ],
+  "title": "ActionExecution",
+  "type": "object"
+}

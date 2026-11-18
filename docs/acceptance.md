@@ -1,6 +1,6 @@
 # Acceptance matrix
 
-All product gates are **NOT RUN**. Foundation checks only validate repository integrity. See [implementation ledger](implementation-ledger.md) for observed evidence.
+Full product gates below remain open. RF-01 contract/pure-policy evidence is recorded separately in the [RF-01 ledger](rf-01-ledger.md); it does not pass the P1 vertical slice. Foundation checks only validate repository integrity. See [implementation ledger](implementation-ledger.md) for observed evidence.
 
 | Gate | Required evidence | Owner / status |
 | --- | --- | --- |

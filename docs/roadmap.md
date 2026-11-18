@@ -12,7 +12,7 @@ The [implementation plan](implementation-plan.md) owns detailed work packages. T
 | 5 | Fresh-clone reproducibility, docs, and [analyst effort evidence](implementation-plan.md#measure-analyst-time-saved) | Planned: RF-09 |
 | 6 | Optional read-only AI investigation | Deferred until phases 1–5 qualify |
 
-The next coding package is RF-01. No replay scenario, SOAR execution or live response has passed acceptance yet.
+RF-01 contracts/pure policy are implemented; qualification and review are recorded in the [RF-01 ledger](rf-01-ledger.md). RF-02/03 implementation and RF-04 investigation are next. No replay scenario, SOAR execution or live response has passed acceptance yet.
 
 
 ## GitHub delivery tracking
@@ -21,7 +21,7 @@ The baseline is nine issues and nine implementation PRs through full release rea
 
 | Package | GitHub issue | PR |
 | --- | --- | --- |
-| RF-01 · Contracts and tooling | [#1](https://github.com/TravisMa07/ResponseForge/issues/1) | Pending |
+| RF-01 · Contracts and tooling | [#1](https://github.com/TravisMa07/ResponseForge/issues/1) | [#11](https://github.com/TravisMa07/ResponseForge/pull/11) · locally qualified; owner review/merge open |
 | RF-02 · Durable core | [#2](https://github.com/TravisMa07/ResponseForge/issues/2) | Pending |
 | RF-03 · Offline replay | [#3](https://github.com/TravisMa07/ResponseForge/issues/3) | Pending |
 | RF-04 · Shuffle deployment and transport | [#4](https://github.com/TravisMa07/ResponseForge/issues/4) | Pending |
@@ -32,3 +32,5 @@ The baseline is nine issues and nine implementation PRs through full release rea
 | RF-09 · Release readiness | [#9](https://github.com/TravisMa07/ResponseForge/issues/9) | Pending |
 
 After RF-01, RF-02 and RF-03 can run in parallel alongside RF-04 discovery. RF-04 runtime qualification needs the integrated core and replay path. RF-06 dataset discovery can overlap those lanes.
+
+The next lanes have [bounded preparation and ownership](next-packages.md) from proven RF-01 revision `6d8b4ec`; their implementation and runtime gates remain open.

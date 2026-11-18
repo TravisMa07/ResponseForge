@@ -1,0 +1,136 @@
+{
+  "$defs": {
+    "EndpointRef": {
+      "additionalProperties": false,
+      "properties": {
+        "agent_id": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Agent Id"
+        },
+        "endpoint_id": {
+          "minLength": 1,
+          "title": "Endpoint Id",
+          "type": "string"
+        },
+        "hostname": {
+          "minLength": 1,
+          "title": "Hostname",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "1.0",
+          "default": "1.0",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "endpoint_id",
+        "hostname"
+      ],
+      "title": "EndpointRef",
+      "type": "object"
+    },
+    "IncidentStatus": {
+      "enum": [
+        "RECEIVED",
+        "TRIAGING",
+        "INVESTIGATING",
+        "AWAITING_APPROVAL",
+        "RESPONDING",
+        "CONTAINED",
+        "RESOLVED",
+        "FAILED",
+        "CLOSED"
+      ],
+      "title": "IncidentStatus",
+      "type": "string"
+    },
+    "Mode": {
+      "enum": [
+        "replay",
+        "live"
+      ],
+      "title": "Mode",
+      "type": "string"
+    },
+    "Severity": {
+      "enum": [
+        "low",
+        "medium",
+        "high",
+        "critical"
+      ],
+      "title": "Severity",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "alert_id": {
+      "minLength": 1,
+      "title": "Alert Id",
+      "type": "string"
+    },
+    "assessment": {
+      "minLength": 1,
+      "title": "Assessment",
+      "type": "string"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "endpoint": {
+      "$ref": "#/$defs/EndpointRef"
+    },
+    "incident_id": {
+      "minLength": 1,
+      "title": "Incident Id",
+      "type": "string"
+    },
+    "mode": {
+      "$ref": "#/$defs/Mode"
+    },
+    "priority": {
+      "$ref": "#/$defs/Severity"
+    },
+    "scenario_id": {
+      "minLength": 1,
+      "title": "Scenario Id",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "1.0",
+      "default": "1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "status": {
+      "$ref": "#/$defs/IncidentStatus",
+      "default": "RECEIVED"
+    }
+  },
+  "required": [
+    "incident_id",
+    "alert_id",
+    "mode",
+    "scenario_id",
+    "endpoint",
+    "priority",
+    "assessment",
+    "created_at"
+  ],
+  "title": "Incident",
+  "type": "object"
+}

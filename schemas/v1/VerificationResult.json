@@ -1,0 +1,56 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "checked_at": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Checked At"
+    },
+    "detail": {
+      "minLength": 1,
+      "title": "Detail",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "1.0",
+      "default": "1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "simulated": {
+      "title": "Simulated",
+      "type": "boolean"
+    },
+    "status": {
+      "enum": [
+        "pending",
+        "verified",
+        "failed",
+        "timeout",
+        "unsupported"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "verified_live": {
+      "title": "Verified Live",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "status",
+    "simulated",
+    "verified_live",
+    "detail"
+  ],
+  "title": "VerificationResult",
+  "type": "object"
+}

@@ -1,0 +1,58 @@
+{
+  "$defs": {
+    "ActionType": {
+      "enum": [
+        "terminate_process",
+        "quarantine_file",
+        "block_indicator",
+        "isolate_host",
+        "unisolate_host",
+        "disable_persistence",
+        "test_marker"
+      ],
+      "title": "ActionType",
+      "type": "string"
+    },
+    "Mode": {
+      "enum": [
+        "replay",
+        "live"
+      ],
+      "title": "Mode",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "action": {
+      "$ref": "#/$defs/ActionType"
+    },
+    "mode": {
+      "$ref": "#/$defs/Mode"
+    },
+    "provider": {
+      "minLength": 1,
+      "title": "Provider",
+      "type": "string"
+    },
+    "provider_version": {
+      "minLength": 1,
+      "title": "Provider Version",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "1.0",
+      "default": "1.0",
+      "title": "Schema Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "provider",
+    "provider_version",
+    "mode",
+    "action"
+  ],
+  "title": "ActionCapability",
+  "type": "object"
+}

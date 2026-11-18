@@ -2,7 +2,7 @@
 
 SOAR-first incident response automation with offline attack replay and an optional live Wazuh endpoint path. ResponseForge connects evidence, analyst approval, response providers and auditable case reports through real Shuffle workflows.
 
-**Status: repository foundation / Phase 0 discovery. No incident API, replay engine, Shuffle workflow or live integration is implemented or qualified yet.**
+**Status: RF-01 contracts and pure policy implemented; local qualification is recorded in the [RF-01 ledger](docs/rf-01-ledger.md). No incident API, replay engine, Shuffle workflow or live integration is implemented or qualified yet.**
 
 The public engineering requirements are captured in the [architecture](docs/architecture.md) and acceptance documentation. The [implementation plan](docs/implementation-plan.md) defines bounded delivery packages and parallel-agent ownership; the [acceptance matrix](docs/acceptance.md) keeps implementation separate from verification.
 
@@ -14,6 +14,17 @@ The public engineering requirements are captured in the [architecture](docs/arch
 - Live: opt-in Wazuh alerts and an approved safe action on an authorized, separately supplied VM. Live support requires observed endpoint evidence.
 
 This is deliberately smaller than DetectBridge: no custom SIEM/EDR, stream-processing fleet, dashboard, paid API or AI dependency. DetectBridge is not a runtime dependency.
+
+## Run offline contract and policy checks
+
+Requires Python 3.12+ and uv (qualified locally with Python 3.12.12 and uv 0.13.6):
+
+```bash
+uv sync --locked
+make qualify
+```
+
+The first dependency install may need network access. Qualification then runs offline: pytest, Ruff, strict typing, schema drift and documentation checks. See [testing](docs/testing.md), the [contract design](docs/rf-01-design.md), [v1 JSON Schemas](schemas/v1), and [examples](examples/contracts-v1.json). These checks do not start an API or qualify provider execution.
 
 ## Run the foundation checks
 
