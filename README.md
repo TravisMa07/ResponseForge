@@ -2,7 +2,7 @@
 
 SOAR-first incident response automation with offline attack replay and an optional live Wazuh endpoint path. ResponseForge connects evidence, analyst approval, response providers and auditable case reports through real Shuffle workflows.
 
-**Status: RF-01 contracts and RF-02 authenticated case API/durable recovery implemented. See the [RF-02 ledger](docs/rf-02-ledger.md). Replay, reports, actual Shuffle execution and live endpoint integration remain unimplemented/unqualified.**
+**Status: RF-01/02 are merged. RF-03 offline replay, scoped evidence, durable simulated response and JSON/HTML reports are locally qualified; see the [RF-03 ledger](docs/rf-03-ledger.md). Real Shuffle, recorded attack corpus coverage and live endpoint integration remain unqualified.**
 
 The public engineering requirements are captured in the [architecture](docs/architecture.md) and acceptance documentation. The [implementation plan](docs/implementation-plan.md) defines bounded delivery packages and parallel-agent ownership; the [acceptance matrix](docs/acceptance.md) keeps implementation separate from verification.
 
@@ -26,6 +26,15 @@ make qualify
 
 The first dependency install may need network access. Qualification then runs offline: pytest, Ruff, strict typing, schema drift and documentation checks. See [testing](docs/testing.md), the [contract design](docs/rf-01-design.md), [v1 JSON Schemas](schemas/v1), and [examples](examples/contracts-v1.json). These checks exercise the API in process and controlled simulated providers. They do not qualify actual vendor or endpoint execution.
 
+## Replay an original synthetic fixture
+
+```bash
+uv run --locked --offline python -m responseforge \
+  --replay datasets/fixtures/suspicious.jsonl --source-id rf03-suspicious
+```
+
+This uses the authenticated API in process, writes ignored local state/reports and stops for approval. Add `--decision approve` explicitly to apply one **simulated** effect; repeat delivery retains one case/effect. No TCP listener, real Shuffle workflow or endpoint action runs. See the [replay runbook](docs/replay.md) for benign/incomplete cases, denial, recovery, formats and report redaction.
+
 ## Local case API
 
 ```bash
@@ -46,7 +55,7 @@ make check PYTHON="uv run --no-project --python 3.12 python"
 make doctor PYTHON="uv run --no-project --python 3.12 python"
 ```
 
-Or use `make check doctor PYTHON=python3` when that interpreter is 3.12+. These commands validate documentation and inspect local prerequisites only. For the local API, use the explicit private configuration below. Doctor returns nonzero if a required tool is unavailable; passing it does not qualify a deployment. No external Python packages are needed for foundation checks.
+Or use `make check doctor PYTHON=python3` when that interpreter is 3.12+. These commands validate documentation and inspect local prerequisites only. For the local API, use the explicit private configuration above. Doctor returns nonzero if a required tool is unavailable; passing it does not qualify a deployment. No external Python packages are needed for foundation checks.
 
 ## Engineering documentation
 

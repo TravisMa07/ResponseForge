@@ -4,12 +4,12 @@ import hmac
 import sqlite3
 from collections.abc import Callable
 from datetime import UTC, datetime
-from typing import Annotated
+from typing import Annotated, Literal
 from uuid import uuid4
 
 from fastapi import Depends, FastAPI, Header, HTTPException, Request, Response
 from fastapi.exceptions import RequestValidationError
-from fastapi.responses import JSONResponse
+from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from pydantic import TypeAdapter, ValidationError
 
@@ -19,6 +19,8 @@ from responseforge.contracts import (
     Approval,
     AuditEvent,
     CaseReadiness,
+    CollectionRequest,
+    CollectionResult,
     Evidence,
     Incident,
     MetricEvent,
@@ -222,5 +224,31 @@ def create_app(settings: Settings, *, clock: Callable[[], datetime] | None = Non
             system_denial(actor.actor_id, "Callback timestamp rejected")
             raise HTTPException(422, "Invalid callback timestamp") from None
         return service.callback(item, actor, nonce=x_request_nonce, sent_at=sent_at)
+
+    @app.post("/v1/incidents/{incident_id}/collect", response_model=CollectionResult)
+    async def collect(incident_id: str, item: CollectionRequest, actor: Actor) -> CollectionResult:
+        return await service.collect(incident_id, item, actor)
+
+    @app.get(
+        "/v1/incidents/{incident_id}/report",
+        response_model=None,
+        responses={
+            200: {
+                "content": {
+                    "application/json": {"schema": {"type": "object"}},
+                    "text/html": {"schema": {"type": "string"}},
+                }
+            }
+        },
+    )
+    def report(
+        incident_id: str, actor: Actor, format: Literal["json", "html"] = "json"
+    ) -> Response:
+        from responseforge.reports import build_report, render_html
+
+        value = build_report(service, incident_id, actor, secrets=tuple(settings.credentials))
+        if format == "html":
+            return HTMLResponse(render_html(value))
+        return JSONResponse(value)
 
     return app

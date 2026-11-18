@@ -1,0 +1,68 @@
+{
+  "schema_version": "1.0",
+  "fixtures": [
+    {
+      "source_id": "rf03-suspicious",
+      "path": "suspicious.jsonl",
+      "sha256": "a49dd257210a2a505083f260b079cfa39422ee62c729cda13ed5973555ed61f8",
+      "origin": "original-synthetic",
+      "format": "jsonl",
+      "fields": [
+        "event_id",
+        "scenario_id",
+        "endpoint",
+        "observed_at",
+        "artifact",
+        "fields"
+      ],
+      "expected_rule": "RF-REPLAY-ENCODED-PS",
+      "expected_missing": [
+        "network",
+        "parent_process"
+      ],
+      "redistribution_note": "Project license unselected; no third-party corpus. Original synthetic fixtures only; strings are inert data."
+    },
+    {
+      "source_id": "rf03-benign",
+      "path": "benign.jsonl",
+      "sha256": "664cc10c6c1417f13694748fc3810be1468898f4f63749ccb844a7e249b6359b",
+      "origin": "original-synthetic",
+      "format": "jsonl",
+      "fields": [
+        "event_id",
+        "scenario_id",
+        "endpoint",
+        "observed_at",
+        "artifact",
+        "fields"
+      ],
+      "expected_rule": "RF-REPLAY-OBSERVATION",
+      "expected_missing": [
+        "network"
+      ],
+      "redistribution_note": "Project license unselected; no third-party corpus. Original synthetic fixtures only; strings are inert data."
+    },
+    {
+      "source_id": "rf03-incomplete",
+      "path": "incomplete.jsonl",
+      "sha256": "5df3d581ea290f56e1b0205d82af08f1465185c027120b6843080e888aab60b6",
+      "origin": "original-synthetic",
+      "format": "jsonl",
+      "fields": [
+        "event_id",
+        "scenario_id",
+        "endpoint",
+        "observed_at",
+        "artifact",
+        "fields"
+      ],
+      "expected_rule": "RF-REPLAY-ENCODED-PS",
+      "expected_missing": [
+        "network",
+        "parent_process",
+        "process_id"
+      ],
+      "redistribution_note": "Project license unselected; no third-party corpus. Original synthetic fixtures only; strings are inert data."
+    }
+  ]
+}

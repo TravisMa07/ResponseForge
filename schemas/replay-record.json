@@ -1,0 +1,104 @@
+{
+  "$defs": {
+    "EndpointRef": {
+      "additionalProperties": false,
+      "properties": {
+        "agent_id": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Agent Id"
+        },
+        "endpoint_id": {
+          "minLength": 1,
+          "title": "Endpoint Id",
+          "type": "string"
+        },
+        "hostname": {
+          "minLength": 1,
+          "title": "Hostname",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "1.0",
+          "default": "1.0",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "endpoint_id",
+        "hostname"
+      ],
+      "title": "EndpointRef",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "artifact": {
+      "enum": [
+        "process",
+        "network",
+        "file",
+        "persistence"
+      ],
+      "title": "Artifact",
+      "type": "string"
+    },
+    "endpoint": {
+      "$ref": "#/$defs/EndpointRef"
+    },
+    "event_id": {
+      "minLength": 1,
+      "title": "Event Id",
+      "type": "string"
+    },
+    "fields": {
+      "additionalProperties": {
+        "maxLength": 4096,
+        "type": "string"
+      },
+      "maxProperties": 32,
+      "propertyNames": {
+        "maxLength": 128,
+        "minLength": 1
+      },
+      "title": "Fields",
+      "type": "object"
+    },
+    "observed_at": {
+      "format": "date-time",
+      "title": "Observed At",
+      "type": "string"
+    },
+    "scenario_id": {
+      "minLength": 1,
+      "title": "Scenario Id",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "1.0",
+      "default": "1.0",
+      "title": "Schema Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "event_id",
+    "scenario_id",
+    "endpoint",
+    "observed_at",
+    "artifact",
+    "fields"
+  ],
+  "title": "RecordedEvent",
+  "type": "object"
+}

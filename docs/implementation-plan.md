@@ -1,6 +1,6 @@
 # Implementation plan
 
-Initial scope: establish and publish the repository, complete feasible Phase 0 research, and expose remaining qualification gates. RF-01 contracts and RF-02 durable API/core are now implemented with bounded local qualification; replay and vendor integrations follow. No time estimate or feature completion is inferred from parallelism.
+Initial scope: establish and publish the repository, complete feasible Phase 0 research, and expose remaining qualification gates. RF-01 contracts and RF-02 durable API/core are now implemented with bounded local qualification; RF-03 now qualifies the offline replay/report slice; vendor integrations follow. No time estimate or feature completion is inferred from parallelism.
 
 ## Work packages
 
@@ -48,3 +48,7 @@ Confirm vendor image architecture and runtime compatibility before declaring a t
 ## RF-02 durable core
 
 The [RF-02 design](rf-02-design.md), [independent expectations](expectations/rf-02.md), [ledger](rf-02-ledger.md) and [API runbook](core-api.md) own this package. RF-03 now integrates through the authenticated case/evidence/action API and frozen response protocols. It must return deterministic `exec-<proposal_id>` execution identities, preserve reserved-request chronology and support verification of an original action after unknown outcome. RF-04 actual transport remains independently qualified.
+
+## RF-03 offline slice
+
+[Design](rf-03-design.md), [expectations](expectations/rf-03.md), [ledger](rf-03-ledger.md) and [runbook](replay.md) own bounded synthetic replay/evidence/simulated-response/report acceptance. RF-04 must now resolve Shuffle isolation and immutable image/worker compatibility, then qualify actual transport against this integrated path. No synthetic run closes the real-SOAR gate.

@@ -474,6 +474,96 @@
         "title": "CaseReadiness",
         "type": "object"
       },
+      "CollectionRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "artifact": {
+            "enum": [
+              "process",
+              "network",
+              "file",
+              "persistence"
+            ],
+            "title": "Artifact",
+            "type": "string"
+          },
+          "end": {
+            "format": "date-time",
+            "title": "End",
+            "type": "string"
+          },
+          "endpoint": {
+            "$ref": "#/components/schemas/EndpointRef"
+          },
+          "incident_id": {
+            "minLength": 1,
+            "title": "Incident Id",
+            "type": "string"
+          },
+          "mode": {
+            "$ref": "#/components/schemas/Mode"
+          },
+          "scenario_id": {
+            "minLength": 1,
+            "title": "Scenario Id",
+            "type": "string"
+          },
+          "schema_version": {
+            "const": "1.0",
+            "default": "1.0",
+            "title": "Schema Version",
+            "type": "string"
+          },
+          "start": {
+            "format": "date-time",
+            "title": "Start",
+            "type": "string"
+          }
+        },
+        "required": [
+          "incident_id",
+          "mode",
+          "scenario_id",
+          "endpoint",
+          "start",
+          "end",
+          "artifact"
+        ],
+        "title": "CollectionRequest",
+        "type": "object"
+      },
+      "CollectionResult": {
+        "additionalProperties": false,
+        "properties": {
+          "evidence": {
+            "items": {
+              "$ref": "#/components/schemas/Evidence"
+            },
+            "title": "Evidence",
+            "type": "array"
+          },
+          "gaps": {
+            "items": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "title": "Gaps",
+            "type": "array"
+          },
+          "schema_version": {
+            "const": "1.0",
+            "default": "1.0",
+            "title": "Schema Version",
+            "type": "string"
+          }
+        },
+        "required": [
+          "evidence",
+          "gaps"
+        ],
+        "title": "CollectionResult",
+        "type": "object"
+      },
       "DecisionRequest": {
         "additionalProperties": false,
         "properties": {
@@ -1800,6 +1890,60 @@
         "summary": "Audit"
       }
     },
+    "/v1/incidents/{incident_id}/collect": {
+      "post": {
+        "operationId": "collect_v1_incidents__incident_id__collect_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "incident_id",
+            "required": true,
+            "schema": {
+              "title": "Incident Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CollectionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CollectionResult"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Collect"
+      }
+    },
     "/v1/incidents/{incident_id}/evidence": {
       "get": {
         "operationId": "evidence_v1_incidents__incident_id__evidence_get",
@@ -2000,6 +2144,69 @@
           }
         ],
         "summary": "Mark Ready"
+      }
+    },
+    "/v1/incidents/{incident_id}/report": {
+      "get": {
+        "operationId": "report_v1_incidents__incident_id__report_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "incident_id",
+            "required": true,
+            "schema": {
+              "title": "Incident Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "format",
+            "required": false,
+            "schema": {
+              "default": "json",
+              "enum": [
+                "json",
+                "html"
+              ],
+              "title": "Format",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              },
+              "text/html": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Report"
       }
     },
     "/v1/incidents/{incident_id}/transition": {

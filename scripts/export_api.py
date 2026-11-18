@@ -6,6 +6,7 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 
 from responseforge.api import create_app
+from responseforge.replay_contracts import RecordedEvent
 from responseforge.runtime import Settings
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -18,15 +19,22 @@ def main() -> int:
     with TemporaryDirectory(prefix="responseforge-schema-") as directory:
         app = create_app(Settings(database_path=Path(directory) / "schema.sqlite3"))
         content = json.dumps(app.openapi(), indent=2, sort_keys=True) + "\n"
-    path = ROOT / "schemas" / "internal-api.json"
+    artifacts = {
+        ROOT / "schemas" / "internal-api.json": content,
+        ROOT / "schemas" / "replay-record.json": json.dumps(
+            RecordedEvent.model_json_schema(), indent=2, sort_keys=True
+        )
+        + "\n",
+    }
     if args.check:
-        if not path.exists() or path.read_text() != content:
+        if any(not path.exists() or path.read_text() != value for path, value in artifacts.items()):
             print("FAIL: internal API artifact drift; regenerate scripts/export_api.py and review")
             return 1
-        print("PASS: internal OpenAPI matches routes and Bearer authentication")
+        print("PASS: internal OpenAPI and replay-record schema match implementation")
     else:
-        path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text(content)
+        for path, value in artifacts.items():
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text(value)
         print("Exported internal OpenAPI (no vendor compatibility claim)")
     return 0
 

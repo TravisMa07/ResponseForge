@@ -500,6 +500,7 @@ version = "0.1.0"
 source = { editable = "." }
 dependencies = [
     { name = "fastapi" },
+    { name = "httpx" },
     { name = "pydantic" },
     { name = "uvicorn" },
 ]
@@ -507,7 +508,6 @@ dependencies = [
 [package.dev-dependencies]
 dev = [
     { name = "hatchling" },
-    { name = "httpx" },
     { name = "mypy" },
     { name = "pytest" },
     { name = "ruff" },
@@ -516,6 +516,7 @@ dev = [
 [package.metadata]
 requires-dist = [
     { name = "fastapi", specifier = "==0.164.0" },
+    { name = "httpx", specifier = "==0.28.1" },
     { name = "pydantic", specifier = "==2.14.3" },
     { name = "uvicorn", specifier = "==0.54.0" },
 ]
@@ -523,7 +524,6 @@ requires-dist = [
 [package.metadata.requires-dev]
 dev = [
     { name = "hatchling", specifier = "==1.33.0" },
-    { name = "httpx", specifier = "==0.28.1" },
     { name = "mypy", specifier = "==1.20.2" },
     { name = "pytest", specifier = "==9.2.0" },
     { name = "ruff", specifier = "==0.17.5" },
