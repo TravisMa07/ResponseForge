@@ -46,3 +46,7 @@ Validation: inspected every rewritten commit tree for handoff filenames, confirm
 ## Analyst effort measurement
 
 The owner requested tracking hands-on analyst time saved per eligible case. RF-01 defines the case readiness events and RF-09 collects the evidence using the [measurement plan](implementation-plan.md#measure-analyst-time-saved). A timed lab comparison is preferred. A documented estimate is an acceptable fallback and stays labeled as estimated. Collection is planned.
+
+## RF-01 kickoff
+
+Verified PR #10 merged on 2026-11-18; base `b6a44d6` on main. RF-01 branch `feat/rf-01-contracts`. [Design](rf-01-design.md) and [independent expectations](expectations/rf-01.md) freeze before code. Contracts/provider writer, policy writer and independent test writer have disjoint paths; primary owns tooling, CI, shared docs and qualification. No deployment or live action authorized or performed. RF-02/03 implementation and RF-04 investigation await proven contracts.
