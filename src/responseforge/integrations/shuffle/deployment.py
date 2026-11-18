@@ -131,6 +131,9 @@ def build_plan(lock: dict[str, Any], target: DeploymentTarget) -> DeploymentPlan
         "SHUFFLE_PASS_APP_PROXY": "false",
         "SHUFFLE_LOGS_DISABLED": "true",
         "SHUFFLE_STATS_DISABLED": "true",
+        "SHUFFLE_SKIP_PIPELINES": "true",
+        "SHUFFLE_PIPELINE_ENABLED": "false",
+        "SHUFFLE_AGENT_MODE": "false",
         "ENVIRONMENT_NAME": "ResponseForge",
         "TZ": "UTC",
     }
@@ -164,12 +167,13 @@ def build_plan(lock: dict[str, Any], target: DeploymentTarget) -> DeploymentPlan
         "AUTH": _required("SHUFFLE_ORBORUS_AUTH"),
         "ORG": _required("SHUFFLE_ORG_ID"),
         "IS_KUBERNETES": "false",
-        "SHUFFLE_SWARM_CONFIG": "run",
+        # Source-native standalone default; "run" also opts into Swarm.
+        "SHUFFLE_SWARM_CONFIG": "",
         "SHUFFLE_WORKER_IMAGE": images["worker"],
         "SHUFFLE_ORBORUS_EXECUTION_CONCURRENCY": "1",
         "SHUFFLE_APP_REPLICAS": "1",
-        "SHUFFLE_CONTAINER_AUTO_CLEANUP": "true",
-        "CLEANUP": "true",
+        "SHUFFLE_CONTAINER_AUTO_CLEANUP": "false",
+        "CLEANUP": "false",
     }
     orborus["depends_on"] = ["backend"]
     if target.engine_control_authorized:
@@ -202,6 +206,10 @@ def build_plan(lock: dict[str, Any], target: DeploymentTarget) -> DeploymentPlan
     blockers = list(dict.fromkeys((*pins.gates, *_REQUIRED_GATES)))
     if not target.engine_control_authorized:
         blockers.append("execution-engine-control-not-authorized")
+    if target.kind == "docker-desktop":
+        # Orborus zombiecheck scans/removes containers by global heuristics even
+        # when CLEANUP=false. A socket grant cannot scope that vendor behavior.
+        blockers.append("shared-daemon-cleanup-unqualified")
     compose = {
         "name": "responseforge-shuffle-" + target.kind,
         "services": {

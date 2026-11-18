@@ -2,7 +2,7 @@
 
 SOAR-first incident response automation with offline attack replay and an optional live Wazuh endpoint path. ResponseForge connects evidence, analyst approval, response providers and auditable case reports through real Shuffle workflows.
 
-**Status: RF-01–03 are merged; the offline replay/evidence/simulated-response/report slice is verified. RF-04A transport/planning is locally verified, while genuine Shuffle runtime remains open; see the [RF-03 ledger](docs/rf-03-ledger.md). Real Shuffle, recorded attack corpus coverage and live endpoint integration remain unqualified.**
+**Status: RF-01–03 are merged; the offline replay/evidence/simulated-response/report slice is verified. RF-04A transport/planning is merged and verified; RF-04B callback/safety corrections are locally verified, while genuine Shuffle runtime remains open; see the [RF-04B ledger](docs/rf-04b-ledger.md). Real Shuffle, recorded attack corpus coverage and live endpoint integration remain unqualified.**
 
 The public engineering requirements are captured in the [architecture](docs/architecture.md) and acceptance documentation. The [implementation plan](docs/implementation-plan.md) defines bounded delivery packages and parallel-agent ownership; the [acceptance matrix](docs/acceptance.md) keeps implementation separate from verification.
 

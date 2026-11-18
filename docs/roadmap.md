@@ -24,7 +24,7 @@ The baseline is nine issues and nine implementation PRs through full release rea
 | RF-01 · Contracts and tooling | [#1](https://github.com/TravisMa07/ResponseForge/issues/1) | [#11](https://github.com/TravisMa07/ResponseForge/pull/11) · merged; issue closed; merged checks pass |
 | RF-02 · Durable core | [#2](https://github.com/TravisMa07/ResponseForge/issues/2) | [#12](https://github.com/TravisMa07/ResponseForge/pull/12) · merged; issue closed; merged checks pass |
 | RF-03 · Offline replay | [#3](https://github.com/TravisMa07/ResponseForge/issues/3) | [#13](https://github.com/TravisMa07/ResponseForge/pull/13) · merged; issue closed; merged checks pass |
-| RF-04 · Shuffle deployment and transport | [#4](https://github.com/TravisMa07/ResponseForge/issues/4) | [#14](https://github.com/TravisMa07/ResponseForge/pull/14) · RF-04A partial; offline checks pass; runtime/issue open |
+| RF-04 · Shuffle deployment and transport | [#4](https://github.com/TravisMa07/ResponseForge/issues/4) | [#14](https://github.com/TravisMa07/ResponseForge/pull/14) · RF-04A merged and merged checks pass; [RF-04B #15](https://github.com/TravisMa07/ResponseForge/pull/15) locally verified; runtime/issue open |
 | RF-05 · Shuffle playbooks | [#5](https://github.com/TravisMa07/ResponseForge/issues/5) | Pending |
 | RF-06 · Scenario and dataset qualification | [#6](https://github.com/TravisMa07/ResponseForge/issues/6) | Pending |
 | RF-07 · Wazuh adapter and enrollment bundle | [#7](https://github.com/TravisMa07/ResponseForge/issues/7) | Pending |
