@@ -1,0 +1,165 @@
+{
+  "notice": "Synthetic illustrative contract shapes only. Timestamps are invented, not benchmark evidence; no provider ran. Provenance hash identifies the literal UTF-8 string RF-01 synthetic example event. Approval is not an authorization token.",
+  "examples": [
+    {
+      "model": "Alert",
+      "value": {
+        "schema_version": "1.0",
+        "alert_id": "synthetic-alert-1",
+        "mode": "replay",
+        "source": "synthetic",
+        "scenario_id": "contract-example",
+        "endpoint": {
+          "schema_version": "1.0",
+          "endpoint_id": "synthetic-host",
+          "hostname": "lab-example",
+          "agent_id": null
+        },
+        "event_time": "2026-01-01T12:00:00Z",
+        "ingested_at": "2026-01-01T12:01:00Z",
+        "rule_id": "example-rule",
+        "severity": "high",
+        "provenance": {
+          "schema_version": "1.0",
+          "source": "synthetic",
+          "source_ref": "inline:RF-01-contract-example",
+          "sha256": "f025d77ed054ddc337b7957ea3c87827816f54128b7bd689e47f278ef2e0e240",
+          "original_event_ids": [
+            "synthetic-event-1"
+          ]
+        },
+        "evidence_refs": [
+          "evidence-1"
+        ]
+      }
+    },
+    {
+      "model": "ActionProposal",
+      "value": {
+        "schema_version": "1.0",
+        "proposal_id": "proposal-1",
+        "incident_id": "case-1",
+        "mode": "replay",
+        "target": {
+          "schema_version": "1.0",
+          "endpoint": {
+            "schema_version": "1.0",
+            "endpoint_id": "synthetic-host",
+            "hostname": "lab-example",
+            "agent_id": null
+          },
+          "resource": "process:synthetic-42"
+        },
+        "action": "terminate_process",
+        "rationale": "Illustrative process investigation",
+        "risk": "disruptive",
+        "created_at": "2026-01-01T12:01:00Z",
+        "expires_at": "2026-01-01T12:31:00Z",
+        "idempotency_key": "example-action-1"
+      }
+    },
+    {
+      "model": "Approval",
+      "value": {
+        "schema_version": "1.0",
+        "approval_id": "approval-1",
+        "proposal": {
+          "schema_version": "1.0",
+          "proposal_id": "proposal-1",
+          "incident_id": "case-1",
+          "mode": "replay",
+          "target": {
+            "schema_version": "1.0",
+            "endpoint": {
+              "schema_version": "1.0",
+              "endpoint_id": "synthetic-host",
+              "hostname": "lab-example",
+              "agent_id": null
+            },
+            "resource": "process:synthetic-42"
+          },
+          "action": "terminate_process",
+          "rationale": "Illustrative process investigation",
+          "risk": "disruptive",
+          "created_at": "2026-01-01T12:01:00Z",
+          "expires_at": "2026-01-01T12:31:00Z",
+          "idempotency_key": "example-action-1"
+        },
+        "approver_id": "example-analyst",
+        "decision": "approved",
+        "decided_at": "2026-01-01T12:02:00Z",
+        "expires_at": "2026-01-01T12:30:00Z"
+      }
+    },
+    {
+      "model": "MetricEvent",
+      "value": {
+        "schema_version": "1.0",
+        "event_id": "metric-1",
+        "kind": "alert_accepted",
+        "incident_id": "case-1",
+        "alert_id": "synthetic-alert-1",
+        "correlation_id": "correlation-1",
+        "scenario_id": "contract-example",
+        "mode": "replay",
+        "revision": "illustrative-example",
+        "environment": "synthetic-documentation",
+        "occurred_at": "2026-01-01T12:01:00Z",
+        "readiness": null
+      }
+    },
+    {
+      "model": "MetricEvent",
+      "value": {
+        "schema_version": "1.0",
+        "event_id": "metric-2",
+        "kind": "case_ready",
+        "incident_id": "case-1",
+        "alert_id": "synthetic-alert-1",
+        "correlation_id": "correlation-1",
+        "scenario_id": "contract-example",
+        "mode": "replay",
+        "revision": "illustrative-example",
+        "environment": "synthetic-documentation",
+        "occurred_at": "2026-01-01T12:01:10Z",
+        "readiness": {
+          "schema_version": "1.0",
+          "evidence_refs": [
+            "evidence-1"
+          ],
+          "known_gaps": [
+            "Parent process not recorded"
+          ],
+          "proposal_ids": [
+            "proposal-1"
+          ],
+          "no_action_reason": null,
+          "audit_event_id": "audit-1"
+        }
+      }
+    },
+    {
+      "model": "ActionExecution",
+      "value": {
+        "schema_version": "1.0",
+        "execution_id": "execution-1",
+        "proposal_id": "proposal-1",
+        "incident_id": "case-1",
+        "provider": "mock-example",
+        "mode": "replay",
+        "dispatch_state": "uncertain",
+        "requested_at": "2026-01-01T12:03:00Z",
+        "updated_at": "2026-01-01T12:04:00Z",
+        "verification": {
+          "schema_version": "1.0",
+          "status": "pending",
+          "simulated": true,
+          "verified_live": false,
+          "checked_at": null,
+          "detail": "Outcome unknown; reconcile before retry"
+        },
+        "error": "Illustrative timeout awaiting acknowledgement"
+      }
+    }
+  ]
+}

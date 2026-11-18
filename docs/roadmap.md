@@ -12,7 +12,7 @@ The [implementation plan](implementation-plan.md) owns detailed work packages. T
 | 5 | Fresh-clone reproducibility, docs, and [analyst effort evidence](implementation-plan.md#measure-analyst-time-saved) | Planned: RF-09 |
 | 6 | Optional read-only AI investigation | Deferred until phases 1–5 qualify |
 
-The next coding package is RF-01. No replay scenario, SOAR execution or live response has passed acceptance yet.
+RF-01 contracts/pure policy are implemented; qualification and review are recorded in the [RF-01 ledger](rf-01-ledger.md). RF-02/03 implementation and RF-04 investigation are next. No replay scenario, SOAR execution or live response has passed acceptance yet.
 
 
 ## GitHub delivery tracking

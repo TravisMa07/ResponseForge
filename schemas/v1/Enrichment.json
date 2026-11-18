@@ -1,0 +1,80 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "enrichment_id": {
+      "minLength": 1,
+      "title": "Enrichment Id",
+      "type": "string"
+    },
+    "error": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Error"
+    },
+    "incident_id": {
+      "minLength": 1,
+      "title": "Incident Id",
+      "type": "string"
+    },
+    "indicator": {
+      "minLength": 1,
+      "title": "Indicator",
+      "type": "string"
+    },
+    "provider": {
+      "minLength": 1,
+      "title": "Provider",
+      "type": "string"
+    },
+    "queried_at": {
+      "format": "date-time",
+      "title": "Queried At",
+      "type": "string"
+    },
+    "result": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Result"
+    },
+    "schema_version": {
+      "const": "1.0",
+      "default": "1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "success",
+        "unavailable",
+        "timeout",
+        "failed"
+      ],
+      "title": "Status",
+      "type": "string"
+    }
+  },
+  "required": [
+    "enrichment_id",
+    "incident_id",
+    "indicator",
+    "provider",
+    "queried_at",
+    "status"
+  ],
+  "title": "Enrichment",
+  "type": "object"
+}

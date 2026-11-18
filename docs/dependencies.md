@@ -6,8 +6,8 @@ Reviewed 2026-11-18. This is a source-verification record, **not a tested compat
 
 | Component | Inspected release / immutable source | Role and qualification |
 | --- | --- | --- |
-| Python | 3.12.12 selected for local foundation; application lock pending Phase 1 | One application/package, replay CLI and tests. Host system Python 3.9.6 is below target. |
-| FastAPI / Pydantic / SQLite tooling | Exact versions pending lock generation and tests | API/contracts and local case state; no external application database. |
+| Python | 3.12.12 selected for local foundation and RF-01 qualification | One application/package, replay CLI and tests. Host system Python 3.9.6 is below target. |
+| FastAPI / Pydantic / SQLite tooling | FastAPI 0.164.0 / Pydantic 2.14.3 locked for RF-01; SQLite integration pending | API/contracts and local case state; no external application database. |
 | Shuffle | [v2.3.0](https://github.com/Shuffle/Shuffle/releases/tag/v2.3.0), source `473cc335e5fcc663006d8e5ca16af5ee71fefa68` | Published 2026-09-28; candidate for real SOAR qualification. Source tag does not pin its container set. |
 | Shuffle OpenSearch | `opensearchproject/opensearch:3.2.0` in tagged upstream Compose | Vendor dependency only; never use it as a custom ResponseForge SIEM. Digest and runtime pending. |
 | Wazuh Docker | [v4.14.10](https://github.com/wazuh/wazuh-docker/releases/tag/v4.14.10), source `76ddb88b9c8b618a254a287f2684f93d3c5ac2f4` | Published 2026-11-05; manager/indexer/dashboard images each use `4.14.10`. Live phase only; agent version compatibility must be verified. |
@@ -66,9 +66,11 @@ The following metadata paths were located in that same Splunk commit; their data
 
 ## Qualification work still required
 
-1. Lock Python/application dependencies and record reproducible offline test setup.
+1. RF-01 locks Python/application dependencies in `uv.lock`; [offline test setup](testing.md) and [qualification evidence](rf-01-ledger.md) cover contracts/policy only. Runtime and vulnerability/license scans remain separate gates.
 2. Inspect image manifests for each selected architecture; pin digests and worker/app versions. Resolve the Shuffle socket boundary with a reviewed ADR.
 3. Run dependency/image vulnerability and license scans; triage findings against official advisories. Release existence is not a security clearance.
 4. Run Compose configuration checks, isolated startup, authenticated real workflow import/trigger/callback, restart and teardown tests. Capture exact versions, commands, logs and limitations.
 5. Create a dataset manifest for imported artifacts with hashes, fields, provenance, rights and independent golden expectations; qualify all supported scenarios.
 6. Separately verify live agent enrollment, sensor alert, approved safe effect and recovery on an authorized VM. Optional [Velociraptor API](https://docs.velociraptor.app/docs/server_automation/server_api/) collection remains deferred.
+
+RF-01 development versions: pytest 9.2.0, Ruff 0.17.5, mypy 1.20.2, Hatchling 1.33.0; uv 0.13.6. Direct dependencies and build backend are exact-pinned in `pyproject.toml`; the lock records transitive versions/hashes. No license decision is implied by these pins.

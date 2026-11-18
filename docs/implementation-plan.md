@@ -17,9 +17,9 @@ Initial scope: establish and publish the repository, complete feasible Phase 0 r
 | RF-08 / 4 | Authorized VM enrollment, real alert, approved harmless marker action, effect verification/recovery | RF-07 + explicit administrator authorization and supplied VM | Real sensor→Wazuh→same Shuffle/core flow; dispatch/ack/effect distinguished; restore/teardown proof; Windows qualified separately |
 | RF-09 / 5 | Fresh-clone Docker automation, runbooks, reports/demo and measured metrics | RF-01–08 for full release; replay release may precede live | Reproducible offline starter, actual version report, persistence/teardown/rerun; measured claims only |
 
-## First ready package: RF-01
+## RF-01 contract foundation
 
-Create `docs/rf-01-design.md` and freeze expectations before application code. Own `src/responseforge/contracts/`, provider protocols, configuration/auth design, `pyproject.toml`, dependency lock and test tooling. Use Python 3.12 as baseline, Pydantic v2 and FastAPI after exact compatible dependency resolution. Define strict versioned schemas and source/scenario/mode-scoped identity; distinguish provider dispatch from effect verification. Specify proposal immutability, human identity verification, TTL, callback nonce/time validation, rate limits and idempotency retention.
+The [RF-01 design](rf-01-design.md) and [expectations](expectations/rf-01.md) are frozen before application code. Own `src/responseforge/contracts/`, provider protocols, configuration/auth design, `pyproject.toml`, dependency lock and test tooling. Use Python 3.12 as baseline, Pydantic v2 and FastAPI after exact compatible dependency resolution. Define strict versioned schemas and source/scenario/mode-scoped identity; distinguish provider dispatch from effect verification. Specify proposal immutability, human identity verification, TTL, callback nonce/time validation, rate limits and idempotency retention.
 
 Tests must derive expected allowed/rejected transitions and action approval decisions from the handoff, including forged identity, changed endpoint/action, expired approval, unsupported capability and replay/live mismatch. No Docker, external datasets, endpoint enrollment or UI in this package. Acceptance is contracts/tooling only, not a working response platform.
 
