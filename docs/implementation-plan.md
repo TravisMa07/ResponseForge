@@ -23,6 +23,14 @@ Create `docs/rf-01-design.md` and freeze expectations before application code. O
 
 Tests must derive expected allowed/rejected transitions and action approval decisions from the handoff, including forged identity, changed endpoint/action, expired approval, unsupported capability and replay/live mismatch. No Docker, external datasets, endpoint enrollment or UI in this package. Acceptance is contracts/tooling only, not a working response platform.
 
+## Measure analyst time saved
+
+RF-01 defines the events and correlation IDs for alert acceptance and case readiness. A case is ready for review when it contains source-linked evidence, any known evidence gaps, a proposed action or a documented reason for no action, and an audit record. Later packages capture the events as their paths land. Elapsed alert-to-case time is measured separately from active analyst work.
+
+RF-09 records hands-on investigation and documentation minutes per eligible case. Prefer a matched lab comparison using the owner or another test analyst. Use equivalent scenarios and the same evidence, decision, and report requirements for manual and assisted runs. Vary the order where possible to reduce familiarity bias. Record paired durations, the number of cases and analysts, and the median paired difference. Record waiting for approval or automation separately.
+
+If a timed manual baseline is unavailable, use a documented estimate drawn from a comparable source or explicit task-by-task assumptions. Record the source or assumptions, range, and how closely the baseline matches the scenarios. Label any resulting savings as estimated. Publish aggregate, redacted results with the tested revision and environment. A measured improvement claim requires measured timings for both paths.
+
 ## Parallel-agent execution plan
 
 The integration owner freezes RF-01 and records the exact base SHA before allocating work. After that, use at most three implementation lanes:
