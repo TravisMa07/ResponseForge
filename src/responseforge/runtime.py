@@ -25,6 +25,7 @@ from responseforge.contracts import (
     PlaybookRun,
     UtcDateTime,
 )
+from responseforge.integrations.shuffle.models import ShuffleConfig, WorkflowBinding
 from responseforge.providers import EvidenceProvider, ResponseProvider
 from responseforge.replay_contracts import ReplayBatch
 
@@ -62,6 +63,8 @@ class Settings:
     provider_versions: dict[str, str] = field(default_factory=dict)
     evidence_provider: EvidenceProvider | None = field(default=None, repr=False)
     replay_batch: ReplayBatch | None = field(default=None, repr=False)
+    shuffle_config: ShuffleConfig | None = field(default=None, repr=False)
+    shuffle_bindings: dict[str, WorkflowBinding] = field(default_factory=dict)
     live_dispatch_enabled: bool = False
     provider_timeout: float = 5.0
     revision: str = "development"
@@ -69,6 +72,16 @@ class Settings:
 
     def __post_init__(self) -> None:
         object.__setattr__(self, "mode", Mode(self.mode))
+        bindings = {
+            key: WorkflowBinding.model_validate(value.model_dump(mode="json", warnings=False))
+            for key, value in self.shuffle_bindings.items()
+        }
+        if (bindings and self.shuffle_config is None) or (
+            self.shuffle_config is not None
+            and set(bindings) != set(self.shuffle_config.workflow_ids)
+        ):
+            raise ValueError("Every Shuffle workflow must have exactly one reviewed binding")
+        object.__setattr__(self, "shuffle_bindings", bindings)
         if self.replay_batch is not None:
             object.__setattr__(
                 self,

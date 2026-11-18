@@ -52,3 +52,7 @@ The [RF-02 design](rf-02-design.md), [independent expectations](expectations/rf-
 ## RF-03 offline slice
 
 [Design](rf-03-design.md), [expectations](expectations/rf-03.md), [ledger](rf-03-ledger.md) and [runbook](replay.md) own bounded synthetic replay/evidence/simulated-response/report acceptance. RF-04 must now resolve Shuffle isolation and immutable image/worker compatibility, then qualify actual transport against this integrated path. No synthetic run closes the real-SOAR gate.
+
+## RF-04 staged delivery
+
+RF-04A freezes and locally verifies [source-derived transport/durable suppression and blocked deployment plans](rf-04-design.md), with [independent expectations](expectations/rf-04.md) and [evidence](rf-04-ledger.md). [Target comparison](shuffle.md) and [proposedADR0002](decisions/0002-shuffle-execution-boundary.md) precede any engine/socket grant. A partial PR uses Refs#4. Real import/bootstrap, safe app credentials/image inventory, execution/callback/restart/teardown evidence and measured resources must pass in a separately authorized environment before full RF-04 completion.

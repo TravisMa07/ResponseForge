@@ -24,3 +24,7 @@ Commands: `uname -sm`, `sw_vers`, `sysctl -n hw.memsize hw.ncpu`, `df -h .`, `gi
 macOS ARM64 is available for Python foundation checks and a Linux ARM64 Docker engine. Shuffle/Wazuh images and worker execution are not yet runtime-qualified here. Linux AMD64 is the proposed integration reference platform, not a tested platform. Apple Silicon does not establish Windows x64 guest/agent compatibility. Do not assume an ARM guest or emulated container is vendor supported.
 
 The Docker VM memory budget is smaller than host RAM and leaves little room for heavy vendor stacks. Record vendor minimums in [dependencies](dependencies.md), then measure each profile. Do not launch Wazuh alongside Shuffle on this host without a reviewed resource allocation. No resource settings, kernel parameters, virtualization settings or services were changed.
+
+## RF-04 read-only recheck
+
+2026-11-18: Docker29.8.0linux/arm64,Compose5.5.1,buildx0.37.1;15CPUs and8318844928-byte(~7.75GiB) Docker memorylimit unchanged; host25769803776bytes(24GiB),0runningcontainers. This is capacity/availability inventory only, not measured Shuffle headroom or proof the daemon has no other assets. Owner has no dedicated VM running and asked both execution routes evaluated; no allocation/context/Swarm/privilege/service change performed. See [decision packet](shuffle.md).

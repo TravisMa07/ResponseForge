@@ -11,3 +11,5 @@
 - RF-02 first decisions are immutable; cancel records an initial cancellation, not revocation of a prior grant. No force-resend exists for uncertain reservations. Persistence uses local SQLite, not a network-filesystem guarantee; audit triggers are not cryptographic tamper evidence. Retention is currently indefinite. See [API recovery and retention](core-api.md).
 
 - Replay currently accepts bounded original JSON/JSONL records, with a transparent toy observation rule. It is not a vendor log parser, SIEM detector, recorded attack validation or general maliciousness classifier. Default reports preserve provenance IDs while omitting raw telemetry and sensitive/free-text fields. See [replay limitations](replay.md).
+
+- RF-04A source-derived client/coordinator and candidate Compose planning are locally tested; full issue#4 remains open. There is no qualified Shuffle instance/imported workflow/callback, execution target or engine authority. Header logging in the inspected stock HTTP app, unresolved app/image/source compatibility and separate-artifact terms are explicit gates. See [the comparison and runtime packet](shuffle.md).

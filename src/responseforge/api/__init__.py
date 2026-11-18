@@ -7,6 +7,7 @@ from datetime import UTC, datetime
 from typing import Annotated, Literal
 from uuid import uuid4
 
+import httpx
 from fastapi import Depends, FastAPI, Header, HTTPException, Request, Response
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import HTMLResponse, JSONResponse
@@ -28,6 +29,7 @@ from responseforge.contracts import (
     UtcDateTime,
 )
 from responseforge.core import CaseService, ServiceError
+from responseforge.integrations.shuffle.coordinator import ShuffleCoordinator
 from responseforge.runtime import (
     ActionView,
     DecisionRequest,
@@ -42,7 +44,12 @@ from responseforge.runtime import (
 from responseforge.storage import ConflictError, StorageError, Store
 
 
-def create_app(settings: Settings, *, clock: Callable[[], datetime] | None = None) -> FastAPI:
+def create_app(
+    settings: Settings,
+    *,
+    clock: Callable[[], datetime] | None = None,
+    shuffle_transport: httpx.AsyncBaseTransport | None = None,
+) -> FastAPI:
     now = clock or (lambda: datetime.now(UTC))
     store = Store(settings.database_path)
     service = CaseService(store, settings, clock=now)
@@ -246,9 +253,41 @@ def create_app(settings: Settings, *, clock: Callable[[], datetime] | None = Non
     ) -> Response:
         from responseforge.reports import build_report, render_html
 
-        value = build_report(service, incident_id, actor, secrets=tuple(settings.credentials))
+        report_secrets = tuple(settings.credentials)
+        if settings.shuffle_config is not None:
+            report_secrets += (settings.shuffle_config.api_key,)
+        value = build_report(service, incident_id, actor, secrets=report_secrets)
         if format == "html":
             return HTMLResponse(render_html(value))
         return JSONResponse(value)
+
+    def shuffle_coordinator() -> ShuffleCoordinator:
+        from responseforge.integrations.shuffle.client import ShuffleTransport
+
+        if settings.shuffle_config is None:
+            raise ServiceError(503, "Shuffle transport is not configured")
+        return ShuffleCoordinator(
+            service,
+            ShuffleTransport(settings.shuffle_config, transport=shuffle_transport),
+            settings.shuffle_bindings,
+        )
+
+    from responseforge.integrations.shuffle.models import (
+        DeliveryRecord,
+        ShuffleReconcileRequest,
+        ShuffleStartRequest,
+    )
+
+    @app.post("/v1/incidents/{incident_id}/shuffle/start", response_model=DeliveryRecord)
+    async def shuffle_start(
+        incident_id: str, item: ShuffleStartRequest, actor: Actor
+    ) -> DeliveryRecord:
+        return await shuffle_coordinator().start(incident_id, item.workflow_id, item.run_id, actor)
+
+    @app.post("/v1/incidents/{incident_id}/shuffle/reconcile", response_model=DeliveryRecord)
+    async def shuffle_reconcile(
+        incident_id: str, item: ShuffleReconcileRequest, actor: Actor
+    ) -> DeliveryRecord:
+        return await shuffle_coordinator().reconcile(incident_id, item.run_id, actor)
 
     return app

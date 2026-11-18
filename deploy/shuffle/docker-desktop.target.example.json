@@ -1,0 +1,8 @@
+{
+  "schema_version": "1.0",
+  "kind": "docker-desktop",
+  "architecture": "arm64",
+  "engine_id": "replace-with-explicit-reviewed-target-engine-id",
+  "engine_control_authorized": false,
+  "loopback_ui": false
+}
