@@ -1,6 +1,6 @@
 # RF-03: offline replay, recorded evidence, simulated response and reports
 
-Issue [#3](https://github.com/TravisMa07/ResponseForge/issues/3). Base main `6fc67660efc46e1a1a71cd193e61b066c12c2ec5` (RF-02 PR #12 merged; issue #2 closed). Integration owns design, shared replay types, driver/CLI, API/core/storage registration, reports, lock/CI/docs and qualification. Three agents own replay/evidence, mock provider and independent tests respectively; no overlapping edits or agent commits. No external corpus, detector, actual Shuffle, live endpoint, Docker or management exposure is part of RF-03. Synthetic observations are visibly labeled; RF-06 qualifies licensed recorded telemetry separately.
+Issue [#3](https://github.com/TravisMa07/ResponseForge/issues/3); locally qualified [PR #13](https://github.com/TravisMa07/ResponseForge/pull/13), owner merge gate open. Base main `6fc67660efc46e1a1a71cd193e61b066c12c2ec5` (RF-02 PR #12 merged; issue #2 closed). Integration owns design, shared replay types, driver/CLI, API/core/storage registration, reports, lock/CI/docs and qualification. Three agents own replay/evidence, mock provider and independent tests respectively; no overlapping edits or agent commits. No external corpus, detector, actual Shuffle, live endpoint, Docker or management exposure is part of RF-03. Synthetic observations are visibly labeled; RF-06 qualifies licensed recorded telemetry separately.
 
 ## Shared replay types (integration writer)
 
@@ -46,3 +46,7 @@ Extend `python -m responseforge` with `--replay PATH --source-id ID --database P
 ## Ownership and qualification
 
 Replay/evidence writer, mock writer, independent test writer (tests/rf03/** only); integration owns all other changes. Each receives exact freeze SHA, frozen imports and tests, exclusions and required handback (files, tested SHA/dirty scope, commands/results/failures, objections). Meaningful behavioral red precedes final validation. Tests cover deterministic ordering/speed, quarantine, exact hashes/event IDs, scope windows, missing data, stateful mock failures/restart/rollback/idempotency, authenticated offline HTTP cases/reports and hostile redaction/HTML/path input. Read-only independent review inspects actual artifacts before claiming qualification. Original fixtures do not pass RF-06 recorded-data acceptance; offline execution is not real SOAR/live proof.
+
+## Reviewed source/report refinements
+
+API collection now requires full stored-alert agreement with the registered replay source before provider I/O, not scenario/endpoint agreement alone. Report projection explicitly permits known safe model fields; auth/env aliases and unknown future values are redacted. Parser decoding treats Python integer-digit guard ValueError as invalid_json. All three review reproductions have independent regressions; the frozen matrix was not weakened. Metric provenance records Git SHA/dirty status only for a verifiable source checkout, otherwise explicitly marks revision unavailable; it is not a benchmark claim.
