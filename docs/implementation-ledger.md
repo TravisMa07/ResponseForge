@@ -59,3 +59,9 @@ Verified PR #10 merged on 2026-11-18; base `b6a44d6` on main. RF-01 branch `feat
 At clean implementation revision `6d8b4ec`, `make qualify`, `uv lock --check --offline`, `uv build --offline --no-build-isolation` and `git diff --check` passed on macOS ARM64 / CPython 3.12.12 / uv 0.13.6. **278 tests pass**. Red failures, correction, review scope and limitations are in the [RF-01 ledger](rf-01-ledger.md). No API/storage/replay/provider runtime is qualified. Owner acceptance, merge authorization and merged-revision qualification remain open; no release performed. Issue #1 stays open until the authorized merge.
 
 RF-02/03 implementation and RF-04 investigation have [prepared bounded assignments](next-packages.md) from that proven revision. Their actual agents are not assigned yet; their own designs/expectations and cross-lane durable interfaces must freeze before code. Real RF-04 runtime still depends on RF-02/03 and approved execution isolation. License, infrastructure and endpoint decisions do not block these offline design lanes.
+
+## RF-02 kickoff and RF-01 merged verification
+
+PR #11 was merged by the owner as `1e662c115410f64c7a44da9c635f346a36f43ca2`; issue #1 is closed. On that clean merged revision, `make qualify` passed: 278 tests, Ruff, strict typing, schemas/examples and documentation/index checks (macOS ARM64, Python 3.12.12, uv 0.13.6). RF-01 merged-revision verification is now observed, not transferred from its prior PR head.
+
+RF-02 branch `feat/rf-02-durable-core` starts from that revision. [Owning design](rf-02-design.md) and [independent expectations](expectations/rf-02.md) freeze before code. Storage writer owns storage only, core writer owns core only, test writer owns tests/rf02 only; primary owns API/runtime/auth, locks, CI, shared docs and integration. No live action or deployment is part of RF-02.
