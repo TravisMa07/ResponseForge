@@ -46,3 +46,7 @@ Both actual-pin target plans parse with Compose; no services were started. A ded
 ## Owner-selected pilot target
 
 On 2026-11-18 the owner selected Docker Desktop for the pilot while requiring both deployment options remain viable and core tool logic remain identical. [ADR0002](decisions/0002-shuffle-execution-boundary.md) records the accepted target and invariant behavior. Workflow definitions, policy/authentication, evidence, durable recovery and effect verification must not be weakened for either host. Configuration, resources, networking and operational recovery differ; each target needs its own real-runtime proof. This target selection does not itself mount a socket or resolve the separately scoped shared-daemon execution grant and technical gates.
+
+## Authorized merge and successor
+
+RF-04A #14 merged with owner authorization as `2e1c95b3af3bb5820859ab31a3646eb54c465a6a`; `make qualify` passes 562 tests and all checks on that actual merged revision. Issue #4 remains open. [RF-04B](rf-04b-ledger.md) corrects source-derived candidate Swarm/cleanup/pipeline assumptions and adds credential-safe callback transport. Original blocked RF-04A plans must not be started; further source inspection found broad unconditional cleanup. Neither socket grant nor flags alone cure that shared-daemon boundary.

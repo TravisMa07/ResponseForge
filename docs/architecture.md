@@ -1,6 +1,6 @@
 # Architecture
 
-Status: direction accepted from owner requirements; RF-01 contracts and RF-02 authenticated API/SQLite core implemented; see [RF-02 evidence](rf-02-ledger.md). RF-03 replay/report and simulated response are merged and verified; RF-04A source-derived transport/planning is locally verified, vendor runtime remains open.
+Status: direction accepted from owner requirements; RF-01 contracts and RF-02 authenticated API/SQLite core implemented; see [RF-02 evidence](rf-02-ledger.md). RF-03 replay/report and simulated response are merged and verified; RF-04A source-derived transport/planning is merged and verified; RF-04B callback/safety corrections are in progress, vendor runtime remains open.
 
 ```mermaid
 flowchart TD
@@ -42,4 +42,4 @@ No qualified startup Compose is supplied. RF-04A can render blocked planning-onl
 
 The [RF-03 design](rf-03-design.md) binds replay alerts/evidence to source bytes and scope, uses a separate SQLite file for durable simulated endpoint state, and produces one authorized, default-redacted report snapshot. The in-process HTTP driver exercises common core authentication/approval/recovery without implying genuine SOAR orchestration. Actual Shuffle and recorded-source qualification remain distinct.
 
-[RF-04A](rf-04-design.md) adds a source-derived vendor client and durable workflow launch coordinator in the same Python package. Outbound reservations use namespaced records in the existing private callbacks collection and do not modify RF-01 contracts or reset case schema. Completion requires exact source/case/run/workflow/argument and executed-graph binding; workflow status never establishes endpoint effect.
+[RF-04A](rf-04-design.md) adds a source-derived vendor client and durable workflow launch coordinator in the same Python package. Outbound reservations use namespaced records in the existing private callbacks collection and do not modify RF-01 contracts or reset case schema. Coordinator terminal delivery attribution requires exact source/case/run/workflow/argument and executed-graph binding. Existing core callbacks may separately record callback-reported terminal PlaybookRun status before vendor verification; runtime integration must reconcile those observations. Workflow status never establishes endpoint effect.

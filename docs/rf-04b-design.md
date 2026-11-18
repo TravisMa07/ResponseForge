@@ -29,3 +29,7 @@ One writer owns only `deployment.py`. Set explicit empty SHUFFLE_SWARM_CONFIG (s
 Primary owns design/freeze, shared docs/CI/scripts/locks and qualification. Independent test writer owns only `tests/rf04b/**`; callback writer only callback.py; deployment writer only deployment.py. Freeze precedes substantive code. Tests derive from [independent cases](expectations/rf-04b.md), source and existing authenticated core. Handback must include changed files, revision/dirty scope, commands, actual results/failures and objections. No agent commits/pushes or starts a runtime. Independent read-only review follows integration.
 
 No image pulls, containers, management listeners, socket mounts, Swarm/host setting changes, live enrollment/actions or release are authorized by this slice. A future safe execution image/app inventory, credential injection, CA/bootstrap, explicit scoped engine permission and actual runtime evidence remain required. Partial PR uses Refs #4.
+
+## Independent review clarification
+
+Existing CaseService.callback directly records terminal PlaybookRun status from a validated callback. That is callback-reported, not executed-graph verification. Only coordinator terminal DeliveryRecord attribution enforces the polled graph fingerprint; uncertain delivery does not reset an already callback-reported terminal run. This slice preserves that existing API behavior. Runtime integration must reconcile node callbacks with whole-workflow observations and test disagreement before full completion claims.

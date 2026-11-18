@@ -115,3 +115,9 @@ Both actual-pin target plans parse with Compose; no services were started. A ded
 ## Owner-selected pilot target
 
 On 2026-11-18 the owner selected Docker Desktop for the pilot while requiring both deployment options remain viable and core tool logic remain identical. [ADR0002](decisions/0002-shuffle-execution-boundary.md) records the accepted target and invariant behavior. Workflow definitions, policy/authentication, evidence, durable recovery and effect verification must not be weakened for either host. Configuration, resources, networking and operational recovery differ; each target needs its own real-runtime proof. This target selection does not itself mount a socket or resolve the separately scoped shared-daemon execution grant and technical gates.
+
+## RF-04A authorized merge / RF-04B kickoff
+
+Owner authorized #14 merge at final head `4c2e7e018a0f20331cc894ea621a512de4e06899`; both hosted checks succeeded, no submitted reviews/unresolved threads. Expected-head guarded merge produced `2e1c95b3af3bb5820859ab31a3646eb54c465a6a`. `make qualify` on that actual merged revision passes 562 tests and all tooling checks. Issue #4 remains open for real runtime.
+
+RF-04B [design](rf-04b-design.md), [independent expectations](expectations/rf-04b.md) and [ledger](rf-04b-ledger.md) own callback transport and shared-daemon safety corrections from freeze `585f5f6`. Callback writer owns only callback.py; planner writer only deployment.py; tests only tests/rf04b. Primary owns shared docs/scripts/CI/qualification. Source review found unconditional vendor cleanup beyond project scope and Swarm startup selected by the old candidate. No startup/socket/privilege change occurs; a scoped execution image/boundary must precede runtime, even with owner engine permission.

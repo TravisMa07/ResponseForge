@@ -18,6 +18,21 @@ def main() -> int:
             plan = build_plan(lock, target)
             if plan.ready or not plan.blockers or target.engine_control_authorized:
                 raise ValueError("unqualified plan cannot become ready or grant authority")
+            environment = plan.compose["services"]["orborus"]["environment"]
+            expected = {
+                "SHUFFLE_SWARM_CONFIG": "",
+                "CLEANUP": "false",
+                "SHUFFLE_CONTAINER_AUTO_CLEANUP": "false",
+                "SHUFFLE_SKIP_PIPELINES": "true",
+                "SHUFFLE_PIPELINE_ENABLED": "false",
+                "SHUFFLE_AGENT_MODE": "false",
+            }
+            if any(environment.get(key) != value for key, value in expected.items()):
+                raise ValueError("candidate plan enables unreviewed execution-plane behavior")
+            if kind == "docker-desktop" and (
+                "shared-daemon-cleanup-unqualified" not in plan.blockers
+            ):
+                raise ValueError("shared-daemon cleanup must remain blocked")
             for service in plan.compose["services"].values():
                 if (
                     service.get("ports")
@@ -26,7 +41,7 @@ def main() -> int:
                     or "docker.sock" in json.dumps(service)
                 ):
                     raise ValueError("default plan exposes authority or management")
-    print("PASS: candidate digest/platform pins and both socket-free blocked target plans")
+    print("PASS: candidate pins, standalone defaults and both socket-free blocked target plans")
     return 0
 
 

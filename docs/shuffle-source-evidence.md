@@ -33,3 +33,20 @@ HTTP app source49–54 logs header strings;72–79 makes omitted verification un
 Host read-only commands: docker version/info/compose/buildx version, sysctl hw.memsize; current memorylimit8318844928bytes,15DockerCPUs,linux/aarch64,0runningcontainers,24GiBhost. No allocation/context/Swarm/kernel change occurred. Web documentation fetches later timed out during a resource-text refresh; no new resource minimum is inferred from that failed fetch. The candidate guest budget is explicitly an engineering proposal.
 
 Shuffle root LICENSE is AGPL-3.0. Separate Orborus tagged tree has no LICENSE and GitHub reports license=null; do not infer separate-artifact terms or redistribution permission from another repository. Images/app/SDK dependency rights and notices remain a release gate. No upstream scripts were executed.
+
+## RF-04B source corrections and callback boundary
+
+Further inspection of the same pinned Orborus source found that `SHUFFLE_SWARM_CONFIG=run` selects Swarm, not ordinary standalone containers. Startup lines2826–2850 call `checkSwarmService`, whose lines2047–2095 include SwarmInit. The RF-04A candidate plan had this setting and must not be executed unchanged. Explicit empty config selects the source-default standalone branch. CLEANUP=false and SHUFFLE_CONTAINER_AUTO_CLEANUP=false disable optional cleanup, while SHUFFLE_SKIP_PIPELINES=true and SHUFFLE_PIPELINE_ENABLED=false avoid the inspected pipeline opt-in. SHUFFLE_AGENT_MODE=false keeps agent mode disabled.
+
+These settings do **not** make shared Docker authority safe: `zombiecheck` is invoked at startup, periodically and shutdown (2473,2859,3311). Lines4674–4765 scan all containers using broad image/command/label matches, then stop/remove aged matches with Force and RemoveVolumes. It does not consult CLEANUP. A reviewed scoped implementation or proven enforcement boundary is required before Docker Desktop startup; merely granting permission does not preserve unrelated workloads. RF-04B therefore retains a mandatory shared-daemon cleanup blocker, even when target authority is recorded.
+
+Additional independently inspected artifacts:
+
+| Artifact | Revision / file SHA-256 |
+| --- | --- |
+| [Shuffle SDK](https://github.com/Shuffle/app_sdk/blob/abe5f4a14f876b68d2a82274dc033a99eca2f409/shuffle_sdk/shuffle_sdk.py) | abe5f4a14f876b68d2a82274dc033a99eca2f409 / 8cb06e8fd2275dc2ebbf1398db9dd92e38226330114d002f784b897c78d28409 |
+| [Shared database connector](https://github.com/Shuffle/shuffle-shared/blob/f81e48ec7dfdd9fd0b94c207fb6b58535ed52a90/db-connector.go) | f81e48ec7dfdd9fd0b94c207fb6b58535ed52a90 / 2807ce5efd71c7e2f15fa5da20e59b071e76d9940d2518468211bec01b206dab |
+
+SDK send_result690–742 preserves action parameters and captured logs in persisted results; parameter-resolution debug paths4177–4180 can also log values. Callback credentials must stay out of workflow/action parameters and execution arguments. Pinned worker5133 logs execution authorization in normal environment mode, and3053 logs expected/received authorization on mismatch. A credential-safe ResponseForge sender does not repair those upstream logs or SDK transport. Upstream runtime logs remain private and credential handling remains a qualification gate. No SDK is installed or vendored by RF-04B.
+
+Database connector712–730 reads SHUFFLE_OPENSEARCH_CERTIFICATE_FILE into CACert; that existing setting is valid. The missing work is CA/server certificate provisioning and a reviewed read-only mount with matching SANs. SHUFFLE_CERT_DIR in shared.go is a separate external-client trust path. An initial incomplete source search missed the connector file; research corrected the finding before implementation, and no invalid environment rename was made.
