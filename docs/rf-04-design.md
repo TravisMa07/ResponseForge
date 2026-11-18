@@ -56,3 +56,12 @@ Lock fields `schema_version:'1.0',observed_at:UTC,source_revision:Id,images:{com
 [Independent matrix](expectations/rf-04.md) freezes expected negative/failure/recovery/success cases before code. Test writer owns tests/rf04/** only. Integration owns locks/CI/schema/core/API/status and technical qualification. Read-only artifact review follows integration. Each agent gets this SHA/paths/interfaces/tests/exclusions and returns files, tested revision/dirty scope, exact commands/results/failures, objections/remaining gates.
 
 Before requesting runtime authority, present both Docker Desktop and dedicated-VM options with exact scope: current daemon grants control over all its containers vs separate disposable daemon confines that authority; both still require privileged execution-plane capability, safe callback credentials, pinned apps, resource measurement and teardown. User has not selected/authorized either. Do not mark issue #4 or real Shuffle acceptance complete merely because offline contracts/config checks pass.
+
+
+## Reviewed refinements before qualification
+
+Schema-valid stored PlaybookRun values must match their requested dictionary key/run UUID at every reservation/duplicate/reconcile/save boundary. Config repr hides origin/CA as well as API key. API report redaction includes the configured vendor API key, including a copy embedded in an otherwise retained identifier.
+
+VendorExecution adds optional workflow_sha256 computed from its full executed workflow snapshot. Terminal delivery attribution requires exact equality with the reserved reviewed fingerprint; missing/drifting graphs stay uncertain. Strict execution-snapshot normalization is still a real-runtime gate and preflight cannot atomically freeze an editable vendor graph. Positive test envelopes were corrected to source-shaped full snapshots, not weakened to accept mismatches.
+
+Candidate locks use repository@index-digest references and observed architecture child digests; floating tags are preserved only as research provenance, never rendered. Planner explicitly binds source-used DNS aliases. Both routes still need private ResponseForge callback connectivity (a selected guest/private container or reviewed tunnel); the core must not silently listen on a public/LAN interface to solve routing.

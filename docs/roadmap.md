@@ -5,14 +5,14 @@ The [implementation plan](implementation-plan.md) owns detailed work packages. T
 | Phase | Outcome | Status |
 | --- | --- | --- |
 | 0 | Environment, upstream review, architecture, roadmap, public repository | Foundation prepared; dependency compatibility and selected-data qualification remain open |
-| 1 | Offline authenticated case/replay/policy/report vertical slice | RF-01/02 merged; RF-03 locally qualified, owner review/merge open |
-| 2 | Three real Shuffle workflows with recovery tests | Planned: RF-04–05 |
+| 1 | Offline authenticated case/replay/policy/report vertical slice | RF-01–03 merged; merged-revision checks pass |
+| 2 | Three real Shuffle workflows with recovery tests | RF-04A transport/planning locally verified; real RF-04/05 runtime open |
 | 3 | Five evidence-backed scenarios with opt-in public data | Planned: RF-06 |
 | 4 | Real Wazuh alert and approved safe VM action | Planned: RF-07–08; blocked on authorized lab and prior replay gates |
 | 5 | Fresh-clone reproducibility, docs, and [analyst effort evidence](implementation-plan.md#measure-analyst-time-saved) | Planned: RF-09 |
 | 6 | Optional read-only AI investigation | Deferred until phases 1–5 qualify |
 
-RF-01/02 are merged and their merged revisions verified. RF-03 offline replay/report is locally qualified in the [RF-03 ledger](rf-03-ledger.md). RF-04 deployment/transport investigation is next; actual Shuffle execution remains open. No replay scenario, SOAR execution or live response has passed acceptance yet.
+RF-01–03 are merged and their merged revisions verified. Original synthetic replay acceptance passes; recorded attack scenarios, actual Shuffle and live response remain open. RF-04A source-derived transport/planning is locally verified in the [RF-04 ledger](rf-04-ledger.md); full issue#4 runtime is not qualified. [Both target options](shuffle.md) are evaluated, with execution authority still pending.
 
 
 ## GitHub delivery tracking
@@ -23,7 +23,7 @@ The baseline is nine issues and nine implementation PRs through full release rea
 | --- | --- | --- |
 | RF-01 · Contracts and tooling | [#1](https://github.com/TravisMa07/ResponseForge/issues/1) | [#11](https://github.com/TravisMa07/ResponseForge/pull/11) · merged; issue closed; merged checks pass |
 | RF-02 · Durable core | [#2](https://github.com/TravisMa07/ResponseForge/issues/2) | [#12](https://github.com/TravisMa07/ResponseForge/pull/12) · merged; issue closed; merged checks pass |
-| RF-03 · Offline replay | [#3](https://github.com/TravisMa07/ResponseForge/issues/3) | [#13](https://github.com/TravisMa07/ResponseForge/pull/13) · locally qualified; owner review/merge open |
+| RF-03 · Offline replay | [#3](https://github.com/TravisMa07/ResponseForge/issues/3) | [#13](https://github.com/TravisMa07/ResponseForge/pull/13) · merged; issue closed; merged checks pass |
 | RF-04 · Shuffle deployment and transport | [#4](https://github.com/TravisMa07/ResponseForge/issues/4) | Pending |
 | RF-05 · Shuffle playbooks | [#5](https://github.com/TravisMa07/ResponseForge/issues/5) | Pending |
 | RF-06 · Scenario and dataset qualification | [#6](https://github.com/TravisMa07/ResponseForge/issues/6) | Pending |
@@ -33,4 +33,4 @@ The baseline is nine issues and nine implementation PRs through full release rea
 
 After RF-01, RF-02 and RF-03 can run in parallel alongside RF-04 discovery. RF-04 runtime qualification needs the integrated core and replay path. RF-06 dataset discovery can overlap those lanes.
 
-The next lanes have [bounded preparation and ownership](next-packages.md) from proven RF-01 revision `6d8b4ec`; their implementation and runtime gates remain open.
+The next lanes have [bounded preparation and ownership](next-packages.md) from proven RF-01 revision `6d8b4ec`; the current RF-04 source/runtime boundary is maintained in its owning design/ledger.

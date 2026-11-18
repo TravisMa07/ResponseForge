@@ -26,3 +26,5 @@ Full product gates below remain open. RF-01 contract/pure-policy and [RF-02 dura
 For each gate record revision, dependency/image identity, environment, exact command/scenario, independently defined expected result, observed result, evidence path and limitations. Missing infrastructure is a blocker, not a pass or a failing product test.
 
 RF-03 qualifies the offline vertical slice with original synthetic observations only; see [exact evidence and limitations](rf-03-ledger.md). It does not pass real SOAR, recorded corpus/scenario, live endpoint or release gates.
+
+RF-04A validates inspected vendor API contracts, durable local launch suppression and syntax/security defaults of blocked plans only. The [ledger](rf-04-ledger.md) keeps real import/start/callback/image/runtime acceptance OPEN. Neither source-matching stubs nor docker compose config is genuine Shuffle execution.

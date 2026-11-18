@@ -9,9 +9,10 @@ import sqlite3
 from pathlib import Path
 
 import uvicorn
-from pydantic import ValidationError
+from pydantic import Field, SecretStr, ValidationError
 
 from responseforge.contracts import ActionType, Contract, EndpointRef, Id, Mode
+from responseforge.integrations.shuffle.models import ShuffleConfig, ShuffleError, WorkflowBinding
 from responseforge.runtime import Principal, Settings
 
 
@@ -25,6 +26,16 @@ class ActorConfig(Contract):
     human: bool = False
 
 
+class ShuffleFileConfig(Contract):
+    base_url: Id = Field(repr=False)
+    api_key: SecretStr = Field(repr=False)
+    workflow_bindings: dict[str, WorkflowBinding]
+    timeout: float = 5.0
+    allow_loopback_http: bool = False
+    ca_file: str | None = Field(default=None, repr=False)
+    org_id: str | None = None
+
+
 class FileConfig(Contract):
     database_path: str
     mode: Mode = Mode.REPLAY
@@ -33,6 +44,7 @@ class FileConfig(Contract):
     resource_allowlist: dict[str, tuple[Id, ...]]
     revision: Id = "development"
     environment: Id = "local"
+    shuffle: ShuffleFileConfig | None = None
 
 
 def load_settings(path: Path) -> Settings:
@@ -49,6 +61,20 @@ def load_settings(path: Path) -> Settings:
         )
         for token, actor in config.credentials.items()
     }
+    shuffle = config.shuffle
+    shuffle_config = (
+        None
+        if shuffle is None
+        else ShuffleConfig(
+            base_url=shuffle.base_url,
+            api_key=shuffle.api_key.get_secret_value(),
+            workflow_ids=frozenset(shuffle.workflow_bindings),
+            timeout=shuffle.timeout,
+            allow_loopback_http=shuffle.allow_loopback_http,
+            ca_file=shuffle.ca_file,
+            org_id=shuffle.org_id,
+        )
+    )
     # Files cannot enable live dispatch or instantiate arbitrary provider/plugin code.
     return Settings(
         database_path=config.database_path,
@@ -58,6 +84,8 @@ def load_settings(path: Path) -> Settings:
         resource_allowlist={k: frozenset(v) for k, v in config.resource_allowlist.items()},
         revision=config.revision,
         environment=config.environment,
+        shuffle_config=shuffle_config,
+        shuffle_bindings={} if shuffle is None else shuffle.workflow_bindings,
     )
 
 
@@ -161,7 +189,7 @@ def main() -> int:
         parser.error("port must be between 1 and 65535")
     try:
         settings = load_settings(args.config)
-    except (OSError, ValueError, ValidationError):
+    except (OSError, ValueError, ValidationError, ShuffleError):
         parser.exit(2, "Invalid or unreadable private configuration.\n")
     from responseforge.api import create_app
 

@@ -1,6 +1,6 @@
 # Architecture
 
-Status: direction accepted from owner requirements; RF-01 contracts and RF-02 authenticated API/SQLite core implemented; see [RF-02 evidence](rf-02-ledger.md). RF-03 replay/report and simulated response are locally qualified; vendor runtime remains open.
+Status: direction accepted from owner requirements; RF-01 contracts and RF-02 authenticated API/SQLite core implemented; see [RF-02 evidence](rf-02-ledger.md). RF-03 replay/report and simulated response are merged and verified; RF-04A source-derived transport/planning is locally verified, vendor runtime remains open.
 
 ```mermaid
 flowchart TD
@@ -33,11 +33,13 @@ Incident states are `RECEIVED → TRIAGING → INVESTIGATING → AWAITING_APPROV
 | --- | --- | --- |
 | One Python package, SQLite, shared replay/live core | Accepted from handoff | [ADR 0001](decisions/0001-bounded-core.md) |
 | Integration version/digest lock and native architecture support | Pending runtime qualification | [Dependencies](dependencies.md) |
-| Safe Shuffle worker execution without default Docker socket | Blocking deployment design question | [Plan RF-04](implementation-plan.md) |
+| Shuffle execution-plane authority | Proposed target decision; no socket grant | [ADR0002](decisions/0002-shuffle-execution-boundary.md) |
 | Project license | Owner decision pending | [Limitations](limitations.md) |
 
 The [RF-02 durable design](rf-02-design.md) implements short SQLite transactions, persistent approval snapshots and dispatch reservations. Provider I/O occurs outside transactions; uncertain reservations suppress redispatch and reconcile only through verification. Internal OpenAPI is published, with no claim of vendor-schema compatibility. Actual Shuffle and endpoint integrations still require independent runtime proof.
 
-No Compose file is supplied until a supported, secure configuration is validated. Docker reproducibility is a delivery gate, not established by a diagram.
+No qualified startup Compose is supplied. RF-04A can render blocked planning-only Compose JSON with no default sockets/exposure; passing syntax is not a supported runtime. Docker reproducibility is a delivery gate, not established by a diagram.
 
 The [RF-03 design](rf-03-design.md) binds replay alerts/evidence to source bytes and scope, uses a separate SQLite file for durable simulated endpoint state, and produces one authorized, default-redacted report snapshot. The in-process HTTP driver exercises common core authentication/approval/recovery without implying genuine SOAR orchestration. Actual Shuffle and recorded-source qualification remain distinct.
+
+[RF-04A](rf-04-design.md) adds a source-derived vendor client and durable workflow launch coordinator in the same Python package. Outbound reservations use namespaced records in the existing private callbacks collection and do not modify RF-01 contracts or reset case schema. Completion requires exact source/case/run/workflow/argument and executed-graph binding; workflow status never establishes endpoint effect.

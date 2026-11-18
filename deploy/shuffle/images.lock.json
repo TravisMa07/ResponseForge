@@ -1,0 +1,56 @@
+{
+  "schema_version": "1.0",
+  "observed_at": "2026-11-18T22:21:56.155124+00:00",
+  "source_revision": "473cc335e5fcc663006d8e5ca16af5ee71fefa68",
+  "images": {
+    "frontend": {
+      "reference": "ghcr.io/shuffle/shuffle-frontend@sha256:18c504a45ce853387275f63170e7df662ec9a2b3dd0f56da7458fda22b7379e0",
+      "index_digest": "sha256:18c504a45ce853387275f63170e7df662ec9a2b3dd0f56da7458fda22b7379e0",
+      "platforms": {
+        "amd64": "sha256:12b862b8965867273339465398b06ee0af5936433bfe1146334ce93ae52e6f52",
+        "arm64": "sha256:6966e448fe0c60f21cb4cb404a001ab91eb80ff3f57a77bf072da9f5bda15ec2"
+      }
+    },
+    "backend": {
+      "reference": "ghcr.io/shuffle/shuffle-backend@sha256:6342d3996eb4cad2e927f9af756ba68ff00b9ca8fad26b9642c8bcb0acb21f69",
+      "index_digest": "sha256:6342d3996eb4cad2e927f9af756ba68ff00b9ca8fad26b9642c8bcb0acb21f69",
+      "platforms": {
+        "amd64": "sha256:ea7f0d069511f7f0394ebb391953484faf7c26080fb3a11e8e1d0c96cc127575",
+        "arm64": "sha256:a8c0dab5a2138ab6d25c48a476b648eacad58e8d93356b0ab59c1c0b03a8e332"
+      }
+    },
+    "orborus": {
+      "reference": "ghcr.io/shuffle/shuffle-orborus@sha256:5fed3672b8be2c9b6042eaa4da0d1fe321ab93ec9d0264b10e46560242ef2183",
+      "index_digest": "sha256:5fed3672b8be2c9b6042eaa4da0d1fe321ab93ec9d0264b10e46560242ef2183",
+      "platforms": {
+        "amd64": "sha256:8ab2886143e2c108e3ede4a47ba76326964de48fca54aac1f15f781b713a066c",
+        "arm64": "sha256:06574ca24e0fa781625951bd3301462a1816ffc10b3baf448a8efbc83ac5770f"
+      }
+    },
+    "worker": {
+      "reference": "ghcr.io/shuffle/shuffle-worker@sha256:784f80e55e8ede3191fcde48626d6186303f32cade73ce5c0ebe55cff0ae6be7",
+      "index_digest": "sha256:784f80e55e8ede3191fcde48626d6186303f32cade73ce5c0ebe55cff0ae6be7",
+      "platforms": {
+        "amd64": "sha256:aa8f97aee982e0692e4da4d0b98e92ab0d702b19038d1ade3b6af520d3e81514",
+        "arm64": "sha256:32078117283705373ad1500db7cd956d809f46ae71a5631d11769b796e048281"
+      }
+    },
+    "opensearch": {
+      "reference": "opensearchproject/opensearch@sha256:23297b8d8545e129dd58c254ed08d786dc552410ba772983ad2af31048d2f04b",
+      "index_digest": "sha256:23297b8d8545e129dd58c254ed08d786dc552410ba772983ad2af31048d2f04b",
+      "platforms": {
+        "amd64": "sha256:eab536fd3e19f208e07b65ac8ee6c4bde9b02cb6f191ace87569f922e14b802a",
+        "arm64": "sha256:1dc8b257917e53ef639c0c4a579fc324fb955f045bf4d2c0a0a84f056e5ac68e"
+      }
+    }
+  },
+  "gates": [
+    "source-image-correlation-unverified",
+    "app-image-inventory-unqualified",
+    "callback-logging-unqualified",
+    "license-review-open",
+    "runtime-unqualified",
+    "resource-budget-unmeasured",
+    "opensearch-ca-provisioning-unverified"
+  ]
+}
