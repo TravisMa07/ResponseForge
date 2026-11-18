@@ -1,13 +1,13 @@
 # Acceptance matrix
 
-Full product gates below remain open. RF-01 contract/pure-policy evidence is recorded separately in the [RF-01 ledger](rf-01-ledger.md); it does not pass the P1 vertical slice. Foundation checks only validate repository integrity. See [implementation ledger](implementation-ledger.md) for observed evidence.
+Full product gates below remain open. RF-01 contract/pure-policy and [RF-02 durable API/recovery evidence](rf-02-ledger.md) qualify their bounded components, not the complete P1 vertical slice. Foundation checks only validate repository integrity. See [implementation ledger](implementation-ledger.md) for observed evidence.
 
 | Gate | Required evidence | Owner / status |
 | --- | --- | --- |
 | P0 environment | Host/Docker resources, Python/Git/Compose availability, supported vs unverified platform matrix | RF-00 / inspected |
 | P0 dependency/data | Tested version/digest set; minimum dataset fields, hashes and terms verified | RF-00, RF-04, RF-06 / open; references alone do not pass |
-| P1 offline core | `make test` without network/VM; one deterministic evidence-backed case/report; benign case; quarantine and duplicate tests | RF-01–03 / not run |
-| P1 safety | Spoofed/expired/mismatched approvals rejected; authorization enforced; durable idempotency; mock failure/rollback and flags | RF-02/03 / not run |
+| P1 offline core | `make test` without network/VM; one deterministic evidence-backed case/report; benign case; quarantine and duplicate tests | RF-01/02 components locally verified; RF-03 vertical slice pending |
+| P1 safety | Spoofed/expired/mismatched approvals rejected; authorization enforced; durable idempotency; mock failure/rollback and flags | RF-02 core/HTTP enforcement and recovery locally verified; RF-03 mock/rollback pending |
 | P2 real SOAR | Three imported workflows; correlated real run, denied approval, failed/lost/replayed callback and retry recovery | RF-04/05 / not run |
 | P3 scenarios | Five licensed evidence-backed scenarios or justified narrowing; positive/negative/incomplete tests and real branch/audit assertions | RF-06 / not run |
 | P4 live | Authorized enrolled VM produces real alert and approved safe effect through common core; recovery and Windows evidence | RF-07/08 / not verified, no VM |

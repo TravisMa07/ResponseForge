@@ -15,13 +15,14 @@ test:
 	$(UV) run --locked --offline pytest
 
 lint:
-	$(UV) run --locked --offline ruff check src tests scripts/export_contracts.py
+	$(UV) run --locked --offline ruff check src tests scripts/export_contracts.py scripts/export_api.py
 
 typecheck:
 	$(UV) run --locked --offline mypy
 
 schemas:
 	$(UV) run --locked --offline python scripts/export_contracts.py --check
+	$(UV) run --locked --offline python scripts/export_api.py --check
 
 qualify: test lint typecheck schemas
 	$(UV) run --locked --offline python scripts/check_foundation.py

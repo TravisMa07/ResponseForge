@@ -1,0 +1,126 @@
+"""Start the local internal API with explicit private configuration."""
+
+import argparse
+import json
+import os
+import secrets
+from pathlib import Path
+
+import uvicorn
+from pydantic import ValidationError
+
+from responseforge.contracts import ActionType, Contract, EndpointRef, Id, Mode
+from responseforge.runtime import Principal, Settings
+
+
+class ActorConfig(Contract):
+    actor_id: Id
+    roles: tuple[Id, ...]
+    endpoint_ids: tuple[Id, ...]
+    actions: tuple[ActionType, ...]
+    resources: tuple[Id, ...]
+    sources: tuple[Id, ...] = ()
+    human: bool = False
+
+
+class FileConfig(Contract):
+    database_path: str
+    mode: Mode = Mode.REPLAY
+    endpoints: tuple[EndpointRef, ...]
+    credentials: dict[str, ActorConfig]
+    resource_allowlist: dict[str, tuple[Id, ...]]
+    revision: Id = "development"
+    environment: Id = "local"
+
+
+def load_settings(path: Path) -> Settings:
+    config = FileConfig.model_validate_json(path.read_text())
+    principals = {
+        token: Principal(
+            actor_id=actor.actor_id,
+            roles=frozenset(actor.roles),
+            endpoint_ids=frozenset(actor.endpoint_ids),
+            actions=frozenset(actor.actions),
+            resources=frozenset(actor.resources),
+            sources=frozenset(actor.sources),
+            human=actor.human,
+        )
+        for token, actor in config.credentials.items()
+    }
+    # Files cannot enable live dispatch or instantiate arbitrary provider/plugin code.
+    return Settings(
+        database_path=config.database_path,
+        mode=config.mode,
+        endpoints=config.endpoints,
+        credentials=principals,
+        resource_allowlist={k: frozenset(v) for k, v in config.resource_allowlist.items()},
+        revision=config.revision,
+        environment=config.environment,
+    )
+
+
+def write_initial_config(path: Path) -> None:
+    actors = {}
+    for role in ("source", "analyst", "approver", "executor", "workflow"):
+        actors[secrets.token_urlsafe(32)] = {
+            "actor_id": f"local-{role}",
+            "roles": [role],
+            "endpoint_ids": ["synthetic-host"],
+            "actions": ["test_marker"],
+            "resources": ["marker:demo"],
+            "sources": ["synthetic-fixture"] if role == "source" else [],
+            "human": role == "approver",
+        }
+    content = {
+        "database_path": ".local/responseforge.sqlite3",
+        "mode": "replay",
+        "endpoints": [{"endpoint_id": "synthetic-host", "hostname": "lab-example"}],
+        "credentials": actors,
+        "resource_allowlist": {"synthetic-host": ["marker:demo"]},
+        "revision": "development",
+        "environment": "local",
+    }
+    path.parent.mkdir(parents=True, exist_ok=True)
+    # Never overwrite existing credentials, and never print them to the terminal.
+    descriptor = os.open(path, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
+    with os.fdopen(descriptor, "w") as stream:
+        stream.write(json.dumps(content, indent=2) + "\n")
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--config", type=Path, help="Private JSON config (never commit)")
+    parser.add_argument("--init-config", type=Path, help="Generate a new private replay config")
+    parser.add_argument("--port", type=int, default=8000)
+    parser.add_argument(
+        "--export-openapi", type=Path, help="Write OpenAPI without starting a server"
+    )
+    args = parser.parse_args()
+    if args.init_config:
+        try:
+            write_initial_config(args.init_config)
+        except OSError:
+            parser.exit(2, "Cannot create config; existing files are never overwritten.\n")
+        print(f"Created private replay configuration at {args.init_config}")
+        return 0
+    if args.config is None:
+        parser.error("--config is required to run the API or export OpenAPI")
+    if not 1 <= args.port <= 65535:
+        parser.error("port must be between 1 and 65535")
+    try:
+        settings = load_settings(args.config)
+    except (OSError, ValueError, ValidationError):
+        parser.exit(2, "Invalid or unreadable private configuration.\n")
+    from responseforge.api import create_app
+
+    app = create_app(settings)
+    if args.export_openapi:
+        args.export_openapi.parent.mkdir(parents=True, exist_ok=True)
+        args.export_openapi.write_text(json.dumps(app.openapi(), indent=2, sort_keys=True) + "\n")
+        return 0
+    uvicorn.run(app, host="127.0.0.1", port=args.port, access_log=False)
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
