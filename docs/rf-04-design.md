@@ -2,7 +2,7 @@
 
 Issue [#4](https://github.com/TravisMa07/ResponseForge/issues/4); partial [PR #14](https://github.com/TravisMa07/ResponseForge/pull/14). Base `bc303833d945578014377f4cb4a012a1bd157aca`: owner authorized merge of RF-03 #13; merge preserved freeze/history, issue #3 closed, all 452 tests/checks pass on the actual merged revision. RF-04 is split for review: this bounded PR delivers source-derived transport, durable launch suppression and deployment preparation; RF-04 runtime qualification stays OPEN until an authorized execution environment, safe callback app, app/image inventory and genuine import/start/callback evidence pass. Use Refs #4, not Closes #4.
 
-User has Docker Desktop but no dedicated VM currently running, and requested both options be evaluated. No Docker socket grant, privileged change, install, management exposure, paid infrastructure or vendor startup is inferred. Plan/render/manifest/config checks and offline adapter tests are authorized. ADR execution target remains proposed, not an accepted architecture change.
+User has Docker Desktop but no dedicated VM currently running, and requested both options be evaluated. No Docker socket grant, privileged change, install, management exposure, paid infrastructure or vendor startup is inferred. Plan/render/manifest/config checks and offline adapter tests are authorized. Docker Desktop is now the owner-selected pilot target; execution permissions and technical gates remain open.
 
 ## Verified vendor source basis (before code)
 
@@ -55,7 +55,7 @@ Lock fields `schema_version:'1.0',observed_at:UTC,source_revision:Id,images:{com
 
 [Independent matrix](expectations/rf-04.md) freezes expected negative/failure/recovery/success cases before code. Test writer owns tests/rf04/** only. Integration owns locks/CI/schema/core/API/status and technical qualification. Read-only artifact review follows integration. Each agent gets this SHA/paths/interfaces/tests/exclusions and returns files, tested revision/dirty scope, exact commands/results/failures, objections/remaining gates.
 
-Before requesting runtime authority, present both Docker Desktop and dedicated-VM options with exact scope: current daemon grants control over all its containers vs separate disposable daemon confines that authority; both still require privileged execution-plane capability, safe callback credentials, pinned apps, resource measurement and teardown. User has not selected/authorized either. Do not mark issue #4 or real Shuffle acceptance complete merely because offline contracts/config checks pass.
+Before requesting runtime authority, present both Docker Desktop and dedicated-VM options with exact scope: current daemon grants control over all its containers vs separate disposable daemon confines that authority; both still require privileged execution-plane capability, safe callback credentials, pinned apps, resource measurement and teardown. User selected Docker Desktop for the pilot; the separately scoped engine grant remains pending. Do not mark issue #4 or real Shuffle acceptance complete merely because offline contracts/config checks pass.
 
 
 ## Reviewed refinements before qualification
@@ -65,3 +65,7 @@ Schema-valid stored PlaybookRun values must match their requested dictionary key
 VendorExecution adds optional workflow_sha256 computed from its full executed workflow snapshot. Terminal delivery attribution requires exact equality with the reserved reviewed fingerprint; missing/drifting graphs stay uncertain. Strict execution-snapshot normalization is still a real-runtime gate and preflight cannot atomically freeze an editable vendor graph. Positive test envelopes were corrected to source-shaped full snapshots, not weakened to accept mismatches.
 
 Candidate locks use repository@index-digest references and observed architecture child digests; floating tags are preserved only as research provenance, never rendered. Planner explicitly binds source-used DNS aliases. Both routes still need private ResponseForge callback connectivity (a selected guest/private container or reviewed tunnel); the core must not silently listen on a public/LAN interface to solve routing.
+
+## Owner-selected pilot target
+
+On 2026-11-18 the owner selected Docker Desktop for the pilot while requiring both deployment options remain viable and core tool logic remain identical. [ADR0002](decisions/0002-shuffle-execution-boundary.md) records the accepted target and invariant behavior. Workflow definitions, policy/authentication, evidence, durable recovery and effect verification must not be weakened for either host. Configuration, resources, networking and operational recovery differ; each target needs its own real-runtime proof. This target selection does not itself mount a socket or resolve the separately scoped shared-daemon execution grant and technical gates.

@@ -33,7 +33,7 @@ Incident states are `RECEIVED → TRIAGING → INVESTIGATING → AWAITING_APPROV
 | --- | --- | --- |
 | One Python package, SQLite, shared replay/live core | Accepted from handoff | [ADR 0001](decisions/0001-bounded-core.md) |
 | Integration version/digest lock and native architecture support | Pending runtime qualification | [Dependencies](dependencies.md) |
-| Shuffle execution-plane authority | Proposed target decision; no socket grant | [ADR0002](decisions/0002-shuffle-execution-boundary.md) |
+| Shuffle execution-plane authority | Docker Desktop pilot selected; VM option retained; execution grant pending | [ADR0002](decisions/0002-shuffle-execution-boundary.md) |
 | Project license | Owner decision pending | [Limitations](limitations.md) |
 
 The [RF-02 durable design](rf-02-design.md) implements short SQLite transactions, persistent approval snapshots and dispatch reservations. Provider I/O occurs outside transactions; uncertain reservations suppress redispatch and reconcile only through verification. Internal OpenAPI is published, with no claim of vendor-schema compatibility. Actual Shuffle and endpoint integrations still require independent runtime proof.

@@ -12,7 +12,7 @@ The [implementation plan](implementation-plan.md) owns detailed work packages. T
 | 5 | Fresh-clone reproducibility, docs, and [analyst effort evidence](implementation-plan.md#measure-analyst-time-saved) | Planned: RF-09 |
 | 6 | Optional read-only AI investigation | Deferred until phases 1–5 qualify |
 
-RF-01–03 are merged and their merged revisions verified. Original synthetic replay acceptance passes; recorded attack scenarios, actual Shuffle and live response remain open. RF-04A source-derived transport/planning is locally verified in the [RF-04 ledger](rf-04-ledger.md); full issue#4 runtime is not qualified. [Both target options](shuffle.md) are evaluated, with execution authority still pending.
+RF-01–03 are merged and their merged revisions verified. Original synthetic replay acceptance passes; recorded attack scenarios, actual Shuffle and live response remain open. RF-04A source-derived transport/planning is locally verified in the [RF-04 ledger](rf-04-ledger.md); full issue#4 runtime is not qualified. [Both target options](shuffle.md) are retained; the owner selected Docker Desktop for the pilot, with execution authority and runtime qualification still pending.
 
 
 ## GitHub delivery tracking

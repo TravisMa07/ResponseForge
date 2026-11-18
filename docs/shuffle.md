@@ -1,6 +1,6 @@
 # Shuffle transport and execution-target decision
 
-RF-04A provides source-derived API transport, durable launch suppression/reconciliation and blocked deployment plans. **No real Shuffle instance was started or workflow imported/executed. Issue #4 remains open.** Offline tests and Compose parsing establish bounded preparation only; see [design](rf-04-design.md) and [qualification ledger](rf-04-ledger.md).
+The owner selected Docker Desktop for the container pilot, with a dedicated Linux VM retained as a supported deployment option. RF-04A provides source-derived API transport, durable launch suppression/reconciliation and blocked deployment plans. **No real Shuffle instance was started or workflow imported/executed. Issue #4 remains open.** Offline tests and Compose parsing establish bounded preparation only; see [design](rf-04-design.md) and [qualification ledger](rf-04-ledger.md).
 
 ## Docker Desktop and dedicated VM, evaluated
 
@@ -61,3 +61,7 @@ Optional private server config can supply shuffle.base_url, api_key, reviewed wo
 5. Record exact revisions/images/app artifacts/commands and limitations. Only then can RF-04 acceptance close; RF-05 still owns three real playbooks.
 
 [Source evidence](shuffle-source-evidence.md) links exact official revisions and observed hashes. No socket-free working runtime, vendor-compatible image set or genuine workflow success is implied by these plans/stubs.
+
+## Same product behavior on both targets
+
+Both targets use the same Python case/policy core, Shuffle workflow definitions, authenticated contracts, evidence requirements, server-authorized approvals, provider capability checks, durable delivery suppression/reconciliation and verified-effect criteria. Deployment changes must not remove logic or weaken those checks. Network addresses, callback routing, TLS/secret provisioning, architecture-specific image digests, capacity, volume backup/restore and teardown are target configuration and operations. Docker Desktop qualification proves only that tested topology; the VM still needs its own runtime validation. No real Shuffle runtime has been qualified yet.
