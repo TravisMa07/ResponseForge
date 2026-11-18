@@ -12,4 +12,23 @@ The [implementation plan](implementation-plan.md) owns detailed work packages. T
 | 5 | Fresh-clone reproducibility, docs, measured evidence | Planned: RF-09 |
 | 6 | Optional read-only AI investigation | Deferred until phases 1–5 qualify |
 
-Current delivery scope is repository creation and publication. The next coding package is RF-01. No replay scenario, SOAR execution or live response has passed acceptance yet.
+The next coding package is RF-01. No replay scenario, SOAR execution or live response has passed acceptance yet.
+
+
+## GitHub delivery tracking
+
+The baseline is nine issues and nine implementation PRs through full release readiness. A package can need more than one PR when its work benefits from separate review. Phase 0 follow-up qualifications are tracked in their owning packages below.
+
+| Package | GitHub issue | PR |
+| --- | --- | --- |
+| RF-01 · Contracts and tooling | [#1](https://github.com/TravisMa07/ResponseForge/issues/1) | Pending |
+| RF-02 · Durable core | [#2](https://github.com/TravisMa07/ResponseForge/issues/2) | Pending |
+| RF-03 · Offline replay | [#3](https://github.com/TravisMa07/ResponseForge/issues/3) | Pending |
+| RF-04 · Shuffle deployment and transport | [#4](https://github.com/TravisMa07/ResponseForge/issues/4) | Pending |
+| RF-05 · Shuffle playbooks | [#5](https://github.com/TravisMa07/ResponseForge/issues/5) | Pending |
+| RF-06 · Scenario and dataset qualification | [#6](https://github.com/TravisMa07/ResponseForge/issues/6) | Pending |
+| RF-07 · Wazuh adapter and enrollment bundle | [#7](https://github.com/TravisMa07/ResponseForge/issues/7) | Pending |
+| RF-08 · Authorized live verification | [#8](https://github.com/TravisMa07/ResponseForge/issues/8) | Pending |
+| RF-09 · Release readiness | [#9](https://github.com/TravisMa07/ResponseForge/issues/9) | Pending |
+
+After RF-01, RF-02 and RF-03 can run in parallel alongside RF-04 discovery. RF-04 runtime qualification needs the integrated core and replay path. RF-06 dataset discovery can overlap those lanes.
