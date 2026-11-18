@@ -49,3 +49,10 @@ POST /v1/alerts (201 new/200 duplicate), GET /v1/incidents, GET /v1/incidents/{i
 ## Ownership and evidence
 
 Storage agent owns only src/responseforge/storage/**; service agent owns only src/responseforge/core/**; independent tests agent owns only tests/rf02/**. Integration owns runtime.py, API, dependency changes, operator docs, schema/API exports, shared status and qualification. No overlapping edits or commits/push by agents. The [frozen independent matrix](expectations/rf-02.md) is the oracle; each agent gets this freeze SHA and hands back changed files, exact tested revision/working edits, commands/results/failures and objections. Independent artifact review follows integration. No provider tests qualify actual vendor/live behavior.
+
+
+## Reviewed implementation refinements
+
+Independent artifact review clarified required cross-record validation: schema-valid stored execution/approval snapshots must bind to the requested key, full canonical endpoint, case, mode and original provider. Canonical identity also applies to case listing. All non-None provider check timestamps, including pending results, must be in the dispatch/server interval; otherwise persist a sanitized uncertain result and allow later reconciliation. Regression tests preserve these interpretations of D05/D15/D23.
+
+Reservation atomically retains the configured provider version in an internal `execution_provider_version` unique key; unresolved reconciliation refuses a missing/changed version rather than querying another adapter version under the same name. This refines original-provider verification without changing RF-01 wire contracts. Already verified historical results remain readable without provider I/O. Invalid model-copy objects are serialized without raw-value warnings and immediately revalidated; this prevents log leakage, not validation bypass. Tests and review validate all refinements before qualification.

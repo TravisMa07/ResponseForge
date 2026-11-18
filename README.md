@@ -2,7 +2,7 @@
 
 SOAR-first incident response automation with offline attack replay and an optional live Wazuh endpoint path. ResponseForge connects evidence, analyst approval, response providers and auditable case reports through real Shuffle workflows.
 
-**Status: RF-01 contracts and pure policy implemented; local qualification is recorded in the [RF-01 ledger](docs/rf-01-ledger.md). No incident API, replay engine, Shuffle workflow or live integration is implemented or qualified yet.**
+**Status: RF-01 contracts and RF-02 authenticated case API/durable recovery implemented. See the [RF-02 ledger](docs/rf-02-ledger.md). Replay, reports, actual Shuffle execution and live endpoint integration remain unimplemented/unqualified.**
 
 The public engineering requirements are captured in the [architecture](docs/architecture.md) and acceptance documentation. The [implementation plan](docs/implementation-plan.md) defines bounded delivery packages and parallel-agent ownership; the [acceptance matrix](docs/acceptance.md) keeps implementation separate from verification.
 
@@ -15,7 +15,7 @@ The public engineering requirements are captured in the [architecture](docs/arch
 
 This is deliberately smaller than DetectBridge: no custom SIEM/EDR, stream-processing fleet, dashboard, paid API or AI dependency. DetectBridge is not a runtime dependency.
 
-## Run offline contract and policy checks
+## Run offline core checks
 
 Requires Python 3.12+ and uv (qualified locally with Python 3.12.12 and uv 0.13.6):
 
@@ -24,7 +24,16 @@ uv sync --locked
 make qualify
 ```
 
-The first dependency install may need network access. Qualification then runs offline: pytest, Ruff, strict typing, schema drift and documentation checks. See [testing](docs/testing.md), the [contract design](docs/rf-01-design.md), [v1 JSON Schemas](schemas/v1), and [examples](examples/contracts-v1.json). These checks do not start an API or qualify provider execution.
+The first dependency install may need network access. Qualification then runs offline: pytest, Ruff, strict typing, schema drift and documentation checks. See [testing](docs/testing.md), the [contract design](docs/rf-01-design.md), [v1 JSON Schemas](schemas/v1), and [examples](examples/contracts-v1.json). These checks exercise the API in process and controlled simulated providers. They do not qualify actual vendor or endpoint execution.
+
+## Local case API
+
+```bash
+uv run --locked --offline python -m responseforge --init-config .local/config.json
+uv run --locked --offline python -m responseforge --config .local/config.json
+```
+
+This creates separate private credentials and binds the API to `127.0.0.1:8000`. No provider, replay scenario or endpoint action starts automatically. See the [API and recovery runbook](docs/core-api.md) and [internal OpenAPI](schemas/internal-api.json). Internal alerts are normalized ResponseForge contracts; actual Wazuh/Shuffle payload mappings still require their own qualification.
 
 ## Run the foundation checks
 
@@ -37,7 +46,7 @@ make check PYTHON="uv run --no-project --python 3.12 python"
 make doctor PYTHON="uv run --no-project --python 3.12 python"
 ```
 
-Or use `make check doctor PYTHON=python3` when that interpreter is 3.12+. These commands validate documentation and inspect local prerequisites only. There is no application startup command yet. Doctor returns nonzero if a required tool is unavailable; passing it does not qualify a deployment. No external Python packages are needed for foundation checks.
+Or use `make check doctor PYTHON=python3` when that interpreter is 3.12+. These commands validate documentation and inspect local prerequisites only. For the local API, use the explicit private configuration below. Doctor returns nonzero if a required tool is unavailable; passing it does not qualify a deployment. No external Python packages are needed for foundation checks.
 
 ## Engineering documentation
 

@@ -5,14 +5,14 @@ The [implementation plan](implementation-plan.md) owns detailed work packages. T
 | Phase | Outcome | Status |
 | --- | --- | --- |
 | 0 | Environment, upstream review, architecture, roadmap, public repository | Foundation prepared; dependency compatibility and selected-data qualification remain open |
-| 1 | Offline authenticated case/replay/policy/report vertical slice | Planned: RF-01–03 |
+| 1 | Offline authenticated case/replay/policy/report vertical slice | RF-01 merged; RF-02 locally qualified; RF-03 planned |
 | 2 | Three real Shuffle workflows with recovery tests | Planned: RF-04–05 |
 | 3 | Five evidence-backed scenarios with opt-in public data | Planned: RF-06 |
 | 4 | Real Wazuh alert and approved safe VM action | Planned: RF-07–08; blocked on authorized lab and prior replay gates |
 | 5 | Fresh-clone reproducibility, docs, and [analyst effort evidence](implementation-plan.md#measure-analyst-time-saved) | Planned: RF-09 |
 | 6 | Optional read-only AI investigation | Deferred until phases 1–5 qualify |
 
-RF-01 contracts/pure policy are implemented; qualification and review are recorded in the [RF-01 ledger](rf-01-ledger.md). RF-02/03 implementation and RF-04 investigation are next. No replay scenario, SOAR execution or live response has passed acceptance yet.
+RF-01 is merged and its merged revision verified. RF-02 durable API/core is locally qualified in the [RF-02 ledger](rf-02-ledger.md). RF-03 replay/report implementation and RF-04 investigation are next. No replay scenario, SOAR execution or live response has passed acceptance yet.
 
 
 ## GitHub delivery tracking
@@ -21,7 +21,7 @@ The baseline is nine issues and nine implementation PRs through full release rea
 
 | Package | GitHub issue | PR |
 | --- | --- | --- |
-| RF-01 · Contracts and tooling | [#1](https://github.com/TravisMa07/ResponseForge/issues/1) | [#11](https://github.com/TravisMa07/ResponseForge/pull/11) · locally qualified; owner review/merge open |
+| RF-01 · Contracts and tooling | [#1](https://github.com/TravisMa07/ResponseForge/issues/1) | [#11](https://github.com/TravisMa07/ResponseForge/pull/11) · merged; issue closed; merged checks pass |
 | RF-02 · Durable core | [#2](https://github.com/TravisMa07/ResponseForge/issues/2) | Pending |
 | RF-03 · Offline replay | [#3](https://github.com/TravisMa07/ResponseForge/issues/3) | Pending |
 | RF-04 · Shuffle deployment and transport | [#4](https://github.com/TravisMa07/ResponseForge/issues/4) | Pending |

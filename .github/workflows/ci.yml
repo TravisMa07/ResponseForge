@@ -13,7 +13,7 @@ jobs:
           python-version: "3.12.12"
       - name: Install locked development environment
         run: uv sync --locked
-      - name: Offline contract and policy qualification
+      - name: Offline contracts, API and durable recovery qualification
         run: make qualify
       - name: Build distributable without dependency resolution
         run: uv build --offline --no-build-isolation

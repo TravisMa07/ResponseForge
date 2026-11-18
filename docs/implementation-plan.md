@@ -1,6 +1,6 @@
 # Implementation plan
 
-Initial scope: establish and publish the repository, complete feasible Phase 0 research, and expose remaining qualification gates. Product implementation begins in subsequent bounded packages. No time estimate or feature completion is inferred from parallelism.
+Initial scope: establish and publish the repository, complete feasible Phase 0 research, and expose remaining qualification gates. RF-01 contracts and RF-02 durable API/core are now implemented with bounded local qualification; replay and vendor integrations follow. No time estimate or feature completion is inferred from parallelism.
 
 ## Work packages
 
@@ -44,3 +44,7 @@ Each lane receives explicit paths, expected tests, exclusions and base revision.
 ## Decisions and blockers
 
 Confirm vendor image architecture and runtime compatibility before declaring a tested version set. Resolve Shuffle worker requirements versus no-default-Docker-socket policy before startup. Inspect minimum selected dataset fields, redistribution terms and checksums before fixture inclusion. Public project license remains unselected. Windows/ARM virtualization and Wazuh compatibility need explicit verification on the chosen guest; no VM was supplied. Do not install or provision one implicitly.
+
+## RF-02 durable core
+
+The [RF-02 design](rf-02-design.md), [independent expectations](expectations/rf-02.md), [ledger](rf-02-ledger.md) and [API runbook](core-api.md) own this package. RF-03 now integrates through the authenticated case/evidence/action API and frozen response protocols. It must return deterministic `exec-<proposal_id>` execution identities, preserve reserved-request chronology and support verification of an original action after unknown outcome. RF-04 actual transport remains independently qualified.
