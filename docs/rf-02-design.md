@@ -1,6 +1,6 @@
 # RF-02: durable cases, approvals and dispatch recovery
 
-Issue [#2](https://github.com/TravisMa07/ResponseForge/issues/2). Base main `1e662c115410f64c7a44da9c635f346a36f43ca2` (merged RF-01 PR #11; issue #1 closed). Integration owns this design, runtime configuration/auth/API, shared contracts, locks, CI and qualification. SQLite and core service have separate agent writers; a third agent owns independent tests. No vendor adapters, replay engine, reports, Docker or endpoint operation in this package. Vendor payload compatibility remains RF-04/07; these are internal APIs.
+Issue [#2](https://github.com/TravisMa07/ResponseForge/issues/2); locally qualified [PR #12](https://github.com/TravisMa07/ResponseForge/pull/12), owner merge authorization open. Base main `1e662c115410f64c7a44da9c635f346a36f43ca2` (merged RF-01 PR #11; issue #1 closed). Integration owns this design, runtime configuration/auth/API, shared contracts, locks, CI and qualification. SQLite and core service have separate agent writers; a third agent owns independent tests. No vendor adapters, replay engine, reports, Docker or endpoint operation in this package. Vendor payload compatibility remains RF-04/07; these are internal APIs.
 
 ## Durable store interface (storage writer)
 

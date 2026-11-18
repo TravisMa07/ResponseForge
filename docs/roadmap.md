@@ -22,7 +22,7 @@ The baseline is nine issues and nine implementation PRs through full release rea
 | Package | GitHub issue | PR |
 | --- | --- | --- |
 | RF-01 · Contracts and tooling | [#1](https://github.com/TravisMa07/ResponseForge/issues/1) | [#11](https://github.com/TravisMa07/ResponseForge/pull/11) · merged; issue closed; merged checks pass |
-| RF-02 · Durable core | [#2](https://github.com/TravisMa07/ResponseForge/issues/2) | Pending |
+| RF-02 · Durable core | [#2](https://github.com/TravisMa07/ResponseForge/issues/2) | [#12](https://github.com/TravisMa07/ResponseForge/pull/12) · locally qualified; owner review/merge open |
 | RF-03 · Offline replay | [#3](https://github.com/TravisMa07/ResponseForge/issues/3) | Pending |
 | RF-04 · Shuffle deployment and transport | [#4](https://github.com/TravisMa07/ResponseForge/issues/4) | Pending |
 | RF-05 · Shuffle playbooks | [#5](https://github.com/TravisMa07/ResponseForge/issues/5) | Pending |
