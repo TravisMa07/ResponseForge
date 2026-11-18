@@ -1,6 +1,6 @@
 # RF-04B: callback transport and shared-daemon safety corrections
 
-Refs [issue #4](https://github.com/TravisMa07/ResponseForge/issues/4). Base `2e1c95b3af3bb5820859ab31a3646eb54c465a6a` is the owner-authorized RF-04A #14 merge. Both final-head hosted checks passed, no reviews or unresolved threads; `make qualify` passes 562 tests and all tooling checks on the actual merged revision. Issue #4 remains open. This slice preserves both deployment targets and common product semantics; real Shuffle acceptance remains open.
+Refs [issue #4](https://github.com/TravisMa07/ResponseForge/issues/4); partial [PR #15](https://github.com/TravisMa07/ResponseForge/pull/15). Base `2e1c95b3af3bb5820859ab31a3646eb54c465a6a` is the owner-authorized RF-04A #14 merge. Both final-head hosted checks passed, no reviews or unresolved threads; `make qualify` passes 562 tests and all tooling checks on the actual merged revision. Issue #4 remains open. This slice preserves both deployment targets and common product semantics; real Shuffle acceptance remains open.
 
 ## Source-driven scope
 
