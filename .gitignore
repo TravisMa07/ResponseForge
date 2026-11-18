@@ -1,0 +1,31 @@
+# Python and local tools
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+build/
+dist/
+*.egg-info/
+# Credentials and local state
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets/
+.local/
+*.sqlite
+*.sqlite3
+*.db
+*.db-wal
+*.db-shm
+# Downloaded data and generated evidence
+datasets/downloads/
+artifacts/
+reports/
+logs/
+.DS_Store
