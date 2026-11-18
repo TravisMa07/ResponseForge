@@ -36,4 +36,9 @@ Raw source/manifest research and rendered plans stay local/untracked; public mai
 
 Specific execution target and any engine/socket/provisioning/exposure permission; binary/source correlation; pinned/reviewed app inventory and safe callback logging; artifact rights before redistribution; CA/private-secret bootstrap; resource measurements; genuine import/start/executed-snapshot/authenticated callback/restart/timeout/teardown evidence. No vendor, endpoint, management listener, Docker socket mount, privilege/resource/Swarm change or paid infrastructure was started. Full RF-04 and RF-05/06/live/release gates remain open. A partial PR must Refs#4 and cannot close it.
 
-Exact implementation revision and PR reference follow in final evidence. Owner review/merge and any runtime authorization remain separate decisions.
+
+## Committed qualification and publication
+
+[PR #14](https://github.com/TravisMa07/ResponseForge/pull/14) targets main and uses Refs #4. Clean implementation revision `b3a9bb6df11fb34025a5e4867c576308c00a5f04` passes `make qualify` (562 tests, Ruff, strict mypy and schema/example/fixture/plan/docs checks), `uv lock --check --offline`, `uv build --offline --no-build-isolation` and `git diff --check` in the environment above. Wheel/sdist inspection found 23/120 members, production Shuffle client/coordinator present and no private/handoff/local/database artifacts. Final documentation-only commit adds references and repeats qualification; hosted CI is reported separately.
+
+Both actual-pin target plans parse with Compose; no services were started. A dedicated disposable guest is recommended for separating engine authority; Docker Desktop remains an explicitly authorized pilot option. Neither target/engine grant is authorized. Source/image/app correlation, safe callback logging, CA/bootstrap, measured resources and genuine workflow/recovery evidence remain gates. Issue #4 remains open; merge/release requires owner authorization.
