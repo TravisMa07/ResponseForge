@@ -4,7 +4,7 @@ SOAR-first incident response automation with offline attack replay and an option
 
 **Status: repository foundation / Phase 0 discovery. No incident API, replay engine, Shuffle workflow or live integration is implemented or qualified yet.**
 
-The authoritative engineering specification is [HANDOFF.md](HANDOFF.md). The [implementation plan](docs/implementation-plan.md) defines bounded delivery packages and parallel-agent ownership; the [acceptance matrix](docs/acceptance.md) keeps implementation separate from verification.
+The public engineering requirements are captured in the [architecture](docs/architecture.md) and acceptance documentation. The [implementation plan](docs/implementation-plan.md) defines bounded delivery packages and parallel-agent ownership; the [acceptance matrix](docs/acceptance.md) keeps implementation separate from verification.
 
 ## Planned product
 

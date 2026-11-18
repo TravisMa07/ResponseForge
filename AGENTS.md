@@ -1,7 +1,8 @@
 # Working on ResponseForge
 
-Read `HANDOFF.md` (authoritative product specification), `README.md`, `docs/architecture.md`, `docs/sdlc.md`, `docs/implementation-plan.md` and the current ledger before changes. Read the owning design/ledger when starting a work package.
+Read `README.md`, `docs/architecture.md`, `docs/sdlc.md`, `docs/implementation-plan.md` and the current ledger before changes. Read the owning design/ledger when starting a work package.
 
+- Keep handoff documents, original user attachments and private working notes local and untracked. Never stage or push them, even with `git add -f`. Consult a local `HANDOFF.md` when available; public docs must remain usable without it. Publish maintained architecture, acceptance criteria and operator documentation instead.
 - Preserve the SOAR scope: one Python package, SQLite, replay, Shuffle and optional live Wazuh. No DetectBridge dependency, SIEM, EDR, Kafka, dashboard or AI in the MVP.
 - Replay is simulated; live verification requires real endpoint proof. Never silently substitute mock success for failed live operations.
 - Freeze independent behavioral expectations before implementation. Write and run meaningful negative, failure/recovery and success tests; maintain evidence and limitations.

@@ -29,3 +29,9 @@ artifacts/
 reports/
 logs/
 .DS_Store
+
+# Local engineering handoffs and private working notes
+[Hh][Aa][Nn][Dd][Oo][Ff][Ff]*
+*[Hh][Aa][Nn][Dd][Oo][Ff][Ff].md
+*[Hh][Aa][Nn][Dd][Oo][Ff][Ff]_*.md
+docs/private/

@@ -2,11 +2,12 @@
 from pathlib import Path
 import re
 import sys
+import subprocess
 from urllib.parse import unquote, urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 REQUIRED = (
-    'HANDOFF.md', 'AGENTS.md', 'README.md', 'THIRD_PARTY.md',
+    'AGENTS.md', 'README.md', 'THIRD_PARTY.md',
     'docs/architecture.md', 'docs/dependencies.md', 'docs/environment.md',
     'docs/implementation-plan.md', 'docs/acceptance.md', 'docs/sdlc.md',
     'docs/roadmap.md', 'docs/implementation-ledger.md',
@@ -15,6 +16,13 @@ REQUIRED = (
 
 def main():
     errors = []
+    # Inspect the Git index, not just ignore rules: already-tracked files bypass ignores.
+    tracked = subprocess.run(
+        ['git', 'ls-files', '-z'], cwd=ROOT, capture_output=True, text=True, check=True,
+    ).stdout.split('\0')
+    for name in filter(None, tracked):
+        if 'handoff' in Path(name).name.lower() or name.startswith('docs/private/'):
+            errors.append(f'Private engineering document must not be tracked: {name}')
     if sys.version_info < (3, 12):
         errors.append('Python 3.12+ required; select a suitable interpreter with PYTHON=...')
     for name in REQUIRED:

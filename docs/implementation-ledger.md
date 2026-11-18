@@ -30,3 +30,9 @@ RF-01 through RF-09: planned, not implemented, not locally verified, not runtime
 Reproduce local checks with `make check doctor PYTHON="uv run --no-project --python 3.12 python"` and `uv run --no-project --python 3.12 python -m py_compile scripts/check_foundation.py scripts/doctor.py`. Evidence applies to the foundation artifact containing this record; the initial Git commit identifies the exact files. Remote CI results, if available, are recorded separately after publication.
 
 Seed revision: `2264efd95899cb6581be1c6f7346941671e2016f`. This follow-up ledger entry records publication evidence without rewriting that revision. Local foundation checks were rerun for this documentation update.
+
+## Publication correction: local handoff policy
+
+The initial seed incorrectly included the owner's handoff. Removed `HANDOFF.md` from the index while preserving the local file. Public docs no longer link to or require it. Added ignore rules and an automated index check rejecting handoff filenames and `docs/private/` content. Important maintained engineering docs remain public.
+
+Validation: the new check first failed on the tracked handoff, then passed after removal. This proves the publication guard detects already-tracked handoff files even when ignore rules exist. Historical seed commits still contain the original file; this correction does not rewrite published history. The earlier inclusion/review records above describe that historical state, not the current publication policy.

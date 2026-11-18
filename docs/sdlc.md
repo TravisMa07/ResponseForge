@@ -1,6 +1,6 @@
 # Development workflow
 
-Use the agentic SDLC with bounded packages in the [plan](implementation-plan.md). The handoff takes precedence over derived documentation.
+Use the agentic SDLC with bounded packages in the [plan](implementation-plan.md). Owner requirements take precedence over derived documentation. Original handoff documents and private working notes remain local and untracked; publish only maintained project documentation. Public checks and clone instructions must work without local handoffs.
 
 1. **Ready:** owning design states behavior, exclusions, interfaces, dependencies, failure modes, security invariants and observable independent expectations. Resolve consequential architecture changes with the owner and an ADR.
 2. **Freeze:** commit substantive schema/state/security expectations before implementation. Derive oracles from requirements and source evidence, never from the implementation's outputs.
