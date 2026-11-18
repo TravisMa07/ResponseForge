@@ -6,8 +6,8 @@ Full product gates below remain open. RF-01 contract/pure-policy and [RF-02 dura
 | --- | --- | --- |
 | P0 environment | Host/Docker resources, Python/Git/Compose availability, supported vs unverified platform matrix | RF-00 / inspected |
 | P0 dependency/data | Tested version/digest set; minimum dataset fields, hashes and terms verified | RF-00, RF-04, RF-06 / open; references alone do not pass |
-| P1 offline core | `make test` without network/VM; one deterministic evidence-backed case/report; benign case; quarantine and duplicate tests | RF-01/02 components locally verified; RF-03 vertical slice pending |
-| P1 safety | Spoofed/expired/mismatched approvals rejected; authorization enforced; durable idempotency; mock failure/rollback and flags | RF-02 core/HTTP enforcement and recovery locally verified; RF-03 mock/rollback pending |
+| P1 offline core | `make test` without network/VM; one deterministic evidence-backed case/report; benign case; quarantine and duplicate tests | RF-01–03 locally verified using original synthetic fixtures; owner RF-03 review/merge open |
+| P1 safety | Spoofed/expired/mismatched approvals rejected; authorization enforced; durable idempotency; mock failure/rollback and flags | RF-02/03 enforcement, durable simulated effects, failure/recovery and approved rollback locally verified |
 | P2 real SOAR | Three imported workflows; correlated real run, denied approval, failed/lost/replayed callback and retry recovery | RF-04/05 / not run |
 | P3 scenarios | Five licensed evidence-backed scenarios or justified narrowing; positive/negative/incomplete tests and real branch/audit assertions | RF-06 / not run |
 | P4 live | Authorized enrolled VM produces real alert and approved safe effect through common core; recovery and Windows evidence | RF-07/08 / not verified, no VM |
@@ -24,3 +24,5 @@ Full product gates below remain open. RF-01 contract/pure-policy and [RF-02 dura
 - Operational demo includes denying then approving a mock action, duplicate suppression, incomplete evidence, JSON/HTML reporting, teardown and clean rerun. Live demo is independent and explicitly authorized.
 
 For each gate record revision, dependency/image identity, environment, exact command/scenario, independently defined expected result, observed result, evidence path and limitations. Missing infrastructure is a blocker, not a pass or a failing product test.
+
+RF-03 qualifies the offline vertical slice with original synthetic observations only; see [exact evidence and limitations](rf-03-ledger.md). It does not pass real SOAR, recorded corpus/scenario, live endpoint or release gates.

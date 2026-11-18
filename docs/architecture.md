@@ -1,6 +1,6 @@
 # Architecture
 
-Status: direction accepted from owner requirements; RF-01 contracts and RF-02 authenticated API/SQLite core implemented; see [RF-02 evidence](rf-02-ledger.md). Replay/report and vendor runtime components remain open.
+Status: direction accepted from owner requirements; RF-01 contracts and RF-02 authenticated API/SQLite core implemented; see [RF-02 evidence](rf-02-ledger.md). RF-03 replay/report and simulated response are locally qualified; vendor runtime remains open.
 
 ```mermaid
 flowchart TD
@@ -39,3 +39,5 @@ Incident states are `RECEIVED → TRIAGING → INVESTIGATING → AWAITING_APPROV
 The [RF-02 durable design](rf-02-design.md) implements short SQLite transactions, persistent approval snapshots and dispatch reservations. Provider I/O occurs outside transactions; uncertain reservations suppress redispatch and reconcile only through verification. Internal OpenAPI is published, with no claim of vendor-schema compatibility. Actual Shuffle and endpoint integrations still require independent runtime proof.
 
 No Compose file is supplied until a supported, secure configuration is validated. Docker reproducibility is a delivery gate, not established by a diagram.
+
+The [RF-03 design](rf-03-design.md) binds replay alerts/evidence to source bytes and scope, uses a separate SQLite file for durable simulated endpoint state, and produces one authorized, default-redacted report snapshot. The in-process HTTP driver exercises common core authentication/approval/recovery without implying genuine SOAR orchestration. Actual Shuffle and recorded-source qualification remain distinct.

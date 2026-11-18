@@ -1,6 +1,6 @@
 # Local case API and durable recovery
 
-RF-02 implements one authenticated FastAPI application with file-backed SQLite cases, immutable action proposals/approval decisions, append-only audit/metrics, callback correlation and conservative dispatch recovery. These are ResponseForge's internal normalized contracts, not a Wazuh, ECS/OCSF or Shuffle-native schema. Vendor adapters and actual vendor executions remain RF-04/07 gates. RF-03 supplies the replay/evidence/mock/report path; RF-02 ships no response provider.
+RF-02 implements one authenticated FastAPI application with file-backed SQLite cases, immutable action proposals/approval decisions, append-only audit/metrics, callback correlation and conservative dispatch recovery. These are ResponseForge's internal normalized contracts, not a Wazuh, ECS/OCSF or Shuffle-native schema. Vendor adapters and actual vendor executions remain RF-04/07 gates. RF-03 supplies the [replay/evidence/mock/report path](replay.md); the ordinary server configuration still registers no provider by default.
 
 ## Local setup
 
@@ -44,3 +44,5 @@ Analysts register a workflow run before a callback. The reserved `/v1/integratio
 SQLite initializes empty files atomically at application schema version 1 and refuses foreign or future-version files. Short BEGIN IMMEDIATE transactions commit or fully roll back; provider calls occur outside them. Audit/metrics reject updates/deletes at repository and SQLite trigger boundaries. These protections do not defend against an administrator rewriting the database/schema; they are not cryptographically tamper-proof. Use a local filesystem and protect the private directory, database and backups. Test-backed concurrency covers independent connections/process restarts on the qualification host; no network-filesystem or high-volume guarantee is made.
 
 Dedup keys are retained at least seven days (currently indefinitely), action tombstones for case lifetime, and callback nonces indefinitely. Retention/migration tooling beyond initial version 1 is future work. Structured errors avoid echoing supplied secrets, bodies or provider exception text. `make qualify` verifies offline behavior; the [RF-02 ledger](rf-02-ledger.md) records exact evidence and remaining gates.
+
+RF-03 adds authenticated `/v1/incidents/{id}/collect` with full registered-source/case/window checks, and `/v1/incidents/{id}/report?format=json|html` with one consistent default-redacted case snapshot. Programmatic evidence configuration requires both an evidence provider and the trusted source snapshot; no live fallback is available. Ordinary server files do not automatically load replay state or providers.

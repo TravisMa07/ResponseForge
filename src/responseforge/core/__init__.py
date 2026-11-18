@@ -21,6 +21,8 @@ from responseforge.contracts import (
     Approval,
     AuditEvent,
     CaseReadiness,
+    CollectionRequest,
+    CollectionResult,
     Contract,
     Evidence,
     Incident,
@@ -36,7 +38,14 @@ from responseforge.policy import (
     validate_approval,
     validate_transition,
 )
-from responseforge.runtime import ActionView, IntakeResult, Principal, Settings, WorkflowCallback
+from responseforge.runtime import (
+    ActionView,
+    CaseSnapshot,
+    IntakeResult,
+    Principal,
+    Settings,
+    WorkflowCallback,
+)
 from responseforge.storage import ConflictError, Store, Transaction
 
 T = TypeVar("T", bound=Contract)
@@ -917,3 +926,197 @@ class CaseService:
         except ServiceError:
             self._denial(incident_id, actor)
             raise
+
+    async def collect(
+        self, incident_id: str, request: CollectionRequest, actor: Principal
+    ) -> CollectionResult:
+        with self._operation(incident_id, actor):
+            incident = self.get_incident(incident_id, actor)
+            request = _validated(CollectionRequest, request)
+            if (
+                request.incident_id != incident_id
+                or request.mode != incident.mode
+                or request.scenario_id != incident.scenario_id
+                or request.endpoint != incident.endpoint
+            ):
+                raise ServiceError(409, "Collection scope differs from case")
+            provider, batch = self.settings.evidence_provider, self.settings.replay_batch
+            if incident.mode != Mode.REPLAY or provider is None or batch is None:
+                raise ServiceError(503, "No qualified evidence provider for this mode")
+            # An endpoint/scenario match is insufficient: bind the case to the
+            # registered source bytes and normalized observation before provider I/O.
+            from responseforge.replay import make_alerts
+
+            with self.store.transaction() as tx:
+                stored_alert = _read(Alert, tx.get("alerts", incident_id))
+            expected_alert = next(
+                (
+                    item
+                    for item in make_alerts(batch, ingested_at=stored_alert.ingested_at)
+                    if item.alert_id == stored_alert.alert_id
+                ),
+                None,
+            )
+            if expected_alert is None or expected_alert != stored_alert:
+                raise ServiceError(409, "Case alert does not match registered replay source")
+            try:
+                result = await asyncio.wait_for(
+                    provider.collect(request), self.settings.provider_timeout
+                )
+                result = _validated(CollectionResult, result)
+            except Exception as exc:
+                raise ServiceError(503, "Evidence collection unavailable") from exc
+            from responseforge.replay_contracts import ReplayBatch, digest
+
+            batch = ReplayBatch.model_validate(batch.model_dump(mode="json", warnings=False))
+            expected = {
+                e.event_id: e
+                for e in batch.events
+                if e.scenario_id == request.scenario_id
+                and e.endpoint == request.endpoint
+                and e.artifact == request.artifact
+                and request.start <= e.observed_at <= request.end
+            }
+            seen: set[str] = set()
+            for item in result.evidence:
+                if (
+                    item.incident_id != incident_id
+                    or item.mode != incident.mode
+                    or item.endpoint != incident.endpoint
+                ):
+                    raise ServiceError(409, "Evidence response scope is invalid")
+                if item.availability == "available":
+                    proof = item.provenance
+                    if proof is None or len(proof.original_event_ids) != 1:
+                        raise ServiceError(409, "Evidence provenance is invalid")
+                    event_id = proof.original_event_ids[0]
+                    event = expected.get(event_id)
+                    identity = "evidence-" + digest(
+                        [
+                            batch.source_id,
+                            batch.sha256,
+                            incident_id,
+                            request.scenario_id,
+                            request.endpoint.model_dump(mode="json"),
+                            event_id,
+                        ]
+                    )
+                    if (
+                        event is None
+                        or event_id in seen
+                        or item.observed_at != event.observed_at
+                        or proof.sha256 != batch.sha256
+                        or proof.source != "synthetic-fixture"
+                        or proof.source_ref != "fixture:" + batch.source_id
+                        or item.evidence_id != identity
+                    ):
+                        raise ServiceError(409, "Evidence response does not match recorded source")
+                    seen.add(event_id)
+                elif expected:
+                    raise ServiceError(409, "Recorded evidence cannot be replaced with a gap")
+            if seen != set(expected) or (
+                not expected
+                and (
+                    len(result.evidence) != 1
+                    or result.evidence[0].availability != "unavailable"
+                    or not result.gaps
+                )
+            ):
+                raise ServiceError(409, "Evidence result is incomplete or ungrounded")
+            persisted: list[Evidence] = []
+            with self.store.transaction() as tx:
+                self._principal(actor, {"analyst"})
+                self._incident(tx, incident_id, actor)
+                for item in result.evidence:
+                    old = tx.get("evidence", item.evidence_id)
+                    if old is not None:
+                        original = _read(Evidence, old)
+                        if {k: v for k, v in _dump(original).items() if k != "collected_at"} != {
+                            k: v for k, v in _dump(item).items() if k != "collected_at"
+                        }:
+                            raise ServiceError(
+                                409, "Evidence identity conflicts with stored source"
+                            )
+                        persisted.append(original)
+                    else:
+                        tx.insert("evidence", item.evidence_id, _dump(item))
+                        self._audit(
+                            tx,
+                            incident_id,
+                            actor,
+                            "evidence_added",
+                            "Recorded source evidence stored",
+                        )
+                        persisted.append(item)
+            return CollectionResult(evidence=tuple(persisted), gaps=result.gaps)
+
+    def snapshot(self, incident_id: str, actor: Principal) -> CaseSnapshot:
+        """Resolve one authorized report view under a single SQLite transaction."""
+        with self._operation(incident_id, actor):
+            self._principal(actor, {"analyst"})
+            with self.store.transaction() as tx:
+                incident = self._incident(tx, incident_id, actor)
+                alert = _read(Alert, tx.get("alerts", incident_id))
+                if (
+                    alert.alert_id != incident.alert_id
+                    or alert.endpoint != incident.endpoint
+                    or alert.mode != incident.mode
+                    or alert.scenario_id != incident.scenario_id
+                ):
+                    raise ServiceError(409, "Stored alert scope differs from case")
+                evidence = tuple(
+                    _read(Evidence, x)
+                    for x in tx.list("evidence")
+                    if x.get("incident_id") == incident_id
+                )
+                if any(
+                    e.mode != incident.mode or e.endpoint != incident.endpoint for e in evidence
+                ):
+                    raise ServiceError(409, "Stored evidence differs from case")
+                actions = []
+                for value in tx.list("proposals"):
+                    if value.get("incident_id") != incident_id:
+                        continue
+                    proposal = _read(ActionProposal, value)
+                    if (
+                        proposal.mode != incident.mode
+                        or proposal.target.endpoint != incident.endpoint
+                        or tx.get("proposals", proposal.proposal_id) != value
+                    ):
+                        raise ServiceError(409, "Stored proposal differs from case")
+                    approval_data = tx.get("approvals", proposal.proposal_id)
+                    approval = None if approval_data is None else _read(Approval, approval_data)
+                    if approval is not None and approval.proposal != proposal:
+                        raise ServiceError(409, "Stored approval differs from proposal")
+                    execution_data = tx.get("executions", proposal.proposal_id)
+                    execution = (
+                        None
+                        if execution_data is None
+                        else self._bound_execution(
+                            execution_data, proposal, execution_data.get("provider", "")
+                        )
+                    )
+                    actions.append(
+                        ActionView(proposal=proposal, approval=approval, execution=execution)
+                    )
+                return CaseSnapshot(
+                    incident=incident,
+                    alert=alert,
+                    evidence=evidence,
+                    actions=tuple(actions),
+                    audit=tuple(
+                        _read(AuditEvent, x)
+                        for x in tx.list("audit")
+                        if x.get("incident_id") == incident_id
+                    ),
+                    metrics=tuple(
+                        _read(MetricEvent, x)
+                        for x in tx.list("metrics")
+                        if x.get("incident_id") == incident_id
+                    ),
+                    workflows=tuple(
+                        _read(PlaybookRun, x)
+                        for x in tx.list("workflows")
+                        if x.get("incident_id") == incident_id
+                    ),
+                )

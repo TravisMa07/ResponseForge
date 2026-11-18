@@ -12,6 +12,7 @@ dependencies = [
     "pydantic==2.14.3",
     "fastapi==0.164.0",
     "uvicorn==0.54.0",
+    "httpx==0.28.1",
 ]
 
 [dependency-groups]
@@ -20,7 +21,6 @@ dev = [
     "ruff==0.17.5",
     "mypy==1.20.2",
     "hatchling==1.33.0",
-    "httpx==0.28.1",
 ]
 
 [tool.hatch.build.targets.wheel]

@@ -1,9 +1,11 @@
 """Start the local internal API with explicit private configuration."""
 
 import argparse
+import asyncio
 import json
 import os
 import secrets
+import sqlite3
 from pathlib import Path
 
 import uvicorn
@@ -95,7 +97,57 @@ def main() -> int:
     parser.add_argument(
         "--export-openapi", type=Path, help="Write OpenAPI without starting a server"
     )
+    parser.add_argument("--replay", type=Path, help="Original local JSON/JSONL replay fixture")
+    parser.add_argument("--source-id", default="local-original-fixture")
+    parser.add_argument("--database", type=Path, default=Path(".local/replay-cases.sqlite3"))
+    parser.add_argument("--mock-database", type=Path, default=Path(".local/replay-mock.sqlite3"))
+    parser.add_argument("--output-dir", type=Path, default=Path("reports/replay"))
+    parser.add_argument("--decision", choices=("none", "approve", "reject"), default="none")
+    parser.add_argument("--speed", type=float, default=0)
     args = parser.parse_args()
+    if args.replay is not None:
+        if (
+            args.config is not None
+            or args.init_config is not None
+            or args.export_openapi is not None
+        ):
+            parser.error("replay and server/config commands are separate explicit modes")
+        from responseforge.replay import load_replay
+        from responseforge.replay_driver import run_replay
+        from responseforge.storage import StorageError
+
+        try:
+            batch = load_replay(args.replay, source_id=args.source_id)
+            if not batch.events:
+                print(
+                    json.dumps(
+                        {
+                            "simulated": True,
+                            "verified_live": False,
+                            "incident_ids": [],
+                            "quarantine": [x.model_dump(mode="json") for x in batch.quarantine],
+                        }
+                    )
+                )
+                parser.exit(2, "No valid replay events; no case or response created.\n")
+            result = asyncio.run(
+                run_replay(
+                    batch,
+                    database_path=args.database,
+                    mock_path=args.mock_database,
+                    output_dir=args.output_dir,
+                    decision=args.decision,
+                    speed=args.speed,
+                )
+            )
+        except (OSError, ValueError, sqlite3.Error, StorageError):
+            parser.exit(
+                2,
+                "Offline replay failed; inspect private state before retrying. No live fallback.\n",
+            )
+        print(result.model_dump_json())
+        return 0
+
     if args.init_config:
         try:
             write_initial_config(args.init_config)

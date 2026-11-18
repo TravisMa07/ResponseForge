@@ -11,15 +11,22 @@ from responseforge.contracts import (
     ActionExecution,
     ActionProposal,
     ActionType,
+    Alert,
     Approval,
+    AuditEvent,
     Contract,
     EndpointRef,
+    Evidence,
     Id,
+    Incident,
     IncidentStatus,
+    MetricEvent,
     Mode,
+    PlaybookRun,
     UtcDateTime,
 )
-from responseforge.providers import ResponseProvider
+from responseforge.providers import EvidenceProvider, ResponseProvider
+from responseforge.replay_contracts import ReplayBatch
 
 
 @dataclass(frozen=True)
@@ -53,6 +60,8 @@ class Settings:
     resource_allowlist: dict[str, frozenset[str]] = field(default_factory=dict)
     providers: dict[str, ResponseProvider] = field(default_factory=dict, repr=False)
     provider_versions: dict[str, str] = field(default_factory=dict)
+    evidence_provider: EvidenceProvider | None = field(default=None, repr=False)
+    replay_batch: ReplayBatch | None = field(default=None, repr=False)
     live_dispatch_enabled: bool = False
     provider_timeout: float = 5.0
     revision: str = "development"
@@ -60,6 +69,14 @@ class Settings:
 
     def __post_init__(self) -> None:
         object.__setattr__(self, "mode", Mode(self.mode))
+        if self.replay_batch is not None:
+            object.__setattr__(
+                self,
+                "replay_batch",
+                ReplayBatch.model_validate(
+                    self.replay_batch.model_dump(mode="json", warnings=False)
+                ),
+            )
         endpoints = tuple(
             EndpointRef.model_validate(x.model_dump(mode="json")) for x in self.endpoints
         )
@@ -128,3 +145,13 @@ class WorkflowCallback(Contract):
     workflow_id: Id
     correlation_id: Id
     status: Literal["succeeded", "failed", "timeout"]
+
+
+class CaseSnapshot(Contract):
+    incident: Incident
+    alert: Alert
+    evidence: tuple[Evidence, ...]
+    actions: tuple[ActionView, ...]
+    audit: tuple[AuditEvent, ...]
+    metrics: tuple[MetricEvent, ...]
+    workflows: tuple[PlaybookRun, ...]
