@@ -1,6 +1,6 @@
 # RF-01: contracts and pure policy
 
-Issue: [#1](https://github.com/TravisMa07/ResponseForge/issues/1). Base: `b6a44d6` on main, including merged PR #10. Integration owner: primary agent. Status: expectation freeze; contracts/tooling only. No API, storage, provider implementation, Docker or endpoint operation is delivered here.
+Issue: [#1](https://github.com/TravisMa07/ResponseForge/issues/1). Base: `b6a44d6` on main, including merged PR #10. Integration owner: primary agent. Status: expectation freeze retained; implementation locally qualified in [PR #11](https://github.com/TravisMa07/ResponseForge/pull/11), see [ledger](rf-01-ledger.md). Contracts/tooling only. No API, storage, provider implementation, Docker or endpoint operation is delivered here.
 
 ## Contract v1
 
