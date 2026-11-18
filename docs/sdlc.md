@@ -11,6 +11,10 @@ Use the agentic SDLC with bounded packages in the [plan](implementation-plan.md)
 
 Track planned, implemented, locally verified, runtime-qualified, owner-accepted, merged and merged-revision verification separately. Keep architecture, design, roadmap, ledgers and runbooks consistent. Do not manufacture empty test suites or passing CI to imply progress.
 
+## Link roadmap, issues, and PRs
+
+Start from the GitHub issue in the [roadmap](roadmap.md). Include the work package ID in the PR title and link the issue in its description. Use `Refs #N` for partial work. Once the issue's acceptance evidence passes, use `Closes #N` in the final PR targeting the default branch so the authorized merge closes the issue. If a gate remains open, keep the issue open and record the blocker. After merge, verify the issue state and update the roadmap and ledger with the PR link and tested revision. The integration owner coordinates shared status edits when branches run in parallel.
+
 ## Parallel work
 
 Assign base revision and file ownership; freeze shared contracts before parallel implementation. Integration owner exclusively owns contracts, lockfiles, CI, shared documentation and merges. Agents must report changed files, tested revision, commands/results, objections and remaining gates. Serialize Docker integration runs and database migration integration. Review agents inspect artifacts read-only. See the plan for independent lanes.

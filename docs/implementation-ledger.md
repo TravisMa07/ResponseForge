@@ -42,3 +42,7 @@ Validation: the new check first failed on the tracked handoff, then passed after
 The owner authorized rewriting published history to remove `HANDOFF.md` from every commit on `main`. Rewritten foundation seed: `8876d49`; rewritten publication record: `e75c41d`; rewritten local-only policy correction: `797467a`. Earlier SHA references above are historical evidence identifiers and no longer identify commits reachable from published `main`.
 
 Validation: inspected every rewritten commit tree for handoff filenames, confirmed no handoff history remains on `main`, and reran foundation checks. The original handoff remains an ignored local file. Publication uses an explicit force-with-lease against the previously observed remote head to avoid overwriting concurrent changes. Removing Git reachability does not guarantee deletion of cached GitHub objects or copies already cloned elsewhere.
+
+## Analyst effort measurement
+
+The owner requested tracking hands-on analyst time saved per eligible case. RF-01 defines the case readiness events and RF-09 collects the evidence using the [measurement plan](implementation-plan.md#measure-analyst-time-saved). A timed lab comparison is preferred. A documented estimate is an acceptable fallback and stays labeled as estimated. Collection is planned.

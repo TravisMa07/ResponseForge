@@ -12,6 +12,7 @@ All product gates are **NOT RUN**. Foundation checks only validate repository in
 | P3 scenarios | Five licensed evidence-backed scenarios or justified narrowing; positive/negative/incomplete tests and real branch/audit assertions | RF-06 / not run |
 | P4 live | Authorized enrolled VM produces real alert and approved safe effect through common core; recovery and Windows evidence | RF-07/08 / not verified, no VM |
 | P5 reproducibility | Fresh clone, doctor/bootstrap/up/status/replay/report/down/rerun; pinned artifacts, persisted case, secret-free reports | RF-09 / not run |
+| P5 analyst effort | Record hands-on minutes per eligible case with a matched timed comparison or a clearly labeled, sourced or assumption-based estimate. Keep waiting time separate and disclose the sample or assumptions and limitations. | RF-09 / not run |
 
 ## Cross-cutting requirements
 
