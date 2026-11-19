@@ -188,3 +188,8 @@ Clean full qualification passes1,727tests/all checks, locked build and228sdist/4
 ## RF-06B1 merged / RF-06B2 kickoff
 
 Owner-authorized guarded #20 merge at55f0ab7 produced2ff84b8c8cf44766cc91bd4c10866057d022a4e7; actual merged qualification passes1,727tests/all checks. Issue#6 remains open. [B2 design](rf-06b2-design.md)/[expectations](expectations/rf-06b2.md) own exact multi-source routing, preserved old mock receipts, private runtime source binding and genuine5recorded scenario qualification. Registry/preparation/test lanes have disjoint paths after freeze; primary owns contracts/consumers/deployment/harness/qualification. Existing retained pilot remains stopped before reviewed changed artifacts are ready.
+
+
+## RF-06B2 implementation / first candidate
+
+Freezecfb118c precedes implementation8d70ed0 and644new tests; full offline qualification passes2,371. Disjoint registry/preparation/expectation lanes and independent pre-execution review correct source-provider namespaces, read-only proof and native-phase/full-context validation. First clean source-bound runtime passes20genuine phases/14cases/five recorded observations/three graph kinds with three simulated effects and no duplicate/forbidden effect. [Owning ledger](rf-06-ledger.md) preserves exact hashes/metrics/diagnostics. README metadata correction receives a separate clean build boundary and fresh qualification before final acceptance; independent actual-artifact review is in progress. Owner acceptance/merge/release/live gates remain separate.
