@@ -1,0 +1,266 @@
+{
+  "schema_version": "1.0",
+  "claim": "complete-transpiled-ServerAPIClient synthetic native TLS component only",
+  "revision": "5005c3e2213abeb5c7798f489a7304a6abb7c6d1",
+  "source_sha256": "b55c5947bab7c9b0b1e97238edb4f2c26ceae8f6bd4d5a33801d8a8d5fde6ca5",
+  "patched_sha256": "a56d5fe37f1bed9aa4eaa66af0649e5266d914647f90ed1b4d0ef201b62cc27f",
+  "cookie_sha256": "2acfdac9af159576cc0deede34516dac790269ce6d132fadd1430c153130cbd4",
+  "node": "v24.21.0",
+  "openssl": "LibreSSL 3.3.6",
+  "axios": "1.17.0",
+  "typescript": "5.5.2",
+  "harness_sha256": "287cf60fca8faefbb99b85fcddc48a7095458e609e375e9ce85a8d7ffaa2c4d3",
+  "compiled_sha256": {
+    "original": "95ba1f40f5f4eac882d594409a751c4217dcf37136b7ebba7b10ae610ad2f9ac",
+    "corrected": "64ab82199e94678a8a6eb827a36f70b59fd58d94d9c49d93418eb7a34d2a28d4"
+  },
+  "cookie_compiled_sha256": "1f81bd44804d398d87b17b9772ab142fe39d1f4a66502e654204ec029100f1da",
+  "semantic_typecheck": false,
+  "full_plugin_build": false,
+  "manager_runtime": false,
+  "passed": true,
+  "evaluated_revision": "edc5e06da4d7ee1de486583f8f80372a4ae00aa5",
+  "environment": {
+    "os": "macOS ARM64",
+    "python": "3.12.12",
+    "sqlite": "3.50.4"
+  },
+  "offline_qualification": {
+    "command": "make qualify",
+    "passed_tests": 2771,
+    "source_downloads": false,
+    "node_install": false
+  },
+  "native_command": "NODE_PATH=<private-toolchain>/node_modules node tools/wazuh-tls/qualify.cjs --bundle <private-bundle> --state-dir <new-private-state>",
+  "artifact_sha256": {
+    "deploy/wazuh/tls-client/source.lock.json": "123f863946c053e1878e3f36e6324f6deff3a418605f308c37e2d9ca2327ef35",
+    "tools/wazuh-tls/package-lock.json": "1628ba123cb761562ebc26fe424db02407084c7d2092a15ad2f54918c56b3763",
+    "src/responseforge/integrations/wazuh/tls_source.py": "273a2f93b0ef350bde1e14d67724ac5709dffdf414cb7a68c486fa3f2e454d1f",
+    "tests/rf07c/test_tls_source.py": "c49a638b5bc4304c4ab6d6f85dd4c7a88b3e8a9121459522e0b964b3828750a3"
+  },
+  "remaining_gates": [
+    "owner promotion/feature merge and actual main qualification",
+    "full plugin semantic/build qualification",
+    "deployed wazuh-core dependency resolution",
+    "image and manager TLS/bootstrap/runtime qualification",
+    "capacity and real manager capture",
+    "native Windows enrollment",
+    "real endpoint/live response proof"
+  ],
+  "scenarios": {
+    "original_insecure_baseline": {
+      "loaded": true,
+      "secure_assertion": "FAIL: untrusted certificate accepted",
+      "authHTTP": 1,
+      "requestHTTP": 1
+    },
+    "trusted_CA_matching_SAN": {
+      "loaded": true,
+      "authenticate": {
+        "success": true,
+        "valid": true
+      },
+      "request": {
+        "success": true,
+        "valid": true
+      },
+      "observed_HTTP": {
+        "good": {
+          "authentication": 1,
+          "request": 1,
+          "wrong_identity": 0
+        }
+      }
+    },
+    "missing_CA": {
+      "loaded": true,
+      "authenticate": {
+        "success": false,
+        "code": "UNABLE_TO_VERIFY_LEAF_SIGNATURE",
+        "status": null,
+        "policy": false
+      },
+      "request": {
+        "success": false,
+        "code": "UNABLE_TO_VERIFY_LEAF_SIGNATURE",
+        "status": null,
+        "policy": false
+      },
+      "observed_HTTP": {}
+    },
+    "different_CA": {
+      "loaded": true,
+      "authenticate": {
+        "success": false,
+        "code": "UNABLE_TO_VERIFY_LEAF_SIGNATURE",
+        "status": null,
+        "policy": false
+      },
+      "request": {
+        "success": false,
+        "code": "UNABLE_TO_VERIFY_LEAF_SIGNATURE",
+        "status": null,
+        "policy": false
+      },
+      "observed_HTTP": {}
+    },
+    "untrusted_chain": {
+      "loaded": true,
+      "authenticate": {
+        "success": false,
+        "code": "UNABLE_TO_VERIFY_LEAF_SIGNATURE",
+        "status": null,
+        "policy": false
+      },
+      "request": {
+        "success": false,
+        "code": "UNABLE_TO_VERIFY_LEAF_SIGNATURE",
+        "status": null,
+        "policy": false
+      },
+      "observed_HTTP": {}
+    },
+    "wrong_SAN": {
+      "loaded": true,
+      "authenticate": {
+        "success": false,
+        "code": "ERR_TLS_CERT_ALTNAME_INVALID",
+        "status": null,
+        "policy": false
+      },
+      "request": {
+        "success": false,
+        "code": "ERR_TLS_CERT_ALTNAME_INVALID",
+        "status": null,
+        "policy": false
+      },
+      "observed_HTTP": {}
+    },
+    "environment_TLS_zero": {
+      "loaded": true,
+      "authenticate": {
+        "success": false,
+        "code": "UNABLE_TO_VERIFY_LEAF_SIGNATURE",
+        "status": null,
+        "policy": false
+      },
+      "request": {
+        "success": false,
+        "code": "UNABLE_TO_VERIFY_LEAF_SIGNATURE",
+        "status": null,
+        "policy": false
+      },
+      "observed_HTTP": {}
+    },
+    "plain_HTTP": {
+      "loaded": true,
+      "authenticate": {
+        "success": false,
+        "code": null,
+        "status": null,
+        "policy": true
+      },
+      "request": {
+        "success": false,
+        "code": null,
+        "status": null,
+        "policy": true
+      },
+      "observed_HTTP": {}
+    },
+    "URL_credentials": {
+      "loaded": true,
+      "authenticate": {
+        "success": false,
+        "code": null,
+        "status": null,
+        "policy": true
+      },
+      "request": {
+        "success": false,
+        "code": null,
+        "status": null,
+        "policy": true
+      },
+      "observed_HTTP": {}
+    },
+    "URL_control": {
+      "loaded": true,
+      "authenticate": {
+        "success": false,
+        "code": null,
+        "status": null,
+        "policy": true
+      },
+      "request": {
+        "success": false,
+        "code": null,
+        "status": null,
+        "policy": true
+      },
+      "observed_HTTP": {}
+    },
+    "HTTPS_redirect": {
+      "loaded": true,
+      "authenticate": {
+        "success": false,
+        "code": "ERR_BAD_RESPONSE",
+        "status": 302,
+        "policy": false
+      },
+      "request": {
+        "success": false,
+        "code": "ERR_BAD_RESPONSE",
+        "status": 302,
+        "policy": false
+      },
+      "observed_HTTP": {
+        "redirectHTTPS": {
+          "authentication": 1,
+          "request": 1,
+          "wrong_identity": 0
+        }
+      }
+    },
+    "HTTP_redirect": {
+      "loaded": true,
+      "authenticate": {
+        "success": false,
+        "code": "ERR_BAD_RESPONSE",
+        "status": 302,
+        "policy": false
+      },
+      "request": {
+        "success": false,
+        "code": "ERR_BAD_RESPONSE",
+        "status": 302,
+        "policy": false
+      },
+      "observed_HTTP": {
+        "redirectHTTP": {
+          "authentication": 1,
+          "request": 1,
+          "wrong_identity": 0
+        }
+      }
+    },
+    "hostile_proxy": {
+      "loaded": true,
+      "authenticate": {
+        "success": true,
+        "valid": true
+      },
+      "request": {
+        "success": true,
+        "valid": true
+      },
+      "observed_HTTP": {
+        "good": {
+          "authentication": 1,
+          "request": 1,
+          "wrong_identity": 0
+        }
+      }
+    }
+  }
+}

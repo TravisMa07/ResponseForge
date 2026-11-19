@@ -28,3 +28,9 @@ The callback app is original ResponseForge Python code, installed from this same
 
 
 RF-06B1 adds reviewed catalog metadata for five Windows observation sources; [dataset review](docs/dependencies.md#rf-06b1-five-recorded-observation-sources) records exact paths/hashes, author attribution and limits. Raw telemetry and derivatives remain ignored/private; checked-in XML is original synthetic data. Windows/task projection and recorded rules are original Python code, with no vendored dataset tooling. Project license and release obligations remain unchanged.
+
+## RF-07C1 dashboard client source
+
+The opt-in [TLS source tool](docs/wazuh-tls-source.md) acquires only the exact ServerAPIClient, cookie helper and root LICENSE at Wazuh dashboard plugins commit `5005c3e2213abeb5c7798f489a7304a6abb7c6d1`; the [source lock](deploy/wazuh/tls-client/source.lock.json) identifies each artifact by path, size and SHA256. Both source headers state GPL version2 or later; the retained root license contains GPLv2. Private prepared output preserves original notices/license/source and a modification notice. This repository carries original preparation/test code and metadata, not those vendor source files or their emitted JavaScript. Full-plugin/image redistribution and its complete notices/dependency inventory remain separate gates.
+
+The optional native component-test tool pins Axios1.17.0 and TypeScript5.5.2 with npm integrity locks; their installed packages remain private. Axios is MIT licensed and TypeScript Apache-2.0 licensed; transitive installed package licenses are retained by npm. These are component-test candidate dependencies, not a claim about deployed wazuh-core resolution or a complete product SBOM. Default offline CI does not install them.

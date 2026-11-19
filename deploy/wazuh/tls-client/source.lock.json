@@ -1,0 +1,24 @@
+{
+  "revision": "5005c3e2213abeb5c7798f489a7304a6abb7c6d1",
+  "members": [
+    {
+      "path": "plugins/wazuh-core/server/services/server-api-client.ts",
+      "name": "upstream-server-api-client.ts",
+      "size": 9065,
+      "sha256": "b55c5947bab7c9b0b1e97238edb4f2c26ceae8f6bd4d5a33801d8a8d5fde6ca5"
+    },
+    {
+      "path": "plugins/wazuh-core/server/services/cookie.ts",
+      "name": "cookie.ts",
+      "size": 671,
+      "sha256": "2acfdac9af159576cc0deede34516dac790269ce6d132fadd1430c153130cbd4"
+    },
+    {
+      "path": "LICENSE",
+      "name": "LICENSE",
+      "size": 18091,
+      "sha256": "7a8af52a46a18822fe4858a963871ce0cca465d72ea312e25e28b15b158beec0"
+    }
+  ],
+  "patched_sha256": "a56d5fe37f1bed9aa4eaa66af0649e5266d914647f90ed1b4d0ef201b62cc27f"
+}
