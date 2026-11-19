@@ -213,3 +213,8 @@ Freeze15e28a5 follows verified merge2f5e204 and independent source/expectation r
 ## RF-07B preparation
 
 [Design](rf-07b-design.md)/[expectations](expectations/rf-07b.md) begin at verified A head75e10f7 because remote #22 remains open despite the owner's merge report. Actual dependent-base2,562 checks pass; no merged-revision result is inferred. Primary owns shared models/security/sender/profile/CLI/CI/status; source/expectations and Windows writer lanes have disjoint paths. Pinned dashboard API TLS bypass is an explicit runtime blocker, not silently papered over with environment settings. B implements safe sender recovery, a gated profile and integrity-first private Windows package without manager startup or endpoint authority.
+
+
+## RF-07B implementation
+
+Freeze604ef50 precedes three-component red/green. Windows writer owns windows.py/Install.ps1 only; independent tests own tests/rf07b; primary owns all shared input/security/outbox/profile/CLI/build/CI/status. Independent actual review exposes private-ancestor writes, native hard-link ACL scope and publication directory-sync gaps; corrections preserve diagnostics. Working qualification passes2,739 tests/all checks. [Ledger](rf-07-ledger.md) distinguishes actual loopback HTTPS/artifact acquisition/portable script controls from still-unverified manager/TLS-patch/Windows/endpoint proof. A #22 remains open as last verified; B remains dependent with no fabricated merged result.
