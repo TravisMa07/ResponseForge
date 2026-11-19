@@ -21,3 +21,7 @@ Native tools use pinned Axios 1.17.0 and TypeScript 5.5.2 installed explicitly w
 Root owns integration contracts, source lock, production preparation/CLI, dependency lock and status. Independent expectation agent owns tests/rf07c and tools/wazuh-tls/qualify.cjs. Final independent review inspects actual private sources, emitted modules and observed results. Source correction/component tests are not a semantic TypeScript or full plugin build: upstream duplicate _axios declarations remain. Candidate dependency versions do not establish deployed wazuh-core resolution. Full image/build, certificate/bootstrap, capacity, real manager capture and native Windows/endpoint gates remain; deployment ready stays false.
 
 RF-07A actual main merge 74a6e59 passed 2,562 tests. RF-07B actual feature-branch merge 4f16cfd passed 2,739 tests, with identical tree to reviewed 93ed2eb. Promotion [#24](https://github.com/TravisMa07/ResponseForge/pull/24) remains a separate owner merge and actual-main qualification gate.
+
+## Observed C1 result
+
+Implementation edc5e06 passes32 independent offline tests and13 complete-source native TLS scenarios; the [ledger](rf-07-ledger.md) and [aggregate](evidence/rf-07c1-component.json) attribute exact artifacts, genuine original-source red, corrected transport outcomes and limitations. Full repository qualification passes2,771 tests/all checks. Full plugin/image/runtime gates remain unchanged.
