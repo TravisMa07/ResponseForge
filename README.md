@@ -2,7 +2,7 @@
 
 SOAR-first incident response automation with offline attack replay and an optional live Wazuh endpoint path. ResponseForge connects evidence, analyst approval, response providers and auditable case reports through real Shuffle workflows.
 
-**Status: RF-01–03 and RF-04A/B are merged and verified offline. The explicitly authorized RF-04 Docker Desktop pilot is running, with genuine execution/recovery qualification in progress; see the [runtime ledger](docs/rf-04-runtime-ledger.md) and [operator runbook](docs/rf-04-operator.md). Three domain workflows, recorded attack corpus coverage and live endpoint integration remain unqualified.**
+**Status: RF-01–03 and RF-04A/B are merged and verified offline. RF-04 Docker Desktop transport passed five genuine execution/recovery scenarios and is ready for review in [PR #16](https://github.com/TravisMa07/ResponseForge/pull/16); see the [runtime ledger](docs/rf-04-runtime-ledger.md) and [operator runbook](docs/rf-04-operator.md). The pilot is stopped with data retained. Three domain workflows, recorded attack corpus coverage and live endpoint integration remain unqualified.**
 
 The public engineering requirements are captured in the [architecture](docs/architecture.md) and acceptance documentation. The [implementation plan](docs/implementation-plan.md) defines bounded delivery packages and parallel-agent ownership; the [acceptance matrix](docs/acceptance.md) keeps implementation separate from verification.
 

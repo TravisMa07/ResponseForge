@@ -1,0 +1,288 @@
+{
+  "schema_version": "1.0",
+  "work_id": "RF-04",
+  "revision": "87ac23a5020c2794c21f21c1565306e33cfa748a",
+  "observed_at": "2026-11-19T00:49:50.889560+00:00",
+  "provenance": "Actual authenticated Shuffle/native app/core execution on owner-authorized Docker Desktop; public projection of private qualification journal, summary and build inventory. Synthetic cases only; no case/run/workflow IDs or credentials published.",
+  "sample_size": 5,
+  "mode": "replay",
+  "runtime_qualified": true,
+  "verified_live": false,
+  "endpoint_effect": "none",
+  "domain_workflows_qualified": 0,
+  "environment": {
+    "host": "macOS ARM64",
+    "host_memory_gib": 24,
+    "docker_platform": "linux/arm64",
+    "docker_cpus": 15,
+    "docker_memory_bytes": 8318844928,
+    "swarm": "inactive",
+    "host_settings_changed": false
+  },
+  "build": {
+    "source_tree_sha256": "0ba828e38f4868148ac9ae112ac1747616644d8403d3f2aac164e0900ce05406",
+    "wheel_sha256": "56c11e0fa61a5b1ca9c40d08f5fcb165532170df6e0f9d75390ac5407f78b83d",
+    "images": {
+      "backend": "sha256:f334f01d454b70085e7b6a8350c83aee0c7f36eea0ce19b76cd5eb06ec8a0c90",
+      "worker": "sha256:2248b9fe858aeab13d3e97037877021a8410105077beff49de09dda5a8cc7300",
+      "orborus": "sha256:a8473217785992924c27eea3483c4267fef21721dfdf5173843a09ebf43465db",
+      "core": "sha256:2f68cf9dd2da10b8d59217c158500c81b6802c2a5cc7bb076bbe002532f05e58",
+      "app": "sha256:2f68cf9dd2da10b8d59217c158500c81b6802c2a5cc7bb076bbe002532f05e58",
+      "frontend": "ghcr.io/shuffle/shuffle-frontend@sha256:6966e448fe0c60f21cb4cb404a001ab91eb80ff3f57a77bf072da9f5bda15ec2",
+      "opensearch": "opensearchproject/opensearch@sha256:1dc8b257917e53ef639c0c4a579fc324fb955f045bf4d2c0a0a84f056e5ac68e"
+    },
+    "patch_manifest": {
+      "schema_version": "1.0",
+      "input_lock": {
+        "schema_version": "1.0",
+        "files": [
+          {
+            "component": "backend",
+            "name": "main.go",
+            "url": "https://raw.githubusercontent.com/Shuffle/Shuffle/473cc335e5fcc663006d8e5ca16af5ee71fefa68/backend/go-app/main.go",
+            "sha256": "f1dd87c2013ce853580843dd2794cb345e869546148696afb6bfb95090b8b40e"
+          },
+          {
+            "component": "backend",
+            "name": "walkoff.go",
+            "url": "https://raw.githubusercontent.com/Shuffle/Shuffle/473cc335e5fcc663006d8e5ca16af5ee71fefa68/backend/go-app/walkoff.go",
+            "sha256": "a14e17c667e6bab1fc2975db44a3836455c0d32acf0e01cf05e4446c14bffd53"
+          },
+          {
+            "component": "backend",
+            "name": "docker.go",
+            "url": "https://raw.githubusercontent.com/Shuffle/Shuffle/473cc335e5fcc663006d8e5ca16af5ee71fefa68/backend/go-app/docker.go",
+            "sha256": "c9e73b7aa8940908f612ae5ce3744815b5b9b22c81bb44da29c2d316cf0f9aaf"
+          },
+          {
+            "component": "backend",
+            "name": "go.mod",
+            "url": "https://raw.githubusercontent.com/Shuffle/Shuffle/473cc335e5fcc663006d8e5ca16af5ee71fefa68/backend/go-app/go.mod",
+            "sha256": "14739b99fb3149d9067516527e0656a8916ed5dda30bf05c8ad0e8bed10a6667"
+          },
+          {
+            "component": "backend",
+            "name": "go.sum",
+            "url": "https://raw.githubusercontent.com/Shuffle/Shuffle/473cc335e5fcc663006d8e5ca16af5ee71fefa68/backend/go-app/go.sum",
+            "sha256": "501182e2a56d5482a535dcbba3e7e2f0a9a640d2e49abd811c827686f18b3c47"
+          },
+          {
+            "component": "backend",
+            "name": "LICENSE",
+            "url": "https://raw.githubusercontent.com/Shuffle/Shuffle/9ad57e0631a6ea4eb41e5b22b114d215be63dfdc/LICENSE",
+            "sha256": "8486a10c4393cee1c25392769ddd3b2d6c242d6ec7928e1414efff7dfb2f07ef"
+          },
+          {
+            "component": "worker",
+            "name": "worker.go",
+            "url": "https://raw.githubusercontent.com/Shuffle/Shuffle/473cc335e5fcc663006d8e5ca16af5ee71fefa68/functions/onprem/worker/worker.go",
+            "sha256": "4d0e7805460dec3bd82f73176e66d97e3a4df42580555e55d837f58f01a2b053"
+          },
+          {
+            "component": "worker",
+            "name": "go.mod",
+            "url": "https://raw.githubusercontent.com/Shuffle/Shuffle/473cc335e5fcc663006d8e5ca16af5ee71fefa68/functions/onprem/worker/go.mod",
+            "sha256": "7849ee053e783a56340d29133461c8f79060f922ffe9e0fe8d29f6ad8c1c6757"
+          },
+          {
+            "component": "worker",
+            "name": "go.sum",
+            "url": "https://raw.githubusercontent.com/Shuffle/Shuffle/473cc335e5fcc663006d8e5ca16af5ee71fefa68/functions/onprem/worker/go.sum",
+            "sha256": "52d0bfa15e643ecdd7ca69a7d19963a2c8a9e90307ba1b6192b5198087ae7422"
+          },
+          {
+            "component": "worker",
+            "name": "LICENSE",
+            "url": "https://raw.githubusercontent.com/Shuffle/Shuffle/9ad57e0631a6ea4eb41e5b22b114d215be63dfdc/LICENSE",
+            "sha256": "8486a10c4393cee1c25392769ddd3b2d6c242d6ec7928e1414efff7dfb2f07ef"
+          },
+          {
+            "component": "orborus",
+            "name": "orborus.go",
+            "url": "https://raw.githubusercontent.com/Shuffle/Shuffle/9ad57e0631a6ea4eb41e5b22b114d215be63dfdc/functions/onprem/orborus/orborus.go",
+            "sha256": "cb13b1c1e792a26be176949336af3ebd08fb5893f4d223278f24665544d420db"
+          },
+          {
+            "component": "orborus",
+            "name": "go.mod",
+            "url": "https://raw.githubusercontent.com/Shuffle/Shuffle/9ad57e0631a6ea4eb41e5b22b114d215be63dfdc/functions/onprem/orborus/go.mod",
+            "sha256": "ed6c565fb26fef8029710c09740855ff2041e625c32d5ffa31356f8c8c44b2f3"
+          },
+          {
+            "component": "orborus",
+            "name": "go.sum",
+            "url": "https://raw.githubusercontent.com/Shuffle/Shuffle/9ad57e0631a6ea4eb41e5b22b114d215be63dfdc/functions/onprem/orborus/go.sum",
+            "sha256": "1fb38541e1b0b78effa4dd034ac087e6b00871745825a37c37294e583e8cf3b4"
+          },
+          {
+            "component": "orborus",
+            "name": "LICENSE",
+            "url": "https://raw.githubusercontent.com/Shuffle/Shuffle/9ad57e0631a6ea4eb41e5b22b114d215be63dfdc/LICENSE",
+            "sha256": "8486a10c4393cee1c25392769ddd3b2d6c242d6ec7928e1414efff7dfb2f07ef"
+          },
+          {
+            "component": "sdk",
+            "name": "app_base.py",
+            "url": "https://raw.githubusercontent.com/Shuffle/app_sdk/abe5f4a14f876b68d2a82274dc033a99eca2f409/shuffle_sdk/shuffle_sdk.py",
+            "sha256": "8cb06e8fd2275dc2ebbf1398db9dd92e38226330114d002f784b897c78d28409"
+          }
+        ]
+      },
+      "patched_files": {
+        "backend/main.go": "b6724bb84133d2b03c75b13a279e2cea5eb86ded0b1cad457649b38e1fb8c8c1",
+        "backend/walkoff.go": "e67e32c70fc719ddb1a81d851ba3fa5bc058765ec37b05d7dfd481d919624fbf",
+        "backend/docker.go": "c9e73b7aa8940908f612ae5ce3744815b5b9b22c81bb44da29c2d316cf0f9aaf",
+        "backend/go.mod": "14739b99fb3149d9067516527e0656a8916ed5dda30bf05c8ad0e8bed10a6667",
+        "backend/go.sum": "501182e2a56d5482a535dcbba3e7e2f0a9a640d2e49abd811c827686f18b3c47",
+        "backend/LICENSE": "8486a10c4393cee1c25392769ddd3b2d6c242d6ec7928e1414efff7dfb2f07ef",
+        "worker/worker.go": "07ba3feabd4b856d5bbe20c1f7a808ef4cc72795af28f46e99c0187c1408e0d0",
+        "worker/go.mod": "7849ee053e783a56340d29133461c8f79060f922ffe9e0fe8d29f6ad8c1c6757",
+        "worker/go.sum": "52d0bfa15e643ecdd7ca69a7d19963a2c8a9e90307ba1b6192b5198087ae7422",
+        "worker/LICENSE": "8486a10c4393cee1c25392769ddd3b2d6c242d6ec7928e1414efff7dfb2f07ef",
+        "orborus/orborus.go": "a4daa182b67f595d57231dfb80cda14c33747906897547eb13a1e4afa9ab5b20",
+        "orborus/go.mod": "6058bb49ff7a90d6dc395ed8ab207e04ae2a3b372c5b4344797202d8bfc0b88b",
+        "orborus/go.sum": "1fb38541e1b0b78effa4dd034ac087e6b00871745825a37c37294e583e8cf3b4",
+        "orborus/LICENSE": "8486a10c4393cee1c25392769ddd3b2d6c242d6ec7928e1414efff7dfb2f07ef",
+        "sdk/app_base.py": "8cb06e8fd2275dc2ebbf1398db9dd92e38226330114d002f784b897c78d28409"
+      }
+    },
+    "module_lock": {
+      "backend/go.mod": "14739b99fb3149d9067516527e0656a8916ed5dda30bf05c8ad0e8bed10a6667",
+      "backend/go.sum": "ac78a073758dcf4cf9c4e43f0292ce35b11d8d9b1cf3433d7745d1d738eb23eb",
+      "worker/go.mod": "7849ee053e783a56340d29133461c8f79060f922ffe9e0fe8d29f6ad8c1c6757",
+      "worker/go.sum": "cc5311e603476dc6af163dc240010c4da3bdbeb4eba329209f3594c13014c56b",
+      "orborus/go.mod": "4f9be90042892d0d84ecb1d981e9549f1ba9a6e437ef5a1afb8646a7c6441f3a",
+      "orborus/go.sum": "a9ed0fc3d5b4964728e2c209d4ad377d2e2bc8fbe73b67b9adb69f3e91398a68"
+    }
+  },
+  "scenarios": {
+    "success": {
+      "vendor_status": "FINISHED",
+      "delivery_state": "finished",
+      "callback_audit": true,
+      "duplicate_intake": true,
+      "duplicate_start": true,
+      "graph_verified": true,
+      "native_app_results": 1,
+      "native_app_containers": 1,
+      "native_status": "SUCCESS",
+      "actual_start_ack_timeout": false,
+      "post_commit_start_delay_proven": false,
+      "post_commit_callback_delay_proven": false
+    },
+    "failure": {
+      "vendor_status": "FINISHED",
+      "delivery_state": "failed",
+      "callback_audit": true,
+      "duplicate_intake": true,
+      "duplicate_start": true,
+      "graph_verified": true,
+      "native_app_results": 1,
+      "native_app_containers": 1,
+      "native_status": "FAILURE",
+      "actual_start_ack_timeout": false,
+      "post_commit_start_delay_proven": false,
+      "post_commit_callback_delay_proven": false
+    },
+    "timeout": {
+      "vendor_status": "FINISHED",
+      "delivery_state": "uncertain",
+      "callback_audit": true,
+      "duplicate_intake": true,
+      "duplicate_start": true,
+      "graph_verified": true,
+      "native_app_results": 1,
+      "native_app_containers": 1,
+      "native_status": "FAILURE",
+      "actual_start_ack_timeout": false,
+      "post_commit_start_delay_proven": false,
+      "post_commit_callback_delay_proven": true
+    },
+    "restart": {
+      "vendor_status": "FINISHED",
+      "delivery_state": "finished",
+      "callback_audit": true,
+      "duplicate_intake": true,
+      "duplicate_start": true,
+      "graph_verified": true,
+      "native_app_results": 1,
+      "native_app_containers": 1,
+      "native_status": "SUCCESS",
+      "actual_start_ack_timeout": false,
+      "post_commit_start_delay_proven": false,
+      "post_commit_callback_delay_proven": false
+    },
+    "lost_start_ack": {
+      "vendor_status": "FINISHED",
+      "delivery_state": "finished",
+      "callback_audit": true,
+      "duplicate_intake": true,
+      "duplicate_start": true,
+      "graph_verified": true,
+      "native_app_results": 1,
+      "native_app_containers": 1,
+      "native_status": "SUCCESS",
+      "actual_start_ack_timeout": true,
+      "post_commit_start_delay_proven": true,
+      "post_commit_callback_delay_proven": false
+    }
+  },
+  "recovery": {
+    "vendor_restart": true,
+    "persistence_down_up": true,
+    "unrelated_sentinel_preserved": true,
+    "configured_secret_log_scan": true
+  },
+  "qualification_housekeeping_age_seconds": 2,
+  "expected_uncertain_fault_runs": 1,
+  "invocation_elapsed_seconds": 105.409,
+  "timing_limitation": "Harness invocation duration only; not case-readiness latency, peak load, endpoint response timing or analyst-effort benchmark. One sample per fault scenario.",
+  "negative_http_checks": {
+    "forged_correlation_rejected": 5,
+    "wrong_credential_rejected": 5,
+    "nonce_replay_rejected": 3,
+    "stale_timestamp_rejected": 3
+  },
+  "resource_observation": {
+    "kind": "post-scenario snapshot, not peak or benchmark",
+    "containers": [
+      {
+        "Name": "responseforge-rf04-orborus",
+        "CPUPerc": "0.03%",
+        "MemUsage": "14.08MiB / 512MiB",
+        "PIDs": "5"
+      },
+      {
+        "Name": "responseforge-rf04-core",
+        "CPUPerc": "0.33%",
+        "MemUsage": "40.14MiB / 512MiB",
+        "PIDs": "3"
+      },
+      {
+        "Name": "responseforge-rf04-backend",
+        "CPUPerc": "0.00%",
+        "MemUsage": "20.87MiB / 1.5GiB",
+        "PIDs": "5"
+      },
+      {
+        "Name": "retained-diagnostic-test-container",
+        "CPUPerc": "0.00%",
+        "MemUsage": "5.617MiB / 64MiB",
+        "PIDs": "1"
+      },
+      {
+        "Name": "responseforge-rf04-frontend",
+        "CPUPerc": "0.00%",
+        "MemUsage": "5.129MiB / 128MiB",
+        "PIDs": "2"
+      },
+      {
+        "Name": "responseforge-rf04-opensearch",
+        "CPUPerc": "1.30%",
+        "MemUsage": "1.443GiB / 2GiB",
+        "PIDs": "72"
+      }
+    ],
+    "limitation": "Includes one retained diagnostic test container at snapshot time; excludes build peaks. All lab/test containers are removed after qualification; persistent volumes/images retained."
+  }
+}

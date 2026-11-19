@@ -6,13 +6,13 @@ The [implementation plan](implementation-plan.md) owns detailed work packages. T
 | --- | --- | --- |
 | 0 | Environment, upstream review, architecture, roadmap, public repository | Foundation prepared; dependency compatibility and selected-data qualification remain open |
 | 1 | Offline authenticated case/replay/policy/report vertical slice | RF-01–03 merged; merged-revision checks pass |
-| 2 | Three real Shuffle workflows with recovery tests | RF-04A/B merged; authorized RF-04 runtime qualification in progress; RF-05 open |
+| 2 | Three real Shuffle workflows with recovery tests | RF-04 transport qualified locally on Docker Desktop; RF-05 domain workflows open |
 | 3 | Five evidence-backed scenarios with opt-in public data | Planned: RF-06 |
 | 4 | Real Wazuh alert and approved safe VM action | Planned: RF-07–08; blocked on authorized lab and prior replay gates |
 | 5 | Fresh-clone reproducibility, docs, and [analyst effort evidence](implementation-plan.md#measure-analyst-time-saved) | Planned: RF-09 |
 | 6 | Optional read-only AI investigation | Deferred until phases 1–5 qualify |
 
-RF-01–03 are merged and their merged revisions verified. Original synthetic replay acceptance passes; recorded attack scenarios, actual Shuffle and live response remain open. RF-04A/B are merged and their merged checks pass. The [runtime ledger](rf-04-runtime-ledger.md) owns the remaining genuine execution/recovery gates. [Both target options](shuffle.md) are retained; the owner explicitly authorized the reviewed Docker Desktop socket/loopback pilot, which is running while final qualification proceeds.
+RF-01–03 are merged and their merged revisions verified. Original synthetic replay acceptance passes; recorded attack scenarios, actual Shuffle and live response remain open. RF-04A/B are merged and their merged checks pass. The [runtime ledger](rf-04-runtime-ledger.md) and [redacted evidence](evidence/rf-04-runtime.json) record five genuine Docker Desktop execution/recovery scenarios passing. [Both target options](shuffle.md) are retained; the explicitly authorized pilot is stopped with volumes retained. The runtime PR awaits owner review/merge; dedicated-VM runtime and RF-05 domain workflows remain separate.
 
 
 ## GitHub delivery tracking
@@ -24,7 +24,7 @@ The baseline is nine issues and nine implementation PRs through full release rea
 | RF-01 · Contracts and tooling | [#1](https://github.com/TravisMa07/ResponseForge/issues/1) | [#11](https://github.com/TravisMa07/ResponseForge/pull/11) · merged; issue closed; merged checks pass |
 | RF-02 · Durable core | [#2](https://github.com/TravisMa07/ResponseForge/issues/2) | [#12](https://github.com/TravisMa07/ResponseForge/pull/12) · merged; issue closed; merged checks pass |
 | RF-03 · Offline replay | [#3](https://github.com/TravisMa07/ResponseForge/issues/3) | [#13](https://github.com/TravisMa07/ResponseForge/pull/13) · merged; issue closed; merged checks pass |
-| RF-04 · Shuffle deployment and transport | [#4](https://github.com/TravisMa07/ResponseForge/issues/4) | [#14](https://github.com/TravisMa07/ResponseForge/pull/14) · RF-04A merged and merged checks pass; [RF-04B #15](https://github.com/TravisMa07/ResponseForge/pull/15) merged and merged checks pass; [runtime #16](https://github.com/TravisMa07/ResponseForge/pull/16) draft, actual qualification in progress; issue open |
+| RF-04 · Shuffle deployment and transport | [#4](https://github.com/TravisMa07/ResponseForge/issues/4) | [#14](https://github.com/TravisMa07/ResponseForge/pull/14) · RF-04A merged and merged checks pass; [RF-04B #15](https://github.com/TravisMa07/ResponseForge/pull/15) merged and merged checks pass; [runtime #16](https://github.com/TravisMa07/ResponseForge/pull/16) locally qualified and ready for owner review/merge; issue remains open until merge |
 | RF-05 · Shuffle playbooks | [#5](https://github.com/TravisMa07/ResponseForge/issues/5) | Pending |
 | RF-06 · Scenario and dataset qualification | [#6](https://github.com/TravisMa07/ResponseForge/issues/6) | Pending |
 | RF-07 · Wazuh adapter and enrollment bundle | [#7](https://github.com/TravisMa07/ResponseForge/issues/7) | Pending |

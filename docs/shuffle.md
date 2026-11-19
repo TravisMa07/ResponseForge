@@ -1,6 +1,6 @@
 # Shuffle transport and execution-target decision
 
-The owner selected Docker Desktop for the container pilot, with a dedicated Linux VM retained as a supported deployment option. RF-04A provides source-derived API transport, durable launch suppression/reconciliation and blocked deployment plans. The later [runtime pilot](rf-04-operator.md) is explicitly authorized and running; actual evidence and open gates are recorded in the [runtime ledger](rf-04-runtime-ledger.md). Issue #4 remains open pending qualification and owner-authorized merge. Offline tests and Compose parsing establish bounded preparation only; see [design](rf-04-design.md) and [qualification ledger](rf-04-ledger.md).
+The owner selected Docker Desktop for the container pilot, with a dedicated Linux VM retained as a supported deployment option. RF-04A provides source-derived API transport, durable launch suppression/reconciliation and blocked deployment plans. The later [runtime pilot](rf-04-operator.md) passed the explicitly authorized Docker Desktop ARM64 qualification and is stopped with state retained; actual evidence and remaining package gates are recorded in the [runtime ledger](rf-04-runtime-ledger.md). Issue #4 remains open pending owner-authorized merge. Offline tests and Compose parsing establish bounded preparation only; see [design](rf-04-design.md) and [qualification ledger](rf-04-ledger.md).
 
 ## Docker Desktop and dedicated VM, evaluated
 
