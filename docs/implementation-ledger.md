@@ -171,3 +171,8 @@ On 2026-11-19, GitHub reports [PR #18](https://github.com/TravisMa07/ResponseFor
 
 
 [RF-06A PR #19](https://github.com/TravisMa07/ResponseForge/pull/19) targets main, Refs#6; clean implementationae17329402371d2eeb76cf626238788932c4a7d7 passes1,547tests/all checks, locked build and archive hygiene. Actual selective final-catalog acquisition and strict projection reproduce7valid/7duplicate/2quarantined observations without a positive scenario claim. [Owning ledger](rf-06-ledger.md) binds exact commands/environment/source/license hashes,89new tests, independent review/fixes and remaining RF-06B native-runtime gates. Final-head hosted checks, owner acceptance and merge remain distinct.
+
+
+## RF-06A merged / RF-06B kickoff
+
+Owner-merged #19 is6e3ecb4ad0bec2d476529b5c3f89a276c493ed1b; actual merged `make qualify` passes1,547tests/all checks. Issue#6 was closed despite partial delivery and reopened for remaining full acceptance. [RF-06B design](rf-06b-design.md)/[expectations](expectations/rf-06b.md) own source-specific Windows projection, source-bound selection and narrow recorded-observation policies before separately reviewed genuine native runtime qualification. Private source packets and old pilot state remain preserved. No successor merge, release or live authorization inferred.
