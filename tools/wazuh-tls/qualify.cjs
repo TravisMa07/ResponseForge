@@ -39,7 +39,8 @@ function snapshot(file, limit) {
 
 async function child(config) {
   // Dependencies and the complete compiled class must load before refusal is evidence.
-  const axios = require('axios');
+  if (config.axiosEntry) assert.equal(fs.realpathSync(require('node:module').createRequire(config.module).resolve('axios')), config.axiosEntry, 'Compiled module dependency escaped audited toolchain');
+  const axios = require(config.axiosEntry || 'axios');
   const {ServerAPIClient} = require(config.module);
   const host = {url: config.url, port: config.port, username: 'synthetic-user', password: 'synthetic-password'};
   const client = new ServerAPIClient({warn() {}}, {get: async () => host, isEnabledAuthWithRunAs: () => false}, {});
@@ -88,9 +89,23 @@ function certs(dir) {
   for (const name of fs.readdirSync(dir)) fs.chmodSync(path.join(dir,name), 0o600);
 }
 
-async function main() {
-  assert.equal(process.version, 'v24.21.0', 'Pinned component Node version required');
-  const args = process.argv.slice(2);
+const defaultProfile = {
+  nodeVersion: 'v24.21.0', axiosVersion: '1.17.0', compilerName: 'typescript', compilerVersion: '5.5.2',
+  async createCompiler() {
+    const ts = require('typescript');
+    assert.equal(ts.version, '5.5.2');
+    return {metadata: {typescript: ts.version}, async compile(bytes, filename) {
+      const result = ts.transpileModule(bytes.toString('utf8'), {fileName: filename, reportDiagnostics: true,
+        compilerOptions: {module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022, esModuleInterop: true}});
+      assert.equal((result.diagnostics || []).filter(d => d.category === ts.DiagnosticCategory.Error).length, 0, 'Transpile failure');
+      return result.outputText;
+    }};
+  },
+};
+
+async function main(profile = defaultProfile) {
+  assert.equal(process.version, profile.nodeVersion, 'Pinned component Node version required');
+  const args = profile.argv || process.argv.slice(2);
   assert.deepEqual(args.filter((_, i) => i % 2 === 0), ['--bundle','--state-dir']);
   const bundle = path.resolve(args[1]), state = path.resolve(args[3]);
   trustedDirectory(path.dirname(state));
@@ -107,20 +122,20 @@ async function main() {
   const patched = snapshot(path.join(bundle,'server-api-client.ts'),32768);
   buffers['server-api-client.ts']=patched;
   assert.equal(hash(patched),lock.patched_sha256,'Patched source hash mismatch');
-  const ts = require('typescript');
-  const axios = require('axios');
-  assert.equal(ts.version,'5.5.2'); assert.equal(axios.VERSION,'1.17.0');
+  const axios = require(profile.axiosEntry || 'axios');
+  assert.equal(axios.VERSION, profile.axiosVersion);
   fs.mkdirSync(state,{mode:0o700,recursive:false});
   trustedDirectory(state,true);
+  const compiler = await profile.createCompiler(state);
   const materials = path.join(state,'materials'); fs.mkdirSync(materials,{mode:0o700});
   certs(materials);
   const modules = {};
   for (const [kind, filename] of [['original','upstream-server-api-client.ts'],['corrected','server-api-client.ts']]) {
     const dir = path.join(state,kind); fs.mkdirSync(dir,{mode:0o700});
     for (const [input, output] of [[filename,'server-api-client.js'],['cookie.ts','cookie.js']]) {
-      const result = ts.transpileModule(buffers[input].toString('utf8'), {fileName:input, reportDiagnostics:true, compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022,esModuleInterop:true}});
-      assert.equal((result.diagnostics || []).filter(d => d.category === ts.DiagnosticCategory.Error).length,0,'Transpile failure');
-      fs.writeFileSync(path.join(dir,output),result.outputText,{mode:0o600});
+      const code = await compiler.compile(buffers[input], input);
+      assert.equal(typeof code, 'string', 'Compiler must emit JavaScript');
+      fs.writeFileSync(path.join(dir,output),code,{mode:0o600});
     }
     modules[kind] = path.join(dir,'server-api-client.js');
   }
@@ -143,7 +158,7 @@ async function main() {
   }
   const baseEnv = {...process.env};
   for (const key of ['HTTPS_PROXY','HTTP_PROXY','ALL_PROXY','https_proxy','http_proxy','all_proxy','NO_PROXY','no_proxy','NODE_EXTRA_CA_CERTS','NODE_TLS_REJECT_UNAUTHORIZED','NODE_OPTIONS','NODE_USE_ENV_PROXY']) delete baseEnv[key];
-  const report = {schema_version:'1.0',claim:'complete-transpiled-ServerAPIClient synthetic native TLS component only',revision:lock.revision,source_sha256:lock.members[0].sha256,patched_sha256:lock.patched_sha256,cookie_sha256:lock.members[1].sha256,node:process.version,openssl:execFileSync('openssl',['version'],{encoding:'utf8'}).trim(),axios:axios.VERSION,typescript:ts.version,harness_sha256:hash(fs.readFileSync(__filename)),compiled_sha256:Object.fromEntries(Object.entries(modules).map(([name,file])=>[name,hash(fs.readFileSync(file))])),cookie_compiled_sha256:hash(fs.readFileSync(path.join(state,'corrected/cookie.js'))),semantic_typecheck:false,full_plugin_build:false,manager_runtime:false,scenarios:records};
+  const report = {schema_version:'1.0',claim:'complete-transpiled-ServerAPIClient synthetic native TLS component only',revision:lock.revision,source_sha256:lock.members[0].sha256,patched_sha256:lock.patched_sha256,cookie_sha256:lock.members[1].sha256,node:process.version,openssl:execFileSync('openssl',['version'],{encoding:'utf8'}).trim(),axios:axios.VERSION,compiler:profile.compilerName,compiler_version:profile.compilerVersion,...compiler.metadata,harness_sha256:hash(fs.readFileSync(__filename)),compiled_sha256:Object.fromEntries(Object.entries(modules).map(([name,file])=>[name,hash(fs.readFileSync(file))])),cookie_compiled_sha256:hash(fs.readFileSync(path.join(state,'corrected/cookie.js'))),semantic_typecheck:false,full_plugin_build:false,manager_runtime:false,scenarios:records};
   try {
     const good = await listen('good','good');
     const bad = await listen('untrusted','untrusted');
@@ -154,8 +169,8 @@ async function main() {
     const redirectHTTP = await listen('redirectHTTP','good',()=>`http://127.0.0.1:${plain}/redirect-target`);
     async function check(name, port, env, expectation, url='https://127.0.0.1', module=modules.corrected) {
       const before = structuredClone(counters);
-      const result = await runChild({module,url,port},{...baseEnv,...env});
-      assert.equal(result.loaded,true); assert.equal(result.axios,'1.17.0');
+      const result = await runChild({module,url,port,axiosEntry:profile.axiosEntry},{...baseEnv,...env});
+      assert.equal(result.loaded,true); assert.equal(result.axios,profile.axiosVersion);
       const delta = Object.fromEntries(Object.entries(counters).map(([key,value])=>[key,Object.fromEntries(Object.entries(value).map(([k,v])=>[k,v-before[key][k]]))]));
       records[name] = {result,delta};
       for (const method of ['authenticate','request']) assert.equal(result[method].success,expectation==='success',`${name}: ${method}`);
@@ -178,7 +193,7 @@ async function main() {
     const trusted = {NODE_EXTRA_CA_CERTS:path.join(materials,'trusted.pem')};
     // Baseline must actually load and exchange credentials, exposing the original defect.
     const beforeRed = structuredClone(counters.untrusted);
-    const baseline = await runChild({module:modules.original,url:'https://127.0.0.1',port:bad},baseEnv);
+    const baseline = await runChild({module:modules.original,url:'https://127.0.0.1',port:bad,axiosEntry:profile.axiosEntry},baseEnv);
     assert(baseline.loaded && baseline.authenticate.success && baseline.request.success,'Original defect not reproduced');
     assert.equal(counters.untrusted.auth-beforeRed.auth,1); assert.equal(counters.untrusted.request-beforeRed.request,1);
     records.original_insecure_baseline = {loaded:true,secure_assertion:'FAIL: untrusted certificate accepted',authHTTP:1,requestHTTP:1};
@@ -207,7 +222,9 @@ async function main() {
   }
 }
 
-(async()=>{
+module.exports = {main, trustedDirectory, snapshot};
+
+if (require.main === module) (async()=>{
   if (process.argv[2] === '--child') await child(JSON.parse(process.argv[3]));
   else await main();
 })().catch(error=>{process.stderr.write('RF-07C component qualification failed; setup failures are not TLS refusal evidence. ' + error.message + '\n');process.exitCode=1;});
