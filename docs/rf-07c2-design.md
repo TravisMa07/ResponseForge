@@ -27,3 +27,7 @@ Full plugin bootstrap/build/frontend/packaging, semantic TypeScript, deployed wa
 ## Post-freeze source-backed dependency refinement
 
 The first private frozen-lock install with all54 root resolutions refuses serialize-javascript7.0.6 on Node18 (requires >=20). No engine check is disabled. That unused root resolution is outside the component dependency graph. Retain the complete original root package/lock privately, but limit the minimum manifest to applicable Babel traverse/helpers/runtime/runtime-corejs3, follow-redirects, semver and Axios resolutions. Audit the resulting installed closure for omitted applicable constraints and original-lock selectors/identities; any mismatch blocks the platform-bound claim. This changes the initial all-root-resolutions preparation choice based on an observed incompatible unused package, not a TLS test output. Full-platform bootstrap remains explicitly unqualified.
+
+## Observed bounded result
+
+Implementation1035327 passes44 offline Python cases,12 original JS audit vectors,nine real CLI setup refusals and13 platform-bound native TLS scenarios. Shared C1 regression passes13 scenarios; fullrepository qualification passes2,815 tests/all checks. [Ledger](rf-07-ledger.md)/[safe aggregate](evidence/rf-07c2-platform-component.json) bind exact artifacts and preserved engine-conflict/setup/review limitations. Full-plugin/deployed-resolution/image/runtime gates remain open.

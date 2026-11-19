@@ -1,0 +1,401 @@
+{
+  "schema_version": "1.0",
+  "claim": "complete-transpiled-ServerAPIClient synthetic native TLS component only",
+  "revision": "5005c3e2213abeb5c7798f489a7304a6abb7c6d1",
+  "source_sha256": "b55c5947bab7c9b0b1e97238edb4f2c26ceae8f6bd4d5a33801d8a8d5fde6ca5",
+  "patched_sha256": "a56d5fe37f1bed9aa4eaa66af0649e5266d914647f90ed1b4d0ef201b62cc27f",
+  "cookie_sha256": "2acfdac9af159576cc0deede34516dac790269ce6d132fadd1430c153130cbd4",
+  "node": "v18.19.0",
+  "openssl": "LibreSSL 3.3.6",
+  "axios": "1.18.1",
+  "compiler": "upstream-osd-babel-node-preset",
+  "compiler_version": "7.23.3",
+  "node_executable_sha256": "c902894d21712ec52f5d43ef1185bd2b62e14aa612197005e1f3a44ea59fe0e5",
+  "platform_revision": "4a81e59ee597c0014e1d72666aa32423a964ba27",
+  "selected_dependencies": {
+    "@babel/core": "7.23.3",
+    "@babel/preset-env": "7.23.3",
+    "@babel/preset-typescript": "7.23.3",
+    "@babel/preset-react": "7.23.3",
+    "@babel/plugin-transform-class-properties": "7.23.3",
+    "@babel/plugin-transform-private-methods": "7.23.3",
+    "babel-plugin-add-module-exports": "1.0.4",
+    "@babel/plugin-transform-optional-chaining": "7.23.3",
+    "@babel/plugin-transform-nullish-coalescing-operator": "7.23.3",
+    "@babel/plugin-transform-export-namespace-from": "7.23.3",
+    "@babel/plugin-transform-logical-assignment-operators": "7.23.3",
+    "axios": "1.18.1"
+  },
+  "selected_dependency_paths": {
+    "@babel/core": {
+      "entry": "node_modules/@babel/core/lib/index.js",
+      "package_json": "node_modules/@babel/core/package.json",
+      "package_json_sha256": "b1221c53bc71a553ab12ab41c7c3e448cde143d0f653b505ed6c35a7677f6799"
+    },
+    "@babel/preset-env": {
+      "entry": "node_modules/@babel/preset-env/lib/index.js",
+      "package_json": "node_modules/@babel/preset-env/package.json",
+      "package_json_sha256": "6fb85d1a5af157b436b5cde4ea4bcdf155f1daf5114c2914fe27da275e693a83"
+    },
+    "@babel/preset-typescript": {
+      "entry": "node_modules/@babel/preset-typescript/lib/index.js",
+      "package_json": "node_modules/@babel/preset-typescript/package.json",
+      "package_json_sha256": "db9a3c944c4ca0f528b77d1be721831534431a509a3036810f58c5c8c84d3ed6"
+    },
+    "@babel/preset-react": {
+      "entry": "node_modules/@babel/preset-react/lib/index.js",
+      "package_json": "node_modules/@babel/preset-react/package.json",
+      "package_json_sha256": "72a3c327e84a8116bb0ebb8968e8647442f71c4ff8219e0c4b7d46ca8ec9c5db"
+    },
+    "@babel/plugin-transform-class-properties": {
+      "entry": "node_modules/@babel/plugin-transform-class-properties/lib/index.js",
+      "package_json": "node_modules/@babel/plugin-transform-class-properties/package.json",
+      "package_json_sha256": "12ca8c45d24ed05b882200e6889696b1a4433304d4e09cf234e55ddd65a4a78e"
+    },
+    "@babel/plugin-transform-private-methods": {
+      "entry": "node_modules/@babel/plugin-transform-private-methods/lib/index.js",
+      "package_json": "node_modules/@babel/plugin-transform-private-methods/package.json",
+      "package_json_sha256": "b17ca674031546baf54cddbe8061dbfb0dae899bbfc3ce758a438728ba764ed0"
+    },
+    "babel-plugin-add-module-exports": {
+      "entry": "node_modules/babel-plugin-add-module-exports/lib/index.js",
+      "package_json": "node_modules/babel-plugin-add-module-exports/package.json",
+      "package_json_sha256": "18def223af4b8b667d0ecef64dadfe133568c16373536e3a489bf89dda0e33a2"
+    },
+    "@babel/plugin-transform-optional-chaining": {
+      "entry": "node_modules/@babel/plugin-transform-optional-chaining/lib/index.js",
+      "package_json": "node_modules/@babel/plugin-transform-optional-chaining/package.json",
+      "package_json_sha256": "ae10d6287717d170f6122e370467bfb817596a7e8eb7d6a77515388b096014ec"
+    },
+    "@babel/plugin-transform-nullish-coalescing-operator": {
+      "entry": "node_modules/@babel/plugin-transform-nullish-coalescing-operator/lib/index.js",
+      "package_json": "node_modules/@babel/plugin-transform-nullish-coalescing-operator/package.json",
+      "package_json_sha256": "a6eb12966999c8b3e2dc7a0a44b40172d08df45199b9e7ad36cfea7b51bf6083"
+    },
+    "@babel/plugin-transform-export-namespace-from": {
+      "entry": "node_modules/@babel/plugin-transform-export-namespace-from/lib/index.js",
+      "package_json": "node_modules/@babel/plugin-transform-export-namespace-from/package.json",
+      "package_json_sha256": "562bea76c9ed64ea046fe16f647fa1c178506148042ffc463102436c39101b96"
+    },
+    "@babel/plugin-transform-logical-assignment-operators": {
+      "entry": "node_modules/@babel/plugin-transform-logical-assignment-operators/lib/index.js",
+      "package_json": "node_modules/@babel/plugin-transform-logical-assignment-operators/package.json",
+      "package_json_sha256": "437b41a94dc14d76b7f9d4c4cae60c48d91c373d20d0823a67e47ec02d83fa9c"
+    },
+    "axios": {
+      "entry": "node_modules/axios/dist/node/axios.cjs",
+      "package_json": "node_modules/axios/package.json",
+      "package_json_sha256": "65f1d1513135840ca721900a56995a6fea13dc124c41a0873389ad4ac64c052e"
+    }
+  },
+  "closure_audit": {
+    "selectors": 262,
+    "installed_packages": 217,
+    "parser": {
+      "version": "1.1.0",
+      "entry": "node_modules/@yarnpkg/lockfile/index.js",
+      "entry_sha256": "23b16b3cb31ec51e558971e64251ec7f9f97ad64380929d7a09718bf9dd23439",
+      "package_json_sha256": "40b02d6bd906ceb10acd716721e0fbf1d7ae51db4962621c348abc5229aa7d48",
+      "actual_bootstrap_lock_sha256": "4cefa29b2cb3ad6682454c9b994dc40eb6f71680bbef31724527e36302b61596"
+    },
+    "integrity_algorithms": {
+      "sha1": 8,
+      "sha512": 254
+    },
+    "closure_sha256": "3e7046c3cb0069e2c055d51201e0c83ec55d7e56a4fc02d322490c1eefcbcfb4",
+    "installed_metadata_sha256": "45edef66a770fde84b624398c511e9421cc280252fa5b6fa50b3c4c5525bc44b",
+    "original_lock_selectors_and_artifacts_verified": true,
+    "applicable_root_resolutions_verified": true
+  },
+  "platform_source_sha256": {
+    "platform-package.json": "9e2b82d839ba3c40ff95810efa66a285c2727f1b5e31b726f6871aac8acc2305",
+    "yarn.lock": "db5c4f5233c26dea247bb32a071a6ab84dba8327369bfe88e67cb91429728c9d",
+    "node-version.txt": "c38efac7acb66c8c7976b5d875474722d05a24151159c74403f0ed4fcbd1146d",
+    "LICENSE.txt": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+    "NOTICE.txt": "6affa18ffb4db4e416a36abaa5892dbfd42bf0e76aa299c157ea0874c645d06e",
+    "write-server-files.ts": "ae72fe5c285b037f9768c66a7cc77220684d56fd0ec42a4cca21c7a8edfbd944",
+    "yarn-install.ts": "972d54883bdef35aa6e9b82f4cc7d10839e06b7f7f55ecd66526633cbf502c22",
+    "node_preset.js": "b76332559781d2f7bff9df19ecab8c65839962118f173d9d10db0b59df77280c",
+    "babel-helper.ts": "bb379cb94992e015e1bebe3d0f42ec9585b8b30b00773a4a723d26495b96ebb1",
+    "common_preset.js": "d2bbe1ade56ebb9f0a67f4203372665383919dc4a57c54a3e9be14e59c81ffbb",
+    "preset-package.json": "8bc82f308f13c90ca3bbdc06c105cb8c5b5ff290593ba9eb95857f697e39f70b"
+  },
+  "platform_policy_sha256": "0603f86f798fcdeb038959bb3b2b94a42f8f165b3c69812f8fdb279acea456c0",
+  "wrapper_sha256": "fa1c072283af3a11e476b666f2ffe91f4d4d4d90ddf7187a23627b41234058b8",
+  "audit_sha256": "8544e16d6ec5f17d6a7550b8a95f97e712275444093d3e4b8c3a0cdf0d7241e0",
+  "minimum_manifest_sha256": "d8c9030eec0cfcfb8bc6a61d1074da7c957bc88982da3c7224a874bb7cb98df4",
+  "bootstrap_lock_sha256": "4cefa29b2cb3ad6682454c9b994dc40eb6f71680bbef31724527e36302b61596",
+  "compiler_options": {
+    "babelrc": false,
+    "configFile": false,
+    "sourceMaps": "inline",
+    "preset": "verified upstream node_preset.js",
+    "preset_target_node": 14
+  },
+  "minimum_toolchain_only": true,
+  "deployed_resolution_verified": false,
+  "node_global_environment_proxy_supported": false,
+  "harness_sha256": "d49531edfb0afa14e78babad48722b88b4746ed5d7f5cf62ab0d157cc99e5b30",
+  "compiled_sha256": {
+    "original": "55db8eaaf89f6021e7d6fb88800035853ec34f3557bc461dd671358706fab2e3",
+    "corrected": "2ddd81281d4e89bd67ab67bdf388c750d5befcfaac5c4859e76a155e9c27a030"
+  },
+  "cookie_compiled_sha256": "a7833d76d164bf31ce2bade07f7004189260c6c46f6b398df9b8eab2481d1d90",
+  "semantic_typecheck": false,
+  "full_plugin_build": false,
+  "manager_runtime": false,
+  "passed": true,
+  "evaluated_revision": "10353274bbd365ba9eb23375394635fafe865bd5",
+  "native_report_sha256": "6cf5c7b4542fe694b836957d4f55a72844b263b3ebd14c5f63809c1ff24bd9bb",
+  "environment": {
+    "os": "macOS ARM64",
+    "python": "3.12.12",
+    "sqlite": "3.50.4"
+  },
+  "offline_qualification": {
+    "command": "make qualify",
+    "passed_tests": 2815,
+    "source_downloads": false,
+    "node_installs": false
+  },
+  "negative_checks": {
+    "original_synthetic_audit_vectors": 12,
+    "real_CLI_setup_refusals": 9,
+    "unverified_dependency_or_parser_executed": false
+  },
+  "c1_regression": {
+    "node": "v24.21.0",
+    "axios": "1.17.0",
+    "compiler": "typescript",
+    "compiler_version": "5.5.2",
+    "scenarios": 13,
+    "passed": true,
+    "harness_sha256": "d49531edfb0afa14e78babad48722b88b4746ed5d7f5cf62ab0d157cc99e5b30",
+    "private_report_sha256": "6ca63370bfe7d842dca1de266546da49c1a6f610bf59f6eccdcfd985012e6920"
+  },
+  "remaining_gates": [
+    "owner C2 acceptance/merge and actual main qualification",
+    "full platform bootstrap with Node18 engine conflict",
+    "full plugin semantic/frontend/build/packaging qualification",
+    "deployed wazuh-core dependency resolution/hoisting",
+    "Linux image and manager TLS/bootstrap/runtime/capacity",
+    "captured manager payload and native Windows enrollment",
+    "real endpoint/live response proof"
+  ],
+  "scenarios": {
+    "original_insecure_baseline": {
+      "loaded": true,
+      "secure_assertion": "FAIL: untrusted certificate accepted",
+      "authHTTP": 1,
+      "requestHTTP": 1
+    },
+    "trusted_CA_matching_SAN": {
+      "loaded": true,
+      "authenticate": {
+        "success": true,
+        "valid": true
+      },
+      "request": {
+        "success": true,
+        "valid": true
+      },
+      "observed_HTTP": {
+        "good": {
+          "auth": 1,
+          "request": 1,
+          "badIdentity": 0
+        }
+      }
+    },
+    "missing_CA": {
+      "loaded": true,
+      "authenticate": {
+        "success": false,
+        "code": "UNABLE_TO_VERIFY_LEAF_SIGNATURE",
+        "status": null,
+        "policy": false
+      },
+      "request": {
+        "success": false,
+        "code": "UNABLE_TO_VERIFY_LEAF_SIGNATURE",
+        "status": null,
+        "policy": false
+      },
+      "observed_HTTP": {}
+    },
+    "different_CA": {
+      "loaded": true,
+      "authenticate": {
+        "success": false,
+        "code": "UNABLE_TO_VERIFY_LEAF_SIGNATURE",
+        "status": null,
+        "policy": false
+      },
+      "request": {
+        "success": false,
+        "code": "UNABLE_TO_VERIFY_LEAF_SIGNATURE",
+        "status": null,
+        "policy": false
+      },
+      "observed_HTTP": {}
+    },
+    "untrusted_chain": {
+      "loaded": true,
+      "authenticate": {
+        "success": false,
+        "code": "UNABLE_TO_VERIFY_LEAF_SIGNATURE",
+        "status": null,
+        "policy": false
+      },
+      "request": {
+        "success": false,
+        "code": "UNABLE_TO_VERIFY_LEAF_SIGNATURE",
+        "status": null,
+        "policy": false
+      },
+      "observed_HTTP": {}
+    },
+    "wrong_SAN": {
+      "loaded": true,
+      "authenticate": {
+        "success": false,
+        "code": "ERR_TLS_CERT_ALTNAME_INVALID",
+        "status": null,
+        "policy": false
+      },
+      "request": {
+        "success": false,
+        "code": "ERR_TLS_CERT_ALTNAME_INVALID",
+        "status": null,
+        "policy": false
+      },
+      "observed_HTTP": {}
+    },
+    "environment_TLS_zero": {
+      "loaded": true,
+      "authenticate": {
+        "success": false,
+        "code": "UNABLE_TO_VERIFY_LEAF_SIGNATURE",
+        "status": null,
+        "policy": false
+      },
+      "request": {
+        "success": false,
+        "code": "UNABLE_TO_VERIFY_LEAF_SIGNATURE",
+        "status": null,
+        "policy": false
+      },
+      "observed_HTTP": {}
+    },
+    "plain_HTTP": {
+      "loaded": true,
+      "authenticate": {
+        "success": false,
+        "code": null,
+        "status": null,
+        "policy": true
+      },
+      "request": {
+        "success": false,
+        "code": null,
+        "status": null,
+        "policy": true
+      },
+      "observed_HTTP": {}
+    },
+    "URL_credentials": {
+      "loaded": true,
+      "authenticate": {
+        "success": false,
+        "code": null,
+        "status": null,
+        "policy": true
+      },
+      "request": {
+        "success": false,
+        "code": null,
+        "status": null,
+        "policy": true
+      },
+      "observed_HTTP": {}
+    },
+    "URL_control": {
+      "loaded": true,
+      "authenticate": {
+        "success": false,
+        "code": null,
+        "status": null,
+        "policy": true
+      },
+      "request": {
+        "success": false,
+        "code": null,
+        "status": null,
+        "policy": true
+      },
+      "observed_HTTP": {}
+    },
+    "HTTPS_redirect": {
+      "loaded": true,
+      "authenticate": {
+        "success": false,
+        "code": "ERR_BAD_RESPONSE",
+        "status": 302,
+        "policy": false
+      },
+      "request": {
+        "success": false,
+        "code": "ERR_BAD_RESPONSE",
+        "status": 302,
+        "policy": false
+      },
+      "observed_HTTP": {
+        "redirectHTTPS": {
+          "auth": 1,
+          "request": 1,
+          "badIdentity": 0
+        }
+      }
+    },
+    "HTTP_redirect": {
+      "loaded": true,
+      "authenticate": {
+        "success": false,
+        "code": "ERR_BAD_RESPONSE",
+        "status": 302,
+        "policy": false
+      },
+      "request": {
+        "success": false,
+        "code": "ERR_BAD_RESPONSE",
+        "status": 302,
+        "policy": false
+      },
+      "observed_HTTP": {
+        "redirectHTTP": {
+          "auth": 1,
+          "request": 1,
+          "badIdentity": 0
+        }
+      }
+    },
+    "hostile_proxy": {
+      "loaded": true,
+      "authenticate": {
+        "success": true,
+        "valid": true
+      },
+      "request": {
+        "success": true,
+        "valid": true
+      },
+      "observed_HTTP": {
+        "good": {
+          "auth": 1,
+          "request": 1,
+          "badIdentity": 0
+        }
+      }
+    }
+  }
+}
