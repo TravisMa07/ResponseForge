@@ -1,6 +1,6 @@
 # Architecture
 
-Status: direction accepted from owner requirements; RF-01 contracts and RF-02 authenticated API/SQLite core implemented; see [RF-02 evidence](rf-02-ledger.md). RF-03 replay/report and simulated response are merged and verified; RF-04A source-derived transport/planning is merged and verified; RF-04 runtime is merged and bounded Docker Desktop transport qualified; RF-05A domain steps are merged and verified; RF-05B native graphs are locally runtime-qualified on Docker Desktop, with owner review/merge pending.
+Status: direction accepted from owner requirements; RF-01 contracts and RF-02 authenticated API/SQLite core implemented; see [RF-02 evidence](rf-02-ledger.md). RF-03 replay/report and simulated response are merged and verified; RF-04A source-derived transport/planning is merged and verified; RF-04 runtime is merged and bounded Docker Desktop transport qualified; RF-05A domain steps are merged and verified; RF-05B native graphs are runtime-qualified on Docker Desktop and merged as `ec5d80e`, with actual merged-revision offline checks passing. RF-06 recorded-source qualification is underway.
 
 ```mermaid
 flowchart TD
