@@ -78,3 +78,6 @@ Five source-selected positive/negative policy pairs are inspected; original synt
 
 
 RF-06B2 adds authenticated `POST /v1/incidents/{incident_id}/playbooks/inspect` with the same typed PlaybookStepRequest and workflow-only scope. It reads and fully validates an existing plan without preparing, refreshing readiness or proposing an action; a missing original plan returns409. Qualification uses it only after genuine native Prepare proof. Multi-source lookup is server-owned and exact-alert-bound; a stable private recorded mock namespace preserves legacy/older uncertain execution database bindings. Actual native recorded-source qualification is tracked in [B2 design](rf-06b2-design.md) and the [ledger](rf-06-ledger.md).
+
+
+Current recorded runtime: RF-06B2 explicitly prepares the five reviewed sources behind a default-false, fixed read-only mount and server-owned source/provider bindings. Its [ledger](rf-06-ledger.md), [actual aggregate](evidence/rf-06b2-runtime.json) and [operator runbook](recorded-runtime.md) supersede earlier preparation-only status for the qualified candidate. Default original-fixture configuration stays unchanged. Twenty genuine phases cover five narrowed observations and source-selected negatives; effects remain simulated and live endpoints unqualified.

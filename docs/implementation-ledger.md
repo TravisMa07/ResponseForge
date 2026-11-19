@@ -193,3 +193,8 @@ Owner-authorized guarded #20 merge at55f0ab7 produced2ff84b8c8cf44766cc91bd4c108
 ## RF-06B2 implementation / first candidate
 
 Freezecfb118c precedes implementation8d70ed0 and644new tests; full offline qualification passes2,371. Disjoint registry/preparation/expectation lanes and independent pre-execution review correct source-provider namespaces, read-only proof and native-phase/full-context validation. First clean source-bound runtime passes20genuine phases/14cases/five recorded observations/three graph kinds with three simulated effects and no duplicate/forbidden effect. [Owning ledger](rf-06-ledger.md) preserves exact hashes/metrics/diagnostics. README metadata correction receives a separate clean build boundary and fresh qualification before final acceptance; independent actual-artifact review is in progress. Owner acceptance/merge/release/live gates remain separate.
+
+
+## RF-06B2 final qualification
+
+Clean candidate `c99da291f70ece08883d96ec7cb2aae206a4278c` passes2,371offline tests/all checks and a new source-bound build after README metadata correction. Fresh20native phases/14 cases/five recorded observations/three graphs pass with3 verified simulated effects, two expected uncertain faults and0 duplicate/forbidden effects. [Owning ledger](rf-06-ledger.md)/[aggregate](evidence/rf-06b2-runtime.json) bind exact source/wheel/images/modules, independently checked plans/audits/receipts/reports/metrics and scoped recovery. The prior qualified candidate and all private legacy state remain preserved; pilot is stopped. Owner acceptance/merge and actual merged-revision verification remain separate.

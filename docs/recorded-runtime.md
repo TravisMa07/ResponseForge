@@ -8,7 +8,7 @@ Use the five individually reviewed artifacts from [the catalog](../datasets/cata
 
 A private JSON RecordedCaseManifest contains qualification_id (a fresh UUID) and cases. Each case has profile, artifact (the complete reviewed DatasetArtifact from the catalog), scenario_id and event_ids (exactly one original normalized channel:rawRecordID). scenario_id is `rf06-<profile>-<qualification_id>`. Freeze selections against independently inspected original XML before execution; never select expected records from policy output. No checked-in example invents source identifiers.
 
-Exactly14 profiles are required: powershell, lsass, task, note, dns; their five `-negative` variants; denied, expired, callback-loss and task-failure. The latter four use the positive PowerShell record in separate operator scenario namespaces. Each namespace retains the actual source Computer, original ID, distinct original times and raw SHA. A negative is absence of the narrow match, not proven benign; note-negative is source context without the file event. Missing creation/lineage/task execution/encryption/session proof stays missing.
+Exactly 14 profiles are required: powershell, lsass, task, note, dns; their five `-negative` variants; denied, expired, callback-loss and task-failure. The latter four use the positive PowerShell record in separate operator scenario namespaces. Each namespace retains the actual source Computer, original ID, distinct original times and raw SHA. A negative is absence of the narrow match, not proven benign; note-negative is source context without the file event. Missing creation/lineage/task execution/encryption/session proof stays missing.
 
 ## Reviewed stopped-state deployment
 
