@@ -6,6 +6,7 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 
 from responseforge.api import create_app
+from responseforge.integrations.wazuh.models import WazuhConfig
 from responseforge.replay_contracts import RecordedEvent
 from responseforge.runtime import Settings
 
@@ -26,6 +27,9 @@ def main() -> int:
         )
         + "\n",
     }
+    artifacts[ROOT / "schemas" / "wazuh-config.json"] = (
+        json.dumps(WazuhConfig.model_json_schema(), indent=2, sort_keys=True) + "\n"
+    )
     if args.check:
         if any(not path.exists() or path.read_text() != value for path, value in artifacts.items()):
             print("FAIL: internal API artifact drift; regenerate scripts/export_api.py and review")

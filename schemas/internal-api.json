@@ -3254,6 +3254,49 @@
         ],
         "summary": "Callback"
       }
+    },
+    "/v1/integrations/wazuh/alerts": {
+      "post": {
+        "operationId": "wazuh_intake_v1_integrations_wazuh_alerts_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IntakeResult"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IntakeResult"
+                }
+              }
+            },
+            "description": "New native source case"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Wazuh Intake"
+      }
     }
   }
 }

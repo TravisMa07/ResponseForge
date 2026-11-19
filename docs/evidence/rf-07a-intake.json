@@ -1,0 +1,102 @@
+{
+  "schema_version": "1.0",
+  "work_id": "RF-07A",
+  "qualification_kind": "offline in-process native source contracts, authorization and durability",
+  "revision": "6e83585a8f0447585d493a197f912630341107fd",
+  "expectation_revision": "15e28a56ea696b0387a17957773f74d7ca7aeedf",
+  "observed_at": "2026-11-19T17:53:16.965247+00:00",
+  "runtime_qualified": false,
+  "verified_live": false,
+  "manager_started": false,
+  "endpoint_installed_or_enrolled": false,
+  "captured_endpoint_payload_qualified": false,
+  "live_shuffle_qualified": false,
+  "response_provider_registered": false,
+  "live_dispatch_enabled": false,
+  "tests": {
+    "total": 2562,
+    "new_rf07a": 191,
+    "passed": 2562,
+    "failed": 0,
+    "prior_warning": "Existing Starlette/httpx deprecation"
+  },
+  "checks": [
+    "Ruff",
+    "strict mypy50 modules",
+    "v1 schema/examples",
+    "internal OpenAPI/replay/Wazuh config schema drift",
+    "fixture/catalog metadata",
+    "candidate plans",
+    "59 Markdown documents",
+    "offline lock/build",
+    "archive private-material exclusion",
+    "git diff --check"
+  ],
+  "environment": {
+    "host_os": "Darwin",
+    "host_os_version": "26.5.1",
+    "machine": "arm64",
+    "python": "3.12.12",
+    "sqlite": "3.50.4",
+    "uv": "uv 0.13.6 (329bf9448 2026-10-26 aarch64-apple-darwin)"
+  },
+  "build": {
+    "wheel_sha256": "424fd7ff137d2898fc7a669899e06bd460687c1468cfbb6c337aaa5f545d2a30",
+    "sdist_members": 267,
+    "wheel_members": 53,
+    "private_material_absent": true,
+    "module_sha256": {
+      "src/responseforge/integrations/wazuh/models.py": "514e926b7f0f12c7302f2f32b6669359b80dae44d22e39980e387f39cac5afaa",
+      "src/responseforge/integrations/wazuh/mapping.py": "c634a6621105c06829a94c836a34a86f631143c4953be9e906536bc83bf41748",
+      "src/responseforge/integrations/wazuh/service.py": "699405d76cb4b17b2e5ba60235ca0978bfa947f83539fd160b679b61d6843e3a",
+      "src/responseforge/runtime.py": "7e6d42232fdfbc0a044650a200322ae7dc3251dbbf8f9348ed088e29806c7088",
+      "src/responseforge/core/__init__.py": "dc634e684a506b1b0d19982f3b09634d3b45221e0705da2069d3d9bab6d94c70",
+      "src/responseforge/api/__init__.py": "621a97c1a187fd09e9c8fd0f980c4b02e70992e92a75aec5825b59723a11aacf",
+      "src/responseforge/reports/__init__.py": "dc2ac4fd8be954c2bb3851cec5345ef6951649030dd25cfdcb14fe75e2535e92"
+    }
+  },
+  "upstream": {
+    "release": "Wazuh4.14.10",
+    "source_commit": "6e7835b4880c3210ef30e855a6bb43432be792e1",
+    "integrator_sha256": "3baf5e60a4e4f65f8e7689d7dfbdd2d17bd7ee8d43793044b0788e1afd42bdff",
+    "event_json_sha256": "a20434ec2b7b3473b31a145489e85dc88d5163ca4aefd261191b77573ef9ba41",
+    "identity": "server manager namespace + exact agent ID + native seconds.counter",
+    "byte_provenance": "exact received integration delivery, not guaranteed original alerts.json bytes"
+  },
+  "published_example_check": {
+    "kind": "published-documentation-example-compatibility",
+    "source": "https://documentation.wazuh.com/current/user-manual/capabilities/malware-detection/fim-threat-detection-rules.html",
+    "bytes": 2705,
+    "sha256": "8298df8e5c3e13c4098c275208e4ab9d37248a461cf4a2acbd4ddc2f59b7b9e9",
+    "mapped": true,
+    "captured_endpoint": false,
+    "verified_live": false,
+    "endpoint_connected": false,
+    "provider_created": false,
+    "original_timestamp_preserved": true,
+    "native_id_preserved": true
+  },
+  "behavioral_evidence": {
+    "initial_intended_reds": 3,
+    "additional_regression_reds": 2,
+    "partial_insert_rollback_points": 8,
+    "concurrent_duplicate_requests": 12,
+    "native_source_evidence_records_per_case": 2,
+    "native_endpoint_state_or_effect_verified": false,
+    "native_readiness_automatically_created": false,
+    "raw_source_in_default_reports": false,
+    "exact_duplicate_first_receipt_preserved": true,
+    "changed_source_or_proof_fails_closed": true,
+    "approved_manual_live_execution_rejected": true
+  },
+  "independent_review": "passed: separate read-only implementation, package and public projection review",
+  "remaining_gates": [
+    "owner acceptance and merge authorization",
+    "hosted final-head CI",
+    "actual merged-revision verification",
+    "RF-07B upstream profile/sender/Windows enrollment integrity",
+    "real captured manager/endpoint contracts",
+    "authorized RF-08 sensor to native Shuffle to harmless action and verified effect/recovery",
+    "Windows/ARM and deployment capacity qualification"
+  ]
+}

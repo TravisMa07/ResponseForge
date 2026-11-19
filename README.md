@@ -2,7 +2,7 @@
 
 SOAR-first incident response automation with offline attack replay and an optional live Wazuh endpoint path. ResponseForge connects evidence, analyst approval, response providers and auditable case reports through real Shuffle workflows.
 
-**RF-01–05, RF-06A and RF-06B1 are merged with merged-revision checks recorded. RF-06B2 adds five narrowly scoped recorded-observation scenarios through genuine Shuffle workflows. The [RF-06 ledger](docs/rf-06-ledger.md) owns exact qualified revisions, runtime results and outstanding acceptance/merge gates; the [recorded-source operator notes](docs/recorded-runtime.md) explain preparation and reproduction. Effects are simulated and human decisions are test fixtures. Dedicated-VM runtime, live endpoints, analyst savings and release readiness require separate qualification.**
+**RF-01–06 are merged with merged-revision checks recorded. RF-06B2 adds five narrowly scoped recorded-observation scenarios through genuine Shuffle workflows. The [RF-06 ledger](docs/rf-06-ledger.md) owns exact qualified revisions, runtime results and outstanding acceptance/merge gates; the [recorded-source operator notes](docs/recorded-runtime.md) explain preparation and reproduction. Effects are simulated and human decisions are test fixtures. Dedicated-VM runtime, live endpoints, analyst savings and release readiness require separate qualification.**
 
 The public engineering requirements are captured in the [architecture](docs/architecture.md) and acceptance documentation. The [implementation plan](docs/implementation-plan.md) defines bounded delivery packages and parallel-agent ownership; the [acceptance matrix](docs/acceptance.md) keeps implementation separate from verification.
 
@@ -42,7 +42,7 @@ uv run --locked --offline python -m responseforge --init-config .local/config.js
 uv run --locked --offline python -m responseforge --config .local/config.json
 ```
 
-This creates separate private credentials and binds the API to `127.0.0.1:8000`. No provider, replay scenario or endpoint action starts automatically. See the [API and recovery runbook](docs/core-api.md) and [internal OpenAPI](schemas/internal-api.json). Internal alerts are normalized ResponseForge contracts; actual Wazuh/Shuffle payload mappings still require their own qualification.
+This creates separate private credentials and binds the API to `127.0.0.1:8000`. No provider, replay scenario or endpoint action starts automatically. See the [API and recovery runbook](docs/core-api.md) and [internal OpenAPI](schemas/internal-api.json). Internal alerts use normalized ResponseForge contracts. [Opt-in native Wazuh intake](docs/wazuh.md) has bounded offline source-contract checks; captured manager/endpoint and live response qualification remain separate.
 
 ## Run the foundation checks
 

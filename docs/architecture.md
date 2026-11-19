@@ -1,6 +1,6 @@
 # Architecture
 
-Status: direction accepted from owner requirements; RF-01 contracts and RF-02 authenticated API/SQLite core implemented; see [RF-02 evidence](rf-02-ledger.md). RF-03 replay/report and simulated response are merged and verified; RF-04A source-derived transport/planning is merged and verified; RF-04 runtime is merged and bounded Docker Desktop transport qualified; RF-05A domain steps are merged and verified; RF-05B native graphs are runtime-qualified on Docker Desktop and merged as `ec5d80e`, with actual merged-revision offline checks passing. RF-06 recorded-source qualification is underway.
+Status: direction accepted from owner requirements; RF-01 contracts and RF-02 authenticated API/SQLite core implemented; see [RF-02 evidence](rf-02-ledger.md). RF-03 replay/report and simulated response are merged and verified; RF-04A source-derived transport/planning is merged and verified; RF-04 runtime is merged and bounded Docker Desktop transport qualified; RF-05A domain steps are merged and verified; RF-05B native graphs are runtime-qualified on Docker Desktop and merged as `ec5d80e`, with actual merged-revision offline checks passing. RF-06B2 is merged as2f5e204 with actual merged-revision checks passing; five narrowed recorded scenarios are qualified. RF-07A native Wazuh intake is under design, with no live endpoint claim.
 
 ```mermaid
 flowchart TD
@@ -56,3 +56,6 @@ The [RF-03 design](rf-03-design.md) binds replay alerts/evidence to source bytes
 
 
 [RF-06B2](rf-06b2-design.md) registers immutable exact-source replay batches and selects the same durable mock adapter through a server-owned qualification/database alias. Full source resolution applies to collection, plans, atomic dispatch and reports; unknown/conflicting scope fails closed. A default-false read-only core mount holds privately prepared pinned bundles. Genuine native Prepare creates plans; authenticated read-only inspection cannot recreate them. The [runtime runbook](recorded-runtime.md) and [owning ledger](rf-06-ledger.md) distinguish source/build identities, first candidate results and final qualification/owner gates. No new live provider or topology authority is implied.
+
+
+[RF-07A](rf-07-design.md) adds bounded authenticated native Wazuh alert intake in the same package and common SQLite case transaction. Trusted manager/agent bindings select canonical endpoints; exact received delivery bytes and original IDs/times remain private and hash-bound. Source credentials cannot call generic intake as Wazuh or acquire approval/dispatch authority. Available delivery provenance and explicit missing endpoint evidence do not imply a live collection/response capability. The [operator notes](wazuh.md) keep source mode, dry-run, raw retention and future deployment/enrollment/live verification separate.
