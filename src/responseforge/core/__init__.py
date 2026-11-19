@@ -694,7 +694,14 @@ class CaseService:
             raise ServiceError(503, "Configured provider is unavailable")
         return adapter
 
-    async def execute(self, proposal_id: str, provider: str, actor: Principal) -> ActionExecution:
+    async def execute(
+        self,
+        proposal_id: str,
+        provider: str,
+        actor: Principal,
+        *,
+        pre_dispatch: Callable[[Transaction], None] | None = None,
+    ) -> ActionExecution:
         incident_id = self._proposal_case(proposal_id)
         try:
             self._principal(actor, {"executor"})
@@ -745,6 +752,8 @@ class CaseService:
                     runtime_mode=self.settings.mode,
                     now=self._now(),
                 )
+                if pre_dispatch is not None:
+                    pre_dispatch(tx)
                 execution = self._reservation(proposal, provider)
                 if not tx.claim_key(
                     "execution_provider_version",

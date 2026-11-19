@@ -48,3 +48,7 @@ Dedup keys are retained at least seven days (currently indefinitely), action tom
 RF-03 adds authenticated `/v1/incidents/{id}/collect` with full registered-source/case/window checks, and `/v1/incidents/{id}/report?format=json|html` with one consistent default-redacted case snapshot. Programmatic evidence configuration requires both an evidence provider and the trusted source snapshot; no live fallback is available. Ordinary server files do not automatically load replay state or providers.
 
 RF-04A optionally configures source-derived Shuffle transport with reviewed workflow bindings. Authenticated analysts can reserve `/shuffle/start` and lookup-only `/shuffle/reconcile`; no default vendor connection is configured. Workflow completion never bypasses response approval or updates case containment. [Runbook and real-runtime gates](shuffle.md) distinguish this adapter contract from qualified deployment.
+
+## Bound playbook steps
+
+RF-05A adds authenticated POST `playbooks/prepare`, `playbooks/gate` and `playbooks/dispatch` beneath an existing case path. [Step contracts and configuration](playbooks.md) require original case/run/workflow/correlation/mode, reviewed server binding and separate scoped technical actors. Workflow callers cannot select targets/providers, submit approvals or receive technical credentials. Existing human decision endpoints and core dispatch revalidation remain authoritative. These routes are disabled without qualified replay and playbook configuration; real native orchestration belongs to RF-05B.
