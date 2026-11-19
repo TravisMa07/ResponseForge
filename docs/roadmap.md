@@ -8,7 +8,7 @@ The [implementation plan](implementation-plan.md) owns detailed work packages. T
 | 1 | Offline authenticated case/replay/policy/report vertical slice | RF-01–03 merged; merged-revision checks pass |
 | 2 | Three real Shuffle workflows with recovery tests | RF-04 transport and RF-05B three native domain workflows qualified locally on Docker Desktop; #18 merged; actual merged-revision checks pass |
 | 3 | Five evidence-backed scenarios with opt-in public data | RF-06A #19 merged and merged checks pass; RF-06B1 #20 merged and merged checks pass; RF-06B2 #21 merged; issue#6 closed; actual merged-revision checks pass; five narrowed recorded scenarios qualified |
-| 4 | Real Wazuh alert and approved safe VM action | RF-07A native intake implemented with191 new offline tests; deployment/enrollment and RF-08 live proof remain open |
+| 4 | Real Wazuh alert and approved safe VM action | RF-07A #22 green; RF-07B sender/profile/Windows bundle underway; manager/endpoint verification remains open |
 | 5 | Fresh-clone reproducibility, docs, and [analyst effort evidence](implementation-plan.md#measure-analyst-time-saved) | Planned: RF-09 |
 | 6 | Optional read-only AI investigation | Deferred until phases 1–5 qualify |
 

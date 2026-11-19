@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0",
+  "source_revision": "76ddb88b9c8b618a254a287f2684f93d3c5ac2f4",
+  "images": {
+    "manager": {
+      "repository": "wazuh/wazuh-manager",
+      "index_digest": "sha256:eabfa7ee4e63acb51c2130fa0583e30f843d030b091cf45a4fbd93d78fa21517",
+      "platforms": {
+        "amd64": "sha256:beda27e1e88bfe5fe5e882eea3b006dfc4a77e19f31d5a0292e5126f23900e75",
+        "arm64": "sha256:471628c2e47cf56d227c170516e7ba89e5aee55bd9fef831384146af0c3ab2e4"
+      }
+    },
+    "indexer": {
+      "repository": "wazuh/wazuh-indexer",
+      "index_digest": "sha256:1d2aeadb9de88c6d17ce12030606425deca5a210cdf5c87008843da38eb629ea",
+      "platforms": {
+        "amd64": "sha256:1780a13d5950deda05860fdb2e2d6cc466a15b341a88de01452d99932e05f610",
+        "arm64": "sha256:407d511477f65cf4d57cc9a0928232c52096baa254dd24032dde3bb92d4149ba"
+      }
+    },
+    "dashboard": {
+      "repository": "wazuh/wazuh-dashboard",
+      "index_digest": "sha256:4d48be7210a291c00a2bd148cbd8bd61a25876e947b81790fd03f7d2aabda95a",
+      "platforms": {
+        "amd64": "sha256:2987776f76cbf3d47452a51b0e59792453686e5d37bbff7768ec033987b073a0",
+        "arm64": "sha256:83560991be21e1cc50f396bd2c8281f903b9a6a33918632057294b2300cfea65"
+      }
+    }
+  },
+  "runtime_qualified": false
+}

@@ -208,3 +208,8 @@ Owner-merged #21 head9311159 is2f5e204243469fa0fe67ac596cde3fd66d05f1bd; issue#6
 ## RF-07A native intake implementation
 
 Freeze15e28a5 follows verified merge2f5e204 and independent source/expectation review. Mapper owns only integrations/wazuh/mapping.py; independent expectations/tests own tests/rf07a; primary owns models/shared transactions/config/API/reports/schemas/CI/status.191 new tests expose five meaningful missing/incorrect behaviors and pass after corrections; working full qualification passes2,562 tests/all checks. [Owning ledger](rf-07-ledger.md) distinguishes published-example compatibility from captured/native live proof, exact clean qualification and independent final review. Deployment/enrollment and RF-08 live verification stay open.
+
+
+## RF-07B preparation
+
+[Design](rf-07b-design.md)/[expectations](expectations/rf-07b.md) begin at verified A head75e10f7 because remote #22 remains open despite the owner's merge report. Actual dependent-base2,562 checks pass; no merged-revision result is inferred. Primary owns shared models/security/sender/profile/CLI/CI/status; source/expectations and Windows writer lanes have disjoint paths. Pinned dashboard API TLS bypass is an explicit runtime blocker, not silently papered over with environment settings. B implements safe sender recovery, a gated profile and integrity-first private Windows package without manager startup or endpoint authority.
