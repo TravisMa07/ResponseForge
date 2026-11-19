@@ -73,9 +73,11 @@ def _callback_status(result: dict[str, Any]) -> Literal["SUCCESS", "FAILURE"] | 
     if len(receipts) != 1:
         return None
     receipt = receipts[0]
+    if receipt["action"].get("app_id") not in (None, "", node.get("app_id")):
+        return None
     if receipt.get("execution_id") != result.get("execution_id") or any(
         receipt["action"].get(key) != node.get(key)
-        for key in ("id", "app_id", "app_name", "app_version", "name")
+        for key in ("id", "app_name", "app_version", "name")
     ):
         return None
     status = receipt.get("status")

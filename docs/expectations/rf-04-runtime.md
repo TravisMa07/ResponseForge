@@ -61,3 +61,11 @@ including when vendor status is FINISHED. FAILURE/ABORTED with nativeSUCCESS
 remains conflicting/uncertain. Keep vendor_status unchanged; never relabel vendor
 FINISHED as FAILURE to fit the expectation. Update positive synthetic fixtures to
 include explicit native results, retaining negative missing-result tests.
+
+Pinned sharedf81e48ec7 source reconstructs ActionResult.Action with only
+appname/version/label/name/id/parameters/executionvariable, omitting app_id.
+Actual result retrieval therefore strips even a correctly submitted app_id.
+Before changing receipt projection, allow missing/empty native app_id only when
+the unique action ID and app name/version/function exactly match the bound graph;
+a nonempty conflicting ID still rejects. Graph app_id remains fingerprint-bound.
+Source shared.goSHA256184edc35032d0629011fdcf20f69644d85394e96b57102a43d951c191cc55f63.

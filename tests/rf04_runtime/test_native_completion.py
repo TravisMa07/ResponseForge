@@ -287,3 +287,16 @@ def test_invalid_or_legacy_terminal_record_cannot_bypass_native_proof(tmp_path, 
     with pytest.raises(ServiceError, match="Stored workflow delivery is invalid"):
         asyncio.run(s.v.coordinator.reconcile(s.v.incident_id, argument().run_id, s.v.actor))
     assert stored_run(s)["status"] == "running" and s.wire["starts"] == 1
+
+
+def test_vendor_sanitized_empty_app_id_retains_bound_node_identity():
+    from responseforge.integrations.shuffle.client import _callback_status
+
+    graph = workflow()
+    graph["actions"][0]["app_id"] = WF
+    receipt = native_result()
+    receipt[0]["action"]["app_id"] = ""
+    assert (
+        _callback_status({"workflow": graph, "execution_id": argument().run_id, "results": receipt})
+        == "SUCCESS"
+    )
