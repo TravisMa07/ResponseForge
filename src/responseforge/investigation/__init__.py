@@ -16,10 +16,9 @@ from responseforge.contracts import (
     Evidence,
     Incident,
     Mode,
-    Provenance,
     UtcDateTime,
 )
-from responseforge.replay import ReplayError, logical_receipt, make_alerts
+from responseforge.replay import ReplayError, logical_receipt, make_alerts, replay_provenance
 from responseforge.replay_contracts import RecordedEvent, ReplayBatch, digest
 
 T = TypeVar("T", bound=Contract)
@@ -82,12 +81,7 @@ class ReplayEvidenceProvider:
             observed_at=event.observed_at,
             collected_at=now,
             availability="available",
-            provenance=Provenance(
-                source="synthetic-fixture",
-                source_ref="fixture:" + batch.source_id,
-                sha256=batch.sha256,
-                original_event_ids=(event.event_id,),
-            ),
+            provenance=replay_provenance(batch, (event.event_id,)),
             unavailable_reason=None,
         )
 

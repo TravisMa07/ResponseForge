@@ -2,11 +2,13 @@
 
 import hashlib
 import json
+import re
 from typing import Annotated, Literal, Self
 
 from pydantic import Field, StrictInt, StringConstraints, model_validator
 
 from responseforge.contracts import Contract, EndpointRef, Id, Sha256, UtcDateTime
+from responseforge.dataset_contracts import validate_source_path
 
 FieldName = Annotated[str, StringConstraints(strict=True, min_length=1, max_length=128)]
 FieldValue = Annotated[str, StringConstraints(strict=True, max_length=4096)]
@@ -26,9 +28,27 @@ class QuarantineItem(Contract):
     code: Literal["invalid_json", "invalid_schema", "duplicate_conflict"]
 
 
+class ReplayOrigin(Contract):
+    source: Literal["splunk-attack-data"] = "splunk-attack-data"
+    source_ref: Id
+    transformation: Literal["sysmon-event1-v1"] = "sysmon-event1-v1"
+
+    @model_validator(mode="after")
+    def pinned_source(self) -> Self:
+        match = re.fullmatch(
+            r"https://github\.com/splunk/attack_data/blob/[0-9a-f]{40}/(datasets/.+)",
+            self.source_ref,
+        )
+        if match is None:
+            raise ValueError("Recorded source must be a pinned dataset URL")
+        validate_source_path(match[1])
+        return self
+
+
 class ReplayBatch(Contract):
     source_id: Id
     sha256: Sha256
+    origin: ReplayOrigin | None = None
     events: tuple[RecordedEvent, ...]
     quarantine: tuple[QuarantineItem, ...]
     duplicates: Annotated[StrictInt, Field(ge=0)]

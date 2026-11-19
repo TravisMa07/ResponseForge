@@ -148,6 +148,16 @@ def _signal(event: RecordedEvent) -> bool:
     )
 
 
+def replay_provenance(batch: ReplayBatch, event_ids: tuple[str, ...]) -> Provenance:
+    """Bind original source bytes and event identities without relabeling recordings."""
+    return Provenance(
+        source="synthetic-fixture" if batch.origin is None else batch.origin.source,
+        source_ref="fixture:" + batch.source_id if batch.origin is None else batch.origin.source_ref,
+        sha256=batch.sha256,
+        original_event_ids=event_ids,
+    )
+
+
 def make_alerts(batch: ReplayBatch, *, ingested_at: datetime) -> tuple[Alert, ...]:
     snapshot = _detached(batch)
     try:
@@ -173,18 +183,15 @@ def make_alerts(batch: ReplayBatch, *, ingested_at: datetime) -> tuple[Alert, ..
             Alert(
                 alert_id="replay-" + digest(identity),
                 mode="replay",
-                source="replay-fixture",
+                source="replay-fixture" if snapshot.origin is None else snapshot.origin.source,
                 scenario_id=scenario,
                 endpoint=anchor.endpoint,
                 event_time=anchor.observed_at,
                 ingested_at=receipt,
                 rule_id="RF-REPLAY-ENCODED-PS" if suspicious else "RF-REPLAY-OBSERVATION",
                 severity="high" if suspicious else "low",
-                provenance=Provenance(
-                    source="synthetic-fixture",
-                    source_ref="fixture:" + snapshot.source_id,
-                    sha256=snapshot.sha256,
-                    original_event_ids=tuple(event.event_id for event in ordered),
+                provenance=replay_provenance(
+                    snapshot, tuple(event.event_id for event in ordered)
                 ),
             )
         )

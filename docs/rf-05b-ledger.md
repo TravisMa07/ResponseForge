@@ -1,6 +1,6 @@
 # RF-05B implementation ledger
 
-Issue [#5](https://github.com/TravisMa07/ResponseForge/issues/5), [design](rf-05b-design.md), [independent expectations](expectations/rf-05b.md). [PR #18](https://github.com/TravisMa07/ResponseForge/pull/18) targets main after RF-05A merged. Three-domain runtime qualified on Docker Desktop ARM64; owner review/merge pending.
+Issue [#5](https://github.com/TravisMa07/ResponseForge/issues/5), [design](rf-05b-design.md), [independent expectations](expectations/rf-05b.md). [PR #18](https://github.com/TravisMa07/ResponseForge/pull/18) targets main after RF-05A merged. Three-domain runtime qualified on Docker Desktop ARM64; merged as `ec5d80e`, actual merged-revision offline checks pass.
 
 RF05A#17 owner-authorized merge from1e5cf3d8912562e25cfa3ab44475f24aeb54114c produced272af652e5dc29623e76aa23ee38aa3f5facdb5a. Both hosted jobs passed, no reviews/unresolved threads. Actual merge `make qualify` passes1033 tests/all checks. Issue#5 remains open because RF05A was partial. No new runtime claim transferred from RF04's older images.
 
@@ -46,3 +46,8 @@ Independent final review ofc33af04/sourceb8f6e3dd21c12a1b5712006745ff6d4b77c1052
 Final `make qualify` passes1458 tests/all checks (425 RF05B,1033 prior), locked offline build and whitespace hygiene pass. Both hosted qualification jobs pass on implementationc33af04; publication-head checks are separate. The pilot is stopped, owned services absent and both loopback listeners closed; volumes/images and diagnostic evidence remain retained. No current private case/run/workflow/proposal/correlation/engine IDs, configured secret tokens or execution authorization appear in the public projection. A broad scan initially matched the preexisting public default operator username in source, which is not a generated secret; classified separately rather than deleting legitimate code.
 
 Issue#5 was observed closed immediately after partial#17 merge despite its Refs reference; reopened before qualification to preserve the full-package gate. RF05B passes its acceptance matrix and may use Closes#5, but the issue remains open until an owner-authorized merge and post-merge verification. RF-06 recorded corpus, VM/live/release qualification, selected project license and measured analyst-effort comparison remain separate. No RF05B merge/release authorization inferred.
+
+
+## RF-05B actual merged-revision verification
+
+On 2026-11-19, GitHub reports [PR #18](https://github.com/TravisMa07/ResponseForge/pull/18) merged at `ec5d80ef1f22b3cc8b8e668ce4d4f5e3603adbbe`, head `3f16d4d39ccf5bf767e9f560e637b734e2bf70db`; issue #5 is CLOSED and issue #6 is OPEN. After `git fetch origin main`, a clean bounded RF-06 branch starts at that exact merge. `make qualify` on the actual unchanged merge passes 1,458 tests, Ruff, strict mypy (34 modules), contract/example/OpenAPI/fixture/plan checks and 47-document integrity checks. Environment: macOS ARM64, Python 3.12.12, SQLite 3.50.4, uv 0.13.6. The existing Starlette/httpx deprecation remains visible. This is new offline evidence for the merge; the original source-bound RF-05B runtime evidence is unchanged, with no new vendor or endpoint execution claimed. Existing private state and stopped pilot are preserved.

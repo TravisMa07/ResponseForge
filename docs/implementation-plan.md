@@ -64,3 +64,8 @@ The [RF-04 runtime successor](rf-04-runtime-design.md) starts at owner-authorize
 ## RF-05 staged delivery
 
 [RF-05 design](rf-05-design.md) splits shared domain authority from vendor execution. RF-05A implements pure recorded-evidence recommendations and bound prepare/gate/dispatch APIs, with independent [expectations](expectations/rf-05a.md) and [ledger](rf-05a-ledger.md); it uses Refs#5. Separate configured technical principals reuse the existing core while workflow credentials never obtain human approval authority. RF-05B owns actual multi-node Shuffle graphs, native task adapter/worker allowlist review and real three-workflow approval/failure/restart qualification. Passing RF-05A offline tests does not close the real-SOAR gate. The [step runbook](playbooks.md) documents configuration and limitations.
+
+
+## RF-06 staged delivery
+
+[Design](rf-06-design.md) separates RF-06A selective pinned acquisition, rights/provenance and strict Event1 XML projection from RF-06B source-specific five-scenario mappings and genuine native Shuffle qualification. Source inspection showed the original PowerShell candidate cannot satisfy the existing rule; this boundary prevents source parsing from masquerading as a successful scenario. The [ledger](rf-06-ledger.md) retains exact source findings, red/green and independent review. Partial PRs use Refs#6; offline CI never downloads telemetry. RF-06B depends on the reviewed A interfaces and needs its own expectation freeze, source-bound runtime build and actual branch/decision/audit/effect/metric evidence.
