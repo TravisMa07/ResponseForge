@@ -23,6 +23,7 @@ from tests.rf04.helpers import (
     WF,
     config,
     fingerprint,
+    native_result,
     workflow,
 )
 from tests.rf04.test_client import wire_response
@@ -168,6 +169,7 @@ def test_ambiguous_launch_reconciles_original_uuid_without_second_start(
                 "execution_id": RUN,
                 "workflow_id": WF,
                 "workflow": workflow(),
+                "results": native_result(),
                 "execution_argument": encoded[0],
                 "status": "FINISHED",
                 "authorization": EXECUTION_SECRET,
@@ -310,6 +312,9 @@ def test_stale_concurrent_failed_lookup_cannot_overwrite_finished_run(tmp_path: 
                 "workflow": workflow(),
                 "execution_argument": encoded[0],
                 "status": status,
+                "results": native_result(
+                    "FAILURE" if status in {"FAILURE", "ABORTED"} else "SUCCESS"
+                ),
             },
         )
 
@@ -382,6 +387,7 @@ asyncio.run(v.coordinator.start(v.incident_id,WF,RUN,v.actor))
                 "execution_id": RUN,
                 "workflow_id": WF,
                 "workflow": workflow(),
+                "results": native_result(),
                 "execution_argument": marker.read_text(),
                 "status": "FINISHED",
             },

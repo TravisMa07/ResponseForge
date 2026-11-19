@@ -191,7 +191,12 @@ class ShuffleCoordinator:
             return self._save(record, state, None, actor)
 
     def _save(
-        self, original: DeliveryRecord, state: str, vendor_status: str | None, actor: Principal
+        self,
+        original: DeliveryRecord,
+        state: str,
+        vendor_status: str | None,
+        actor: Principal,
+        callback_status: str | None = None,
     ) -> DeliveryRecord:
         with self.service.store.transaction() as tx:
             argument = self._argument(
@@ -214,7 +219,12 @@ class ShuffleCoordinator:
                 return current
             result = DeliveryRecord.model_validate(
                 current.model_dump(mode="json")
-                | {"state": state, "vendor_status": vendor_status, "updated_at": now}
+                | {
+                    "state": state,
+                    "vendor_status": vendor_status,
+                    "callback_status": callback_status,
+                    "updated_at": now,
+                }
             )
             run_data = tx.get("workflows", argument.run_id)
             if run_data is None:
@@ -307,10 +317,15 @@ class ShuffleCoordinator:
                 state = (
                     "finished"
                     if status in {"FINISHED", "SUCCESS"}
+                    and observation.callback_status == "SUCCESS"
                     else "failed"
-                    if status in {"FAILURE", "ABORTED"}
+                    if status in {"FINISHED", "SUCCESS", "FAILURE", "ABORTED"}
+                    and observation.callback_status == "FAILURE"
+                    else "uncertain"
+                    if status in {"FINISHED", "SUCCESS", "FAILURE", "ABORTED"}
                     else "accepted"
                 )
+                callback_status = observation.callback_status
             except ShuffleError:
-                state, status = "uncertain", None
-            return self._save(original, state, status, actor)
+                state, status, callback_status = "uncertain", None, None
+            return self._save(original, state, status, actor, callback_status)

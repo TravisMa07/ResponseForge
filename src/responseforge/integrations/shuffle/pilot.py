@@ -102,6 +102,7 @@ async def execute_app(
         ):
             raise ValueError
         action_id = canonical_uuid(action["id"])
+        app_id = canonical_uuid(action["app_id"])
         run_id = canonical_uuid(environ["EXECUTIONID"])
         authorization = environ["AUTHORIZATION"]
         if not 16 <= len(authorization) <= 4096 or any(
@@ -205,6 +206,7 @@ async def execute_app(
                 {
                     "action": {
                         "id": action_id,
+                        "app_id": app_id,
                         "app_name": "responseforge_callback",
                         "app_version": "1.0.0",
                         "name": "callback",

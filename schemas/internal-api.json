@@ -658,6 +658,21 @@
           "argument": {
             "$ref": "#/components/schemas/ShuffleArgument"
           },
+          "callback_status": {
+            "anyOf": [
+              {
+                "enum": [
+                  "SUCCESS",
+                  "FAILURE"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Callback Status"
+          },
           "created_at": {
             "format": "date-time",
             "title": "Created At",

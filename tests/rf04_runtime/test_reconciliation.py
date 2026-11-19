@@ -13,13 +13,19 @@ from responseforge.core import ServiceError
 from responseforge.integrations.shuffle.callback import CallbackConfig, CallbackTransport
 from responseforge.runtime import WorkflowCallback
 from tests.rf02.helpers import TOKENS
-from tests.rf04.helpers import RUN, WF, workflow
+from tests.rf04.helpers import RUN, WF, native_result, workflow
 from tests.rf04.test_client import wire_response
 from tests.rf04.test_coordinator import case_world, reopened
 
 
 def scenario(tmp_path, *, vendor_status="FINISHED"):
-    wire = {"vendor_status": vendor_status, "argument": None, "starts": 0, "lookups": 0}
+    wire = {
+        "vendor_status": vendor_status,
+        "argument": None,
+        "starts": 0,
+        "lookups": 0,
+        "native_status": "FAILURE" if vendor_status in {"FAILURE", "ABORTED"} else "SUCCESS",
+    }
 
     def handler(request):
         if request.method == "GET":
@@ -37,6 +43,7 @@ def scenario(tmp_path, *, vendor_status="FINISHED"):
                 "workflow": workflow(),
                 "execution_argument": wire["argument"],
                 "status": wire["vendor_status"],
+                "results": native_result(wire["native_status"]),
             },
         )
 

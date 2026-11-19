@@ -7,7 +7,7 @@ from fastapi.testclient import TestClient
 
 from responseforge.api import create_app
 from tests.rf02.helpers import TOKENS
-from tests.rf04.helpers import EXECUTION_SECRET, KEY, RUN, WF, workflow
+from tests.rf04.helpers import EXECUTION_SECRET, KEY, RUN, WF, native_result, workflow
 from tests.rf04.test_client import wire_response
 from tests.rf04.test_coordinator import case_world
 
@@ -35,6 +35,7 @@ def test_api_authenticated_launch_reconcile_restart_and_report_excludes_private_
                 "execution_id": RUN,
                 "workflow_id": WF,
                 "workflow": workflow(),
+                "results": native_result(),
                 "execution_argument": arguments[0],
                 "status": "FINISHED",
                 "authorization": EXECUTION_SECRET,

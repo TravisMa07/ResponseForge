@@ -281,7 +281,9 @@ def _qualified_results(results: dict[str, Any], workflows: dict[str, Any]) -> bo
         ):
             return False
         if item.get("vendor_status") not in (
-            {"FAILURE", "ABORTED"} if name in {"failure", "timeout"} else {"FINISHED", "SUCCESS"}
+            {"FINISHED", "SUCCESS", "FAILURE", "ABORTED"}
+            if name in {"failure", "timeout"}
+            else {"FINISHED", "SUCCESS"}
         ):
             return False
         if name == "timeout" and item.get("post_commit_callback_delay_proven") is not True:

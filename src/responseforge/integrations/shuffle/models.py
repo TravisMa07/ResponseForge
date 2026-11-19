@@ -121,6 +121,7 @@ class VendorExecution(Contract):
     execution_id: UUIDString
     argument: ShuffleArgument
     workflow_sha256: Sha256 | None = None
+    callback_status: Literal["SUCCESS", "FAILURE"] | None = None
     vendor_status: Literal["EXECUTING", "WAITING", "FINISHED", "FAILURE", "ABORTED", "SUCCESS"]
 
     @model_validator(mode="after")
@@ -142,6 +143,7 @@ class DeliveryRecord(Contract):
     workflow_version: Id
     workflow_sha256: Sha256
     origin: Id
+    callback_status: Literal["SUCCESS", "FAILURE"] | None = None
     state: Literal["reserved", "accepted", "uncertain", "rejected", "finished", "failed"]
     created_at: UtcDateTime
     updated_at: UtcDateTime
@@ -153,10 +155,19 @@ class DeliveryRecord(Contract):
     def chronology(self) -> Self:
         if self.updated_at < self.created_at:
             raise ValueError("Delivery update precedes reservation")
+        if self.state == "finished" and self.callback_status != "SUCCESS":
+            raise ValueError("Finished delivery requires native callback success")
+        if self.state == "failed" and self.callback_status != "FAILURE":
+            raise ValueError("Failed delivery requires native callback failure")
         if self.state == "finished" and self.vendor_status not in {"FINISHED", "SUCCESS"}:
             raise ValueError("Finished delivery requires a finished workflow status")
-        if self.state == "failed" and self.vendor_status not in {"FAILURE", "ABORTED"}:
-            raise ValueError("Failed delivery requires a failed workflow status")
+        if self.state == "failed" and self.vendor_status not in {
+            "FINISHED",
+            "SUCCESS",
+            "FAILURE",
+            "ABORTED",
+        }:
+            raise ValueError("Failed delivery requires a terminal workflow status")
         return self
 
 

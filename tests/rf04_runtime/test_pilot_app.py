@@ -19,6 +19,7 @@ BACKEND = "http://shuffle-backend:5001"
 def action(**changes):
     return {
         "id": ACTION,
+        "app_id": WF,
         "app_name": "responseforge_callback",
         "app_version": "1.0.0",
         "name": "callback",
@@ -104,6 +105,7 @@ def test_native_app_fetches_original_execution_and_submits_only_safe_result(tmp_
     payload = json.loads(callback_request.content)
     assert payload["run_id"] == RUN and payload["workflow_id"] == WF
     submitted = json.loads(calls[2].content)
+    assert submitted["action"]["app_id"] == WF
     assert submitted["execution_id"] == RUN
     assert submitted["authorization"] == EXECUTION_SECRET
     safe_result = submitted["result"]
