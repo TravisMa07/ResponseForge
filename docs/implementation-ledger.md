@@ -218,3 +218,8 @@ Freeze15e28a5 follows verified merge2f5e204 and independent source/expectation r
 ## RF-07B implementation
 
 Freeze604ef50 precedes three-component red/green. Windows writer owns windows.py/Install.ps1 only; independent tests own tests/rf07b; primary owns all shared input/security/outbox/profile/CLI/build/CI/status. Independent actual review exposes private-ancestor writes, native hard-link ACL scope and publication directory-sync gaps; corrections preserve diagnostics. Working qualification passes2,739 tests/all checks. [Ledger](rf-07-ledger.md) distinguishes actual loopback HTTPS/artifact acquisition/portable script controls from still-unverified manager/TLS-patch/Windows/endpoint proof. A #22 remains open as last verified; B remains dependent with no fabricated merged result.
+
+
+## RF-07B clean qualification
+
+Clean03f5cbad146a5ccf1abec4f1ad21077fc6eed358 passes2,739 tests/all checks, offline lock/build and295sdist/60wheel archive privacy. Actual original-synthetic verified loopback HTTPS, retained-byte ACK-loss recovery/wrong-CA refusal, actual MSI hash checks and portable script controls have separate bounded evidence in the [ledger](rf-07-ledger.md)/[aggregate](evidence/rf-07b-preparation.json). Independent source/package/data/control review passes. Parent #22 remains open as verified; no merged-revision pass, manager runtime, native Windows or live effect is inferred. Owner acceptance and B/parent merge remain separate gates.

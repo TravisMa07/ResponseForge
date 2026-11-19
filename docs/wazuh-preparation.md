@@ -7,8 +7,9 @@
 Use a private0600 JSON DeploymentTarget matching the [schema](../schemas/wazuh-deployment-target.json). For example, architecture=arm64,kind=docker-desktop,manager_id=lab-manager selects advertised ARM64 platform digests; it does not qualify that deployment. Render to a NEW file under a private directory:
 
 ```bash
+mkdir -m 700 .local/wazuh-plans
 uv run --locked --offline python scripts/wazuh_prepare.py plan \
-  --target .local/wazuh-target.json --output .local/wazuh-plan.json
+  --target .local/wazuh-target.json --output .local/wazuh-plans/plan.json
 ```
 
 The output contains a Compose object and explicit blockers/requirements. All three services are behind rf07-runtime-unqualified; ready and runtime_qualified are always false. Management is loopback-only55001/9201/9443, agent ports default loopback1514/1515, data volumes/network are isolated from Shuffle and no Docker socket/host network/privileged/sysctl is supplied. Nonloopback enrollment publication requires a separately authorized matching private lab target descriptor. A descriptor is not permission to start anything.
