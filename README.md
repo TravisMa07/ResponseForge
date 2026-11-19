@@ -42,7 +42,7 @@ uv run --locked --offline python -m responseforge --init-config .local/config.js
 uv run --locked --offline python -m responseforge --config .local/config.json
 ```
 
-This creates separate private credentials and binds the API to `127.0.0.1:8000`. No provider, replay scenario or endpoint action starts automatically. See the [API and recovery runbook](docs/core-api.md) and [internal OpenAPI](schemas/internal-api.json). Internal alerts are normalized ResponseForge contracts; actual Wazuh/Shuffle payload mappings still require their own qualification.
+This creates separate private credentials and binds the API to `127.0.0.1:8000`. No provider, replay scenario or endpoint action starts automatically. See the [API and recovery runbook](docs/core-api.md) and [internal OpenAPI](schemas/internal-api.json). Internal alerts use normalized ResponseForge contracts. [Opt-in native Wazuh intake](docs/wazuh.md) has bounded offline source-contract checks; captured manager/endpoint and live response qualification remain separate.
 
 ## Run the foundation checks
 

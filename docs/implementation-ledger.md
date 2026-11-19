@@ -203,3 +203,8 @@ Clean candidate `c99da291f70ece08883d96ec7cb2aae206a4278c` passes2,371offline te
 ## RF-06B2 merged / RF-07A start
 
 Owner-merged #21 head9311159 is2f5e204243469fa0fe67ac596cde3fd66d05f1bd; issue#6 closed and actual merged make qualify passes2,371 tests/all checks. [RF-07 design](rf-07-design.md)/[ledger](rf-07-ledger.md) split native authenticated intake/private evidence from later upstream deployment/enrollment. Primary owns shared integration; independent source/expectation and later puremapper lanes receive exactbases/disjointpaths. No Wazuh startup or endpoint authority is inferred.
+
+
+## RF-07A native intake implementation
+
+Freeze15e28a5 follows verified merge2f5e204 and independent source/expectation review. Mapper owns only integrations/wazuh/mapping.py; independent expectations/tests own tests/rf07a; primary owns models/shared transactions/config/API/reports/schemas/CI/status.191 new tests expose five meaningful missing/incorrect behaviors and pass after corrections; working full qualification passes2,562 tests/all checks. [Owning ledger](rf-07-ledger.md) distinguishes published-example compatibility from captured/native live proof, exact clean qualification and independent final review. Deployment/enrollment and RF-08 live verification stay open.

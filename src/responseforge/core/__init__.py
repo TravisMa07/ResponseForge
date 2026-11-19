@@ -173,65 +173,76 @@ class CaseService:
             self._denial(incident_id() if callable(incident_id) else incident_id, actor)
             raise ServiceError(422, "Invalid input contract") from exc
 
+    def _authorize_intake(self, alert: Alert, actor: Principal) -> Alert:
+        self._principal(actor, {"source"})
+        alert = _validated(Alert, alert)
+        self._endpoint(alert.endpoint, actor)
+        if alert.source not in actor.sources or alert.mode != self.settings.mode:
+            raise ServiceError(403, "Alert source or mode is not authorized")
+        return alert
+
     def intake(self, alert: Alert, actor: Principal) -> IntakeResult:
         with self._operation(None, actor):
-            self._principal(actor, {"source"})
-            alert = _validated(Alert, alert)
-            self._endpoint(alert.endpoint, actor)
-            if alert.source not in actor.sources or alert.mode != self.settings.mode:
-                raise ServiceError(403, "Alert source or mode is not authorized")
-            key = json.dumps(alert.dedup_identity, separators=(",", ":"))
+            alert = self._authorize_intake(alert, actor)
+            if alert.source == "wazuh":
+                raise ServiceError(403, "Native source requires its authenticated integration")
             with self.store.transaction() as tx:
-                existing = tx.get_key("intake", key)
-                if existing is not None:
-                    original = _read(Alert, tx.get("alerts", existing))
-                    if original != alert:
-                        raise ServiceError(409, "Alert identity has conflicting content")
-                    meta = tx.get("case_meta", existing)
-                    if meta is None:
-                        raise ServiceError(409, "Case metadata is missing")
-                    return IntakeResult(
-                        incident_id=existing, duplicate=True, correlation_id=meta["correlation_id"]
-                    )
-                incident_id, correlation = str(uuid4()), str(uuid4())
-                now = self._now()
-                incident = Incident(
-                    incident_id=incident_id,
-                    alert_id=alert.alert_id,
-                    mode=alert.mode,
-                    scenario_id=alert.scenario_id,
-                    endpoint=alert.endpoint,
-                    priority=alert.severity,
-                    assessment="Awaiting triage",
-                    created_at=now,
-                )
-                meta = dict(
-                    incident_id=incident_id,
-                    alert_id=alert.alert_id,
-                    correlation_id=correlation,
-                    scenario_id=alert.scenario_id,
-                    mode=alert.mode.value,
-                )
-                tx.insert("alerts", incident_id, _dump(alert))
-                tx.insert("incidents", incident_id, _dump(incident))
-                tx.insert("case_meta", incident_id, meta)
-                if not tx.claim_key("intake", key, incident_id):
-                    raise ServiceError(409, "Concurrent alert identity conflict")
-                self._audit(
-                    tx, incident_id, actor, "alert_accepted", "Alert accepted into durable case"
-                )
-                metric = MetricEvent(
-                    event_id=str(uuid4()),
-                    kind="alert_accepted",
-                    occurred_at=now,
-                    revision=self.settings.revision,
-                    environment=self.settings.environment,
-                    **meta,
-                )
-                tx.insert("metrics", metric.event_id, _dump(metric))
-                return IntakeResult(
-                    incident_id=incident_id, duplicate=False, correlation_id=correlation
-                )
+                return self._intake_tx(tx, alert, actor)
+
+    def _intake_tx(self, tx: Transaction, alert: Alert, actor: Principal) -> IntakeResult:
+        alert = self._authorize_intake(alert, actor)
+        key = json.dumps(alert.dedup_identity, separators=(",", ":"))
+        existing = tx.get_key("intake", key)
+        if existing is not None:
+            original = _read(Alert, tx.get("alerts", existing))
+            if original != alert:
+                raise ServiceError(409, "Alert identity has conflicting content")
+            meta = tx.get("case_meta", existing)
+            if meta is None:
+                raise ServiceError(409, "Case metadata is missing")
+            return IntakeResult(
+                incident_id=existing, duplicate=True, correlation_id=meta["correlation_id"]
+            )
+        incident_id, correlation = str(uuid4()), str(uuid4())
+        now = self._now()
+        incident = Incident(
+            incident_id=incident_id,
+            alert_id=alert.alert_id,
+            mode=alert.mode,
+            scenario_id=alert.scenario_id,
+            endpoint=alert.endpoint,
+            priority=alert.severity,
+            assessment="Awaiting triage",
+            created_at=now,
+        )
+        meta = dict(
+            incident_id=incident_id,
+            alert_id=alert.alert_id,
+            correlation_id=correlation,
+            scenario_id=alert.scenario_id,
+            mode=alert.mode.value,
+        )
+        tx.insert("alerts", incident_id, _dump(alert))
+        tx.insert("incidents", incident_id, _dump(incident))
+        tx.insert("case_meta", incident_id, meta)
+        if not tx.claim_key("intake", key, incident_id):
+            raise ServiceError(409, "Concurrent alert identity conflict")
+        self._audit(
+            tx, incident_id, actor, "alert_accepted", "Alert accepted into durable case"
+        )
+        metric = MetricEvent(
+            event_id=str(uuid4()),
+            kind="alert_accepted",
+            occurred_at=now,
+            revision=self.settings.revision,
+            environment=self.settings.environment,
+            **meta,
+        )
+        tx.insert("metrics", metric.event_id, _dump(metric))
+        return IntakeResult(
+            incident_id=incident_id, duplicate=False, correlation_id=correlation
+        )
+
 
     def get_incident(self, incident_id: str, actor: Principal) -> Incident:
         with self._operation(incident_id, actor):

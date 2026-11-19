@@ -96,6 +96,9 @@ def _redact(value: Any, secrets: tuple[str, ...], key: str = "") -> Any:
 def _source_scope(service: CaseService, alert: Alert) -> tuple[str, str]:
     """Expose fixed scope labels only when the registered source matches this case."""
     try:
+        if alert.mode == "live" and alert.source == "wazuh":
+            from responseforge.integrations.wazuh.service import source_scope
+            return source_scope(service, alert)
         if alert.mode != "replay":
             return "unavailable", "unavailable"
         batch = service.settings.source_for_alert(alert)
@@ -152,6 +155,11 @@ def build_report(
         (len(e.readiness.known_gaps) for e in snapshot.metrics if e.readiness is not None),
         default=0,
     )
+    if not replay and snapshot.alert.source == "wazuh":
+        value["known_gap_count"] = max(
+            value["known_gap_count"],
+            sum(item.availability == "unavailable" for item in snapshot.evidence),
+        )
     redacted: dict[str, Any] = _redact(value, secrets)
     redacted["redaction_notice"] = (
         "Default redaction: source payloads, commands, credentials, free text, endpoint identity, "

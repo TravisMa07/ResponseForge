@@ -13,6 +13,7 @@ from pydantic import Field, SecretStr, ValidationError
 
 from responseforge.contracts import ActionType, Contract, EndpointRef, Id, Mode, Sha256
 from responseforge.integrations.shuffle.models import ShuffleConfig, ShuffleError, WorkflowBinding
+from responseforge.integrations.wazuh.models import WazuhConfig
 from responseforge.playbooks.models import PlaybookKind
 from responseforge.providers import EvidenceProvider, ResponseProvider
 from responseforge.recorded_contracts import RecordedConfig, recorded_provider_name
@@ -60,6 +61,7 @@ class FileConfig(Contract):
     shuffle: ShuffleFileConfig | None = None
     playbooks: ReplayPlaybookFileConfig | None = None
     recorded: RecordedConfig | None = None
+    wazuh: WazuhConfig | None = None
 
 
 def load_settings(path: Path) -> Settings:
@@ -176,6 +178,7 @@ def load_settings(path: Path) -> Settings:
         evidence_provider = ReplayRegistry((batch,) + recorded_batches)
     return Settings(
         database_path=config.database_path,
+        wazuh=config.wazuh,
         mode=config.mode,
         endpoints=config.endpoints,
         credentials=principals,

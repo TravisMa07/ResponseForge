@@ -39,3 +39,8 @@ Report source labels complete_received_alert/wazuh-alert-json-v1 require current
 ## Acceptance and remaining gates
 
 Independent negatives cover credentials/roles/mode/source spoofing, agent/name/namespace ambiguity, parser bounds/duplicate keys/nonfinite/surrogates, field types/time/severity boundaries, missing facts, conflicting source bytes, proof corruption, cross-agent identity, atomic failure/retry/concurrent duplicate/restart, safe report labels/redaction and live execute rejection. Meaningful intended red against importable unavailable scaffolds precedes implementation; default tests use original synthetic payloads without downloads. Separate published upstream example compatibility may be checked locally, explicitly labeled noncaptured/nonlive. Full offline qualification/build/archive checks and independent actual artifact review precede a bounded Refs#7 PR. Manager startup, native sender deployment, Windows signature/MSI execution, agent enrollment, genuine live Shuffle and endpoint effects remain mandatory later gates.
+
+
+## Integration refinements
+
+Independent review/test failures require safe native report gap counts even before any case-ready metric, and cross-row receipt checks of full case metadata plus the original acceptance metric/correlation/time. These retain the frozen source/evidence boundary rather than repairing history or marking readiness. Generic intake authorizes before SQLite acquisition and rechecks inside the shared transaction. [Ledger](rf-07-ledger.md) records intended reds and observed results; [operator notes](wazuh.md) keep received source evidence separate from endpoint/action proof.

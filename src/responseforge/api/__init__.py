@@ -151,6 +151,37 @@ def create_app(
         response.status_code = 200 if result.duplicate else 201
         return result
 
+    @app.post(
+        "/v1/integrations/wazuh/alerts", response_model=IntakeResult,
+        responses={201: {"model": IntakeResult, "description": "New native source case"}},
+        openapi_extra={"requestBody": {"required": True, "content": {
+            "application/json": {"schema": {"type": "object"}}}}},
+    )
+    async def wazuh_intake(request: Request, response: Response, actor: Actor) -> IntakeResult:
+        from responseforge.integrations.wazuh.service import WazuhService
+        if settings.wazuh is None:
+            raise HTTPException(404, "Native integration is disabled")
+        if actor.actor_id != settings.wazuh.source_actor_id or actor.roles != {"source"}:
+            raise HTTPException(403, "Native source actor is not authorized")
+        media = request.headers.get("content-type", "").lower().split(";")
+        parameters = [part.strip() for part in media[1:]]
+        if (media[0].strip() != "application/json"
+                or any(part not in {"charset=utf-8", 'charset="utf-8"'} for part in parameters)
+                or request.headers.get("content-encoding", "identity").strip().lower() != "identity"):
+            raise HTTPException(415, "Unsupported native representation")
+        data = bytearray()
+        async for chunk in request.stream():
+            if len(data) + len(chunk) > 262144:
+                raise HTTPException(413, "Native alert exceeds byte limit")
+            data.extend(chunk)
+        try:
+            result = WazuhService(service).intake(bytes(data), actor)
+        except ServiceError:
+            system_denial(actor.actor_id, "Native source intake rejected")
+            raise
+        response.status_code = 200 if result.duplicate else 201
+        return result
+
     @app.get("/v1/incidents", response_model=tuple[Incident, ...])
     def incidents(actor: Actor) -> tuple[Incident, ...]:
         return service.list_incidents(actor)

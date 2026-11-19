@@ -26,6 +26,7 @@ from responseforge.contracts import (
     UtcDateTime,
 )
 from responseforge.integrations.shuffle.models import ShuffleConfig, WorkflowBinding
+from responseforge.integrations.wazuh.models import WazuhConfig
 from responseforge.providers import EvidenceProvider, ResponseProvider
 from responseforge.replay_contracts import ReplayBatch
 
@@ -70,6 +71,7 @@ class Settings:
     playbook_bindings: dict[str, str] = field(default_factory=dict)
     playbook_actors: dict[str, str] = field(default_factory=dict)
     playbook_provider: str | None = None
+    wazuh: WazuhConfig | None = field(default=None, repr=False)
     live_dispatch_enabled: bool = False
     provider_timeout: float = 5.0
     revision: str = "development"
@@ -162,6 +164,24 @@ class Settings:
             "resource_allowlist",
             {key: frozenset(value) for key, value in self.resource_allowlist.items()},
         )
+
+        if self.wazuh is not None:
+            native = WazuhConfig.model_validate(self.wazuh.model_dump(mode="json"))
+            if (self.mode != Mode.LIVE or self.live_dispatch_enabled or self.providers
+                    or self.replay_batch is not None or self.replay_sources
+                    or self.evidence_provider is not None or self.playbook_bindings):
+                raise ValueError("Wazuh intake requires isolated live no-dispatch configuration")
+            canonical = {endpoint.endpoint_id: endpoint for endpoint in self.endpoints}
+            if any(canonical.get(a.endpoint.endpoint_id) != a.endpoint for a in native.agents):
+                raise ValueError("Wazuh endpoint must match the configured full endpoint")
+            native_actors = [actor for actor in self.credentials.values()
+                      if actor.actor_id == native.source_actor_id]
+            allowed = {a.endpoint.endpoint_id for a in native.agents}
+            if (len(native_actors) != 1 or native_actors[0].roles != {"source"} or native_actors[0].human
+                    or native_actors[0].actions or native_actors[0].resources or native_actors[0].sources != {"wazuh"}
+                    or native_actors[0].endpoint_ids != allowed):
+                raise ValueError("Wazuh requires an exact nonhuman source-only principal")
+            object.__setattr__(self, "wazuh", native)
 
 
     def source_for_alert(self, alert: Alert) -> ReplayBatch:

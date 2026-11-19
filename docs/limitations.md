@@ -19,3 +19,6 @@
 
 
 Earlier RF-04 blocked-planning statements above describe retained historical findings. The subsequent reviewed/pinned runtime qualifies only the bounded Desktop pilot, as recorded in the [runtime ledger](rf-04-runtime-ledger.md) and RF-05/RF-06 successors; upstream stock execution remains unsuitable without those corrections.
+
+
+RF-07A [native intake](wazuh.md) is offline-qualified with original synthetic tests and separately attributed published Wazuh example compatibility. It preserves received-delivery evidence in the common live-mode core with dispatch disabled and no provider; mode=live is not proof of a connected endpoint. No live manager/captured endpoint/Windows MSI-signature/enrollment/Shuffle response/effect claim follows. The [ledger](rf-07-ledger.md) keeps deployment/enrollment and full issue#7/RF-08 acceptance open.
