@@ -223,3 +223,7 @@ Freeze604ef50 precedes three-component red/green. Windows writer owns windows.py
 ## RF-07B clean qualification
 
 Clean03f5cbad146a5ccf1abec4f1ad21077fc6eed358 passes2,739 tests/all checks, offline lock/build and295sdist/60wheel archive privacy. Actual original-synthetic verified loopback HTTPS, retained-byte ACK-loss recovery/wrong-CA refusal, actual MSI hash checks and portable script controls have separate bounded evidence in the [ledger](rf-07-ledger.md)/[aggregate](evidence/rf-07b-preparation.json). Independent source/package/data/control review passes. Parent #22 remains open as verified; no merged-revision pass, manager runtime, native Windows or live effect is inferred. Owner acceptance and B/parent merge remain separate gates.
+
+## RF-07 actual merge reconciliation / RF-07C1
+
+A actual main merge `74a6e59` passes 2,562 checks/tests; B actual feature-branch merge `4f16cfd` passes 2,739 tests/all checks. B did not reach main through #23; history-preserving promotion #24 is pending owner merge. C1 starts from `4f16cfd` with [design](rf-07c1-design.md), [expectations](expectations/rf-07c1.md) frozen at5c77a16. Primary owns contracts/locks/source production/CLI/shared qualification; independent lane owns tests/rf07c and tools/wazuh-tls/qualify.cjs. Native full-component TLS checks are opt-in and separate from offline CI. No manager, Docker or endpoint operation is authorized.

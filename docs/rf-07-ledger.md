@@ -77,3 +77,9 @@ Publication changes maintained evidence/status only; wheel/runtime source/templa
 
 
 Final independent clean-artifact/public projection review **PASS**, no remaining blocker in the preparation slice. Reader recomputes source/README/template/lock/wheel/MSI hashes, independently inspects original loopback source/SQLite/outbox and executes portable script controls without Windows calls; public counts/flags/remaining gates match and no private IDs/hosts/keys/tokens appear. This does not qualify a real manager, image runtime, native Windows or endpoint effect. Parent #22 still open at final base verification; B will be a dependent Refs#7 PR. Owner acceptance, parent/B merge, hosted checks and actual merged-revision checks remain separate.
+
+## RF-07 actual merges and C1 freeze
+
+GitHub confirms A #22 merged to main as `74a6e59d25be9220f24795b8b4c90ffbb1994fa4`; unchanged actual revision `make qualify` passed 2,562 tests/all checks on macOS ARM64, Python3.12.12/SQLite3.50.4. B #23 merged into the A feature branch as `4f16cfd7cc6679d9ab6e9cd8c53e7544f315642d`, not main; actual unchanged feature merge passed 2,739 tests/all checks and has identical tree to reviewed `93ed2eb`. Private command logs remain retained locally. Promotion [#24](https://github.com/TravisMa07/ResponseForge/pull/24) preserves history; owner merge and actual resulting main qualification remain separate.
+
+C1 [design](rf-07c1-design.md)/[independent expectations](expectations/rf-07c1.md) freeze at `5c77a16`, based on actual B merge. Root owns production source handling, locks, CLI and status; independent expectation lane owns tests/rf07c and native qualification harness. Full upstream source/helper/license and pinned dependency/source review are private. Source/component evidence will not imply full plugin typecheck, deployed dependency resolution, image, manager capture or endpoint proof.

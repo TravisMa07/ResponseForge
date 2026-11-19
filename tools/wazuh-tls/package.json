@@ -1,0 +1,15 @@
+{
+  "name": "responseforge-private-tls-qualification",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Opt-in component qualification only; not deployed dependency resolution",
+  "dependencies": {
+    "axios": "1.17.0",
+    "typescript": "5.5.2"
+  },
+  "overrides": {
+    "follow-redirects": "1.16.0",
+    "form-data": "4.0.5",
+    "proxy-from-env": "2.1.0"
+  }
+}
