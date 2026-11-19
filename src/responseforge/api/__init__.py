@@ -292,4 +292,25 @@ def create_app(
     ) -> DeliveryRecord:
         return await shuffle_coordinator().reconcile(incident_id, item.run_id, actor)
 
+    from responseforge.playbooks.models import PlaybookPlan, PlaybookProgress, PlaybookStepRequest
+    from responseforge.playbooks.service import PlaybookService
+
+    @app.post("/v1/incidents/{incident_id}/playbooks/prepare", response_model=PlaybookPlan)
+    async def playbook_prepare(
+        incident_id: str, item: PlaybookStepRequest, actor: Actor
+    ) -> PlaybookPlan:
+        return await PlaybookService(service).prepare(incident_id, item, actor)
+
+    @app.post("/v1/incidents/{incident_id}/playbooks/gate", response_model=PlaybookProgress)
+    def playbook_gate(
+        incident_id: str, item: PlaybookStepRequest, actor: Actor
+    ) -> PlaybookProgress:
+        return PlaybookService(service).gate(incident_id, item, actor)
+
+    @app.post("/v1/incidents/{incident_id}/playbooks/dispatch", response_model=PlaybookProgress)
+    async def playbook_dispatch(
+        incident_id: str, item: PlaybookStepRequest, actor: Actor
+    ) -> PlaybookProgress:
+        return await PlaybookService(service).dispatch(incident_id, item, actor)
+
     return app

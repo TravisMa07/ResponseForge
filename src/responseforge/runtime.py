@@ -65,6 +65,9 @@ class Settings:
     replay_batch: ReplayBatch | None = field(default=None, repr=False)
     shuffle_config: ShuffleConfig | None = field(default=None, repr=False)
     shuffle_bindings: dict[str, WorkflowBinding] = field(default_factory=dict)
+    playbook_bindings: dict[str, str] = field(default_factory=dict)
+    playbook_actors: dict[str, str] = field(default_factory=dict)
+    playbook_provider: str | None = None
     live_dispatch_enabled: bool = False
     provider_timeout: float = 5.0
     revision: str = "development"
@@ -111,6 +114,28 @@ class Settings:
             raise ValueError("every configured provider must have exactly one pinned version")
         if any(not x or x != x.strip() for x in self.provider_versions.values()):
             raise ValueError("provider version must be a nonempty identity")
+        playbooks, playbook_actors = dict(self.playbook_bindings), dict(self.playbook_actors)
+        if playbooks or playbook_actors or self.playbook_provider is not None:
+            if (
+                not playbooks
+                or not set(playbooks) <= set(bindings)
+                or any(
+                    not isinstance(kind, str)
+                    or kind not in {"process", "persistence", "containment"}
+                    for kind in playbooks.values()
+                )
+                or set(playbook_actors) != {"analyst", "executor"}
+                or self.playbook_provider not in self.providers
+            ):
+                raise ValueError("Complete reviewed playbook configuration required")
+            for role, identity in playbook_actors.items():
+                principals = [
+                    value for value in self.credentials.values() if value.actor_id == identity
+                ]
+                if len(principals) != 1 or principals[0].roles != {role} or principals[0].human:
+                    raise ValueError("Playbook technical actors require exact nonhuman roles")
+        object.__setattr__(self, "playbook_bindings", playbooks)
+        object.__setattr__(self, "playbook_actors", playbook_actors)
         object.__setattr__(self, "credentials", dict(self.credentials))
         object.__setattr__(self, "providers", dict(self.providers))
         object.__setattr__(self, "provider_versions", dict(self.provider_versions))
