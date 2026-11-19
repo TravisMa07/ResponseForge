@@ -147,3 +147,14 @@ RF-05A starts there with freezeaf05239 ([design](rf-05-design.md), [independent 
 ## RF-05A integrated qualification
 
 [PR #17](https://github.com/TravisMa07/ResponseForge/pull/17), Refs#5, targets main after RF-04 merge. Freezeaf05239 precedes code; cleana57258c70741676ffd378eed7202984fa715014f passes1033 tests (143new), Ruff, strict mypy30, v1/internal schemas/examples, fixture hashes, plans and44 docs; locked build and archive hygiene pass (177sdist/33wheel members, private material absent). [Owning ledger](rf-05a-ledger.md) preserves initial/scoped/race/chronology/provenance reds, harness corrections and independent review. New source-bound prepare/gate/dispatch steps preserve human authority and reconcile unknown effects without another action delivery. No real domain Shuffle execution is claimed. RF-05B native/graph/runtime preparation is [frozen in the design](rf-05-design.md); issue#5 stays open. Owner review/merge and hosted final-head checks remain distinct.
+
+
+## RF-05A authorized merge / RF-05B integration
+
+Owner-authorized guarded merge of #17 head1e5cf3d produced272af652e5dc29623e76aa23ee38aa3f5facdb5a. Both hosted jobs passed; no submitted reviews/unresolved threads. Actual merged `make qualify` passes1033 tests/all checks. Issue#5 remains open. RF-05B starts with freeze8c304f7, bounded native/graph/oracle writers and primary integration/sole-stack ownership. [Design](rf-05b-design.md), [expectations](expectations/rf-05b.md) and [ledger](rf-05b-ledger.md) own genuine graph/runtime gates; source review and1456 offline checks establish preparation only. No RF-05B merge or release authority inferred.
+
+## RF-05B native runtime qualification
+
+[PR #18](https://github.com/TravisMa07/ResponseForge/pull/18), following merged#17, qualifies all3 genuine native domain graphs/14 phase-fault runs/nine original synthetic cases on authorized Docker Desktop ARM64 atc33af04/sourceb8f6e3dd21c12a1b5712006745ff6d4b77c10527aeb9d3c29c50a8be0224c072. [Owning ledger](rf-05b-ledger.md) and [redacted evidence](evidence/rf-05b-runtime.json) bind images/source/modules/wheel,2verified simulated effects, real denial/expiry enforcement, unsupported persistence, duplicate suppression, callback loss/native failure, durable receipt reconciliation across core restart, vendor restart/down-up and foreign sentinel preservation. Two expected fault runs stay uncertain; immediate-restart and sustained-rate diagnostics are retained separately. Timings include explicit host harness pacing, with no analyst savings/throughput/live claim.
+
+Independent artifact/evidence review has no bounded blockers;1458 offline tests/all checks and locked build pass. Both hosted jobs pass on implementationc33af04; final publication-head CI is separate. Pilot stopped, loopback listeners closed and volumes retained. Issue#5 remains open pending owner-authorized#18 merge/post-merge verification; recorded corpus/live/release work remains open.

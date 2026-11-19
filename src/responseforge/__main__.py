@@ -11,8 +11,11 @@ from pathlib import Path
 import uvicorn
 from pydantic import Field, SecretStr, ValidationError
 
-from responseforge.contracts import ActionType, Contract, EndpointRef, Id, Mode
+from responseforge.contracts import ActionType, Contract, EndpointRef, Id, Mode, Sha256
 from responseforge.integrations.shuffle.models import ShuffleConfig, ShuffleError, WorkflowBinding
+from responseforge.playbooks.models import PlaybookKind
+from responseforge.providers import EvidenceProvider, ResponseProvider
+from responseforge.replay_contracts import ReplayBatch
 from responseforge.runtime import Principal, Settings
 
 
@@ -36,6 +39,15 @@ class ShuffleFileConfig(Contract):
     org_id: str | None = None
 
 
+class ReplayPlaybookFileConfig(Contract):
+    source_path: str
+    source_id: Id
+    source_sha256: Sha256
+    mock_path: str
+    bindings: dict[str, PlaybookKind]
+    actors: dict[str, Id]
+
+
 class FileConfig(Contract):
     database_path: str
     mode: Mode = Mode.REPLAY
@@ -45,6 +57,7 @@ class FileConfig(Contract):
     revision: Id = "development"
     environment: Id = "local"
     shuffle: ShuffleFileConfig | None = None
+    playbooks: ReplayPlaybookFileConfig | None = None
 
 
 def load_settings(path: Path) -> Settings:
@@ -75,7 +88,45 @@ def load_settings(path: Path) -> Settings:
             org_id=shuffle.org_id,
         )
     )
-    # Files cannot enable live dispatch or instantiate arbitrary provider/plugin code.
+    # The only file-enabled provider is an explicit replay-only fixed mock.
+    providers: dict[str, ResponseProvider] = {}
+    versions: dict[str, str] = {}
+    evidence_provider: EvidenceProvider | None = None
+    batch: ReplayBatch | None = None
+    domain = config.playbooks
+    if domain is not None:
+        from responseforge.integrations.mock_edr import MockResponseProvider
+        from responseforge.investigation import ReplayEvidenceProvider
+        from responseforge.replay import load_replay
+        from responseforge.replay_driver import _pid
+
+        source = Path(domain.source_path)
+        if (
+            config.mode != Mode.REPLAY
+            or shuffle is None
+            or Path(domain.mock_path).resolve() == Path(config.database_path).resolve()
+            or source.is_symlink()
+            or source.stat().st_size > 4 * 1048576
+        ):
+            raise ValueError("Unqualified playbook replay configuration")
+        batch = load_replay(source, source_id=domain.source_id)
+        if batch.sha256 != domain.source_sha256 or batch.quarantine or not batch.events:
+            raise ValueError("Playbook source hash or records are invalid")
+        registered = {endpoint.endpoint_id: endpoint for endpoint in config.endpoints}
+        processes: dict[str, set[str]] = {}
+        for event in batch.events:
+            if registered.get(event.endpoint.endpoint_id) != event.endpoint:
+                raise ValueError("Playbook source endpoint is not configured")
+            processes.setdefault(event.endpoint.endpoint_id, set())
+            pid = _pid(event.fields.get("process_id")) if event.artifact == "process" else None
+            if pid is not None:
+                processes[event.endpoint.endpoint_id].add(pid)
+        adapter = MockResponseProvider(domain.mock_path)
+        for identity, pids in processes.items():
+            adapter.seed_endpoint(registered[identity], processes=tuple(sorted(pids)))
+        providers = {adapter.name: adapter}
+        versions = {adapter.name: adapter.version}
+        evidence_provider = ReplayEvidenceProvider(batch)
     return Settings(
         database_path=config.database_path,
         mode=config.mode,
@@ -86,6 +137,13 @@ def load_settings(path: Path) -> Settings:
         environment=config.environment,
         shuffle_config=shuffle_config,
         shuffle_bindings={} if shuffle is None else shuffle.workflow_bindings,
+        providers=providers,
+        provider_versions=versions,
+        evidence_provider=evidence_provider,
+        replay_batch=batch,
+        playbook_bindings={} if domain is None else dict(domain.bindings),
+        playbook_actors={} if domain is None else domain.actors,
+        playbook_provider=None if domain is None else "mock-edr",
     )
 
 

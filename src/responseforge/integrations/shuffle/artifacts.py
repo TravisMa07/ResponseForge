@@ -87,7 +87,9 @@ _MODE_GUARD = """
 
 _WORKER_APP_GUARD = """
 \t// RF-04: only the reviewed app receives the immutable image and secret volume.
-\tif action.AppName != "responseforge_callback" || action.AppVersion != "1.0.0" || action.Name != "callback" {
+\tallowedCallback := action.AppName == "responseforge_callback" && action.Name == "callback"
+\tallowedTask := action.AppName == "responseforge_tasks" && (action.Name == "prepare" || action.Name == "gate" || action.Name == "dispatch")
+\tif action.AppVersion != "1.0.0" || (!allowedCallback && !allowedTask) {
 \t\treturn errors.New("RF-04 app metadata is not allowlisted")
 \t}
 \timage = os.Getenv("RF_CALLBACK_IMAGE")
@@ -246,10 +248,14 @@ def patch_source(component: str, name: str, text: str) -> str:
 \thostConfig.SecurityOpt = []string{"no-new-privileges:true"}
 \thostConfig.Resources.Memory = 268435456
 \thostConfig.Resources.NanoCPUs = 1000000000
+\trfCommand := []string{"python", "-m", "responseforge.integrations.shuffle.pilot", "app"}
+\tif action.AppName == "responseforge_tasks" {
+\t\trfCommand = []string{"python", "-m", "responseforge.integrations.shuffle.tasks"}
+\t}
 \tconfig := &container.Config{
 \t\tImage: image,
 \t\tEnv:   env,
-\t\tCmd: []string{"python", "-m", "responseforge.integrations.shuffle.pilot", "app"},"""
+\t\tCmd: rfCommand,"""
             + _OWNED_LABELS % "workflowExecution.ExecutionId"
             + "\n\t}"
         )

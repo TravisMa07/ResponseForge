@@ -18,7 +18,11 @@ from urllib.parse import urlsplit
 import httpx
 
 from responseforge.integrations.shuffle.callback import CallbackConfig, CallbackTransport
-from responseforge.integrations.shuffle.models import ShuffleArgument, canonical_uuid
+from responseforge.integrations.shuffle.models import (
+    ShuffleArgument,
+    canonical_uuid,
+    workflow_artifact,
+)
 from responseforge.runtime import WorkflowCallback
 
 
@@ -82,6 +86,7 @@ async def execute_app(
             "workflow_ids",
             "ca_file",
             "shuffle_backend",
+            "workflow_graphs",
         }:
             raise ValueError
         config = CallbackConfig(
@@ -181,6 +186,13 @@ async def execute_app(
                 or argument.mode.value != "replay"
             ):
                 raise ValueError("Pilot execution correlation rejected")
+            graph_bindings = private.get("workflow_graphs", {})
+            if not isinstance(graph_bindings, dict):
+                raise ValueError("Pilot graph binding rejected")
+            if workflow_id in graph_bindings and (
+                workflow_artifact(execution["workflow"]).sha256 != graph_bindings[workflow_id]
+            ):
+                raise ValueError("Pilot original graph differs from its private binding")
             if delay:
                 await asyncio.sleep(delay)
             callback = WorkflowCallback(
@@ -257,7 +269,9 @@ def main() -> int:
     @app.middleware("http")
     async def qualification_fault(request: Any, call_next: Any) -> Any:
         payload: dict[str, Any] = {}
-        if request.url.path == "/v1/integrations/shuffle/callback":
+        if request.url.path == "/v1/integrations/shuffle/callback" or request.url.path.endswith(
+            "/playbooks/prepare"
+        ):
             try:
                 raw = await request.body()
                 parsed_payload = json.loads(raw) if len(raw) <= 16384 else None
@@ -314,6 +328,37 @@ def main() -> int:
                             "Bounded post-commit acknowledgement delay injected",
                         )
                     await asyncio.sleep(delay)
+            except Exception:
+                pass
+        if response.status_code == 200 and request.url.path.endswith("/playbooks/prepare"):
+            try:
+                fault_path = Path("/run/responseforge/fault.json")
+                if fault_path.stat().st_size > 1024:
+                    raise ValueError
+                fault = json.loads(fault_path.read_text())
+                if fault.get("task_fail_after_prepare") is True:
+                    from fastapi.responses import JSONResponse
+
+                    from responseforge.runtime import Principal
+
+                    service = app.state.service
+                    with service.store.transaction() as transaction:
+                        service._audit(
+                            transaction,
+                            payload["incident_id"],
+                            Principal(
+                                actor_id="rf05-qualification",
+                                roles=frozenset(),
+                                endpoint_ids=frozenset(),
+                                actions=frozenset(),
+                                resources=frozenset(),
+                            ),
+                            "qualification_prepare_failure",
+                            "Post-commit task HTTP failure injected",
+                        )
+                    return JSONResponse(
+                        status_code=503, content={"detail": "Injected task failure"}
+                    )
             except Exception:
                 pass
         return response

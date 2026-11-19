@@ -15,6 +15,7 @@ from responseforge.integrations.shuffle.models import (
     ShuffleConfig,
     ShuffleError,
     StartReceipt,
+    TaskResult,
     VendorExecution,
     WorkflowArtifact,
     canonical_uuid,
@@ -39,8 +40,85 @@ def _object(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
     return result
 
 
+def _tasks_verified(result: dict[str, Any]) -> bool:
+    """Domain completion requires every source-bound task, not just its callback."""
+    try:
+        nodes = result["workflow"]["actions"]
+        results = result.get("results", [])
+        tasks = [
+            node
+            for node in nodes
+            if isinstance(node, dict) and node.get("app_name") == "responseforge_tasks"
+        ]
+        receipts = [
+            item
+            for item in results
+            if isinstance(item, dict)
+            and isinstance(item.get("action"), dict)
+            and (
+                item["action"].get("app_name") == "responseforge_tasks"
+                or any(item["action"].get("id") == node.get("id") for node in tasks)
+            )
+        ]
+        if not tasks:
+            return not receipts
+        if (
+            len(tasks) != 3
+            or len(receipts) != 3
+            or {node.get("name") for node in tasks} != {"prepare", "gate", "dispatch"}
+            or len({node["id"] for node in tasks}) != 3
+        ):
+            return False
+        proofs: dict[str, tuple[TaskResult, str]] = {}
+        for node in tasks:
+            canonical_uuid(node["id"])
+            if node.get("app_version") != "1.0.0":
+                return False
+            matching = [item for item in receipts if item["action"].get("id") == node["id"]]
+            if len(matching) != 1:
+                return False
+            receipt = matching[0]
+            if (
+                receipt.get("execution_id") != result["execution_id"]
+                or receipt["action"].get("app_id") not in (None, "", node.get("app_id"))
+                or any(
+                    receipt["action"].get(key) != node.get(key)
+                    for key in ("id", "app_name", "app_version", "name")
+                )
+            ):
+                return False
+            raw = receipt.get("result")
+            if not isinstance(raw, str) or len(raw.encode()) > 1048576:
+                return False
+            body = TaskResult.model_validate(
+                json.loads(raw, parse_constant=_constant, object_pairs_hook=_object)
+            )
+            if body.run_id != result["execution_id"] or body.step != node["name"]:
+                return False
+            proofs[node["name"]] = (body, receipt.get("status", ""))
+        prepare, gate, dispatch = (proofs[name] for name in ("prepare", "gate", "dispatch"))
+        if (
+            prepare[1] != "SUCCESS"
+            or gate[1] != "SUCCESS"
+            or prepare[0].delivery != "accepted"
+            or gate[0].delivery != "accepted"
+            or len({proof[0].kind for proof in proofs.values()}) != 1
+        ):
+            return False
+        selected = gate[0].status in {"ready", "uncertain"}
+        return (
+            (dispatch[1] == "SUCCESS" and dispatch[0].delivery == "accepted")
+            if selected
+            else (dispatch[1] == "SKIPPED" and dispatch[0].delivery == "skipped")
+        )
+    except (ValueError, KeyError, TypeError, AttributeError):
+        return False
+
+
 def _callback_status(result: dict[str, Any]) -> Literal["SUCCESS", "FAILURE"] | None:
     """Project one native receipt for the exact reviewed callback node, never its body."""
+    if not _tasks_verified(result):
+        return None
     graph = result.get("workflow")
     if not isinstance(graph, dict) or not isinstance(graph.get("actions"), list):
         return None

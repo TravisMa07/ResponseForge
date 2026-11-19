@@ -235,3 +235,38 @@ def workflow_artifact(document: dict[str, Any]) -> WorkflowArtifact:
         )
     except (ValueError, TypeError, KeyError, AttributeError):
         raise ShuffleError("invalid", "Invalid Shuffle workflow artifact") from None
+
+
+class TaskResult(Contract):
+    delivery: Literal["accepted", "skipped", "rejected", "uncertain"]
+    run_id: UUIDString
+    step: Literal["prepare", "gate", "dispatch"]
+    status: Literal[
+        "prepared",
+        "no_action",
+        "awaiting_approval",
+        "denied",
+        "expired",
+        "ready",
+        "uncertain",
+        "completed",
+        "failed",
+        "skipped",
+        "unavailable",
+    ]
+    kind: Literal["process", "persistence", "containment"] | None
+    mode: Literal["replay"] = "replay"
+
+    @model_validator(mode="after")
+    def result_scope(self) -> Self:
+        if self.delivery == "accepted":
+            if self.kind is None or self.status in {"skipped", "unavailable"}:
+                raise ValueError("Accepted task requires a bound business result")
+            if (self.step == "prepare") != (self.status == "prepared"):
+                raise ValueError("Prepared status belongs only to prepare")
+        elif self.delivery == "skipped":
+            if self.step != "dispatch" or self.status != "skipped" or self.kind is None:
+                raise ValueError("Only bound dispatch may skip")
+        elif self.status != "unavailable":
+            raise ValueError("Unverified task cannot claim a business result")
+        return self

@@ -54,6 +54,7 @@ def fingerprint() -> str:
     paths = (
         sorted((ROOT / "src").rglob("*.py"))
         + sorted(RUNTIME.rglob("*"))
+        + sorted((ROOT / "workflows/shuffle").glob("*.json*"))
         + [ROOT / "uv.lock", ROOT / "pyproject.toml", Path(__file__).resolve()]
     )
     for path in paths:
@@ -234,7 +235,19 @@ def build(work: Path, context: str, engine_id: str) -> Path:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("command", choices=("build", "prepare", "up", "status", "down", "qualify"))
+    parser.add_argument(
+        "command",
+        choices=(
+            "build",
+            "prepare",
+            "up",
+            "status",
+            "down",
+            "qualify",
+            "prepare-playbooks",
+            "qualify-playbooks",
+        ),
+    )
     parser.add_argument("--context")
     parser.add_argument("--engine-id")
     parser.add_argument("--work", type=Path, default=ROOT / ".local/rf04-build")
@@ -277,6 +290,28 @@ def main() -> int:
                     }
                 )
             )
+        elif args.command == "prepare-playbooks":
+            from responseforge.integrations.shuffle.playbook_bootstrap import prepare_playbooks
+
+            proof = json.loads((args.state / "build-inventory.json").read_text())
+            if proof.get("source_tree_sha256") != fingerprint():
+                raise ValueError("Playbook preparation requires a current source build")
+            print(
+                json.dumps(
+                    prepare_playbooks(
+                        args.state.absolute(), ROOT / "workflows/shuffle/replay.jsonl"
+                    )
+                )
+            )
+        elif args.command == "qualify-playbooks":
+            import asyncio
+
+            from responseforge.integrations.shuffle.playbook_qualification import qualify_playbooks
+
+            proof = json.loads((args.state / "build-inventory.json").read_text())
+            if proof.get("source_tree_sha256") != fingerprint():
+                raise ValueError("Playbook qualification requires a current source build")
+            print(json.dumps(asyncio.run(qualify_playbooks(args.state.absolute())), indent=2))
         elif args.command == "qualify":
             import asyncio
 

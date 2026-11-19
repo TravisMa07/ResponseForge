@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.0",
+  "source_id": "rf05-domain-original-v1",
+  "origin": "original-synthetic",
+  "sha256": "4e1797fe06bda9764c89a0689d1b4a1fa15f83ef71fc7bf2f6c38186b8a782f1",
+  "profiles": {
+    "process": "process",
+    "denied": "process",
+    "expired": "process",
+    "incomplete": "process",
+    "callback-loss": "process",
+    "restart": "process",
+    "containment": "containment",
+    "persistence": "persistence",
+    "task-failure": "process"
+  },
+  "redistribution": "Original ResponseForge synthetic lab observations; no external telemetry."
+}

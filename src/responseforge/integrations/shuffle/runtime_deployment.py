@@ -92,6 +92,7 @@ def render_runtime(
     state_dir: Path,
     *,
     engine_authorized: bool = False,
+    playbooks_enabled: bool = False,
     ui_port: int = 3443,
     core_port: int = 8443,
 ) -> dict[str, Any]:
@@ -104,6 +105,7 @@ def render_runtime(
         or not state_dir.is_absolute()
         or ".." in state_dir.parts
         or any(ord(character) < 32 or ord(character) == 127 for character in str(state_dir))
+        or type(playbooks_enabled) is not bool
         or type(engine_authorized) is not bool
         or any(type(port) is not int or not 1 <= port <= 65535 for port in (ui_port, core_port))
         or ui_port == core_port
@@ -256,6 +258,10 @@ def render_runtime(
         _mount(state_dir / "pki/core.pem", "/run/responseforge/pki/core.pem"),
         _mount(state_dir / "pki/core-key.pem", "/run/responseforge/pki/core-key.pem"),
     ]
+    if playbooks_enabled:
+        core["volumes"].append(
+            _mount(state_dir / "replay.jsonl", "/run/responseforge/replay.jsonl")
+        )
     if engine_authorized:
         frontend["ports"] = [f"127.0.0.1:{ui_port}:443"]
         core["ports"] = [f"127.0.0.1:{core_port}:8000"]
