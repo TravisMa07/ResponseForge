@@ -1,0 +1,166 @@
+{
+  "$defs": {
+    "EndpointRef": {
+      "additionalProperties": false,
+      "properties": {
+        "agent_id": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Agent Id"
+        },
+        "endpoint_id": {
+          "minLength": 1,
+          "title": "Endpoint Id",
+          "type": "string"
+        },
+        "hostname": {
+          "minLength": 1,
+          "title": "Hostname",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "1.0",
+          "default": "1.0",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "endpoint_id",
+        "hostname"
+      ],
+      "title": "EndpointRef",
+      "type": "object"
+    },
+    "WazuhAgentBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "agent_id": {
+          "pattern": "^[0-9]{1,8}$",
+          "title": "Agent Id",
+          "type": "string"
+        },
+        "endpoint": {
+          "$ref": "#/$defs/EndpointRef"
+        },
+        "schema_version": {
+          "const": "1.0",
+          "default": "1.0",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "agent_id",
+        "endpoint"
+      ],
+      "title": "WazuhAgentBinding",
+      "type": "object"
+    },
+    "WazuhConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "agents": {
+          "items": {
+            "$ref": "#/$defs/WazuhAgentBinding"
+          },
+          "maxItems": 128,
+          "minItems": 1,
+          "title": "Agents",
+          "type": "array"
+        },
+        "manager_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]{0,63}$",
+          "title": "Manager Id",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "1.0",
+          "default": "1.0",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "source_actor_id": {
+          "minLength": 1,
+          "title": "Source Actor Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "manager_id",
+        "source_actor_id",
+        "agents"
+      ],
+      "title": "WazuhConfig",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "alert_root": {
+      "title": "Alert Root",
+      "type": "string"
+    },
+    "alert_uid": {
+      "minimum": 0,
+      "title": "Alert Uid",
+      "type": "integer"
+    },
+    "ca_file": {
+      "title": "Ca File",
+      "type": "string"
+    },
+    "destination": {
+      "title": "Destination",
+      "type": "string"
+    },
+    "enabled": {
+      "default": false,
+      "title": "Enabled",
+      "type": "boolean"
+    },
+    "outbox_dir": {
+      "title": "Outbox Dir",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "1.0",
+      "default": "1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "source": {
+      "$ref": "#/$defs/WazuhConfig"
+    },
+    "timeout": {
+      "default": 10.0,
+      "maximum": 30,
+      "minimum": 0.1,
+      "title": "Timeout",
+      "type": "number"
+    },
+    "token_file": {
+      "title": "Token File",
+      "type": "string"
+    }
+  },
+  "required": [
+    "destination",
+    "ca_file",
+    "token_file",
+    "alert_root",
+    "alert_uid",
+    "outbox_dir",
+    "source"
+  ],
+  "title": "SenderConfig",
+  "type": "object"
+}

@@ -208,3 +208,18 @@ Owner-merged #21 head9311159 is2f5e204243469fa0fe67ac596cde3fd66d05f1bd; issue#6
 ## RF-07A native intake implementation
 
 Freeze15e28a5 follows verified merge2f5e204 and independent source/expectation review. Mapper owns only integrations/wazuh/mapping.py; independent expectations/tests own tests/rf07a; primary owns models/shared transactions/config/API/reports/schemas/CI/status.191 new tests expose five meaningful missing/incorrect behaviors and pass after corrections; working full qualification passes2,562 tests/all checks. [Owning ledger](rf-07-ledger.md) distinguishes published-example compatibility from captured/native live proof, exact clean qualification and independent final review. Deployment/enrollment and RF-08 live verification stay open.
+
+
+## RF-07B preparation
+
+[Design](rf-07b-design.md)/[expectations](expectations/rf-07b.md) begin at verified A head75e10f7 because remote #22 remains open despite the owner's merge report. Actual dependent-base2,562 checks pass; no merged-revision result is inferred. Primary owns shared models/security/sender/profile/CLI/CI/status; source/expectations and Windows writer lanes have disjoint paths. Pinned dashboard API TLS bypass is an explicit runtime blocker, not silently papered over with environment settings. B implements safe sender recovery, a gated profile and integrity-first private Windows package without manager startup or endpoint authority.
+
+
+## RF-07B implementation
+
+Freeze604ef50 precedes three-component red/green. Windows writer owns windows.py/Install.ps1 only; independent tests own tests/rf07b; primary owns all shared input/security/outbox/profile/CLI/build/CI/status. Independent actual review exposes private-ancestor writes, native hard-link ACL scope and publication directory-sync gaps; corrections preserve diagnostics. Working qualification passes2,739 tests/all checks. [Ledger](rf-07-ledger.md) distinguishes actual loopback HTTPS/artifact acquisition/portable script controls from still-unverified manager/TLS-patch/Windows/endpoint proof. A #22 remains open as last verified; B remains dependent with no fabricated merged result.
+
+
+## RF-07B clean qualification
+
+Clean03f5cbad146a5ccf1abec4f1ad21077fc6eed358 passes2,739 tests/all checks, offline lock/build and295sdist/60wheel archive privacy. Actual original-synthetic verified loopback HTTPS, retained-byte ACK-loss recovery/wrong-CA refusal, actual MSI hash checks and portable script controls have separate bounded evidence in the [ledger](rf-07-ledger.md)/[aggregate](evidence/rf-07b-preparation.json). Independent source/package/data/control review passes. Parent #22 remains open as verified; no merged-revision pass, manager runtime, native Windows or live effect is inferred. Owner acceptance and B/parent merge remain separate gates.

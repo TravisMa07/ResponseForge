@@ -1,0 +1,60 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "agent_certificate_file": {
+      "title": "Agent Certificate File",
+      "type": "string"
+    },
+    "agent_key_file": {
+      "title": "Agent Key File",
+      "type": "string"
+    },
+    "agent_name": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]{0,127}$",
+      "title": "Agent Name",
+      "type": "string"
+    },
+    "ca_file": {
+      "title": "Ca File",
+      "type": "string"
+    },
+    "manager_host": {
+      "title": "Manager Host",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "1.0",
+      "default": "1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "signer_subject": {
+      "maxLength": 512,
+      "minLength": 1,
+      "title": "Signer Subject",
+      "type": "string"
+    },
+    "signer_thumbprint": {
+      "pattern": "^[0-9A-F]{40}$",
+      "title": "Signer Thumbprint",
+      "type": "string"
+    },
+    "target_machine": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9-]{0,14}$",
+      "title": "Target Machine",
+      "type": "string"
+    }
+  },
+  "required": [
+    "target_machine",
+    "agent_name",
+    "manager_host",
+    "signer_subject",
+    "signer_thumbprint",
+    "ca_file",
+    "agent_certificate_file",
+    "agent_key_file"
+  ],
+  "title": "WindowsBundleConfig",
+  "type": "object"
+}

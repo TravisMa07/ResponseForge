@@ -17,7 +17,7 @@ This is deliberately smaller than DetectBridge: no custom SIEM/EDR, stream-proce
 
 ## Run offline core checks
 
-Requires Python 3.12+ and uv (qualified locally with Python 3.12.12 and uv 0.13.6):
+Requires Python 3.12+, uv and the OpenSSL CLI for original ephemeral TLS test fixtures (qualified locally with Python 3.12.12 and uv 0.13.6):
 
 ```bash
 uv sync --locked
@@ -42,7 +42,7 @@ uv run --locked --offline python -m responseforge --init-config .local/config.js
 uv run --locked --offline python -m responseforge --config .local/config.json
 ```
 
-This creates separate private credentials and binds the API to `127.0.0.1:8000`. No provider, replay scenario or endpoint action starts automatically. See the [API and recovery runbook](docs/core-api.md) and [internal OpenAPI](schemas/internal-api.json). Internal alerts use normalized ResponseForge contracts. [Opt-in native Wazuh intake](docs/wazuh.md) has bounded offline source-contract checks; captured manager/endpoint and live response qualification remain separate.
+This creates separate private credentials and binds the API to `127.0.0.1:8000`. No provider, replay scenario or endpoint action starts automatically. See the [API and recovery runbook](docs/core-api.md) and [internal OpenAPI](schemas/internal-api.json). Internal alerts use normalized ResponseForge contracts. [Opt-in native Wazuh intake](docs/wazuh.md) has bounded offline source-contract checks; captured manager/endpoint and live response qualification remain separate. [Sender, gated profile and Windows package preparation](docs/wazuh-preparation.md) default to dry-run and do not install or start services.
 
 ## Run the foundation checks
 

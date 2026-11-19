@@ -1,0 +1,61 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "architecture": {
+      "enum": [
+        "amd64",
+        "arm64"
+      ],
+      "title": "Architecture",
+      "type": "string"
+    },
+    "endpoint_bind_ip": {
+      "default": "127.0.0.1",
+      "title": "Endpoint Bind Ip",
+      "type": "string"
+    },
+    "endpoint_publish_authorized": {
+      "default": false,
+      "title": "Endpoint Publish Authorized",
+      "type": "boolean"
+    },
+    "kind": {
+      "enum": [
+        "docker-desktop",
+        "dedicated-vm"
+      ],
+      "title": "Kind",
+      "type": "string"
+    },
+    "lab_subnet": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Lab Subnet"
+    },
+    "manager_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]{0,63}$",
+      "title": "Manager Id",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "1.0",
+      "default": "1.0",
+      "title": "Schema Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "architecture",
+    "kind",
+    "manager_id"
+  ],
+  "title": "DeploymentTarget",
+  "type": "object"
+}
