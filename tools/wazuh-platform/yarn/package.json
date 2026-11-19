@@ -1,0 +1,9 @@
+{
+  "name": "responseforge-private-platform-yarn",
+  "version": "0.0.0",
+  "private": true,
+  "dependencies": {
+    "yarn": "1.22.19",
+    "@yarnpkg/lockfile": "1.1.0"
+  }
+}

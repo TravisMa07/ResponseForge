@@ -1,0 +1,191 @@
+{
+  "revision": "4a81e59ee597c0014e1d72666aa32423a964ba27",
+  "members": [
+    {
+      "path": "package.json",
+      "name": "platform-package.json",
+      "size": 20967,
+      "sha256": "9e2b82d839ba3c40ff95810efa66a285c2727f1b5e31b726f6871aac8acc2305"
+    },
+    {
+      "path": "yarn.lock",
+      "name": "yarn.lock",
+      "size": 891027,
+      "sha256": "db5c4f5233c26dea247bb32a071a6ab84dba8327369bfe88e67cb91429728c9d"
+    },
+    {
+      "path": ".node-version",
+      "name": "node-version.txt",
+      "size": 8,
+      "sha256": "c38efac7acb66c8c7976b5d875474722d05a24151159c74403f0ed4fcbd1146d"
+    },
+    {
+      "path": "LICENSE.txt",
+      "name": "LICENSE.txt",
+      "size": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    {
+      "path": "NOTICE.txt",
+      "name": "NOTICE.txt",
+      "size": 11493,
+      "sha256": "6affa18ffb4db4e416a36abaa5892dbfd42bf0e76aa299c157ea0874c645d06e"
+    },
+    {
+      "path": "packages/osd-plugin-helpers/src/tasks/write_server_files.ts",
+      "name": "write-server-files.ts",
+      "size": 3742,
+      "sha256": "ae72fe5c285b037f9768c66a7cc77220684d56fd0ec42a4cca21c7a8edfbd944"
+    },
+    {
+      "path": "packages/osd-plugin-helpers/src/tasks/yarn_install.ts",
+      "name": "yarn-install.ts",
+      "size": 1696,
+      "sha256": "972d54883bdef35aa6e9b82f4cc7d10839e06b7f7f55ecd66526633cbf502c22"
+    },
+    {
+      "path": "packages/osd-babel-preset/node_preset.js",
+      "name": "node_preset.js",
+      "size": 2435,
+      "sha256": "b76332559781d2f7bff9df19ecab8c65839962118f173d9d10db0b59df77280c"
+    },
+    {
+      "path": "packages/osd-dev-utils/src/babel.ts",
+      "name": "babel-helper.ts",
+      "size": 2237,
+      "sha256": "bb379cb94992e015e1bebe3d0f42ec9585b8b30b00773a4a723d26495b96ebb1"
+    },
+    {
+      "path": "packages/osd-babel-preset/common_preset.js",
+      "name": "common_preset.js",
+      "size": 2237,
+      "sha256": "d2bbe1ade56ebb9f0a67f4203372665383919dc4a57c54a3e9be14e59c81ffbb"
+    },
+    {
+      "path": "packages/osd-babel-preset/package.json",
+      "name": "preset-package.json",
+      "size": 882,
+      "sha256": "8bc82f308f13c90ca3bbdc06c105cb8c5b5ff290593ba9eb95857f697e39f70b"
+    }
+  ],
+  "node_version": "v18.19.0",
+  "yarn_version": "1.22.19",
+  "compiler_versions": {
+    "@babel/core": "7.23.3",
+    "@babel/preset-env": "7.23.3",
+    "@babel/preset-typescript": "7.23.3",
+    "@babel/preset-react": "7.23.3",
+    "@babel/plugin-transform-class-properties": "7.23.3",
+    "@babel/plugin-transform-private-methods": "7.23.3",
+    "babel-plugin-add-module-exports": "1.0.4",
+    "@babel/plugin-transform-optional-chaining": "7.23.3",
+    "@babel/plugin-transform-nullish-coalescing-operator": "7.23.3",
+    "@babel/plugin-transform-export-namespace-from": "7.23.3",
+    "@babel/plugin-transform-logical-assignment-operators": "7.23.3",
+    "axios": "1.18.1"
+  },
+  "selectors": [
+    {
+      "name": "@babel/core",
+      "range": "^7.22.9",
+      "selector": "@babel/core@^7.22.9",
+      "version": "7.23.3",
+      "integrity": "sha512-Jg+msLuNuCJDyBvFv5+OKOUjWMZgd85bKjbICd3zWrKAo+bJ49HJufi7CQE0q0uR8NGyO6xkCACScNqyjHSZew==",
+      "resolved": "https://registry.yarnpkg.com/@babel/core/-/core-7.23.3.tgz#5ec09c8803b91f51cc887dedc2654a35852849c9"
+    },
+    {
+      "name": "@babel/preset-env",
+      "range": "^7.22.9",
+      "selector": "@babel/preset-env@^7.22.9",
+      "version": "7.23.3",
+      "integrity": "sha512-ovzGc2uuyNfNAs/jyjIGxS8arOHS5FENZaNn4rtE7UdKMMkqHCvboHfcuhWLZNX5cB44QfcGNWjaevxMzzMf+Q==",
+      "resolved": "https://registry.yarnpkg.com/@babel/preset-env/-/preset-env-7.23.3.tgz#d299e0140a7650684b95c62be2db0ef8c975143e"
+    },
+    {
+      "name": "@babel/preset-typescript",
+      "range": "^7.22.9",
+      "selector": "@babel/preset-typescript@^7.22.9",
+      "version": "7.23.3",
+      "integrity": "sha512-17oIGVlqz6CchO9RFYn5U6ZpWRZIngayYCtrPRSgANSwC2V1Jb+iP74nVxzzXJte8b8BYxrL1yY96xfhTBrNNQ==",
+      "resolved": "https://registry.yarnpkg.com/@babel/preset-typescript/-/preset-typescript-7.23.3.tgz#14534b34ed5b6d435aa05f1ae1c5e7adcc01d913"
+    },
+    {
+      "name": "@babel/preset-react",
+      "range": "^7.22.9",
+      "selector": "@babel/preset-react@^7.22.9",
+      "version": "7.23.3",
+      "integrity": "sha512-tbkHOS9axH6Ysf2OUEqoSZ6T3Fa2SrNH6WTWSPBboxKzdxNc9qOICeLXkNG0ZEwbQ1HY8liwOce4aN/Ceyuq6w==",
+      "resolved": "https://registry.yarnpkg.com/@babel/preset-react/-/preset-react-7.23.3.tgz#f73ca07e7590f977db07eb54dbe46538cc015709"
+    },
+    {
+      "name": "@babel/plugin-transform-class-properties",
+      "range": "^7.23.3",
+      "selector": "@babel/plugin-transform-class-properties@^7.23.3",
+      "version": "7.23.3",
+      "integrity": "sha512-uM+AN8yCIjDPccsKGlw271xjJtGii+xQIF/uMPS8H15L12jZTsLfF4o5vNO7d/oUguOyfdikHGc/yi9ge4SGIg==",
+      "resolved": "https://registry.yarnpkg.com/@babel/plugin-transform-class-properties/-/plugin-transform-class-properties-7.23.3.tgz#35c377db11ca92a785a718b6aa4e3ed1eb65dc48"
+    },
+    {
+      "name": "@babel/plugin-transform-private-methods",
+      "range": "^7.23.3",
+      "selector": "@babel/plugin-transform-private-methods@^7.23.3",
+      "version": "7.23.3",
+      "integrity": "sha512-UzqRcRtWsDMTLrRWFvUBDwmw06tCQH9Rl1uAjfh6ijMSmGYQ+fpdB+cnqRC8EMh5tuuxSv0/TejGL+7vyj+50g==",
+      "resolved": "https://registry.yarnpkg.com/@babel/plugin-transform-private-methods/-/plugin-transform-private-methods-7.23.3.tgz#b2d7a3c97e278bfe59137a978d53b2c2e038c0e4"
+    },
+    {
+      "name": "babel-plugin-add-module-exports",
+      "range": "^1.0.4",
+      "selector": "babel-plugin-add-module-exports@^1.0.4",
+      "version": "1.0.4",
+      "integrity": "sha512-g+8yxHUZ60RcyaUpfNzy56OtWW+x9cyEe9j+CranqLiqbju2yf/Cy6ZtYK40EZxtrdHllzlVZgLmcOUCTlJ7Jg==",
+      "resolved": "https://registry.yarnpkg.com/babel-plugin-add-module-exports/-/babel-plugin-add-module-exports-1.0.4.tgz#6caa4ddbe1f578c6a5264d4d3e6c8a2720a7ca2b"
+    },
+    {
+      "name": "@babel/plugin-transform-optional-chaining",
+      "range": "^7.22.9",
+      "selector": "@babel/plugin-transform-optional-chaining@^7.22.9",
+      "version": "7.23.3",
+      "integrity": "sha512-zvL8vIfIUgMccIAK1lxjvNv572JHFJIKb4MWBz5OGdBQA0fB0Xluix5rmOby48exiJc987neOmP/m9Fnpkz3Tg==",
+      "resolved": "https://registry.yarnpkg.com/@babel/plugin-transform-optional-chaining/-/plugin-transform-optional-chaining-7.23.3.tgz#92fc83f54aa3adc34288933fa27e54c13113f4be"
+    },
+    {
+      "name": "@babel/plugin-transform-nullish-coalescing-operator",
+      "range": "^7.22.9",
+      "selector": "@babel/plugin-transform-nullish-coalescing-operator@^7.22.9",
+      "version": "7.23.3",
+      "integrity": "sha512-xzg24Lnld4DYIdysyf07zJ1P+iIfJpxtVFOzX4g+bsJ3Ng5Le7rXx9KwqKzuyaUeRnt+I1EICwQITqc0E2PmpA==",
+      "resolved": "https://registry.yarnpkg.com/@babel/plugin-transform-nullish-coalescing-operator/-/plugin-transform-nullish-coalescing-operator-7.23.3.tgz#8a613d514b521b640344ed7c56afeff52f9413f8"
+    },
+    {
+      "name": "@babel/plugin-transform-export-namespace-from",
+      "range": "^7.22.9",
+      "selector": "@babel/plugin-transform-export-namespace-from@^7.22.9",
+      "version": "7.23.3",
+      "integrity": "sha512-yCLhW34wpJWRdTxxWtFZASJisihrfyMOTOQexhVzA78jlU+dH7Dw+zQgcPepQ5F3C6bAIiblZZ+qBggJdHiBAg==",
+      "resolved": "https://registry.yarnpkg.com/@babel/plugin-transform-export-namespace-from/-/plugin-transform-export-namespace-from-7.23.3.tgz#dcd066d995f6ac6077e5a4ccb68322a01e23ac49"
+    },
+    {
+      "name": "@babel/plugin-transform-logical-assignment-operators",
+      "range": "^7.22.9",
+      "selector": "@babel/plugin-transform-logical-assignment-operators@^7.22.9",
+      "version": "7.23.3",
+      "integrity": "sha512-+pD5ZbxofyOygEp+zZAfujY2ShNCXRpDRIPOiBmTO693hhyOEteZgl876Xs9SAHPQpcV0vz8LvA/T+w8AzyX8A==",
+      "resolved": "https://registry.yarnpkg.com/@babel/plugin-transform-logical-assignment-operators/-/plugin-transform-logical-assignment-operators-7.23.3.tgz#3a406d6083feb9487083bca6d2334a3c9b6c4808"
+    },
+    {
+      "name": "axios",
+      "range": "^1.15.0",
+      "selector": "axios@^1.15.0",
+      "version": "1.18.1",
+      "integrity": "sha512-3nTvFlvpn9Zu/RkHUqtc7/+al4UpRW5az71ap5zccp6e8RAYEzhMTecX8Dz1wWDYrPpUoB1HAQEGEAEvUr7S9g==",
+      "resolved": "https://registry.yarnpkg.com/axios/-/axios-1.18.1.tgz#d63f9863bcd8938815c86f9e2abd380189d96dfe"
+    }
+  ],
+  "node_artifact": {
+    "url": "https://nodejs.org/download/release/v18.19.0/node-v18.19.0-darwin-arm64.tar.gz",
+    "sha256": "8907c42a968765b77730fb319458d63ec4ed009265f8012097c3a052407aa99b"
+  },
+  "full_plugin_build": false,
+  "deployed_resolution_verified": false
+}

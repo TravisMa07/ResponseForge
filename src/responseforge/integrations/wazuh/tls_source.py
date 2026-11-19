@@ -101,14 +101,41 @@ def fetch_tls_source(
     if allow_download is not True:
         raise PreparationError("Explicit source download opt-in required")
     _validate_lock(lock)
+    return fetch_reviewed_members(
+        output,
+        "wazuh/wazuh-dashboard-plugins",
+        lock.revision,
+        lock.members,
+        allow_download=allow_download,
+        transport=transport,
+    )
+
+
+def fetch_reviewed_members(
+    output: Path,
+    repository: str,
+    revision: str,
+    members: tuple[SourceMember, ...],
+    *,
+    allow_download: bool = False,
+    transport: Any = None,
+) -> Path:
+    """Trusted policy helper; callers validate their fixed members before entry."""
+    if allow_download is not True or repository not in {
+        "wazuh/wazuh-dashboard-plugins",
+        "wazuh/wazuh-dashboard",
+    }:
+        raise PreparationError("Explicit reviewed source download required")
     opener = urllib.request.build_opener(urllib.request.ProxyHandler({}), _NoRedirect())
     get = transport if transport is not None else lambda url: opener.open(url, timeout=30)
     try:
         with atomic_directory(output) as stage:
-            for member in lock.members:
+            for member in members:
                 url = (
-                    "https://raw.githubusercontent.com/wazuh/wazuh-dashboard-plugins/"
-                    + lock.revision
+                    "https://raw.githubusercontent.com/"
+                    + repository
+                    + "/"
+                    + revision
                     + "/"
                     + member.path
                 )
