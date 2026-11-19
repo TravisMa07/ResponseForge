@@ -66,3 +66,5 @@ The [RF-03 design](rf-03-design.md) binds replay alerts/evidence to source bytes
 [RF-07C1](rf-07c1-design.md) bounds deterministic private vendor-source correction and complete transpiled-client TLS qualification. It preserves the full-plugin/image/runtime gates and deployment ready=False. Native component dependency acquisition stays separate from offline CI.
 
 [RF-07C2](rf-07c2-design.md) checks the complete client with actual platform Node/Babel/Axios metadata and verified private presets. It audits a minimum original-lock-backed dependency closure while preserving full-plugin/deployed-resolution/image/runtime gates. [Platform runbook](wazuh-platform-client.md) separates source preparation and native checks from offline CI.
+
+[RF-07C3](rf-07c3-design.md) binds the shipped compiled client and actual nested dependency files to the immutable dashboard payload and prepares a private source-noticed overlay/build context. Host component execution and context generation remain separate from an image build, running manager or live endpoint proof.

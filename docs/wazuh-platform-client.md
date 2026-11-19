@@ -52,3 +52,5 @@ NODE_PATH="$PWD/.local/platform-toolchain/node_modules:$PWD/.local/platform-yarn
 ```
 
 The second command requires a separate Node24 executable for its wrong-version refusal. Default `make qualify` runs44 new offline Python cases without vendor downloads or Node installs. After shared-harness changes, run the original C1 command separately under its Node24/toolchain as a regression check.
+
+The [C3 shipped-client overlay](wazuh-packaged-client.md) separately verifies the actual packaged dependency layout and prepares a private compiled-client correction. It does not transfer C2 component proof into an image runtime claim.
