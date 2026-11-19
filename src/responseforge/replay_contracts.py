@@ -31,7 +31,8 @@ class QuarantineItem(Contract):
 class ReplayOrigin(Contract):
     source: Literal["splunk-attack-data"] = "splunk-attack-data"
     source_ref: Id
-    transformation: Literal["sysmon-event1-v1"] = "sysmon-event1-v1"
+    transformation: Literal["sysmon-event1-v1", "windows-events-v1"] = "sysmon-event1-v1"
+    selected_event_ids: tuple[Id, ...] | None = None
 
     @model_validator(mode="after")
     def pinned_source(self) -> Self:
@@ -42,6 +43,12 @@ class ReplayOrigin(Contract):
         if match is None:
             raise ValueError("Recorded source must be a pinned dataset URL")
         validate_source_path(match[1])
+        if self.selected_event_ids is not None and (
+            self.transformation != "windows-events-v1"
+            or not self.selected_event_ids
+            or tuple(sorted(set(self.selected_event_ids))) != self.selected_event_ids
+        ):
+            raise ValueError("Invalid recorded source selection")
         return self
 
 
@@ -57,6 +64,12 @@ class ReplayBatch(Contract):
     def bounded_events(self) -> Self:
         if len(self.events) > 1000:
             raise ValueError("replay record limit exceeded")
+        if self.origin is not None and self.origin.selected_event_ids is not None:
+            if (
+                len(self.events) != len(self.origin.selected_event_ids)
+                or tuple(sorted({event.event_id for event in self.events})) != self.origin.selected_event_ids
+            ):
+                raise ValueError("Recorded selection differs from events")
         return self
 
 

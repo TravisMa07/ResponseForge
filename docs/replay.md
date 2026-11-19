@@ -66,3 +66,23 @@ uv run --locked --offline python scripts/dataset_replay.py inspect \
 The Event1-only projection preserves recorded computer, record ID, logging SystemTime (aware UTC), distinct original process UtcTime, process/parent fields actually present and original source SHA-256. Both original timestamp strings survive Python microsecond precision. DTD/entities/processing instructions and structurally invalid XML refuse; unsupported provider/channel/ID and ambiguous/oversized records quarantine. Whole-source bounds are 1MiB, 1,000 events, depth16 and 16KiB/event; normalized fields retain their existing bounds. Additional raw fields remain in the unchanged source bytes, with no completeness claim. [Design](rf-06-design.md) lists the exact projection and failure semantics. Recorded provenance is explicitly `splunk-attack-data`, with a pinned source URL through alerts/evidence/cached plans; original fixture behavior stays unchanged.
 
 Reinspection finds that this sample records a cmd.exe invocation rather than a PowerShell child, duplicates eight records and includes one oversized command in both copies. It is a negative/incomplete source sample for the existing rule; no truncation, broadening or invented child makes it a positive. Five recorded scenarios and genuine Shuffle branch/decision/audit executions remain RF-06B. This source path is not enabled by the existing original-fixture server/lab configuration.
+
+
+## Recorded Windows observation policies (RF-06B1)
+
+Five catalog entries use the explicit Windows projection in the [B design](rf-06b-design.md). Fetching stays opt-in; inspection is offline:
+
+```bash
+uv run --locked --offline python scripts/dataset_replay.py fetch \
+  --artifact splunk-powershell-create --allow-download
+uv run --locked --offline python scripts/dataset_replay.py inspect \
+  --artifact splunk-powershell-create
+```
+
+Use splunk-lsass-access, splunk-task-create, splunk-ransom-note or splunk-process-dns for the other reviewed artifacts. Inspection prints sanitized counts/rule IDs/assessment dispositions. It does not intake cases, approve/dispatch, start Shuffle or qualify scenarios; every summary says scenario_qualified=false and verified_live=false.
+
+For a reproducible source subset, repeat `--event-id '<channel>:<original-record-id>'` using identities from retained source.xml. Selection rejects unknown, duplicate, nested or cross-computer ambiguous IDs. It preserves original events/raw hash/ref and records selected IDs plus a deterministic distinct identity; it never edits fields to manufacture missing evidence. Original synthetic incomplete cases are not represented as recorded omissions. A context negative without file creation is explicitly described that way.
+
+The new event kinds distinguish process_create/access, file_create, dns_query and task_create. Task actions are inert configured XML; DNS is not a connection; a filename is not encryption. Old Event1-only and original synthetic predicates stay unchanged. Raw original IDs survive provenance while channel-scoped identities prevent collisions. Windows alert identity binds transformation/selection. Default JSON/HTML report labels source_selection and source_transformation disclose full/subset scope only for an exactly matched registered historical source, otherwise unavailable. Full_registered_source means this file, not complete endpoint telemetry. Raw fields/free-text gaps stay redacted.
+
+Original synthetic CI exercises real core/SQLite authority, human approval, rejection/expiry, duplicate effects, uncertainty reconciliation and cached proof. The existing JSONL server/pilot configuration does not load these XML sources. RF-06B2 must separately review runtime preparation, rebuild source-bound images and genuinely execute recorded scenarios.

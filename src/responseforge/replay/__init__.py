@@ -150,11 +150,28 @@ def _signal(event: RecordedEvent) -> bool:
 
 def replay_provenance(batch: ReplayBatch, event_ids: tuple[str, ...]) -> Provenance:
     """Bind original source bytes and event identities without relabeling recordings."""
+    originals = event_ids
+    if batch.origin is not None and batch.origin.transformation == "windows-events-v1":
+        original_by_id = {}
+        for event in batch.events:
+            raw_id = event.fields.get("original_record_id")
+            channel = event.fields.get("channel")
+            if (
+                raw_id is None or not raw_id.isascii() or not raw_id.isdecimal()
+                or not raw_id or int(raw_id) <= 0
+                or event.event_id != str(channel) + ":" + raw_id
+            ):
+                raise ReplayError("Invalid recorded original identity")
+            original_by_id[event.event_id] = raw_id
+        try:
+            originals = tuple(original_by_id[event_id] for event_id in event_ids)
+        except KeyError:
+            raise ReplayError("Unknown recorded original identity") from None
     return Provenance(
         source="synthetic-fixture" if batch.origin is None else batch.origin.source,
         source_ref="fixture:" + batch.source_id if batch.origin is None else batch.origin.source_ref,
         sha256=batch.sha256,
-        original_event_ids=event_ids,
+        original_event_ids=originals,
     )
 
 
@@ -171,14 +188,34 @@ def make_alerts(batch: ReplayBatch, *, ingested_at: datetime) -> tuple[Alert, ..
     alerts = []
     for (scenario, _), records in groups.items():
         ordered = sorted(records, key=lambda row: (row.observed_at, row.event_id))
-        suspicious = [event for event in ordered if _signal(event)]
+        recorded = snapshot.origin is not None and snapshot.origin.transformation == "windows-events-v1"
+        recorded_rules: dict[str, str] = {}
+        if recorded:
+            from responseforge.playbooks.recorded import recorded_signal
+
+            for event in ordered:
+                signal = recorded_signal(event)
+                if signal is not None:
+                    recorded_rules[event.event_id] = signal
+            suspicious = [event for event in ordered if event.event_id in recorded_rules]
+        else:
+            suspicious = [event for event in ordered if _signal(event)]
         anchor = suspicious[0] if suspicious else ordered[0]
+        rule = "RF-REPLAY-OBSERVATION"
+        if suspicious:
+            rule = (
+                "RF-RECORDED-" + recorded_rules[anchor.event_id].upper().replace("_", "-")
+                if recorded else "RF-REPLAY-ENCODED-PS"
+            )
         identity = [
             snapshot.source_id,
             snapshot.sha256,
             scenario,
             anchor.endpoint.model_dump(mode="json"),
         ]
+        if recorded:
+            assert snapshot.origin is not None
+            identity.append(snapshot.origin.model_dump(mode="json"))
         alerts.append(
             Alert(
                 alert_id="replay-" + digest(identity),
@@ -188,7 +225,7 @@ def make_alerts(batch: ReplayBatch, *, ingested_at: datetime) -> tuple[Alert, ..
                 endpoint=anchor.endpoint,
                 event_time=anchor.observed_at,
                 ingested_at=receipt,
-                rule_id="RF-REPLAY-ENCODED-PS" if suspicious else "RF-REPLAY-OBSERVATION",
+                rule_id=rule,
                 severity="high" if suspicious else "low",
                 provenance=replay_provenance(
                     snapshot, tuple(event.event_id for event in ordered)

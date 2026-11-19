@@ -25,3 +25,6 @@ The callback app is original ResponseForge Python code, installed from this same
 ## RF-06A dataset metadata
 
 [Catalog](datasets/catalog.json) records a reviewed Splunk Attack Data Event1 XML artifact at the exact upstream revision above. RF-06A selectively acquires it only on explicit request and retains unchanged telemetry, LICENSE and manifest privately; no raw or normalized third-party telemetry is included in source distributions. The adapter is original ResponseForge code, and CI XML records are original synthetic test data. [Dependency review](docs/dependencies.md#rf-06a-reviewed-metadata-and-projection) describes root/per-artifact inspection, hash and attribution differences. Any later redistribution needs preserved terms, author/source attribution and transformation notices; source access and hashes are not independent legal clearance.
+
+
+RF-06B1 adds reviewed catalog metadata for five Windows observation sources; [dataset review](docs/dependencies.md#rf-06b1-five-recorded-observation-sources) records exact paths/hashes, author attribution and limits. Raw telemetry and derivatives remain ignored/private; checked-in XML is original synthetic data. Windows/task projection and recorded rules are original Python code, with no vendored dataset tooling. Project license and release obligations remain unchanged.

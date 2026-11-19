@@ -50,3 +50,6 @@ The [RF-03 design](rf-03-design.md) binds replay alerts/evidence to source bytes
 
 
 [RF-06A](rf-06-design.md) adds explicit selective acquisition and a bounded recorded Sysmon Event1 projection in the same package. Original source bytes/hash, event identity and distinct logging/process times remain traceable; recorded provenance survives core evidence validation and cached plans without a synthetic label. Default fixture/lab configuration stays original-fixture-only. No source-specific policy, new provider or runtime deployment is implied; five-scenario native qualification remains RF-06B.
+
+
+[RF-06B1](rf-06b-design.md) extends explicit Windows projections and recorded-observation policy in the same package. Channel-scoped event/evidence identities preserve raw record IDs; subsets retain source/hash/selection provenance. Existing approvals, capabilities and durable effects remain authoritative. Access/task observations escalate; file/DNS associations never invent process creation. Safe report labels disclose matched full/subset registered source. XML sources remain programmatic/inspection-only until RF-06B2 runtime preparation and genuine qualification.

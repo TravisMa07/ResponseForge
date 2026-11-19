@@ -47,7 +47,7 @@ class DatasetArtifact(Contract):
     path: str
     sha256: Sha256
     size_bytes: Annotated[StrictInt, Field(ge=1, le=1048576)]
-    format: Literal["sysmon-xml"]
+    format: Literal["sysmon-xml", "windows-event-xml"]
     rights: DatasetRights
 
     @model_validator(mode="after")

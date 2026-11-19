@@ -69,3 +69,6 @@ The [RF-04 runtime successor](rf-04-runtime-design.md) starts at owner-authorize
 ## RF-06 staged delivery
 
 [Design](rf-06-design.md) separates RF-06A selective pinned acquisition, rights/provenance and strict Event1 XML projection from RF-06B source-specific five-scenario mappings and genuine native Shuffle qualification. Source inspection showed the original PowerShell candidate cannot satisfy the existing rule; this boundary prevents source parsing from masquerading as a successful scenario. The [ledger](rf-06-ledger.md) retains exact source findings, red/green and independent review. Partial PRs use Refs#6; offline CI never downloads telemetry. RF-06B depends on the reviewed A interfaces and needs its own expectation freeze, source-bound runtime build and actual branch/decision/audit/effect/metric evidence.
+
+
+[RF-06B design](rf-06b-design.md) bounds B1 source-specific Windows projection/selection/policy before B2 runtime configuration and genuine recorded-source native qualification. This makes source interpretation reviewable before changed container execution artifacts. B1 remains Refs#6 with zero qualified runtime scenarios; B2 must freeze/review actual cases, preserve journals and rebuild/verify images before genuine runs.
