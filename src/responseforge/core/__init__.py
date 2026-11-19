@@ -1025,6 +1025,13 @@ class CaseService:
                 and e.artifact == request.artifact
                 and request.start <= e.observed_at <= request.end
             }
+            expected_refs = {
+                "evidence-" + digest([
+                    batch.source_id, batch.sha256, incident_id, request.scenario_id,
+                    request.endpoint.model_dump(mode="json"), event_id,
+                ]): event
+                for event_id, event in expected.items()
+            }
             seen: set[str] = set()
             for item in result.evidence:
                 if (
@@ -1037,24 +1044,14 @@ class CaseService:
                     proof = item.provenance
                     if proof is None or len(proof.original_event_ids) != 1:
                         raise ServiceError(409, "Evidence provenance is invalid")
-                    event_id = proof.original_event_ids[0]
-                    event = expected.get(event_id)
-                    identity = "evidence-" + digest(
-                        [
-                            batch.source_id,
-                            batch.sha256,
-                            incident_id,
-                            request.scenario_id,
-                            request.endpoint.model_dump(mode="json"),
-                            event_id,
-                        ]
-                    )
+                    event = expected_refs.get(item.evidence_id)
+                    if event is None:
+                        raise ServiceError(409, "Evidence identity differs from recorded source")
+                    event_id = event.event_id
                     if (
-                        event is None
-                        or event_id in seen
+                        event_id in seen
                         or item.observed_at != event.observed_at
                         or proof != replay_provenance(batch, (event_id,))
-                        or item.evidence_id != identity
                     ):
                         raise ServiceError(409, "Evidence response does not match recorded source")
                     seen.add(event_id)

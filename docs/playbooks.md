@@ -68,3 +68,10 @@ The private `domain-journal.json` reserves original execution identities before 
 The matrix covers approval waiting, approved explicit resume, denial, expiry, incomplete evidence, unsupported persistence, simulated containment, duplicate deliveries, callback acknowledgement loss, a post-commit native task failure, core/vendor restarts and retained state after scoped down/up. Private results include per-node execution exports, domain summary, case audit/report and actual durable mock effects. Only redacted aggregate evidence is suitable for public Git. The [RF-05B ledger](rf-05b-ledger.md) states which runtime gates actually passed; commands and offline tests alone do not establish them. This lab has no live endpoint effects or measured analyst savings.
 
 Qualification paces host core requests to respect the real60/minute per-actor limit. It does not raise that limit or automatically retry mutations. Recorded readiness and action timings include harness pacing and synthetic approval fixtures; they do not measure analyst savings or production throughput. Positive core restart occurs after native completion and before reconciliation; interrupted unacknowledged task HTTP is allowed to remain uncertain.
+
+
+## Recorded-source policy boundary
+
+[RF-06B1](rf-06b-design.md) adds a separately selected windows-events-v1 policy. Hidden encoded PowerShell creation can propose targeted simulated response; LSASS access and configured tasks escalate with missing creation/execution proof. File-note and process-associated DNS indicators may propose approved replay isolation from their direct recorded GUID/PID, with no-encryption/no-session/C2-proof and rollback gaps. Missing/ambiguous targets escalate. These narrow observations are distinct from the original fixture predicates; source labels never trigger them.
+
+Five source-selected positive/negative policy pairs are inspected; original synthetic XML tests exercise common core authority/recovery. Default runtime remains original-fixture-only. [Source evidence](evidence/rf-06b-source.json) records zero qualified runtime scenarios; RF-06B2 owns genuine recorded-source native execution.

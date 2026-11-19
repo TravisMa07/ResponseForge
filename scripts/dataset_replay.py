@@ -6,8 +6,11 @@ from pathlib import Path
 
 from responseforge.dataset_contracts import DatasetArtifact
 from responseforge.datasets import fetch_artifact
-from responseforge.replay import MAX_BYTES, ReplayError
+from responseforge.playbooks.assessment import assess
+from responseforge.replay import MAX_BYTES, ReplayError, logical_receipt, make_alerts
+from responseforge.replay.selection import select_recorded
 from responseforge.replay.sysmon import normalize_sysmon
+from responseforge.replay.windows import normalize_windows
 
 
 def main() -> int:
@@ -18,6 +21,7 @@ def main() -> int:
     parser.add_argument("--directory", type=Path, default=Path("datasets/downloads"))
     parser.add_argument("--allow-download", action="store_true")
     parser.add_argument("--scenario-id", default="recorded-process-observation")
+    parser.add_argument("--event-id", action="append", default=[])
     arguments = parser.parse_args()
     try:
         if arguments.catalog.is_symlink():
@@ -48,9 +52,23 @@ def main() -> int:
             raise ReplayError("Invalid retained dataset path")
         with source.open("rb") as stream:
             raw = stream.read(MAX_BYTES + 1)
-        batch = normalize_sysmon(raw, artifact=selected, scenario_id=arguments.scenario_id)
+        normalize = normalize_sysmon if selected.format == "sysmon-xml" else normalize_windows
+        batch = normalize(raw, artifact=selected, scenario_id=arguments.scenario_id)
+        if arguments.event_id:
+            batch = select_recorded(batch, event_ids=tuple(arguments.event_id))
+        decisions = []
+        if batch.events:
+            for alert in make_alerts(batch, ingested_at=logical_receipt(batch)):
+                decisions.append({
+                    "rule_id": alert.rule_id,
+                    "assessments": {
+                        kind: assess(kind, batch, alert).disposition
+                        for kind in ("process", "persistence", "containment")
+                    },
+                })
         print(json.dumps({"artifact_id": selected.artifact_id, "sha256": batch.sha256,
                           "events": len(batch.events), "duplicates": batch.duplicates,
+                          "selection_count": len(arguments.event_id), "decisions": decisions,
                           "quarantine": [item.model_dump(mode="json") for item in batch.quarantine],
                           "scenario_qualified": False, "verified_live": False}))
         return 0 if batch.events else 1

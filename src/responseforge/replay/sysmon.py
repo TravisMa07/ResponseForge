@@ -216,7 +216,8 @@ def normalize_sysmon(raw: bytes, *, artifact: DatasetArtifact, scenario_id: str)
         artifact = DatasetArtifact.model_validate(artifact.model_dump(mode="json", warnings=False))
         scenario_id = TypeAdapter(Id).validate_python(scenario_id)
         if (
-            not isinstance(raw, bytes)
+            artifact.format != "sysmon-xml"
+            or not isinstance(raw, bytes)
             or len(raw) > 1024 * 1024
             or len(raw) != artifact.size_bytes
             or hashlib.sha256(raw).hexdigest() != artifact.sha256

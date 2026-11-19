@@ -236,6 +236,17 @@ def assess(kind: PlaybookKind, batch: ReplayBatch, alert: Alert) -> Assessment:
         batch = ReplayBatch.model_validate(batch.model_dump(mode="json", warnings=False))
         alert = Alert.model_validate(alert.model_dump(mode="json", warnings=False))
         events = _context(batch, alert)
+        if batch.origin is not None and batch.origin.transformation == "windows-events-v1":
+            from responseforge.playbooks.recorded import assess_recorded
+
+            result = assess_recorded(kind, events, alert)
+            if batch.origin.selected_event_ids is not None:
+                result = result.model_copy(update={"known_gaps": tuple(sorted(
+                    set(result.known_gaps) | {
+                        "Explicit recorded source subset; omitted source events were not assessed"
+                    }
+                ))})
+            return result
         if kind == "process":
             return _process(events, alert)
         if kind == "persistence":

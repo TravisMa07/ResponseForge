@@ -1,0 +1,142 @@
+{
+  "schema_version": "1.0",
+  "work_id": "RF-06B1",
+  "revision": "b1b172b8af557cf6826ef0c7f638d85a56cf5302",
+  "observed_at": "2026-11-19T05:54:54.716206+00:00",
+  "environment": {
+    "host": "macOS ARM64",
+    "python": "3.12.12",
+    "sqlite": "3.50.4",
+    "uv": "0.13.6"
+  },
+  "provenance": "Actual selective checksum/LICENSE-verified acquisition and production Windows projections compared with independently parsed pinned raw-source expectations. Original telemetry, IDs/hosts/commands and subset descriptors remain private.",
+  "source_revision": "eb3ab7424aaa4bd7ac8e97fd0af6c1d29944d23c",
+  "license_sha256": "8505946b2464fa90223996d99eecbc7639a86648ca071f0cac21695be2623a0a",
+  "recorded_sources_inspected": 5,
+  "normalized_event_count": 581,
+  "source_selected_decisions_checked": 10,
+  "qualified_runtime_scenarios": 0,
+  "runtime_qualified": false,
+  "verified_live": false,
+  "effect_count": 0,
+  "sources": [
+    {
+      "artifact_id": "splunk-powershell-create",
+      "sha256": "9200692ad74037b5234fe6f7da733d3e416b0ea8bb7f6d8ebb5bd16fc39b8b22",
+      "bytes": 13142,
+      "events": 4,
+      "duplicates": 0,
+      "quarantine": 0,
+      "signals": {
+        "powershell": 2
+      },
+      "positive": {
+        "rule_id": "RF-RECORDED-POWERSHELL",
+        "disposition": "propose",
+        "gap_count": 3,
+        "selection_count": 1
+      },
+      "source_negative": {
+        "rule_id": "RF-REPLAY-OBSERVATION",
+        "disposition": "no_action",
+        "gap_count": 2,
+        "selection_count": 1
+      }
+    },
+    {
+      "artifact_id": "splunk-lsass-access",
+      "sha256": "a37b69dce32eaff6b5c1fdb4bb9cbea6dec78a4fbd22cd41362ab0e377f075ef",
+      "bytes": 65428,
+      "events": 32,
+      "duplicates": 0,
+      "quarantine": 0,
+      "signals": {
+        "lsass_access": 4
+      },
+      "positive": {
+        "rule_id": "RF-RECORDED-LSASS-ACCESS",
+        "disposition": "escalate",
+        "gap_count": 4,
+        "selection_count": 1
+      },
+      "source_negative": {
+        "rule_id": "RF-REPLAY-OBSERVATION",
+        "disposition": "no_action",
+        "gap_count": 2,
+        "selection_count": 1
+      }
+    },
+    {
+      "artifact_id": "splunk-task-create",
+      "sha256": "a3ad53ea74a834f1fc90f4844766c0be5ecd688e7768f4b4b5af25eb65a0ecff",
+      "bytes": 9685,
+      "events": 3,
+      "duplicates": 0,
+      "quarantine": 0,
+      "signals": {
+        "task_creation": 2
+      },
+      "positive": {
+        "rule_id": "RF-RECORDED-TASK-CREATION",
+        "disposition": "escalate",
+        "gap_count": 4,
+        "selection_count": 1
+      },
+      "source_negative": {
+        "rule_id": "RF-REPLAY-OBSERVATION",
+        "disposition": "no_action",
+        "gap_count": 2,
+        "selection_count": 1
+      }
+    },
+    {
+      "artifact_id": "splunk-ransom-note",
+      "sha256": "1183c2dc15b80beb3b80d46f101da9537a9c30240fca3ca86208579865ecf72b",
+      "bytes": 381404,
+      "events": 217,
+      "duplicates": 0,
+      "quarantine": 0,
+      "signals": {
+        "ransom_note": 1
+      },
+      "positive": {
+        "rule_id": "RF-RECORDED-RANSOM-NOTE",
+        "disposition": "propose",
+        "gap_count": 5,
+        "selection_count": 1
+      },
+      "source_negative": {
+        "rule_id": "RF-REPLAY-OBSERVATION",
+        "disposition": "no_action",
+        "gap_count": 2,
+        "selection_count": 1
+      }
+    },
+    {
+      "artifact_id": "splunk-process-dns",
+      "sha256": "ef076704e32f808551a2df65c0c0b09f8b0c34ff93a858d1ef57b0631506b9b9",
+      "bytes": 344543,
+      "events": 325,
+      "duplicates": 0,
+      "quarantine": 0,
+      "signals": {
+        "process_dns": 5
+      },
+      "positive": {
+        "rule_id": "RF-RECORDED-PROCESS-DNS",
+        "disposition": "propose",
+        "gap_count": 5,
+        "selection_count": 1
+      },
+      "source_negative": {
+        "rule_id": "RF-REPLAY-OBSERVATION",
+        "disposition": "no_action",
+        "gap_count": 2,
+        "selection_count": 1
+      }
+    }
+  ],
+  "limitations": "Projection and narrow source-selected policy decisions only. No actual recorded-source core/Shuffle execution, readiness/action timing, source response effect, complete lineage, credential theft, task execution, encryption, network session, C2, analyst savings or detection accuracy claim. Source negatives are rule negatives; ransom-note negative is a context subset without a file-create record. Original synthetic CI tests separately exercise core approval, simulated effects, recovery and redaction.",
+  "expectation_freeze": "2caf9c42c1d3965dc1c13c06a0eb1139ab031a29",
+  "mode": "replay"
+}

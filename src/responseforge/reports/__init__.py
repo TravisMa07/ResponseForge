@@ -8,8 +8,10 @@ import tempfile
 from pathlib import Path
 from typing import Any
 
+from responseforge.contracts import Alert
 from responseforge.core import CaseService
-from responseforge.replay_contracts import digest
+from responseforge.replay import make_alerts
+from responseforge.replay_contracts import ReplayBatch, digest
 from responseforge.runtime import Principal
 
 _FREE_TEXT = frozenset(
@@ -49,7 +51,7 @@ _SENSITIVE = (
 _KNOWN_FIELDS = frozenset(
     """schema_version incident_id status mode simulated verified_live
 incident alert evidence actions audit metrics workflows redaction_notice decision_summary
-known_gap_count alert_id scenario_id endpoint priority assessment created_at source event_time
+known_gap_count source_selection source_transformation alert_id scenario_id endpoint priority assessment created_at source event_time
  ingested_at rule_id severity provenance evidence_refs source_ref sha256 original_event_ids
  evidence_id observed_at collected_at availability unavailable_reason classification proposal
  approval execution proposal_id target action rationale risk expires_at idempotency_key
@@ -91,6 +93,24 @@ def _redact(value: Any, secrets: tuple[str, ...], key: str = "") -> Any:
     return value
 
 
+def _source_scope(service: CaseService, alert: Alert) -> tuple[str, str]:
+    """Expose fixed scope labels only when the registered source matches this case."""
+    try:
+        batch = service.settings.replay_batch
+        if batch is None or alert.mode != "replay":
+            return "unavailable", "unavailable"
+        batch = ReplayBatch.model_validate(batch.model_dump(mode="json", warnings=False))
+        if not any(value == alert for value in make_alerts(batch, ingested_at=alert.ingested_at)):
+            return "unavailable", "unavailable"
+        selected = batch.origin is not None and batch.origin.selected_event_ids is not None
+        return (
+            "explicit_subset" if selected else "full_registered_source",
+            "original-json" if batch.origin is None else batch.origin.transformation,
+        )
+    except (ValueError, TypeError, AttributeError, OverflowError):
+        return "unavailable", "unavailable"
+
+
 def build_report(
     service: CaseService, incident_id: str, actor: Principal, *, secrets: tuple[str, ...] = ()
 ) -> dict[str, Any]:
@@ -128,6 +148,7 @@ def build_report(
         )
         else "see_recorded_outcome"
     )
+    value["source_selection"], value["source_transformation"] = _source_scope(service, snapshot.alert)
     value["known_gap_count"] = max(
         (len(e.readiness.known_gaps) for e in snapshot.metrics if e.readiness is not None),
         default=0,
