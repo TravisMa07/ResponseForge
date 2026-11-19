@@ -993,7 +993,7 @@ class CaseService:
                 raise ServiceError(503, "No qualified evidence provider for this mode")
             # An endpoint/scenario match is insufficient: bind the case to the
             # registered source bytes and normalized observation before provider I/O.
-            from responseforge.replay import make_alerts
+            from responseforge.replay import make_alerts, replay_provenance
 
             with self.store.transaction() as tx:
                 stored_alert = _read(Alert, tx.get("alerts", incident_id))
@@ -1053,9 +1053,7 @@ class CaseService:
                         event is None
                         or event_id in seen
                         or item.observed_at != event.observed_at
-                        or proof.sha256 != batch.sha256
-                        or proof.source != "synthetic-fixture"
-                        or proof.source_ref != "fixture:" + batch.source_id
+                        or proof != replay_provenance(batch, (event_id,))
                         or item.evidence_id != identity
                     ):
                         raise ServiceError(409, "Evidence response does not match recorded source")

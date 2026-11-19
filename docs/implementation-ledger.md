@@ -163,3 +163,8 @@ Independent artifact/evidence review has no bounded blockers;1458 offline tests/
 ## RF-05B actual merged-revision verification
 
 On 2026-11-19, GitHub reports [PR #18](https://github.com/TravisMa07/ResponseForge/pull/18) merged at `ec5d80ef1f22b3cc8b8e668ce4d4f5e3603adbbe`, head `3f16d4d39ccf5bf767e9f560e637b734e2bf70db`; issue #5 is CLOSED and issue #6 is OPEN. After `git fetch origin main`, a clean bounded RF-06 branch starts at that exact merge. `make qualify` on the actual unchanged merge passes 1,458 tests, Ruff, strict mypy (34 modules), contract/example/OpenAPI/fixture/plan checks and 47-document integrity checks. Environment: macOS ARM64, Python 3.12.12, SQLite 3.50.4, uv 0.13.6. The existing Starlette/httpx deprecation remains visible. This is new offline evidence for the merge; the original source-bound RF-05B runtime evidence is unchanged, with no new vendor or endpoint execution claimed. Existing private state and stopped pilot are preserved.
+
+
+## RF-06A acquisition and normalization
+
+[RF-06 design](rf-06-design.md), [expectations](expectations/rf-06a.md) and [ledger](rf-06-ledger.md) own partial issue#6 delivery. Freeze9d375d1 follows actual RF-05B merged verification. Acquisition, normalization and independent expectation/test writers have disjoint paths; primary owns shared contracts/provenance/CLI/CI/status and qualification. Read-only review exposes preservation/XML-structure gaps corrected with meaningful reds. Recorded source is kept private; checked-in tests are original synthetic and offline. Five source-scenario mappings and genuine Shuffle execution remain open RF-06B gates; no source-normalization check closes them.

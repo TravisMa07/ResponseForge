@@ -31,7 +31,7 @@ from responseforge.playbooks.models import (
     PlaybookProgress,
     PlaybookStepRequest,
 )
-from responseforge.replay import make_alerts
+from responseforge.replay import make_alerts, replay_provenance
 from responseforge.replay_contracts import ReplayBatch, digest
 from responseforge.runtime import Principal
 from responseforge.storage import Transaction
@@ -273,10 +273,8 @@ class PlaybookService:
                     or item.endpoint != context.incident.endpoint
                     or item.availability != "available"
                     or item.provenance is None
-                    or item.provenance.sha256 != plan.source_sha256
-                    or item.provenance.source != "synthetic-fixture"
-                    or item.provenance.source_ref != "fixture:" + context.batch.source_id
-                    or item.provenance.original_event_ids != (recorded[ref].event_id,)
+                    or item.provenance
+                    != replay_provenance(context.batch, (recorded[ref].event_id,))
                     or item.observed_at != recorded[ref].observed_at
                     or item.collected_at > plan.created_at
                     or item.classification != "sensitive"

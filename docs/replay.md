@@ -48,3 +48,21 @@ The authenticated `/v1/incidents/{id}/report?format=json|html` export uses one a
 Acceptance/readiness metrics persist scenario/mode/correlation, source revision (with dirty-tree suffix when applicable), and Python/SQLite/platform environment. Installed artifacts without a verifiable source checkout explicitly label the source revision unavailable rather than inventing one. These events are not measured analyst savings, detection accuracy or an MTTR claim. RF-09 collects aggregate and paired baseline evidence separately.
 
 Reports and `.local/` databases remain ignored. Preserve both databases to retain idempotency history; deleting simulated state while keeping cases makes effect verification unavailable, not permission to retry. Real recorded-data licensing/scenarios remain RF-06; real Shuffle and live endpoint proof remain RF-04/05 and RF-07/08.
+
+
+## Selective recorded XML inspection (RF-06A)
+
+The [catalog](../datasets/catalog.json) contains reviewed, pinned metadata for one deliberately bounded source-normalization sample. Source rights review, original byte hash/size and fixed HTTPS origins are checked separately. Acquisition is explicit and selective:
+
+```bash
+uv run --locked --offline python scripts/dataset_replay.py fetch \
+  --artifact splunk-trickbot-command --allow-download
+uv run --locked --offline python scripts/dataset_replay.py inspect \
+  --artifact splunk-trickbot-command
+```
+
+`--offline` here constrains uv dependency resolution; the explicit `fetch --allow-download` operation itself uses HTTPS. Omitting that flag refuses before network or output mutation. The default ignored bundle is `datasets/downloads/splunk-trickbot-command/` with unchanged source.xml, verified LICENSE and exact manifest.json. Existing verified bundles are reused after explicit opt-in; conflicts and symlinks refuse without overwriting them. Atomic publication requires the no-replace rename primitive on macOS/Linux and fails closed elsewhere; hosted Linux qualification is recorded separately. `inspect` has no network path and prints counts/safe quarantine codes only. All-invalid projections exit nonzero. Neither command executes source commands, starts services or qualifies a scenario.
+
+The Event1-only projection preserves recorded computer, record ID, logging SystemTime (aware UTC), distinct original process UtcTime, process/parent fields actually present and original source SHA-256. Both original timestamp strings survive Python microsecond precision. DTD/entities/processing instructions and structurally invalid XML refuse; unsupported provider/channel/ID and ambiguous/oversized records quarantine. Whole-source bounds are 1MiB, 1,000 events, depth16 and 16KiB/event; normalized fields retain their existing bounds. Additional raw fields remain in the unchanged source bytes, with no completeness claim. [Design](rf-06-design.md) lists the exact projection and failure semantics. Recorded provenance is explicitly `splunk-attack-data`, with a pinned source URL through alerts/evidence/cached plans; original fixture behavior stays unchanged.
+
+Reinspection finds that this sample records a cmd.exe invocation rather than a PowerShell child, duplicates eight records and includes one oversized command in both copies. It is a negative/incomplete source sample for the existing rule; no truncation, broadening or invented child makes it a positive. Five recorded scenarios and genuine Shuffle branch/decision/audit executions remain RF-06B. This source path is not enabled by the existing original-fixture server/lab configuration.
