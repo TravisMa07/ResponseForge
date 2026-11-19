@@ -32,6 +32,7 @@ from responseforge.core import CaseService, ServiceError
 from responseforge.integrations.shuffle.coordinator import ShuffleCoordinator
 from responseforge.runtime import (
     ActionView,
+    CallbackAcknowledgement,
     DecisionRequest,
     ExecuteRequest,
     IntakeResult,
@@ -218,19 +219,20 @@ def create_app(
     async def reconcile(proposal_id: str, item: ExecuteRequest, actor: Actor) -> ActionExecution:
         return await service.reconcile(proposal_id, item.provider, actor)
 
-    @app.post("/v1/integrations/shuffle/callback", response_model=PlaybookRun)
+    @app.post("/v1/integrations/shuffle/callback", response_model=CallbackAcknowledgement)
     def callback(
         item: WorkflowCallback,
         actor: Actor,
         x_request_timestamp: str = Header(default=""),
         x_request_nonce: str = Header(default=""),
-    ) -> PlaybookRun:
+    ) -> CallbackAcknowledgement:
         try:
             sent_at = TypeAdapter(UtcDateTime).validate_python(x_request_timestamp)
         except ValidationError:
             system_denial(actor.actor_id, "Callback timestamp rejected")
             raise HTTPException(422, "Invalid callback timestamp") from None
-        return service.callback(item, actor, nonce=x_request_nonce, sent_at=sent_at)
+        service.callback(item, actor, nonce=x_request_nonce, sent_at=sent_at)
+        return CallbackAcknowledgement(**item.model_dump(mode="json"), received_at=now())
 
     @app.post("/v1/incidents/{incident_id}/collect", response_model=CollectionResult)
     async def collect(incident_id: str, item: CollectionRequest, actor: Actor) -> CollectionResult:

@@ -1,0 +1,16 @@
+ARG GO_IMAGE
+ARG RUNTIME_IMAGE
+FROM ${GO_IMAGE} AS build
+ENV GOTOOLCHAIN=local CGO_ENABLED=0 GOMAXPROCS=2
+WORKDIR /build
+COPY backend/go.mod backend/go.sum ./
+RUN go mod download && go mod verify
+COPY backend/*.go ./
+RUN go build -mod=readonly -p=2 -trimpath -o /out/backend .
+
+FROM ${RUNTIME_IMAGE}
+WORKDIR /app
+COPY --from=build /out/backend /app/shufflebackend
+COPY sdk/ /app_sdk/
+COPY backend/LICENSE /usr/share/licenses/shuffle/LICENSE
+CMD ["/app/shufflebackend"]

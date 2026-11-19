@@ -36,3 +36,10 @@ app/version/environment, branches, triggers, variables, start and configuration
 remain bound. Changed diagram placement alone must preserve identity; changed
 executable parameters or nested position data must fail binding. This corrects
 the earlier assumption that stored and executed UI coordinates remain identical.
+
+The preservation sentinel must explicitly override any image-inherited project
+label with `unrelated-rf04-sentinel`; lab teardown must exclude it. Inspect both
+its unique sentinel key and foreign project value before/after lifecycle tests.
+Observed fixture error: inherited lab label made the original sentinel invalid
+as an unrelated-resource oracle. Regression first failed1 before correction;
+that diagnostic attempt was interrupted and is not a qualification pass.

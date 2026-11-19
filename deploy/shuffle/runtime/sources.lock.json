@@ -1,0 +1,95 @@
+{
+  "schema_version": "1.0",
+  "files": [
+    {
+      "component": "backend",
+      "name": "main.go",
+      "url": "https://raw.githubusercontent.com/Shuffle/Shuffle/473cc335e5fcc663006d8e5ca16af5ee71fefa68/backend/go-app/main.go",
+      "sha256": "f1dd87c2013ce853580843dd2794cb345e869546148696afb6bfb95090b8b40e"
+    },
+    {
+      "component": "backend",
+      "name": "walkoff.go",
+      "url": "https://raw.githubusercontent.com/Shuffle/Shuffle/473cc335e5fcc663006d8e5ca16af5ee71fefa68/backend/go-app/walkoff.go",
+      "sha256": "a14e17c667e6bab1fc2975db44a3836455c0d32acf0e01cf05e4446c14bffd53"
+    },
+    {
+      "component": "backend",
+      "name": "docker.go",
+      "url": "https://raw.githubusercontent.com/Shuffle/Shuffle/473cc335e5fcc663006d8e5ca16af5ee71fefa68/backend/go-app/docker.go",
+      "sha256": "c9e73b7aa8940908f612ae5ce3744815b5b9b22c81bb44da29c2d316cf0f9aaf"
+    },
+    {
+      "component": "backend",
+      "name": "go.mod",
+      "url": "https://raw.githubusercontent.com/Shuffle/Shuffle/473cc335e5fcc663006d8e5ca16af5ee71fefa68/backend/go-app/go.mod",
+      "sha256": "14739b99fb3149d9067516527e0656a8916ed5dda30bf05c8ad0e8bed10a6667"
+    },
+    {
+      "component": "backend",
+      "name": "go.sum",
+      "url": "https://raw.githubusercontent.com/Shuffle/Shuffle/473cc335e5fcc663006d8e5ca16af5ee71fefa68/backend/go-app/go.sum",
+      "sha256": "501182e2a56d5482a535dcbba3e7e2f0a9a640d2e49abd811c827686f18b3c47"
+    },
+    {
+      "component": "backend",
+      "name": "LICENSE",
+      "url": "https://raw.githubusercontent.com/Shuffle/Shuffle/9ad57e0631a6ea4eb41e5b22b114d215be63dfdc/LICENSE",
+      "sha256": "8486a10c4393cee1c25392769ddd3b2d6c242d6ec7928e1414efff7dfb2f07ef"
+    },
+    {
+      "component": "worker",
+      "name": "worker.go",
+      "url": "https://raw.githubusercontent.com/Shuffle/Shuffle/473cc335e5fcc663006d8e5ca16af5ee71fefa68/functions/onprem/worker/worker.go",
+      "sha256": "4d0e7805460dec3bd82f73176e66d97e3a4df42580555e55d837f58f01a2b053"
+    },
+    {
+      "component": "worker",
+      "name": "go.mod",
+      "url": "https://raw.githubusercontent.com/Shuffle/Shuffle/473cc335e5fcc663006d8e5ca16af5ee71fefa68/functions/onprem/worker/go.mod",
+      "sha256": "7849ee053e783a56340d29133461c8f79060f922ffe9e0fe8d29f6ad8c1c6757"
+    },
+    {
+      "component": "worker",
+      "name": "go.sum",
+      "url": "https://raw.githubusercontent.com/Shuffle/Shuffle/473cc335e5fcc663006d8e5ca16af5ee71fefa68/functions/onprem/worker/go.sum",
+      "sha256": "52d0bfa15e643ecdd7ca69a7d19963a2c8a9e90307ba1b6192b5198087ae7422"
+    },
+    {
+      "component": "worker",
+      "name": "LICENSE",
+      "url": "https://raw.githubusercontent.com/Shuffle/Shuffle/9ad57e0631a6ea4eb41e5b22b114d215be63dfdc/LICENSE",
+      "sha256": "8486a10c4393cee1c25392769ddd3b2d6c242d6ec7928e1414efff7dfb2f07ef"
+    },
+    {
+      "component": "orborus",
+      "name": "orborus.go",
+      "url": "https://raw.githubusercontent.com/Shuffle/Shuffle/9ad57e0631a6ea4eb41e5b22b114d215be63dfdc/functions/onprem/orborus/orborus.go",
+      "sha256": "cb13b1c1e792a26be176949336af3ebd08fb5893f4d223278f24665544d420db"
+    },
+    {
+      "component": "orborus",
+      "name": "go.mod",
+      "url": "https://raw.githubusercontent.com/Shuffle/Shuffle/9ad57e0631a6ea4eb41e5b22b114d215be63dfdc/functions/onprem/orborus/go.mod",
+      "sha256": "ed6c565fb26fef8029710c09740855ff2041e625c32d5ffa31356f8c8c44b2f3"
+    },
+    {
+      "component": "orborus",
+      "name": "go.sum",
+      "url": "https://raw.githubusercontent.com/Shuffle/Shuffle/9ad57e0631a6ea4eb41e5b22b114d215be63dfdc/functions/onprem/orborus/go.sum",
+      "sha256": "1fb38541e1b0b78effa4dd034ac087e6b00871745825a37c37294e583e8cf3b4"
+    },
+    {
+      "component": "orborus",
+      "name": "LICENSE",
+      "url": "https://raw.githubusercontent.com/Shuffle/Shuffle/9ad57e0631a6ea4eb41e5b22b114d215be63dfdc/LICENSE",
+      "sha256": "8486a10c4393cee1c25392769ddd3b2d6c242d6ec7928e1414efff7dfb2f07ef"
+    },
+    {
+      "component": "sdk",
+      "name": "app_base.py",
+      "url": "https://raw.githubusercontent.com/Shuffle/app_sdk/abe5f4a14f876b68d2a82274dc033a99eca2f409/shuffle_sdk/shuffle_sdk.py",
+      "sha256": "8cb06e8fd2275dc2ebbf1398db9dd92e38226330114d002f784b897c78d28409"
+    }
+  ]
+}

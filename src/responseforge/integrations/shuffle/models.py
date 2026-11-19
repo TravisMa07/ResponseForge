@@ -169,6 +169,17 @@ class ShuffleReconcileRequest(Contract):
     run_id: UUIDString
 
 
+def _json_numbers(value: Any) -> Any:
+    """Normalize Go/Python integral JSON round trips without dropping graph fields."""
+    if isinstance(value, float) and value.is_integer():
+        return int(value)
+    if isinstance(value, list):
+        return [_json_numbers(item) for item in value]
+    if isinstance(value, dict):
+        return {key: _json_numbers(item) for key, item in value.items()}
+    return value
+
+
 def workflow_artifact(document: dict[str, Any]) -> WorkflowArtifact:
     try:
         workflow_id = canonical_uuid(document["id"])
@@ -179,7 +190,17 @@ def workflow_artifact(document: dict[str, Any]) -> WorkflowArtifact:
             or any(not isinstance(x, dict) for x in actions)
         ):
             raise ValueError
-        projection = {"id": workflow_id, "actions": actions}
+        # Shuffle rewrites diagram coordinates between storage and execution.
+        # Bind every executable field, excluding only top-level action UI layout.
+        if len(json.dumps(actions, allow_nan=False).encode()) > 1048576:
+            raise ValueError
+        projection = {
+            "id": workflow_id,
+            "actions": [
+                {key: value for key, value in action.items() if key != "position"}
+                for action in actions
+            ],
+        }
         for name in ("branches", "triggers", "workflow_variables", "execution_variables"):
             value = document.get(name, [])
             if not isinstance(value, list):
@@ -192,7 +213,7 @@ def workflow_artifact(document: dict[str, Any]) -> WorkflowArtifact:
         ):
             raise ValueError
         raw = json.dumps(
-            projection, sort_keys=True, separators=(",", ":"), allow_nan=False
+            _json_numbers(projection), sort_keys=True, separators=(",", ":"), allow_nan=False
         ).encode()
         if len(raw) > 1048576:
             raise ValueError

@@ -16,6 +16,7 @@ dist/
 !.env.example
 *.pem
 *.key
+*.srl
 secrets/
 .local/
 *.sqlite

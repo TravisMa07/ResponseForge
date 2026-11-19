@@ -1,6 +1,6 @@
 # ADR0002: Shuffle execution authority
 
-Status: **Docker Desktop selected for the pilot; dedicated VM remains supported. Execution permissions and runtime qualification remain open.** Date2026-11-18. Context/source evidence: [target packet](../shuffle.md), [inspected source](../shuffle-source-evidence.md).
+Status: **Docker Desktop selected for the pilot; dedicated VM remains supported. Scoped execution permission granted for the reviewed pilot; runtime qualification is recorded separately.** Date2026-11-18. Context/source evidence: [target packet](../shuffle.md), [inspected source](../shuffle-source-evidence.md).
 
 Shuffle backend/Orborus/workers need Docker execution-plane authority or an equivalent Kubernetes control plane. A remote DOCKER_HOST, another context or broad socket proxy does not by itself reduce that authority. No source-proven working zero-authority runtime was found; that is not a proof one is impossible. The compact MVP remains one ResponseForge Python package/SQLite plus external Shuffle; Kubernetes/sensors/custom dashboard are not adopted.
 
@@ -20,3 +20,7 @@ The owner selection below amends the target recommendation; execution authorizat
 Owner selected the Docker Desktop container pilot, conditional on preserving full tool logic and keeping both deployment options viable. This accepts the pilot target, not a reduced-function product variant. Both targets must run the same ResponseForge core, Shuffle workflow definitions, authenticated contracts, approval/capability checks, durable delivery/reconciliation and effect-verification requirements. Differences belong to deployment configuration: engine/network addresses, TLS/secret bootstrap, architecture-specific images, resources, persistence and recovery.
 
 No Docker Desktop-specific bypass or simulated substitute may weaken acceptance. Moving to a dedicated guest must not require rewriting domain logic or workflows; topology and platform compatibility still require real testing on each target. The selected pilot does not qualify a later VM automatically. Shared-daemon socket authority remains the separately scoped execution permission described above; no socket mount or startup occurred with this documentation update.
+
+## Concrete pilot authorization
+
+The owner explicitly authorized reviewed backend/Orborus/worker socket mounts on the existing Docker Desktop daemon, lab/generated test resources and UI/core exposure only on127.0.0.1:3443/8443. No Swarm, privileged containers, host settings, live endpoint actions or unrelated deletion. The [runtime ledger](../rf-04-runtime-ledger.md) records implementation, engine-bound evidence and remaining gates. This scoped grant supersedes historical statements above that permission was outstanding; broad socket authority remains unchanged.

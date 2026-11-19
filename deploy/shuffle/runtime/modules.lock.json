@@ -1,0 +1,11 @@
+{
+  "schema_version": "1.0",
+  "files": {
+    "backend/go.mod": "14739b99fb3149d9067516527e0656a8916ed5dda30bf05c8ad0e8bed10a6667",
+    "backend/go.sum": "ac78a073758dcf4cf9c4e43f0292ce35b11d8d9b1cf3433d7745d1d738eb23eb",
+    "worker/go.mod": "7849ee053e783a56340d29133461c8f79060f922ffe9e0fe8d29f6ad8c1c6757",
+    "worker/go.sum": "cc5311e603476dc6af163dc240010c4da3bdbeb4eba329209f3594c13014c56b",
+    "orborus/go.mod": "4f9be90042892d0d84ecb1d981e9549f1ba9a6e437ef5a1afb8646a7c6441f3a",
+    "orborus/go.sum": "a9ed0fc3d5b4964728e2c209d4ad377d2e2bc8fbe73b67b9adb69f3e91398a68"
+  }
+}

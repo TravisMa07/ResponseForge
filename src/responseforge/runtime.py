@@ -160,6 +160,20 @@ class WorkflowCallback(Contract):
     status: Literal["succeeded", "failed", "timeout"]
 
 
+class CallbackAcknowledgement(WorkflowCallback):
+    accepted: Literal[True] = True
+    received_at: UtcDateTime
+    vendor_verified: Literal[False] = False
+
+
+class NodeObservation(Contract):
+    record_type: Literal["shuffle_node"] = "shuffle_node"
+    callback: WorkflowCallback
+    received_at: UtcDateTime
+    actor_id: Id
+    mode: Mode
+
+
 class CaseSnapshot(Contract):
     incident: Incident
     alert: Alert

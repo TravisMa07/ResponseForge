@@ -1,6 +1,6 @@
 # Shuffle transport and execution-target decision
 
-The owner selected Docker Desktop for the container pilot, with a dedicated Linux VM retained as a supported deployment option. RF-04A provides source-derived API transport, durable launch suppression/reconciliation and blocked deployment plans. **No real Shuffle instance was started or workflow imported/executed. Issue #4 remains open.** Offline tests and Compose parsing establish bounded preparation only; see [design](rf-04-design.md) and [qualification ledger](rf-04-ledger.md).
+The owner selected Docker Desktop for the container pilot, with a dedicated Linux VM retained as a supported deployment option. RF-04A provides source-derived API transport, durable launch suppression/reconciliation and blocked deployment plans. The later [runtime pilot](rf-04-operator.md) is explicitly authorized and running; actual evidence and open gates are recorded in the [runtime ledger](rf-04-runtime-ledger.md). Issue #4 remains open pending qualification and owner-authorized merge. Offline tests and Compose parsing establish bounded preparation only; see [design](rf-04-design.md) and [qualification ledger](rf-04-ledger.md).
 
 ## Docker Desktop and dedicated VM, evaluated
 
@@ -18,7 +18,7 @@ The owner has Docker Desktop and no running dedicated Linux VM. Read-only rechec
 
 Integration recommendation: use a dedicated disposable guest for repeated workflow execution, because it confines Docker authority away from the development daemon. Docker Desktop is a viable candidate for a consciously authorized lab pilot; it is not rejected merely because it is Docker Desktop. No invented risk scores, setup times, cloud prices or throughput estimates support this comparison.
 
-Neither route is currently authorized for socket access/startup. A future grant must name the chosen daemon, permit only the agreed lab service/worker/app creation, define any loopback UI/tunnel, preserve unrelated workloads and exclude physical-endpoint actions, arbitrary host binds, public/LAN APIs and host privilege/resource/Swarm changes unless separately approved. A dedicated VM needs a concrete provisioning choice/budget before an agent installs software or creates it. Engine identity labels in generated plans are review markers, not enforcement or a grant. Before any execution tool is added, it must verify the actual selected engine and require the outstanding gates to be handled; this PR intentionally has no up command.
+The historical preparation below did not authorize startup. The later owner grant covers the reviewed Desktop pilot only, as recorded in ADR0002 and the runtime ledger. A different target grant must name the chosen daemon, permit only the agreed lab service/worker/app creation, define any loopback UI/tunnel, preserve unrelated workloads and exclude physical-endpoint actions, arbitrary host binds, public/LAN APIs and host privilege/resource/Swarm changes unless separately approved. A dedicated VM needs a concrete provisioning choice/budget before an agent installs software or creates it. Engine identity labels in generated plans are review markers, not enforcement or a grant. Before any execution tool is added, it must verify the actual selected engine and require the outstanding gates to be handled; this PR intentionally has no up command.
 
 ## Inspect the candidate plans
 

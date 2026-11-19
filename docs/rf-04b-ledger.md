@@ -31,3 +31,7 @@ Both target kinds and both Linux architectures rendered from actual candidate pi
 ## Next bounded runtime work
 
 Before shared Docker Desktop startup, prepare a reviewed immutable execution artifact or enforced boundary that prevents Orborus/worker cleanup of unrelated containers, without suppressing real workflow logic. Keep per-artifact license/source correlation and upstream log-secret review explicit; no unreviewed upstream patch is vendored. Prepare private app credential injection and CA/container bootstrap, then request only the concrete remaining engine/exposure scope. Runtime must reconcile callback-reported status with polled whole-workflow/graph state and capture genuine success/failure/restart/timeout evidence. RF-05 real playbook qualification follows those gates; dataset research may overlap safely.
+
+## Authorized merge and runtime successor
+
+Owner-authorized #15 merge produced `e53002a68e525854da389c13399921fd4ffb39e9` from expected head22105cbd; both hosted checks succeeded with no submitted reviews/unresolved threads. `make qualify` on the actual merged revision passes651 tests and all tooling checks. Issue #4 remains open. The [runtime successor ledger](rf-04-runtime-ledger.md) owns source-built cleanup corrections, private bootstrap, explicit pilot authorization and genuine execution evidence; historical statements above describe RF-04B's bounded checkpoint.

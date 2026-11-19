@@ -14,7 +14,7 @@ from responseforge.integrations.shuffle.models import (
     WorkflowBinding,
     canonical_uuid,
 )
-from responseforge.runtime import Principal
+from responseforge.runtime import NodeObservation, Principal
 from responseforge.storage import Transaction
 
 
@@ -235,6 +235,30 @@ class ShuffleCoordinator:
                 if state in {"failed", "rejected"}
                 else "running"
             )
+            if state in {"finished", "failed"} and vendor_status is not None:
+                # Vendor graph completion and authenticated node receipt are
+                # separate observations; neither one can finalize the run alone.
+                node_data = tx.get("callbacks", "shuffle-node:" + argument.run_id)
+                try:
+                    node = NodeObservation.model_validate(node_data)
+                    item = node.callback
+                    if (
+                        item.run_id != argument.run_id
+                        or item.incident_id != argument.incident_id
+                        or item.workflow_id != original.workflow_id
+                        or item.correlation_id != argument.correlation_id
+                        or node.mode != argument.mode
+                        or not run.started_at <= node.received_at <= now
+                        or (state == "finished" and item.status != "succeeded")
+                        or (state == "failed" and item.status not in {"failed", "timeout"})
+                    ):
+                        raise ValueError
+                    target = item.status
+                except (ValueError, TypeError):
+                    result = DeliveryRecord.model_validate(
+                        result.model_dump(mode="json") | {"state": "uncertain"}
+                    )
+                    target = "running"
             if run.status != "running" and target != "running" and run.status != target:
                 raise ServiceError(409, "Workflow terminal observations conflict")
             if run.status == "running" and target != "running":

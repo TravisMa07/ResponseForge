@@ -32,6 +32,7 @@ from responseforge.contracts import (
     PlaybookRun,
     VerificationResult,
 )
+from responseforge.integrations.shuffle.models import DeliveryRecord
 from responseforge.policy import (
     AuthorizationContext,
     PolicyError,
@@ -40,8 +41,10 @@ from responseforge.policy import (
 )
 from responseforge.runtime import (
     ActionView,
+    CallbackAcknowledgement,
     CaseSnapshot,
     IntakeResult,
+    NodeObservation,
     Principal,
     Settings,
     WorkflowCallback,
@@ -542,7 +545,7 @@ class CaseService:
 
     def callback(
         self, item: WorkflowCallback, actor: Principal, *, nonce: str, sent_at: datetime
-    ) -> PlaybookRun:
+    ) -> PlaybookRun | CallbackAcknowledgement:
         with self._operation(item.incident_id, actor):
             self._principal(actor, {"workflow"})
             item = _validated(WorkflowCallback, item)
@@ -560,11 +563,47 @@ class CaseService:
                 self._incident(tx, item.incident_id, actor)
                 run = _read(PlaybookRun, tx.get("workflows", item.run_id))
                 if (
-                    run.incident_id != item.incident_id
+                    run.run_id != item.run_id
+                    or run.incident_id != item.incident_id
                     or run.workflow_id != item.workflow_id
                     or run.correlation_id != item.correlation_id
                 ):
                     raise ServiceError(409, "Callback correlation is invalid")
+                delivery_data = tx.get("callbacks", "shuffle:" + item.run_id)
+                if delivery_data is not None:
+                    delivery = _read(DeliveryRecord, delivery_data)
+                    if (
+                        delivery.argument.run_id != item.run_id
+                        or delivery.argument.incident_id != item.incident_id
+                        or delivery.argument.correlation_id != item.correlation_id
+                        or delivery.workflow_id != item.workflow_id
+                        or delivery.argument.mode != self.settings.mode
+                    ):
+                        raise ServiceError(409, "Callback delivery binding is invalid")
+                    node_key = "shuffle-node:" + item.run_id
+                    previous = tx.get("callbacks", node_key)
+                    if previous is not None and _read(NodeObservation, previous).callback != item:
+                        raise ServiceError(409, "Callback node outcomes conflict")
+                    if not tx.claim_key(
+                        "callback", json.dumps([actor.actor_id, nonce]), item.run_id
+                    ):
+                        raise ServiceError(409, "Callback nonce was already consumed")
+                    if previous is None:
+                        observation = NodeObservation(
+                            callback=item,
+                            received_at=now,
+                            actor_id=actor.actor_id,
+                            mode=delivery.argument.mode,
+                        )
+                        tx.insert("callbacks", node_key, _dump(observation))
+                        self._audit(
+                            tx,
+                            item.incident_id,
+                            actor,
+                            "workflow_callback",
+                            "Authenticated node outcome stored; vendor completion pending",
+                        )
+                    return CallbackAcknowledgement(**item.model_dump(mode="json"), received_at=now)
                 if not tx.claim_key("callback", json.dumps([actor.actor_id, nonce]), item.run_id):
                     raise ServiceError(409, "Callback nonce was already consumed")
                 if run.status != "running":
