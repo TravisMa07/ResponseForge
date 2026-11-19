@@ -1,6 +1,6 @@
 # Playbook core steps
 
-[RF-05 design](rf-05-design.md) and [RF-05A ledger](rf-05a-ledger.md) own these internal steps. RF-05A qualifies the Python/HTTP boundaries offline. RF-05B must still install and execute three real Shuffle graphs; the APIs below alone are not that proof. Existing replay CLI behavior is unchanged, and the default server config does not enable these steps.
+[RF-05 design](rf-05-design.md) and [RF-05A ledger](rf-05a-ledger.md) own these internal steps. RF-05A qualifies the Python/HTTP boundaries offline. [RF-05B](rf-05b-ledger.md) qualifies three real native Shuffle graphs on Docker Desktop ARM64; the APIs below alone are not that proof. Existing replay CLI behavior is unchanged, and the default server config does not enable these steps.
 
 ## Server configuration and caller authority
 
@@ -46,4 +46,25 @@ Plans are stored in the existing private SQLite callbacks namespace, separate fr
 
 Use `make qualify` or `uv run --locked --offline pytest tests/rf05 -q` for the independent offline suite after installing locked dependencies. These commands use temporary core/mock SQLite databases and injected HTTP transports; no Docker daemon, network, live action or genuine Shuffle run is required or claimed. Private runtime journals and original endpoint evidence must not be committed. Merge and release gates remain explicit.
 
-An explicit later workflow invocation can reuse an already prepared case after a human decision: the proposal ID, source evidence, readiness and expiration remain original, and duplicate dispatch still has one simulated effect. This is separate from retrying an uncertain vendor launch, which must retain its original run UUID. RF-05B must demonstrate the real branch/resume behavior; RF-05A only exercises that interface offline.
+An explicit later workflow invocation can reuse an already prepared case after a human decision: the proposal ID, source evidence, readiness and expiration remain original, and duplicate dispatch still has one simulated effect. This is separate from retrying an uncertain vendor launch, which must retain its original run UUID. RF-05B demonstrates real branch/resume behavior in its bounded synthetic lab; RF-05A only exercises that interface offline.
+
+## Native Shuffle lab
+
+The [native catalog](../workflows/shuffle/README.md) defines process, persistence and containment graphs. Each uses the fixed task app for Prepare/Gate/conditional Dispatch and one final authenticated Callback. Shuffle schedules and persists the nodes; the core retains policy, evidence, approval and effect authority. The SDKless task app evaluates only the reviewed branch predicate, as the pinned vendor SDK does. A vendor FINISHED status alone cannot qualify failed or missing native tasks.
+
+Use the [existing pilot runbook](rf-04-operator.md) for the explicit engine grant, source-bound build, private state, TLS and lifecycle. For a new prepared state with current images, the original replay source is an explicit opt-in:
+
+```bash
+uv run --locked --offline python scripts/shuffle_runtime.py prepare-playbooks --state "$rf04_state"
+uv run --locked --offline python scripts/shuffle_runtime.py up --state "$rf04_state"
+uv run --locked --offline python scripts/shuffle_runtime.py qualify-playbooks --state "$rf04_state"
+uv run --locked --offline python scripts/shuffle_runtime.py down --state "$rf04_state"
+```
+
+Preparation verifies the checked-in original fixture/manifest, creates its read-only private snapshot and enables only that core mount. Qualification registers the exact private app metadata and three graphs through genuine authenticated APIs, validates their stored semantics/hash, and binds those UUIDs in core and private task configuration. It does not use remote app activation/download/build. Human decisions are separate core calls from an explicitly named synthetic human fixture; no approval credential enters the tasks or graphs.
+
+The private `domain-journal.json` reserves original execution identities before mutation. Resume verifies stored scenario meanings, original vendor/native graph completion and core delivery/audit; unknown acknowledgements do not create replacement runs. A journal cannot inherit a different build's proof. Separate source/database namespaces preserve older diagnostic cases and durable mock receipts rather than resetting them. Replacing a retained state's inventory requires an operator-reviewed exact-engine/image update; initial `prepare` refuses existing state. Never erase a journal to force a fresh start.
+
+The matrix covers approval waiting, approved explicit resume, denial, expiry, incomplete evidence, unsupported persistence, simulated containment, duplicate deliveries, callback acknowledgement loss, a post-commit native task failure, core/vendor restarts and retained state after scoped down/up. Private results include per-node execution exports, domain summary, case audit/report and actual durable mock effects. Only redacted aggregate evidence is suitable for public Git. The [RF-05B ledger](rf-05b-ledger.md) states which runtime gates actually passed; commands and offline tests alone do not establish them. This lab has no live endpoint effects or measured analyst savings.
+
+Qualification paces host core requests to respect the real60/minute per-actor limit. It does not raise that limit or automatically retry mutations. Recorded readiness and action timings include harness pacing and synthetic approval fixtures; they do not measure analyst savings or production throughput. Positive core restart occurs after native completion and before reconciliation; interrupted unacknowledged task HTTP is allowed to remain uncertain.
