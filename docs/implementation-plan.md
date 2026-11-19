@@ -80,3 +80,6 @@ RF-06B2 implementation and genuine Desktop recorded-source qualification are now
 ## RF-07 staged delivery
 
 [Design](rf-07-design.md), [A expectations](expectations/rf-07a.md) and [ledger](rf-07-ledger.md) start from merged/verified RF-06B2. A reviews native JSON authentication, configured manager/agent identity, atomic common-core intake, immutable private source evidence and no-dispatch reports. B owns the separately reviewed optional upstream manager profile and signed/hash-checked Windows enrollment bundle. Both use Refs#7 until full acceptance passes; actual enrolled endpoint/sensor/live Shuffle/effect and recovery remain separately authorized RF-08. Offline A tests use original synthetic JSON and never need downloads or deployment.
+
+
+RF-07B [owning design](rf-07b-design.md) bounds native sender/outbox recovery, immutable upstream-derived deployment planning and Windows certificate/hash/independent-signer guarded installation artifacts. Source inspection exposes hardcoded dashboard→manager TLS bypass; preparation remains explicitly unqualified until a separately reviewed patch/image/runtime gate passes. No manager or endpoint operation is implied by a generated bundle.

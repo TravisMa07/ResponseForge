@@ -53,6 +53,7 @@ def fingerprint() -> str:
     digest = hashlib.sha256()
     paths = (
         sorted((ROOT / "src").rglob("*.py"))
+        + sorted((ROOT / "src").rglob("*.ps1"))
         + sorted(RUNTIME.rglob("*"))
         + sorted((ROOT / "workflows/shuffle").glob("*.json*"))
         + [ROOT / "uv.lock", ROOT / "pyproject.toml", ROOT / "README.md", Path(__file__).resolve()]

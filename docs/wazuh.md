@@ -37,3 +37,6 @@ The Windows-first bundle must pin official MSI/hash metadata, verify actual down
 A custom sender must use fixed private operator destination/credential/CA configuration, bound regular-file handling and safe diagnostics. Do not adopt alert-provided URLs/commands or expose Wazuh api_key/hook_url arguments in logs. Deployment/retry qualification remains separate from receiver idempotency.
 
 RF-08 requires explicit administrator authorization and a supplied isolated endpoint: real sensor alert→Wazuh→same case/Shuffle flow, approved harmless supported action, separate dispatch/ack/effect proof and recovery. Wazuh active response is not automatic full network isolation. No manager startup, installation, agent enrollment, live response, merge or release is authorized by this runbook.
+
+
+Current RF-07B [preparation tools](wazuh-preparation.md) implement a durable safe sender, always-gated immutable deployment plan and private hash/independent-signer guarded Windows bundle. The source-discovered dashboard→manager TLS bypass remains an explicit source-patch/runtime blocker; no environment override or generated package establishes live readiness. Actual Windows/manager/capture/endpoint gates above remain open.

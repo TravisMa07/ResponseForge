@@ -42,3 +42,6 @@ RF-06B2 [actual evidence](evidence/rf-06b2-runtime.json) satisfies the bounded r
 
 
 RF-07A [offline intake evidence](evidence/rf-07a-intake.json) checks bounded native JSON/source authentication, canonical manager/agent mapping, atomic private provenance and safe live-mode no-dispatch reports. Original synthetic tests and published vendor-example compatibility do not satisfy captured endpoint contracts or the P4 live gate. [Deployment/enrollment and live requirements](wazuh.md) remain open under issue#7 and RF-08.
+
+
+RF-07B [preparation evidence](evidence/rf-07b-preparation.json) establishes durable sender/outbox behavior, private integrity-bound Windows package generation and an always-gated immutable upstream plan. Actual loopback HTTPS and portable script controls use original synthetic material. Actual MSI byte hash checks are not native signature/ACL/install/enrollment proof. Pinned dashboard API TLS bypass blocks manager runtime pending reviewed source/image correction; captured manager/endpoint contracts and all P4 live gates remain open.

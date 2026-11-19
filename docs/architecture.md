@@ -59,3 +59,6 @@ The [RF-03 design](rf-03-design.md) binds replay alerts/evidence to source bytes
 
 
 [RF-07A](rf-07-design.md) adds bounded authenticated native Wazuh alert intake in the same package and common SQLite case transaction. Trusted manager/agent bindings select canonical endpoints; exact received delivery bytes and original IDs/times remain private and hash-bound. Source credentials cannot call generic intake as Wazuh or acquire approval/dispatch authority. Available delivery provenance and explicit missing endpoint evidence do not imply a live collection/response capability. The [operator notes](wazuh.md) keep source mode, dry-run, raw retention and future deployment/enrollment/live verification separate.
+
+
+[RF-07B](rf-07b-design.md) adds private immutable sender/outbox recovery and offline deployment/enrollment preparation in the same package. A separately reviewed source correction is required for the pinned dashboard manager-API TLS bypass; the optional plan remains ready=False. Windows package hash/signer/target/ACL/reservation controls do not establish enrolled endpoint or verified action proof. [Operator preparation](wazuh-preparation.md) separates byte acquisition, source metadata, portable control-path tests and native runtime qualification.

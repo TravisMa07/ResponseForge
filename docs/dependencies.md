@@ -111,3 +111,8 @@ Catalog paths pin exact metadata/rights review and author notices. Root LICENSE 
 
 
 Current recorded runtime: RF-06B2 explicitly prepares the five reviewed sources behind a default-false, fixed read-only mount and server-owned source/provider bindings. Its [ledger](rf-06-ledger.md), [actual aggregate](evidence/rf-06b2-runtime.json) and [operator runbook](recorded-runtime.md) supersede earlier preparation-only status for the qualified candidate. Default original-fixture configuration stays unchanged. Twenty genuine phases cover five narrowed observations and source-selected negatives; effects remain simulated and live endpoints unqualified.
+
+
+## RF-07B source and artifact constraints
+
+The [Wazuh image lock](../deploy/wazuh/images.lock.json) records hash-verified advertised AMD64/ARM64 manifests at pinned Docker source76ddb88b9c8b618a254a287f2684f93d3c5ac2f4. No image layers/runtime are qualified. Pinned dashboard plugin5005c3e2213abeb5c7798f489a7304a6abb7c6d1 hardcodes manager-API rejectUnauthorized:false; a CA environment variable cannot correct it. [B design](rf-07b-design.md)/[ledger](rf-07-ledger.md) keep source correction/private bootstrap/runtime blocked, rather than recommending stock Compose. Official Windows4.14.10-1 MSI bytes are locally SHA512-verified; Authenticode/publisher/native install and enrollment remain unverified. Portable PowerShell7.7.0 is a private verified test tool for syntax/control paths only, not a project dependency or Windows proof.
