@@ -1,0 +1,53 @@
+{
+  "parent_ref": "wazuh/wazuh-dashboard@sha256:83560991be21e1cc50f396bd2c8281f903b9a6a33918632057294b2300cfea65",
+  "parent_id": "sha256:4d6bd1342c6bfefa64268dafeab652ff1e8e981256f1a38144838176cb6bc766",
+  "rootfs": [
+    "sha256:3d889f937eb639e200821aef339ae2493b023da21cca6dd02cf7d6a57bf1477f",
+    "sha256:d0d26841e82357a21d5ed67269eaf7256238bfdecfcd451531f5e97179f75db8",
+    "sha256:0ab05a622a33a5fd6e1d0bfa4b0dc327e2151319bf5300edac591bfeeb8da806",
+    "sha256:c7110daf60864a1181b1d81ea368f1576720b5e8682d1ec33cb462475327fff1",
+    "sha256:3dca2ded0f6c4264400522d46ae3bcd433d61340d4558a0b9f3d0a5c8718a7e9",
+    "sha256:811563848c79a4a663102483fc0511f5bf97684ff1fa32bcb5d8bdacf8058fbb",
+    "sha256:01452939f175cfc73c9df3c9a43b9ca65f34c0b6cd750a4983b072f63e868531",
+    "sha256:c78b94002d5370f3291a82c9053e616e14d94f9bc5321c7c9f6765bdd3cbcb01",
+    "sha256:23f027e9976c9076e841ee0a83164ba4222128e02b158f48254288fad2191b49",
+    "sha256:ea43d95881122a32d9ad929e54a57a55f2cbe1b5f13a11590e36cc857011c7b2",
+    "sha256:45a8bbeb99872c3d1490b2d26f77660086c3f9c48d768c5fb08f1c3293e47a83",
+    "sha256:c92f7f9d5bab0bb0120ca89000217c7b0805a049e86a80b82de4e2501895bc6a",
+    "sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef"
+  ],
+  "config": {
+    "User": "wazuh-dashboard",
+    "WorkingDir": "/usr/share/wazuh-dashboard",
+    "Entrypoint": [
+      "/entrypoint.sh"
+    ],
+    "Cmd": null,
+    "Volumes": null,
+    "ExposedPorts": {
+      "443/tcp": {}
+    },
+    "Healthcheck": null,
+    "OnBuild": null,
+    "Shell": null,
+    "StopSignal": null
+  },
+  "env_sha256": "18478c52720db0755f0c84f64ba038ccfb8d4abd642dcf13d993cd016e887832",
+  "node_path": "/usr/share/wazuh-dashboard/node/bin/node",
+  "node_sha256": "6bb2cbd5b711131ca70ef0c8e42089b0cd0ff2791edbb8e3d5a97de16bbebd30",
+  "node_size": 90098976,
+  "node_license_path": "/usr/share/wazuh-dashboard/node/LICENSE",
+  "node_license_sha256": "66233b87054d6bca9b0c2f23b027bb2caf1ebd961a6f981616d098dade33af34",
+  "client_path": "/usr/share/wazuh-dashboard/plugins/wazuhCore/server/services/server-api-client.js",
+  "client_sha256": "ef991736de15e969faf8c16e7792254f15f8bec86fe5b1d658bda21c5a66fd80",
+  "source_hashes": {
+    "bundle/upstream-server-api-client.ts": "b55c5947bab7c9b0b1e97238edb4f2c26ceae8f6bd4d5a33801d8a8d5fde6ca5",
+    "bundle/cookie.ts": "2acfdac9af159576cc0deede34516dac790269ce6d132fadd1430c153130cbd4",
+    "bundle/LICENSE": "7a8af52a46a18822fe4858a963871ce0cca465d72ea312e25e28b15b158beec0",
+    "bundle/server-api-client.ts": "a56d5fe37f1bed9aa4eaa66af0649e5266d914647f90ed1b4d0ef201b62cc27f",
+    "original/server-api-client.js": "25a23ee7db319777db5b6b6937d75b601afc7bfcda3da56bfc747f135469ba10"
+  },
+  "bundled_node_version_observed": false,
+  "image_built": false,
+  "image_executed": false
+}
