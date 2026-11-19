@@ -1,0 +1,535 @@
+{
+  "schema_version": "1.0",
+  "claim": "actual shipped client/dependency TLS component on Darwin fixture Node; no image execution",
+  "revision": "5005c3e2213abeb5c7798f489a7304a6abb7c6d1",
+  "source_sha256": "b55c5947bab7c9b0b1e97238edb4f2c26ceae8f6bd4d5a33801d8a8d5fde6ca5",
+  "patched_sha256": "a56d5fe37f1bed9aa4eaa66af0649e5266d914647f90ed1b4d0ef201b62cc27f",
+  "cookie_sha256": "2acfdac9af159576cc0deede34516dac790269ce6d132fadd1430c153130cbd4",
+  "node": "v18.19.0",
+  "openssl": "LibreSSL 3.3.6",
+  "axios": "1.18.1",
+  "compiler": "packaged-javascript-no-compilation",
+  "compiler_version": "not-applicable",
+  "image_digest": "sha256:83560991be21e1cc50f396bd2c8281f903b9a6a33918632057294b2300cfea65",
+  "config_digest": "sha256:4d6bd1342c6bfefa64268dafeab652ff1e8e981256f1a38144838176cb6bc766",
+  "payload_sha256": "77117a11f0736bfe3b558431afcbe11c1797b3b6b0ba8afbf6698e47b5e3c097",
+  "payload_diff_id": "ea43d95881122a32d9ad929e54a57a55f2cbe1b5f13a11590e36cc857011c7b2",
+  "selected_files": 297,
+  "selected_packages": [
+    {
+      "name": "axios",
+      "version": "1.18.1",
+      "root": "usr/share/wazuh-dashboard/node_modules/axios",
+      "package_json_sha256": "65f1d1513135840ca721900a56995a6fea13dc124c41a0873389ad4ac64c052e"
+    },
+    {
+      "name": "follow-redirects",
+      "version": "1.16.0",
+      "root": "usr/share/wazuh-dashboard/node_modules/follow-redirects",
+      "package_json_sha256": "42d8d50f86a6a8ab62f2c9d9d69532fc51de63becfd1a96681812e479443960c"
+    },
+    {
+      "name": "form-data",
+      "version": "4.0.5",
+      "root": "usr/share/wazuh-dashboard/node_modules/form-data",
+      "package_json_sha256": "5aa0a49ad333a05776c6c236fed575c73ec2290dd4204d3d79e749281baa8787"
+    },
+    {
+      "name": "https-proxy-agent",
+      "version": "5.0.1",
+      "root": "usr/share/wazuh-dashboard/node_modules/https-proxy-agent",
+      "package_json_sha256": "d41d9127cbed43df8e2d404bfaf41361942a8afeb82eb57ccf8515e04eb33d1d"
+    },
+    {
+      "name": "proxy-from-env",
+      "version": "2.1.0",
+      "root": "usr/share/wazuh-dashboard/node_modules/axios/node_modules/proxy-from-env",
+      "package_json_sha256": "d01e73f0bf86e192e7eab7ff3f6f9e1284695ecc713ace22d982f9a35c9be451"
+    },
+    {
+      "name": "asynckit",
+      "version": "0.4.0",
+      "root": "usr/share/wazuh-dashboard/node_modules/asynckit",
+      "package_json_sha256": "63eb9ff63be2e241ee6e80434d4641d6e9b5157d88bd3bbb692fcb2dfc8da4a9"
+    },
+    {
+      "name": "combined-stream",
+      "version": "1.0.8",
+      "root": "usr/share/wazuh-dashboard/node_modules/combined-stream",
+      "package_json_sha256": "761adece21443081ae818fe0e18864d7fa03f387075b89afa6cc5dd98356fafa"
+    },
+    {
+      "name": "es-set-tostringtag",
+      "version": "2.1.0",
+      "root": "usr/share/wazuh-dashboard/node_modules/es-set-tostringtag",
+      "package_json_sha256": "c9506942c9ef472286aff079bb65b7f3edcaccbc7f59fac9f419787b570086e5"
+    },
+    {
+      "name": "hasown",
+      "version": "2.0.2",
+      "root": "usr/share/wazuh-dashboard/node_modules/form-data/node_modules/hasown",
+      "package_json_sha256": "e96d24e4dcec86a4f769f41174b1cc79f70b4ab77b83aac4dfe646242bf76abb"
+    },
+    {
+      "name": "mime-types",
+      "version": "2.1.35",
+      "root": "usr/share/wazuh-dashboard/node_modules/form-data/node_modules/mime-types",
+      "package_json_sha256": "5053cc10259c3913ab6b6c8f13170a619c0d1836c1d9081238329a559fafeb3a"
+    },
+    {
+      "name": "agent-base",
+      "version": "6.0.2",
+      "root": "usr/share/wazuh-dashboard/node_modules/https-proxy-agent/node_modules/agent-base",
+      "package_json_sha256": "05daa619e51686fd21d15f987f943f6692c56b9f489f555cbaf42a4263d5c5e8"
+    },
+    {
+      "name": "debug",
+      "version": "4.3.7",
+      "root": "usr/share/wazuh-dashboard/node_modules/debug",
+      "package_json_sha256": "7a60ed9b6b14aa67f2ffe975715aaa6a78303844a5b43d33bfd619812088fe4d"
+    },
+    {
+      "name": "delayed-stream",
+      "version": "1.0.0",
+      "root": "usr/share/wazuh-dashboard/node_modules/delayed-stream",
+      "package_json_sha256": "4f5bd886efbd8feda6ac04db6ac1aa8b2e8dfc159503b0652667e1bc88efd4cb"
+    },
+    {
+      "name": "es-errors",
+      "version": "1.3.0",
+      "root": "usr/share/wazuh-dashboard/node_modules/es-errors",
+      "package_json_sha256": "1a0a0bcccc76b915cb64073317312840cf6363e9144b96f406d0059774dd5278"
+    },
+    {
+      "name": "get-intrinsic",
+      "version": "1.3.0",
+      "root": "usr/share/wazuh-dashboard/node_modules/es-set-tostringtag/node_modules/get-intrinsic",
+      "package_json_sha256": "45b14763baacc59b0fd7b39e3ad983d5d2aaf7f5ed682f2fce9edb469826c999"
+    },
+    {
+      "name": "has-tostringtag",
+      "version": "1.0.2",
+      "root": "usr/share/wazuh-dashboard/node_modules/es-set-tostringtag/node_modules/has-tostringtag",
+      "package_json_sha256": "30ab773c52021a6b800ea48f251abeeb1f6e378300f819204dfbb38d6e43f3ad"
+    },
+    {
+      "name": "hasown",
+      "version": "2.0.2",
+      "root": "usr/share/wazuh-dashboard/node_modules/es-set-tostringtag/node_modules/hasown",
+      "package_json_sha256": "e96d24e4dcec86a4f769f41174b1cc79f70b4ab77b83aac4dfe646242bf76abb"
+    },
+    {
+      "name": "function-bind",
+      "version": "1.1.2",
+      "root": "usr/share/wazuh-dashboard/node_modules/function-bind",
+      "package_json_sha256": "edb1c4faf4148e6e3d74ed8dbac1a1dc359a647ff4207aad4851396dc7a3559a"
+    },
+    {
+      "name": "mime-db",
+      "version": "1.52.0",
+      "root": "usr/share/wazuh-dashboard/node_modules/mime-db",
+      "package_json_sha256": "d03e37b915a050af548d543f4e45ff5de06ec767c19e745f18c431d9dc26b5bf"
+    },
+    {
+      "name": "ms",
+      "version": "2.1.3",
+      "root": "usr/share/wazuh-dashboard/node_modules/ms",
+      "package_json_sha256": "1a6b4d9739790c0b94ab96c8cc0507e281c164c311ff4fbf5e57fb8d26290b40"
+    },
+    {
+      "name": "call-bind-apply-helpers",
+      "version": "1.0.2",
+      "root": "usr/share/wazuh-dashboard/node_modules/call-bind-apply-helpers",
+      "package_json_sha256": "59639b628c6846f674857c6a613fd47e2e4d2a24036cdf0f7a62ac634f4c8a5f"
+    },
+    {
+      "name": "es-define-property",
+      "version": "1.0.1",
+      "root": "usr/share/wazuh-dashboard/node_modules/es-define-property",
+      "package_json_sha256": "3a2cb30dae30a96705dcd9aa2d5fb190cf8200f27badccfa5a81a4374e5708b4"
+    },
+    {
+      "name": "es-object-atoms",
+      "version": "1.1.1",
+      "root": "usr/share/wazuh-dashboard/node_modules/es-object-atoms",
+      "package_json_sha256": "9975f032714dd642d08c9b50129096f5daf878dbede1ca3544cdcdbf45b48eb0"
+    },
+    {
+      "name": "get-proto",
+      "version": "1.0.1",
+      "root": "usr/share/wazuh-dashboard/node_modules/get-proto",
+      "package_json_sha256": "73839e012ac7134a632c9d9fc6bdb700ac9ab5553cce39eb789ba2b65663e734"
+    },
+    {
+      "name": "gopd",
+      "version": "1.2.0",
+      "root": "usr/share/wazuh-dashboard/node_modules/es-set-tostringtag/node_modules/gopd",
+      "package_json_sha256": "33ace32dc861f6da9d1fd9d0a44c66e8c6ff3b13358d070683c1c2978ff5f19f"
+    },
+    {
+      "name": "has-symbols",
+      "version": "1.1.0",
+      "root": "usr/share/wazuh-dashboard/node_modules/es-set-tostringtag/node_modules/get-intrinsic/node_modules/has-symbols",
+      "package_json_sha256": "5190268c0e3308d7446d1f7c036238f329f786938453e6017cb90980b3612e7a"
+    },
+    {
+      "name": "math-intrinsics",
+      "version": "1.1.0",
+      "root": "usr/share/wazuh-dashboard/node_modules/math-intrinsics",
+      "package_json_sha256": "39d74aa5a354153130706286dd60a2d8409ce0c8f66546eff2edcac0afff17e1"
+    },
+    {
+      "name": "has-symbols",
+      "version": "1.0.3",
+      "root": "usr/share/wazuh-dashboard/node_modules/has-symbols",
+      "package_json_sha256": "2de994869bda3598116944312cfe5e2383f9cea9df05d12b499d704cbe20ec2d"
+    },
+    {
+      "name": "dunder-proto",
+      "version": "1.0.1",
+      "root": "usr/share/wazuh-dashboard/node_modules/dunder-proto",
+      "package_json_sha256": "24df71008e4225c858f389dd2728b76cf66b752256d42a38ed7930aacae7fe2b"
+    },
+    {
+      "name": "gopd",
+      "version": "1.2.0",
+      "root": "usr/share/wazuh-dashboard/node_modules/dunder-proto/node_modules/gopd",
+      "package_json_sha256": "33ace32dc861f6da9d1fd9d0a44c66e8c6ff3b13358d070683c1c2978ff5f19f"
+    }
+  ],
+  "packaged_original_sha256": "25a23ee7db319777db5b6b6937d75b601afc7bfcda3da56bfc747f135469ba10",
+  "packaged_cookie_sha256": "a7833d76d164bf31ce2bade07f7004189260c6c46f6b398df9b8eab2481d1d90",
+  "packaged_corrected_sha256": "ef991736de15e969faf8c16e7792254f15f8bec86fe5b1d658bda21c5a66fd80",
+  "packaged_policy_sha256": "bb2acad2d057e5d3f688c7d54c5c835832674a3a89fc6ebfb54bd47b06f54b22",
+  "wrapper_sha256": "9b72e9ddc90c4f0882535b212acbc9c61ef1df9c18ceebcbed1d265826a385ba",
+  "node_executable_sha256": "c902894d21712ec52f5d43ef1185bd2b62e14aa612197005e1f3a44ea59fe0e5",
+  "selected_tree_sha256": "5b822abbbcd0d23ee5defe35f335cb0cb69038c20a1bd4742a1218e45d573e04",
+  "build_context_dockerfile_sha256": "3d593a8326b7fe3982c48a3531fe6aba54c94a506cba3767ddab91d10222cfa2",
+  "module_resolution_guard": true,
+  "image_built": false,
+  "image_executed": false,
+  "bundled_linux_node_verified": false,
+  "source_map_removed": true,
+  "parent_artifact_execution": false,
+  "artifact_execution_only_in_guarded_children": true,
+  "harness_sha256": "6aad781f0c5e2661680ee69cde2e7bf82b7bf2a8b5c56784300ccb821d2b934d",
+  "compiled_sha256": {
+    "original": "25a23ee7db319777db5b6b6937d75b601afc7bfcda3da56bfc747f135469ba10",
+    "corrected": "ef991736de15e969faf8c16e7792254f15f8bec86fe5b1d658bda21c5a66fd80"
+  },
+  "cookie_compiled_sha256": "a7833d76d164bf31ce2bade07f7004189260c6c46f6b398df9b8eab2481d1d90",
+  "semantic_typecheck": false,
+  "full_plugin_build": false,
+  "manager_runtime": false,
+  "passed": true,
+  "evaluated_revision": "8adf0c184cc4897408ed62bb0f49130c93081f1e",
+  "native_report_sha256": "8c41c114757f1c51809a9f000e1c034a47fa5b46ae78e7789bc85454aca84bae",
+  "environment": {
+    "os": "macOS ARM64",
+    "python": "3.12.12",
+    "sqlite": "3.50.4"
+  },
+  "offline_qualification": {
+    "command": "make qualify",
+    "passed_tests": 2904,
+    "source_downloads": false,
+    "node_installs": false
+  },
+  "selected_original_bytes": 3165114,
+  "source_correspondence": {
+    "plugin_revision": "5005c3e2213abeb5c7798f489a7304a6abb7c6d1",
+    "source_ts_sha256": "b55c5947bab7c9b0b1e97238edb4f2c26ceae8f6bd4d5a33801d8a8d5fde6ca5",
+    "original_compiled_body_sha256": "ca4fd89a2257a3a4f9815776e2fe2e5a5101a5d7c3b2294dd430e6aa84ecec6f",
+    "corrected_compiled_body_sha256": "ca7b298f6d094fd9fd41f1bf836eb162f96f7f03d61da5c63ba519079333f3e7"
+  },
+  "review_regressions": {
+    "independent_python_cases": 85,
+    "additional_review_python_cases": 4,
+    "module_guard_vectors": 6,
+    "real_profile_checks": 9,
+    "original_parent_ambient_sentinel_red_retained": true,
+    "outside_sentinel_executed_after_fix": false,
+    "later_directory_overrides_refused": true,
+    "decompression_pass_compressed_growth_bounded": true,
+    "compressed_growth_bound": "declared compressed size plus one byte"
+  },
+  "licensing": {
+    "plugin": "GPL-2.0-or-later source/header and separate license retained",
+    "platform": "actual packaged Apache LICENSE and 1423978-byte NOTICE retained",
+    "selected_MIT_package_roots": 30,
+    "standalone_LICENSE_roots": 28,
+    "README_license_roots": 2,
+    "full_image_redistribution_cleared": false
+  },
+  "regressions": {
+    "c1": {
+      "node": "v24.21.0",
+      "axios": "1.17.0",
+      "compiler": "typescript",
+      "scenarios": 13,
+      "passed": true,
+      "report_sha256": "41d4ef60842ddca9f1ba9fcfa29fd22bf97801ab0297ac0d067895dc52a71a9d",
+      "harness_sha256": "6aad781f0c5e2661680ee69cde2e7bf82b7bf2a8b5c56784300ccb821d2b934d"
+    },
+    "c2": {
+      "node": "v18.19.0",
+      "axios": "1.18.1",
+      "compiler": "upstream-osd-babel-node-preset",
+      "scenarios": 13,
+      "passed": true,
+      "report_sha256": "dc667372eb0a879be5b78bffefc8f278c3c7ba322bf6c9e518c163d8ec28c2b7",
+      "harness_sha256": "6aad781f0c5e2661680ee69cde2e7bf82b7bf2a8b5c56784300ccb821d2b934d"
+    }
+  },
+  "remaining_gates": [
+    "owner C3 acceptance/merge and actual main qualification",
+    "separately authorized image build and resulting digest qualification",
+    "bundled Linux Node and whole image execution",
+    "full platform bootstrap Node18 engine conflict and full plugin/frontend/build gate",
+    "whole-image dependency/license/source-offer/security inventory",
+    "private credentials/certificates/security-index bootstrap and capacity",
+    "captured manager payload, native Windows enrollment and real endpoint action proof"
+  ],
+  "scenarios": {
+    "original_insecure_baseline": {
+      "loaded": true,
+      "secure_assertion": "FAIL: untrusted certificate accepted",
+      "authHTTP": 1,
+      "requestHTTP": 1,
+      "module_guard": true,
+      "outside_module_resolutions": 0
+    },
+    "trusted_CA_matching_SAN": {
+      "loaded": true,
+      "module_guard": true,
+      "outside_module_resolutions": 0,
+      "authenticate": {
+        "success": true,
+        "valid": true
+      },
+      "request": {
+        "success": true,
+        "valid": true
+      },
+      "observed_HTTP": {
+        "good": {
+          "auth": 1,
+          "request": 1,
+          "badIdentity": 0
+        }
+      }
+    },
+    "missing_CA": {
+      "loaded": true,
+      "module_guard": true,
+      "outside_module_resolutions": 0,
+      "authenticate": {
+        "success": false,
+        "code": "UNABLE_TO_VERIFY_LEAF_SIGNATURE",
+        "status": null,
+        "policy": false
+      },
+      "request": {
+        "success": false,
+        "code": "UNABLE_TO_VERIFY_LEAF_SIGNATURE",
+        "status": null,
+        "policy": false
+      },
+      "observed_HTTP": {}
+    },
+    "different_CA": {
+      "loaded": true,
+      "module_guard": true,
+      "outside_module_resolutions": 0,
+      "authenticate": {
+        "success": false,
+        "code": "UNABLE_TO_VERIFY_LEAF_SIGNATURE",
+        "status": null,
+        "policy": false
+      },
+      "request": {
+        "success": false,
+        "code": "UNABLE_TO_VERIFY_LEAF_SIGNATURE",
+        "status": null,
+        "policy": false
+      },
+      "observed_HTTP": {}
+    },
+    "untrusted_chain": {
+      "loaded": true,
+      "module_guard": true,
+      "outside_module_resolutions": 0,
+      "authenticate": {
+        "success": false,
+        "code": "UNABLE_TO_VERIFY_LEAF_SIGNATURE",
+        "status": null,
+        "policy": false
+      },
+      "request": {
+        "success": false,
+        "code": "UNABLE_TO_VERIFY_LEAF_SIGNATURE",
+        "status": null,
+        "policy": false
+      },
+      "observed_HTTP": {}
+    },
+    "wrong_SAN": {
+      "loaded": true,
+      "module_guard": true,
+      "outside_module_resolutions": 0,
+      "authenticate": {
+        "success": false,
+        "code": "ERR_TLS_CERT_ALTNAME_INVALID",
+        "status": null,
+        "policy": false
+      },
+      "request": {
+        "success": false,
+        "code": "ERR_TLS_CERT_ALTNAME_INVALID",
+        "status": null,
+        "policy": false
+      },
+      "observed_HTTP": {}
+    },
+    "environment_TLS_zero": {
+      "loaded": true,
+      "module_guard": true,
+      "outside_module_resolutions": 0,
+      "authenticate": {
+        "success": false,
+        "code": "UNABLE_TO_VERIFY_LEAF_SIGNATURE",
+        "status": null,
+        "policy": false
+      },
+      "request": {
+        "success": false,
+        "code": "UNABLE_TO_VERIFY_LEAF_SIGNATURE",
+        "status": null,
+        "policy": false
+      },
+      "observed_HTTP": {}
+    },
+    "plain_HTTP": {
+      "loaded": true,
+      "module_guard": true,
+      "outside_module_resolutions": 0,
+      "authenticate": {
+        "success": false,
+        "code": null,
+        "status": null,
+        "policy": true
+      },
+      "request": {
+        "success": false,
+        "code": null,
+        "status": null,
+        "policy": true
+      },
+      "observed_HTTP": {}
+    },
+    "URL_credentials": {
+      "loaded": true,
+      "module_guard": true,
+      "outside_module_resolutions": 0,
+      "authenticate": {
+        "success": false,
+        "code": null,
+        "status": null,
+        "policy": true
+      },
+      "request": {
+        "success": false,
+        "code": null,
+        "status": null,
+        "policy": true
+      },
+      "observed_HTTP": {}
+    },
+    "URL_control": {
+      "loaded": true,
+      "module_guard": true,
+      "outside_module_resolutions": 0,
+      "authenticate": {
+        "success": false,
+        "code": null,
+        "status": null,
+        "policy": true
+      },
+      "request": {
+        "success": false,
+        "code": null,
+        "status": null,
+        "policy": true
+      },
+      "observed_HTTP": {}
+    },
+    "HTTPS_redirect": {
+      "loaded": true,
+      "module_guard": true,
+      "outside_module_resolutions": 0,
+      "authenticate": {
+        "success": false,
+        "code": "ERR_BAD_RESPONSE",
+        "status": 302,
+        "policy": false
+      },
+      "request": {
+        "success": false,
+        "code": "ERR_BAD_RESPONSE",
+        "status": 302,
+        "policy": false
+      },
+      "observed_HTTP": {
+        "redirectHTTPS": {
+          "auth": 1,
+          "request": 1,
+          "badIdentity": 0
+        }
+      }
+    },
+    "HTTP_redirect": {
+      "loaded": true,
+      "module_guard": true,
+      "outside_module_resolutions": 0,
+      "authenticate": {
+        "success": false,
+        "code": "ERR_BAD_RESPONSE",
+        "status": 302,
+        "policy": false
+      },
+      "request": {
+        "success": false,
+        "code": "ERR_BAD_RESPONSE",
+        "status": 302,
+        "policy": false
+      },
+      "observed_HTTP": {
+        "redirectHTTP": {
+          "auth": 1,
+          "request": 1,
+          "badIdentity": 0
+        }
+      }
+    },
+    "hostile_proxy": {
+      "loaded": true,
+      "module_guard": true,
+      "outside_module_resolutions": 0,
+      "authenticate": {
+        "success": true,
+        "valid": true
+      },
+      "request": {
+        "success": true,
+        "valid": true
+      },
+      "observed_HTTP": {
+        "good": {
+          "auth": 1,
+          "request": 1,
+          "badIdentity": 0
+        }
+      }
+    }
+  }
+}

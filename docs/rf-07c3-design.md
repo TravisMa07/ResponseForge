@@ -33,3 +33,7 @@ Execution uses the separately verified private Darwin Node18.19.0 fixture host. 
 Prepared manifests explicitly distinguish image_built:false from image_executed:false. Review regressions refuse later directories at/below selected files and bound compressed reads to declared size+one byte under growth. C3 parent code never imports shipped Axios: it reports verified metadata, while actual VERSION and TLS behavior are checked only in guarded children. This prevents ambient optional modules executing before child guards.
 
 A final-review growth regression applies the compressed-byte cap to the decompression pass too, so appended empty gzip members cannot evade the expanded-byte cap while consuming unbounded compressed input. Both passes use the original descriptor with bounded reads; final identity checks remain mandatory.
+
+## Observed bounded result
+
+Exact implementation8adf0c1 passes2,904 repository tests/all checks,89 C3 Python cases,six module-guard vectors,nine real profile checks and13 actual-shipped-client TLS scenarios. C1/C2 regressions each pass13 scenarios. Final independent actual-artifact review closes all findings. [Ledger](rf-07-ledger.md)/[aggregate](evidence/rf-07c3-packaged-component.json) keep context/component proof separate from image build/runtime/live qualification.
