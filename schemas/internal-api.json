@@ -2749,6 +2749,60 @@
         "summary": "Playbook Gate"
       }
     },
+    "/v1/incidents/{incident_id}/playbooks/inspect": {
+      "post": {
+        "operationId": "playbook_inspect_v1_incidents__incident_id__playbooks_inspect_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "incident_id",
+            "required": true,
+            "schema": {
+              "title": "Incident Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlaybookStepRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlaybookPlan"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Playbook Inspect"
+      }
+    },
     "/v1/incidents/{incident_id}/playbooks/prepare": {
       "post": {
         "operationId": "playbook_prepare_v1_incidents__incident_id__playbooks_prepare_post",

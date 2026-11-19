@@ -301,6 +301,12 @@ def create_app(
     ) -> PlaybookPlan:
         return await PlaybookService(service).prepare(incident_id, item, actor)
 
+    @app.post("/v1/incidents/{incident_id}/playbooks/inspect", response_model=PlaybookPlan)
+    def playbook_inspect(
+        incident_id: str, item: PlaybookStepRequest, actor: Actor
+    ) -> PlaybookPlan:
+        return PlaybookService(service).inspect(incident_id, item, actor)
+
     @app.post("/v1/incidents/{incident_id}/playbooks/gate", response_model=PlaybookProgress)
     def playbook_gate(
         incident_id: str, item: PlaybookStepRequest, actor: Actor

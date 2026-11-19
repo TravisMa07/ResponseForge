@@ -53,3 +53,6 @@ The [RF-03 design](rf-03-design.md) binds replay alerts/evidence to source bytes
 
 
 [RF-06B1](rf-06b-design.md) extends explicit Windows projections and recorded-observation policy in the same package. Channel-scoped event/evidence identities preserve raw record IDs; subsets retain source/hash/selection provenance. Existing approvals, capabilities and durable effects remain authoritative. Access/task observations escalate; file/DNS associations never invent process creation. Safe report labels disclose matched full/subset registered source. XML sources remain programmatic/inspection-only until RF-06B2 runtime preparation and genuine qualification.
+
+
+[RF-06B2](rf-06b2-design.md) registers immutable exact-source replay batches and selects the same durable mock adapter through a server-owned qualification/database alias. Full source resolution applies to collection, plans, atomic dispatch and reports; unknown/conflicting scope fails closed. A default-false read-only core mount holds privately prepared pinned bundles. Genuine native Prepare creates plans; authenticated read-only inspection cannot recreate them. The [runtime runbook](recorded-runtime.md) and [owning ledger](rf-06-ledger.md) distinguish source/build identities, first candidate results and final qualification/owner gates. No new live provider or topology authority is implied.

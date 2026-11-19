@@ -25,6 +25,7 @@ from responseforge.integrations.shuffle.models import (
     canonical_uuid,
     workflow_artifact,
 )
+from responseforge.integrations.shuffle.native_session import NativeSession
 from responseforge.integrations.shuffle.operations import LABEL, PROJECT, DockerRuntime
 from responseforge.integrations.shuffle.playbook_bootstrap import bind_workflows
 from responseforge.integrations.shuffle.qualification import (
@@ -119,7 +120,7 @@ def _valid_proof(runs: dict[str, Any]) -> bool:
     return set(runs) == _LABELS and all(_valid_record(name, item) for name, item in runs.items())
 
 
-class _Lab:
+class _Lab(NativeSession):
     def __init__(self, state: Path, vendor: httpx.AsyncClient, core: httpx.AsyncClient) -> None:
         self.state, self.vendor, self.core = state, vendor, core
         self.runtime = DockerRuntime(state)
@@ -160,71 +161,6 @@ class _Lab:
     def save(self) -> None:
         _save(self.path, self.journal)
 
-    async def app(self, name: str, org: str) -> str:
-        apps = await _request(
-            self.vendor, "GET", "/api/v1/apps", token=self.env["SHUFFLE_DEFAULT_APIKEY"]
-        )
-        matches = [
-            item for item in apps if item.get("name") == name and item.get("app_version") == "1.0.0"
-        ]
-        if not matches:
-            key = "app-reserved-" + name
-            if self.journal.get(key):
-                raise ValueError(
-                    "App creation acknowledgement uncertain; inspect original vendor identity"
-                )
-            self.journal[key] = True
-            self.save()
-            steps = (
-                ("callback",)
-                if name == "responseforge_callback"
-                else ("prepare", "gate", "dispatch")
-            )
-            await _request(
-                self.vendor,
-                "PUT",
-                "/api/v1/apps",
-                token=self.env["SHUFFLE_DEFAULT_APIKEY"],
-                body={
-                    "name": name,
-                    "app_version": "1.0.0",
-                    "description": "Original RF05 native fixed actions",
-                    "contact_info": {"name": "ResponseForge"},
-                    "reference_org": org,
-                    "public": False,
-                    "sharing": False,
-                    "authentication": {"required": False},
-                    "actions": [
-                        {
-                            "name": step,
-                            "description": "Bound " + step,
-                            "parameters": [
-                                {
-                                    "name": key,
-                                    "description": "",
-                                    "required": False,
-                                    "schema": {"type": "string"},
-                                }
-                                for key in (
-                                    ("outcome", "delay_seconds") if step == "callback" else ()
-                                )
-                            ],
-                        }
-                        for step in steps
-                    ],
-                },
-            )
-            apps = await _request(
-                self.vendor, "GET", "/api/v1/apps", token=self.env["SHUFFLE_DEFAULT_APIKEY"]
-            )
-            matches = [
-                item
-                for item in apps
-                if item.get("name") == name and item.get("app_version") == "1.0.0"
-            ]
-        if len(matches) != 1:
-            raise ValueError("Native app registration is ambiguous")
-        return canonical_uuid(matches[0]["id"])
 
     async def bootstrap(self) -> None:
         info = await _ready(
@@ -350,15 +286,6 @@ class _Lab:
             )
         )
 
-    async def audit(self, incident: str) -> list[dict[str, Any]]:
-        return list(
-            await _request(
-                self.core,
-                "GET",
-                "/v1/incidents/" + incident + "/audit",
-                token=self.roles["analyst"],
-            )
-        )
 
     async def run(
         self,
@@ -690,9 +617,6 @@ class _Lab:
         # Current durable effects are verified separately against final snapshots.
         return dict(record)
 
-    def secret_values(self) -> list[str]:
-        config = json.loads((self.state / "core.json").read_text())
-        return list(config["credentials"]) + list(self.env.values())
 
     async def decide(self, label: str, decision: str, *, expire: bool = False) -> None:
         result = self.journal["results"][label]

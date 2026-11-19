@@ -55,7 +55,7 @@ def fingerprint() -> str:
         sorted((ROOT / "src").rglob("*.py"))
         + sorted(RUNTIME.rglob("*"))
         + sorted((ROOT / "workflows/shuffle").glob("*.json*"))
-        + [ROOT / "uv.lock", ROOT / "pyproject.toml", Path(__file__).resolve()]
+        + [ROOT / "uv.lock", ROOT / "pyproject.toml", ROOT / "README.md", Path(__file__).resolve()]
     )
     for path in paths:
         if path.is_file():
@@ -246,12 +246,16 @@ def main() -> int:
             "qualify",
             "prepare-playbooks",
             "qualify-playbooks",
+            "prepare-recorded",
+            "qualify-recorded",
         ),
     )
     parser.add_argument("--context")
     parser.add_argument("--engine-id")
     parser.add_argument("--work", type=Path, default=ROOT / ".local/rf04-build")
     parser.add_argument("--inventory", type=Path)
+    parser.add_argument("--cases", type=Path)
+    parser.add_argument("--bundle-root", type=Path)
     parser.add_argument("--state", type=Path, default=ROOT / ".local/rf04-pilot")
     parser.add_argument(
         "--authorize-engine",
@@ -303,6 +307,22 @@ def main() -> int:
                     )
                 )
             )
+        elif args.command == "prepare-recorded":
+            from responseforge.integrations.shuffle.recorded_bootstrap import prepare_recorded
+            if args.cases is None or args.bundle_root is None:
+                parser.error("prepare-recorded requires --cases and --bundle-root")
+            proof = json.loads((args.state / "build-inventory.json").read_text())
+            if proof.get("source_tree_sha256") != fingerprint():
+                raise ValueError("Recorded preparation requires a current source build")
+            print(json.dumps(prepare_recorded(args.state.absolute(), args.cases.absolute(), args.bundle_root.absolute())))
+        elif args.command == "qualify-recorded":
+            import asyncio
+
+            from responseforge.integrations.shuffle.recorded_qualification import qualify_recorded
+            proof = json.loads((args.state / "build-inventory.json").read_text())
+            if proof.get("source_tree_sha256") != fingerprint():
+                raise ValueError("Recorded qualification requires a current source build")
+            print(json.dumps(asyncio.run(qualify_recorded(args.state.absolute())), indent=2))
         elif args.command == "qualify-playbooks":
             import asyncio
 

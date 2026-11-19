@@ -15,6 +15,7 @@ from responseforge.contracts import ActionType, Contract, EndpointRef, Id, Mode,
 from responseforge.integrations.shuffle.models import ShuffleConfig, ShuffleError, WorkflowBinding
 from responseforge.playbooks.models import PlaybookKind
 from responseforge.providers import EvidenceProvider, ResponseProvider
+from responseforge.recorded_contracts import RecordedConfig, recorded_provider_name
 from responseforge.replay_contracts import ReplayBatch
 from responseforge.runtime import Principal, Settings
 
@@ -58,6 +59,7 @@ class FileConfig(Contract):
     environment: Id = "local"
     shuffle: ShuffleFileConfig | None = None
     playbooks: ReplayPlaybookFileConfig | None = None
+    recorded: RecordedConfig | None = None
 
 
 def load_settings(path: Path) -> Settings:
@@ -94,6 +96,23 @@ def load_settings(path: Path) -> Settings:
     evidence_provider: EvidenceProvider | None = None
     batch: ReplayBatch | None = None
     domain = config.playbooks
+    recorded_batches: tuple[ReplayBatch, ...] = ()
+    recorded_config = config.recorded
+    if recorded_config is not None:
+        from responseforge.replay.registry import load_recorded_sources
+        if (
+            config.mode != Mode.REPLAY or domain is None
+            or Path(recorded_config.mock_path).resolve() in {
+                Path(config.database_path).resolve(), Path(domain.mock_path).resolve()
+            }
+            or Path(recorded_config.mock_path).resolve().is_relative_to(
+                Path(recorded_config.bundle_root).resolve()
+            )
+            or Path(recorded_config.mock_path).is_symlink()
+            or any(parent.is_symlink() for parent in Path(recorded_config.mock_path).absolute().parents)
+        ):
+            raise ValueError("Recorded mock/source configuration is not isolated")
+        recorded_batches = load_recorded_sources(recorded_config, mode=config.mode)
     if domain is not None:
         from responseforge.integrations.mock_edr import MockResponseProvider
         from responseforge.investigation import ReplayEvidenceProvider
@@ -121,12 +140,40 @@ def load_settings(path: Path) -> Settings:
             pid = _pid(event.fields.get("process_id")) if event.artifact == "process" else None
             if pid is not None:
                 processes[event.endpoint.endpoint_id].add(pid)
+        if recorded_batches:
+            from responseforge.replay.registry import ReplayRegistry
+            ReplayRegistry((batch,) + recorded_batches)
+            for source_batch in recorded_batches:
+                for event in source_batch.events:
+                    if registered.get(event.endpoint.endpoint_id) != event.endpoint:
+                        raise ValueError("Recorded endpoint is not explicitly configured")
         adapter = MockResponseProvider(domain.mock_path)
         for identity, pids in processes.items():
             adapter.seed_endpoint(registered[identity], processes=tuple(sorted(pids)))
         providers = {adapter.name: adapter}
         versions = {adapter.name: adapter.version}
         evidence_provider = ReplayEvidenceProvider(batch)
+    if recorded_config is not None:
+        from responseforge.replay.registry import RecordedMockResponseProvider, ReplayRegistry
+        from responseforge.replay_driver import _pid
+        assert batch is not None
+        source_processes: dict[str, set[str]] = {}
+        endpoint_values = {endpoint.endpoint_id: endpoint for endpoint in config.endpoints}
+        for source_batch in recorded_batches:
+            for event in source_batch.events:
+                source_processes.setdefault(event.endpoint.endpoint_id, set())
+                pid = _pid(event.fields.get("process_id")) if (
+                    event.artifact == "process" and event.fields.get("event_kind") == "process_create"
+                ) else None
+                if pid is not None:
+                    source_processes[event.endpoint.endpoint_id].add(pid)
+        recorded_adapter = RecordedMockResponseProvider(recorded_config.mock_path)
+        recorded_adapter.name = recorded_provider_name(recorded_config)
+        for identity, pids in source_processes.items():
+            recorded_adapter.seed_endpoint(endpoint_values[identity], processes=tuple(sorted(pids)))
+        providers[recorded_adapter.name] = recorded_adapter
+        versions[recorded_adapter.name] = recorded_adapter.version
+        evidence_provider = ReplayRegistry((batch,) + recorded_batches)
     return Settings(
         database_path=config.database_path,
         mode=config.mode,
@@ -141,6 +188,8 @@ def load_settings(path: Path) -> Settings:
         provider_versions=versions,
         evidence_provider=evidence_provider,
         replay_batch=batch,
+        replay_sources=recorded_batches,
+        recorded_playbook_provider=recorded_adapter.name if recorded_batches else None,
         playbook_bindings={} if domain is None else dict(domain.bindings),
         playbook_actors={} if domain is None else domain.actors,
         playbook_provider=None if domain is None else "mock-edr",
