@@ -37,8 +37,25 @@ function snapshot(file, limit) {
   } finally {fs.closeSync(fd);}
 }
 
+function installModuleGuard(files) {
+  const Module = require('node:module');
+  const allowed = new Set(files.map(file => fs.realpathSync(file)));
+  const original = Module._resolveFilename;
+  let denied = 0;
+  Module._resolveFilename = function(request, parent, ...rest) {
+    const result = original.call(this, request, parent, ...rest);
+    if (!Module.isBuiltin(result) && !allowed.has(fs.realpathSync(result))) {
+      denied++;
+      throw new Error('Module resolution outside verified artifact');
+    }
+    return result;
+  };
+  return () => denied;
+}
+
 async function child(config) {
   // Dependencies and the complete compiled class must load before refusal is evidence.
+  const outsideModules = config.allowedModules ? installModuleGuard([...config.allowedModules, config.module, path.join(path.dirname(config.module),'cookie.js')]) : () => 0;
   if (config.axiosEntry) assert.equal(fs.realpathSync(require('node:module').createRequire(config.module).resolve('axios')), config.axiosEntry, 'Compiled module dependency escaped audited toolchain');
   const axios = require(config.axiosEntry || 'axios');
   const {ServerAPIClient} = require(config.module);
@@ -56,6 +73,9 @@ async function child(config) {
         policy: error.message === 'Verified HTTPS manager API URL required'};
     }
   }
+  assert.equal(outsideModules(), 0, 'Unverified module resolution attempted');
+  results.module_guard = Boolean(config.allowedModules);
+  results.outside_module_resolutions = outsideModules();
   process.stdout.write(JSON.stringify(results));
 }
 
@@ -122,11 +142,11 @@ async function main(profile = defaultProfile) {
   const patched = snapshot(path.join(bundle,'server-api-client.ts'),32768);
   buffers['server-api-client.ts']=patched;
   assert.equal(hash(patched),lock.patched_sha256,'Patched source hash mismatch');
-  const axios = require(profile.axiosEntry || 'axios');
-  assert.equal(axios.VERSION, profile.axiosVersion);
   fs.mkdirSync(state,{mode:0o700,recursive:false});
   trustedDirectory(state,true);
   const compiler = await profile.createCompiler(state);
+  const axiosVersion = profile.parentAxiosMetadataOnly ? profile.axiosVersion : require(profile.axiosEntry || 'axios').VERSION;
+  assert.equal(axiosVersion, profile.axiosVersion);
   const materials = path.join(state,'materials'); fs.mkdirSync(materials,{mode:0o700});
   certs(materials);
   const modules = {};
@@ -158,7 +178,8 @@ async function main(profile = defaultProfile) {
   }
   const baseEnv = {...process.env};
   for (const key of ['HTTPS_PROXY','HTTP_PROXY','ALL_PROXY','https_proxy','http_proxy','all_proxy','NO_PROXY','no_proxy','NODE_EXTRA_CA_CERTS','NODE_TLS_REJECT_UNAUTHORIZED','NODE_OPTIONS','NODE_USE_ENV_PROXY']) delete baseEnv[key];
-  const report = {schema_version:'1.0',claim:'complete-transpiled-ServerAPIClient synthetic native TLS component only',revision:lock.revision,source_sha256:lock.members[0].sha256,patched_sha256:lock.patched_sha256,cookie_sha256:lock.members[1].sha256,node:process.version,openssl:execFileSync('openssl',['version'],{encoding:'utf8'}).trim(),axios:axios.VERSION,compiler:profile.compilerName,compiler_version:profile.compilerVersion,...compiler.metadata,harness_sha256:hash(fs.readFileSync(__filename)),compiled_sha256:Object.fromEntries(Object.entries(modules).map(([name,file])=>[name,hash(fs.readFileSync(file))])),cookie_compiled_sha256:hash(fs.readFileSync(path.join(state,'corrected/cookie.js'))),semantic_typecheck:false,full_plugin_build:false,manager_runtime:false,scenarios:records};
+  if (profile.nodePath !== undefined) baseEnv.NODE_PATH = profile.nodePath;
+  const report = {schema_version:'1.0',claim:profile.claim || 'complete-transpiled-ServerAPIClient synthetic native TLS component only',revision:lock.revision,source_sha256:lock.members[0].sha256,patched_sha256:lock.patched_sha256,cookie_sha256:lock.members[1].sha256,node:process.version,openssl:execFileSync('openssl',['version'],{encoding:'utf8'}).trim(),axios:axiosVersion,compiler:profile.compilerName,compiler_version:profile.compilerVersion,...compiler.metadata,harness_sha256:hash(fs.readFileSync(__filename)),compiled_sha256:Object.fromEntries(Object.entries(modules).map(([name,file])=>[name,hash(fs.readFileSync(file))])),cookie_compiled_sha256:hash(fs.readFileSync(path.join(state,'corrected/cookie.js'))),semantic_typecheck:false,full_plugin_build:false,manager_runtime:false,scenarios:records};
   try {
     const good = await listen('good','good');
     const bad = await listen('untrusted','untrusted');
@@ -169,7 +190,7 @@ async function main(profile = defaultProfile) {
     const redirectHTTP = await listen('redirectHTTP','good',()=>`http://127.0.0.1:${plain}/redirect-target`);
     async function check(name, port, env, expectation, url='https://127.0.0.1', module=modules.corrected) {
       const before = structuredClone(counters);
-      const result = await runChild({module,url,port,axiosEntry:profile.axiosEntry},{...baseEnv,...env});
+      const result = await runChild({module,url,port,axiosEntry:profile.axiosEntry,allowedModules:profile.allowedModules},{...baseEnv,...env});
       assert.equal(result.loaded,true); assert.equal(result.axios,profile.axiosVersion);
       const delta = Object.fromEntries(Object.entries(counters).map(([key,value])=>[key,Object.fromEntries(Object.entries(value).map(([k,v])=>[k,v-before[key][k]]))]));
       records[name] = {result,delta};
@@ -193,10 +214,10 @@ async function main(profile = defaultProfile) {
     const trusted = {NODE_EXTRA_CA_CERTS:path.join(materials,'trusted.pem')};
     // Baseline must actually load and exchange credentials, exposing the original defect.
     const beforeRed = structuredClone(counters.untrusted);
-    const baseline = await runChild({module:modules.original,url:'https://127.0.0.1',port:bad,axiosEntry:profile.axiosEntry},baseEnv);
+    const baseline = await runChild({module:modules.original,url:'https://127.0.0.1',port:bad,axiosEntry:profile.axiosEntry,allowedModules:profile.allowedModules},baseEnv);
     assert(baseline.loaded && baseline.authenticate.success && baseline.request.success,'Original defect not reproduced');
     assert.equal(counters.untrusted.auth-beforeRed.auth,1); assert.equal(counters.untrusted.request-beforeRed.request,1);
-    records.original_insecure_baseline = {loaded:true,secure_assertion:'FAIL: untrusted certificate accepted',authHTTP:1,requestHTTP:1};
+    records.original_insecure_baseline = {loaded:true,secure_assertion:'FAIL: untrusted certificate accepted',authHTTP:1,requestHTTP:1,module_guard:Boolean(baseline.module_guard),outside_module_resolutions:baseline.outside_module_resolutions};
     await check('trusted_CA_matching_SAN',good,trusted,'success');
     await check('missing_CA',good,{},'refuse');
     await check('different_CA',good,{NODE_EXTRA_CA_CERTS:path.join(materials,'other.pem')},'refuse');
@@ -222,7 +243,7 @@ async function main(profile = defaultProfile) {
   }
 }
 
-module.exports = {main, trustedDirectory, snapshot};
+module.exports = {main, trustedDirectory, snapshot, installModuleGuard};
 
 if (require.main === module) (async()=>{
   if (process.argv[2] === '--child') await child(JSON.parse(process.argv[3]));

@@ -1,0 +1,2519 @@
+{
+  "image_digest": "sha256:83560991be21e1cc50f396bd2c8281f903b9a6a33918632057294b2300cfea65",
+  "config_digest": "sha256:4d6bd1342c6bfefa64268dafeab652ff1e8e981256f1a38144838176cb6bc766",
+  "architecture": "arm64",
+  "repository": "wazuh/wazuh-dashboard",
+  "node_version": "v18.19.0",
+  "runtime_image_executed": false,
+  "blobs": [
+    {
+      "name": "payload.tar.gz",
+      "size": 292316387,
+      "sha256": "77117a11f0736bfe3b558431afcbe11c1797b3b6b0ba8afbf6698e47b5e3c097",
+      "diff_id": "ea43d95881122a32d9ad929e54a57a55f2cbe1b5f13a11590e36cc857011c7b2"
+    },
+    {
+      "name": "post-10.tar.gz",
+      "size": 261,
+      "sha256": "404e7844a8b59ddc985194cb9058f92316fa5ef1d281f18598a318eb6a38d08b",
+      "diff_id": "45a8bbeb99872c3d1490b2d26f77660086c3f9c48d768c5fb08f1c3293e47a83"
+    },
+    {
+      "name": "post-11.tar.gz",
+      "size": 261,
+      "sha256": "1f7d2e94ed74517ee4d9e22fcabcd3ee91e7a706832c89d425e550d8cba7cf6e",
+      "diff_id": "c92f7f9d5bab0bb0120ca89000217c7b0805a049e86a80b82de4e2501895bc6a"
+    },
+    {
+      "name": "post-12.tar.gz",
+      "size": 32,
+      "sha256": "4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1",
+      "diff_id": "5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef"
+    }
+  ],
+  "files": [
+    {
+      "path": "usr/share/wazuh-dashboard/LICENSE.txt",
+      "size": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/NOTICE.txt",
+      "size": 1423978,
+      "sha256": "f5d92e2d8f85ceefc39bf6b3de44b9553f4448155843054084689533b06e735c"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/asynckit/LICENSE",
+      "size": 1078,
+      "sha256": "1953150d5d4b10c7542cee6f6e0c613b2682545233f069d75cfff1936386ce10"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/asynckit/README.md",
+      "size": 7640,
+      "sha256": "be5bbf9c6a02774a397f2ace8bcfb1a34d052723d8474bf3e46e0623066c8701"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/asynckit/bench.js",
+      "size": 1256,
+      "sha256": "b6c4a058c4fd03900f3786ef216322d57553ec83998e19b6d557dc39acfd2f9f"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/asynckit/index.js",
+      "size": 156,
+      "sha256": "397441fd78b69d7bdaaa48a0f354c8d07086a24414655b0601ab4f0c26e15f2f"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/asynckit/lib/abort.js",
+      "size": 497,
+      "sha256": "2c64e26dbd17f4c5ee9e017a098cda40e5eb2234a89cfeb46287f6378b74a66a"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/asynckit/lib/async.js",
+      "size": 599,
+      "sha256": "cc91aca5b66788252bb01207ec797419eb4add90b88740395e818d12fc77bf87"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/asynckit/lib/defer.js",
+      "size": 441,
+      "sha256": "91e4ffb114b4d60af8da177eb388d507a13dc9bc449f68e2d4912083cbc2b1f7"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/asynckit/lib/iterate.js",
+      "size": 1794,
+      "sha256": "1ed503336dc4f4b252852c45f8ea0b3b8eb9eab90dfa11189d9d00de888010ba"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/asynckit/lib/readable_asynckit.js",
+      "size": 1611,
+      "sha256": "a23c413a059f4422ce03f22cd2a373b2fa6930ac47cc103a0e7e26a6ee6d0602"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/asynckit/lib/readable_parallel.js",
+      "size": 673,
+      "sha256": "d254fc0dc21eb4608336a462592b44cbbcab954d3b6904a26a4766e03dcce202"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/asynckit/lib/readable_serial.js",
+      "size": 655,
+      "sha256": "b79637514db671ef3dcecde523017542c19e63f8eb93c5a5ab42b2f05bcc9a9d"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/asynckit/lib/readable_serial_ordered.js",
+      "size": 941,
+      "sha256": "9ddda7cb6c54a672d8a7e8cdd029d44e35335f7fa6e6102daf0c9f60137b59af"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/asynckit/lib/state.js",
+      "size": 941,
+      "sha256": "9c3fe921ce1c205c62ce1cca97e1eb9335f3ddf066626a36c9a44bd59bd7a2db"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/asynckit/lib/streamify.js",
+      "size": 2964,
+      "sha256": "6112cce2460f0fda4b284d893329fa6a814a86dd4614f782babc2f7de9e7ac0a"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/asynckit/lib/terminator.js",
+      "size": 533,
+      "sha256": "aeecf0a3c9e141ba3f7711426438de2172521a92b37ec3157b04e1a38e337bd0"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/asynckit/package.json",
+      "size": 1611,
+      "sha256": "63eb9ff63be2e241ee6e80434d4641d6e9b5157d88bd3bbb692fcb2dfc8da4a9"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/asynckit/parallel.js",
+      "size": 1017,
+      "sha256": "5296e5c3581ad9dc1f04aedaf1132df9736c580a326970e3975856f73aebfaea"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/asynckit/serial.js",
+      "size": 501,
+      "sha256": "b9bd1e776ab9c386ad2a832e0c02db980cdfc1276ca9969697845c7e45b7795f"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/asynckit/serialOrdered.js",
+      "size": 1751,
+      "sha256": "6ee8b4c5e8ded944d0afc55eba298c2bad1c621db1af56b427e96117cf63e41b"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/asynckit/stream.js",
+      "size": 703,
+      "sha256": "7d3986c8b5a0902da235697dcd2b080617a148ac505ae959e7a23156a204f9af"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/axios/LICENSE",
+      "size": 1084,
+      "sha256": "82761059eaedacb3356803aea8a170d8298609f91b14fc32ee1bfb40d690183c"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/axios/MIGRATION_GUIDE.md",
+      "size": 21742,
+      "sha256": "ec726d8029f29692ee5ad2a81d8b1a101d733051333e998db2afcf6df0bad449"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/axios/README.md",
+      "size": 95548,
+      "sha256": "1b27dec8ab79ec18eb7b2511ba304f4aa37782ce5d85e704b7677f2d2e2b648e"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/axios/dist/axios.js",
+      "size": 185229,
+      "sha256": "d275172e772c5e518d19c3599679de74f43629ba330d7a7de8c14f67e45d1fad"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/axios/dist/axios.min.js",
+      "size": 62406,
+      "sha256": "de2511864b48b3a371a9c789a9cf624b3bcde628fb6572b6b936a5cc2c48c26f"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/axios/dist/browser/axios.cjs",
+      "size": 141851,
+      "sha256": "be654f941544cad0bded95507623e54acc51583a540fc569ba73a1908a9d1182"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/axios/dist/esm/axios.js",
+      "size": 142822,
+      "sha256": "58d61b6ee1596a458ff0684e5f8e8078b9d22f9dd0de992bc188b80e87d393c3"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/axios/dist/esm/axios.min.js",
+      "size": 46108,
+      "sha256": "2f9e6aa51878fedc2c73d62985ec22beca6d166c5aa178e80faa2361c1808701"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/axios/dist/node/axios.cjs",
+      "size": 203332,
+      "sha256": "241146620c67551291fef242d9ab9fd9b28f1e0e14ae311e7db759d36942b574"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/axios/index.d.cts",
+      "size": 22049,
+      "sha256": "76ae30ebc6d5ab637ac5a841a7520fbbba73c17ef83cfef8147d1113f5bb01ca"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/axios/index.js",
+      "size": 704,
+      "sha256": "42286a158ea8dc6244e7e985b7c195d4f0ba25b97c9250305e604928f851378c"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/axios/lib/adapters/README.md",
+      "size": 911,
+      "sha256": "82e7ad662220113a72d91bde36ad5c43139310b1c9d73c7b996d645879af3ef2"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/axios/lib/adapters/adapters.js",
+      "size": 3505,
+      "sha256": "2d3df49937264cb77ddfae5121bfb15f606b6b8d74582da4691bca983fc81a5d"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/axios/lib/adapters/fetch.js",
+      "size": 20367,
+      "sha256": "96720d695365bf137888d44735f1832ddc8e64cc172c17a5393a69ffa45b05cd"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/axios/lib/adapters/http.js",
+      "size": 50616,
+      "sha256": "5bbbece64ffa6d945b5040db851ee7a31137d0c305f6d6f9a76a0c515f3086db"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/axios/lib/adapters/xhr.js",
+      "size": 7617,
+      "sha256": "a8560efd4102d00326990603ae477afcc13c7ec9faa971121e2528ca9f373f98"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/axios/lib/axios.js",
+      "size": 2558,
+      "sha256": "1ee4dce4ce982228f2980aa4573a496464a8afd5f866592a47000b3ae25cd49b"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/axios/lib/cancel/CancelToken.js",
+      "size": 2796,
+      "sha256": "933b19cc36e0c4a29d85f0e65b23d386ead41423be081016bf8011cd3431eec7"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/axios/lib/cancel/CanceledError.js",
+      "size": 618,
+      "sha256": "227a7f7d6b1f14d83560438e2563c1950e3399e48ec251992a69eda00d370f15"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/axios/lib/cancel/isCancel.js",
+      "size": 99,
+      "sha256": "c5ec9e27f9d90ac0dd6aa7921c273ca3e3d9aeca8acf93c54c5dd8305bb624f1"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/axios/lib/core/Axios.js",
+      "size": 8433,
+      "sha256": "f1fa07ebded26cec3cab518e054ae18439c0312276b13f5e78287c274cd8c481"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/axios/lib/core/AxiosError.js",
+      "size": 6149,
+      "sha256": "9293fe6b78fc8b4a9388f0de3410acd3c5d22a86b912e301f933f437b8b7ef52"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/axios/lib/core/AxiosHeaders.js",
+      "size": 7922,
+      "sha256": "a00559ac85f8f2b4c3522e8d32a75a946e618082267cb203a31f82d96aa74621"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/axios/lib/core/InterceptorManager.js",
+      "size": 1594,
+      "sha256": "77ec91c0e0a5cc0e0be8bf9e8e7cff903a83731c877fa2b1ccfc885bf226cfdc"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/axios/lib/core/README.md",
+      "size": 399,
+      "sha256": "6982a869f4da4405a7b74e182ca2eea0da2ade583edd606d182bfc49aee4cd2a"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/axios/lib/core/buildFullPath.js",
+      "size": 1612,
+      "sha256": "6723eeb5657c425832e9507983c7e73395d4db3e8640ce26581a11c4401afbf5"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/axios/lib/core/dispatchRequest.js",
+      "size": 2652,
+      "sha256": "fca1cc4b1709fe2e96c77abbf2cfae27df8df936ab01a614fc10547fe09df794"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/axios/lib/core/mergeConfig.js",
+      "size": 5401,
+      "sha256": "61da69b906e78f1bbc6334abc4ff3a5db43a8e17eaa433f96c9c6df8b08a7ba0"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/axios/lib/core/settle.js",
+      "size": 846,
+      "sha256": "81cb345548bb0eded2422443be6133cef6e555215d18d09808d018382972bd89"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/axios/lib/core/transformData.js",
+      "size": 776,
+      "sha256": "f1fd720e64e5813aca4d362a0ba7b761c243876ce11aa80a78c9e195fd33caaa"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/axios/lib/defaults/index.js",
+      "size": 4977,
+      "sha256": "a11d9112184143680a76124d5f01957d8af1445c489c6d7f73f50d88d75c8278"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/axios/lib/defaults/transitional.js",
+      "size": 239,
+      "sha256": "2d8122b79b4b9fc1d39381ec53e78ddba4c97f98c60f2f5be02126d0434c9850"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/axios/lib/env/README.md",
+      "size": 131,
+      "sha256": "9edc67c3c914a8eb30a6d8ccc12d6ccf21937af25bbd05b6176647dbbec13b50"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/axios/lib/env/classes/FormData.js",
+      "size": 106,
+      "sha256": "c4dc250e5dcf0b3446526c83df86d315c6edfa12a38c0ce9cb9ae476da990f68"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/axios/lib/env/data.js",
+      "size": 32,
+      "sha256": "e68115a1ad47e5bd1f11c37d86db10e0243cfcafb02dfa5973338b1a06949d32"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/axios/lib/helpers/AxiosTransformStream.js",
+      "size": 3809,
+      "sha256": "2bfbf260692a1dc826eff185544345aa400e71a9ff5b862a5aa2bfbe480c5e8b"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/axios/lib/helpers/AxiosURLSearchParams.js",
+      "size": 1416,
+      "sha256": "be7dc2ab4809630b44be971f5e40520bc56ebc91a75a4d7674087bdff1b7066d"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/axios/lib/helpers/Http2Sessions.js",
+      "size": 2622,
+      "sha256": "12c18fe26a9655aac9494644798cda3f6883f570eeb12e858ce4212efb3d3bbe"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/axios/lib/helpers/HttpStatusCode.js",
+      "size": 1760,
+      "sha256": "e825e22101f60ac49beed9c3170d81fd4670cd3ffe56ce9d11c736f2603607b0"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/axios/lib/helpers/README.md",
+      "size": 351,
+      "sha256": "b8fe226abed5bdd9fc5eed1d9b906f4eff742f838685b5ab4fd08e41fe57c193"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/axios/lib/helpers/ZlibHeaderTransformStream.js",
+      "size": 688,
+      "sha256": "d7b1e8d36d918e1dfadb83b3758dcb401a8900bde0b2d18a6b2c9cdb72f49547"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/axios/lib/helpers/bind.js",
+      "size": 444,
+      "sha256": "9a04b935a12b31ca104ada3b68d484c5371c751bb85dcf18215309f5de9188d2"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/axios/lib/helpers/buildURL.js",
+      "size": 1819,
+      "sha256": "97a40ac1bb18ff63756eac99eaba94bb115047abdd10f67300ed7937a5a6ced3"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/axios/lib/helpers/callbackify.js",
+      "size": 417,
+      "sha256": "a7e23fce488972aa264ceed0470b6e0ecf0b1dffab24f762c65c7913a3e17c9d"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/axios/lib/helpers/combineURLs.js",
+      "size": 382,
+      "sha256": "4ba8cf99c8ecafb3eb840c80acaed436d692e3f2449f2f06a91bf1a16c3d6292"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/axios/lib/helpers/composeSignals.js",
+      "size": 1405,
+      "sha256": "41272ff50c18f6c55ee80ec074a94941f43be6eaef58e7f64e7b720502a41d2c"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/axios/lib/helpers/cookies.js",
+      "size": 2152,
+      "sha256": "7b3c79313592b4d537c47a32ed5178970d27f35cc67148a66fd2c23eade307d7"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/axios/lib/helpers/deprecatedMethod.js",
+      "size": 777,
+      "sha256": "0ef9abbd830bb26072507ac3eb39e32f068508afd00622b4f3b67f4b9f4c3ef4"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/axios/lib/helpers/estimateDataURLDecodedBytes.js",
+      "size": 3063,
+      "sha256": "5a0f5b720f8bbe62bb6c3ed5c4f1468655bff4e46ef9d243cdebfc03a9055e45"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/axios/lib/helpers/formDataToJSON.js",
+      "size": 2812,
+      "sha256": "c8e572a579f034b6f526b25dfa52df930fa106ff590b31a5e4bab785193a37b3"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/axios/lib/helpers/formDataToStream.js",
+      "size": 3100,
+      "sha256": "de14b6c1a0125049aba7e4b6500088cbb4395683032bd5bc02d7e26b398f1a2c"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/axios/lib/helpers/fromDataURI.js",
+      "size": 1905,
+      "sha256": "26f960e3e07f3bf0d0253dd0c0e9b93baffd63bb7ce49b83508621c26853a6f1"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/axios/lib/helpers/isAbsoluteURL.js",
+      "size": 617,
+      "sha256": "088d43296f0ffb12f2e85d48375c544b173ba37263ae6abc1a6106fbbc76d469"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/axios/lib/helpers/isAxiosError.js",
+      "size": 369,
+      "sha256": "c3e6d0944407e3a9972954ae72701fd4329f09357f33932f5b35802097828559"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/axios/lib/helpers/isURLSameOrigin.js",
+      "size": 464,
+      "sha256": "d4ef0a17491b801d96e545a1d1632b6050ea303b758a01725cdb2f790bcc6755"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/axios/lib/helpers/null.js",
+      "size": 56,
+      "sha256": "b0d5bcbaccc56e47cd5514a3f6c66ad69dedc7d7a35035943971ab3a8272c0ac"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/axios/lib/helpers/parseHeaders.js",
+      "size": 1445,
+      "sha256": "7eb5f6cbe0cb7d62d7fa2396c9f85bd9f8d8aca2ecebe94193936dfa1c1b3028"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/axios/lib/helpers/parseProtocol.js",
+      "size": 153,
+      "sha256": "96d44b730aa3c6f942feac4369fa880d2de4bfe47f09bf751fb01f4f23fdaa88"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/axios/lib/helpers/progressEventReducer.js",
+      "size": 1416,
+      "sha256": "516cbded3bf05b31bb17a1c4936d459b1b24bec1c2c67f59df370515ebfa0817"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/axios/lib/helpers/readBlob.js",
+      "size": 323,
+      "sha256": "0169c54ef3271a4826109a7b91141afeb62372540e8c9efdf27f99773e042941"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/axios/lib/helpers/resolveConfig.js",
+      "size": 3836,
+      "sha256": "12f5c4d083bb5277d70286503eab952f8b637b03122bff1dff3d3e6dddee96f1"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/axios/lib/helpers/sanitizeHeaderValue.js",
+      "size": 1589,
+      "sha256": "14d8ae78fc865b3f383dbcbdfec6eb7be8324bde55881f7e7a913f7fe0910764"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/axios/lib/helpers/shouldBypassProxy.js",
+      "size": 6213,
+      "sha256": "2990df039fd06c4152d0825f96da3432cf2655dca7d7a7e5ea9c7428a3561f6f"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/axios/lib/helpers/speedometer.js",
+      "size": 1094,
+      "sha256": "b18c1747677bc15445d446ef5762e445222c20cc2964046c435ac471d521a9aa"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/axios/lib/helpers/spread.js",
+      "size": 566,
+      "sha256": "6a30c5a54dfb043005559170326349a795f125f32a398b908ae8d882f4225f62"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/axios/lib/helpers/throttle.js",
+      "size": 854,
+      "sha256": "190c9b9600ce96d542f71248d7a83ed4a959287bf37be8d614cd450fded7a1cb"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/axios/lib/helpers/toFormData.js",
+      "size": 7795,
+      "sha256": "c78594baefd355c9afd96d51fb4a9847d7526603dc586051c28a5930a4ebd58c"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/axios/lib/helpers/toURLEncodedForm.js",
+      "size": 542,
+      "sha256": "119ee561290393ffe4a2346c8ccb9d0d80f1005feafa8bade7416564d85c8326"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/axios/lib/helpers/trackStream.js",
+      "size": 1764,
+      "sha256": "e79d69cd217c29318ad85def34f44c6910e16f276c3f2ea9c8f63289ee0dd688"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/axios/lib/helpers/validator.js",
+      "size": 3083,
+      "sha256": "4dd0b4d89ded421dcd7de49e335b057634db5c195d08a722416553c58f299eb8"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/axios/lib/platform/browser/classes/Blob.js",
+      "size": 73,
+      "sha256": "3f0fb8c6b323ee6c1fe814acb30b085bb1849b6e6f718c32ae6fb7becf6f8758"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/axios/lib/platform/browser/classes/FormData.js",
+      "size": 81,
+      "sha256": "9e5280d27e7e78e2e37f835418161aab2cfb69101a121354fd86d2771fbfa51a"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/axios/lib/platform/browser/classes/URLSearchParams.js",
+      "size": 188,
+      "sha256": "8e410769a3294c05eaf88ccb35045997d02daf7b7742158fd054c6d73a628c18"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/axios/lib/platform/browser/index.js",
+      "size": 310,
+      "sha256": "5bb54d43ab8fe39ab280f5657160087df8b03f456aafba3198db643ff90440bc"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/axios/lib/platform/common/utils.js",
+      "size": 1603,
+      "sha256": "b744eee57f03928fbde9a9c8813dfa00a0f5b7f8803840d34ad9449561174ae3"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/axios/lib/platform/index.js",
+      "size": 132,
+      "sha256": "ff53d7bea9e964ffdf348cd59ebe931daf8430adaef8071a3e8f03fd44ac49a0"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/axios/lib/platform/node/classes/FormData.js",
+      "size": 60,
+      "sha256": "f80d8dd5ae168098f0e0abaff652a21f25277048d498f4b0207d1980afd07277"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/axios/lib/platform/node/classes/URLSearchParams.js",
+      "size": 74,
+      "sha256": "902ab44c602ed27d360b31994b468e6e517b90560862bf326e32604f1557cd85"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/axios/lib/platform/node/index.js",
+      "size": 837,
+      "sha256": "7197a6bd2378cec7481c3a9697c8bf042498ae427cb9f00567acb46b8dad36b3"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/axios/lib/utils.js",
+      "size": 27149,
+      "sha256": "ee5686f89131355c20234a988413dd8d44ead8f1be0b492eace75b46ceaf940b"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/axios/node_modules/proxy-from-env/LICENSE",
+      "size": 1087,
+      "sha256": "f55828df4b8752c48e765a806465b76a103e3cb363379c569b15a1df2ba2d79e"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/axios/node_modules/proxy-from-env/README.md",
+      "size": 6938,
+      "sha256": "d260d4ba227d6642755d5ebf8accb172fd241af324fac7ca141579366e9c223d"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/axios/node_modules/proxy-from-env/index.cjs",
+      "size": 3195,
+      "sha256": "ed81f5c4ada4c04b2f8a000f26defbdb964e658bba2f2416048e539c72380729"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/axios/node_modules/proxy-from-env/index.js",
+      "size": 3160,
+      "sha256": "42459bad8f9381a10b037a5de3cb67d761251f42e0305e32474a94bb7a14da6c"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/axios/node_modules/proxy-from-env/package.json",
+      "size": 1263,
+      "sha256": "d01e73f0bf86e192e7eab7ff3f6f9e1284695ecc713ace22d982f9a35c9be451"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/axios/package.json",
+      "size": 6544,
+      "sha256": "65f1d1513135840ca721900a56995a6fea13dc124c41a0873389ad4ac64c052e"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/call-bind-apply-helpers/.github/FUNDING.yml",
+      "size": 594,
+      "sha256": "ac7406f8f3f8eee59a2cefb2b2064ef232d01df43b7a9184cb7f48db7a8f7514"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/call-bind-apply-helpers/.nycrc",
+      "size": 139,
+      "sha256": "997785c50b0773e5e18bf15550fbf57823c634fefe623cd37b3c83696402ad0a"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/call-bind-apply-helpers/LICENSE",
+      "size": 1071,
+      "sha256": "5e325595b4ea8cfec3802f545b1def5d7b73e4a5b8e9ba63e32a320f67732292"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/call-bind-apply-helpers/README.md",
+      "size": 2330,
+      "sha256": "9505a31673f63c1d4fe2fa70fbfcbf6b6ad71a323911e2e94ad9bf6649c9e002"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/call-bind-apply-helpers/actualApply.js",
+      "size": 280,
+      "sha256": "1cbe921bb00b03294815ff0ece4212f276870466961773ce238802bc71474540"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/call-bind-apply-helpers/applyBind.js",
+      "size": 264,
+      "sha256": "3e65d83cecb93fa80dc5ad4d86d98f9e715e101ac3d8ec56d36ee669f1180bd0"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/call-bind-apply-helpers/functionApply.js",
+      "size": 99,
+      "sha256": "6170e997fbe03c6f8ff48946ada7d54c7aadc01531509af81f0edfdb7be00e27"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/call-bind-apply-helpers/functionCall.js",
+      "size": 97,
+      "sha256": "22d50c812748973250e9aa1994882a880c6e3bfc90d45e41f609cab97beee3fe"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/call-bind-apply-helpers/index.js",
+      "size": 511,
+      "sha256": "6a7ff51e964c2f1e24e3f3a90f41895bec230f07c3001eb29f45741ff99d7a83"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/call-bind-apply-helpers/package.json",
+      "size": 2480,
+      "sha256": "59639b628c6846f674857c6a613fd47e2e4d2a24036cdf0f7a62ac634f4c8a5f"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/call-bind-apply-helpers/reflectApply.js",
+      "size": 132,
+      "sha256": "e3ee45fb4c54bdb5f76ad4ef42780da004412ddb6d668993de4b9014efe246ff"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/combined-stream/License",
+      "size": 1085,
+      "sha256": "47eb8ca82c798246774946d1be0f9aa08f025fa8325ced0947aeeb4c05fe5547"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/combined-stream/Readme.md",
+      "size": 4551,
+      "sha256": "f4409df97c1568d7dd74307e2bbfb9afb3c3cb9b95f0c67272d44a305f30724a"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/combined-stream/lib/combined_stream.js",
+      "size": 4687,
+      "sha256": "f3ef1f988ac4292df828cead080b96a2a97bdce1ab8f44f76345820c58ce7b59"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/combined-stream/package.json",
+      "size": 640,
+      "sha256": "761adece21443081ae818fe0e18864d7fa03f387075b89afa6cc5dd98356fafa"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/debug/LICENSE",
+      "size": 1139,
+      "sha256": "3a61c6c96caf5c1d9b623fb9b04c822b783dfcb78aa7e49c76a3f643e6ed7f95"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/debug/README.md",
+      "size": 22115,
+      "sha256": "486cb669048bd5014adf9ea117e27a45c4e61b0e668f464c724273beb8170797"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/debug/package.json",
+      "size": 1455,
+      "sha256": "7a60ed9b6b14aa67f2ffe975715aaa6a78303844a5b43d33bfd619812088fe4d"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/debug/src/browser.js",
+      "size": 6020,
+      "sha256": "4afa722281f0817504bb7a9d060eea7e8ab2eae342611b525aff9b9204b9c9af"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/debug/src/common.js",
+      "size": 6289,
+      "sha256": "c65bff44c189188e0c45afdbd9b02c427ff5c6e54b94da53c102fbb7a53f0e37"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/debug/src/index.js",
+      "size": 314,
+      "sha256": "aa127ff1752b7d9c7415c5c7bb6994d9aa722b81bcbcab4bd48316b013d23bf3"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/debug/src/node.js",
+      "size": 4728,
+      "sha256": "d7b26d7c92f8ea7794b77ce11f3c11cd18c9084df7c357e3c7025344fa28aac6"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/delayed-stream/License",
+      "size": 1085,
+      "sha256": "47eb8ca82c798246774946d1be0f9aa08f025fa8325ced0947aeeb4c05fe5547"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/delayed-stream/Readme.md",
+      "size": 3871,
+      "sha256": "5940dca6c65d1bf74e089cf84a3948e7b2b75da5dc50a36df470f7393918cf1c"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/delayed-stream/lib/delayed_stream.js",
+      "size": 2319,
+      "sha256": "05f147c24e59e1c538329711b6e4a389fbbf321290fe176cda18750298d77c72"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/delayed-stream/package.json",
+      "size": 684,
+      "sha256": "4f5bd886efbd8feda6ac04db6ac1aa8b2e8dfc159503b0652667e1bc88efd4cb"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/dunder-proto/.github/FUNDING.yml",
+      "size": 583,
+      "sha256": "aa11a9d937d72381b6fc36c2fa3ea4e7bb3d9650c5d2604e14f2998be4e9a643"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/dunder-proto/.nycrc",
+      "size": 216,
+      "sha256": "948366fea3b423a46366326d0bb2e54b08abd1cf0b243678ba6625740c40da5a"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/dunder-proto/LICENSE",
+      "size": 1073,
+      "sha256": "2b770a704c15de238c3f622b01b0044ddd60b49ee30608ea6991ebf19db7a7a1"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/dunder-proto/README.md",
+      "size": 1907,
+      "sha256": "a04f8e67cb76f7d636860dd5d9fc6edd07ec3d41c6672897045573977c8e762a"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/dunder-proto/get.js",
+      "size": 980,
+      "sha256": "9671388b2fa2cbce2f4b8645cc1dedae2f182113a78c93dd142d987c2517dacf"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/dunder-proto/node_modules/gopd/.github/FUNDING.yml",
+      "size": 575,
+      "sha256": "14a29231a020201285cec832f4d4c90b7296bc45f9117e3f2a28c5e51a430cae"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/dunder-proto/node_modules/gopd/LICENSE",
+      "size": 1071,
+      "sha256": "d90bf0a089da4cf43d644ed240a0b3825dcdb705e64e38371d56995a4cc9e4c5"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/dunder-proto/node_modules/gopd/README.md",
+      "size": 1562,
+      "sha256": "a5adda11eb1b5c4a225289ccc2e1f01bdc27e1635b85039ad327ec37082ad3d4"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/dunder-proto/node_modules/gopd/gOPD.js",
+      "size": 97,
+      "sha256": "48a04dcb3fb5cccb6c8541a3a8227b8d9f881ea3ffef3177ac4bb0338556b839"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/dunder-proto/node_modules/gopd/index.js",
+      "size": 206,
+      "sha256": "8f8092ee3aaa2932a71e9f264a9b273dc33f7c52f4cdb0815956fccf80230d8c"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/dunder-proto/node_modules/gopd/package.json",
+      "size": 2070,
+      "sha256": "33ace32dc861f6da9d1fd9d0a44c66e8c6ff3b13358d070683c1c2978ff5f19f"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/dunder-proto/package.json",
+      "size": 2108,
+      "sha256": "24df71008e4225c858f389dd2728b76cf66b752256d42a38ed7930aacae7fe2b"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/dunder-proto/set.js",
+      "size": 1276,
+      "sha256": "627dfab99b492879fca53b5d648a7263fc16181bfee148e7d29f7fa0f47bd24d"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/es-define-property/.github/FUNDING.yml",
+      "size": 564,
+      "sha256": "fdd23eb2a51d498f6bbc1d709eb6fad3778bbb0205126bc9548d4c59b714a402"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/es-define-property/.nycrc",
+      "size": 139,
+      "sha256": "997785c50b0773e5e18bf15550fbf57823c634fefe623cd37b3c83696402ad0a"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/es-define-property/LICENSE",
+      "size": 1071,
+      "sha256": "5e325595b4ea8cfec3802f545b1def5d7b73e4a5b8e9ba63e32a320f67732292"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/es-define-property/README.md",
+      "size": 2056,
+      "sha256": "5ce564bb53fafd87b543f144e04955d128199205cf07bff442f3b875ca90d422"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/es-define-property/index.js",
+      "size": 288,
+      "sha256": "92d23d0217808c68692a1881369c207db1a35fc09dd24b98dd5f1a07d6bb3ed0"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/es-define-property/package.json",
+      "size": 2129,
+      "sha256": "3a2cb30dae30a96705dcd9aa2d5fb190cf8200f27badccfa5a81a4374e5708b4"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/es-errors/.github/FUNDING.yml",
+      "size": 555,
+      "sha256": "5cffdeeee604fdf21f64369bf526c2c707377f01fdf1d816b204422cde144ce9"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/es-errors/LICENSE",
+      "size": 1071,
+      "sha256": "5e325595b4ea8cfec3802f545b1def5d7b73e4a5b8e9ba63e32a320f67732292"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/es-errors/README.md",
+      "size": 2114,
+      "sha256": "176ec91db928c929508abf9917ebc35dd66e5ea1a989ac3e7ab290496d32c0d6"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/es-errors/eval.js",
+      "size": 75,
+      "sha256": "d3161a97f162b483206e9849e41bb17fd54166810c76ebaa1df068133e54caae"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/es-errors/index.js",
+      "size": 66,
+      "sha256": "28fee350e89561019cf27ea37a313b4b4995f521fd087198fa235a8f135962de"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/es-errors/package.json",
+      "size": 2174,
+      "sha256": "1a0a0bcccc76b915cb64073317312840cf6363e9144b96f406d0059774dd5278"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/es-errors/range.js",
+      "size": 77,
+      "sha256": "e376220f3a0226bd5b09b6d5a1411bbac274db8d2d9f7eb723142b7e676374be"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/es-errors/ref.js",
+      "size": 79,
+      "sha256": "31945f1740a0a2143fb8c38943afc6cce5de5ba6fab7af42d17b7874a19a0900"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/es-errors/syntax.js",
+      "size": 79,
+      "sha256": "56574ecd3eb54c06efd319080cc8923992791e430c914520b85e92c2f5e373f5"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/es-errors/type.js",
+      "size": 75,
+      "sha256": "c71b2f41c15edb3824f50dd24df900495c8caaba5b6e9a80851b82bb2309827b"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/es-errors/uri.js",
+      "size": 73,
+      "sha256": "e1e5591bde037a2ffeda822fa03fac22ff7c93c7b269ed9adf1cbea0e21614b0"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/es-object-atoms/.github/FUNDING.yml",
+      "size": 555,
+      "sha256": "3a6cc965019e4c28527969955cb0fe7b8f8e456bcf9c5557b2fdd6c6cea2f9b6"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/es-object-atoms/LICENSE",
+      "size": 1071,
+      "sha256": "5e325595b4ea8cfec3802f545b1def5d7b73e4a5b8e9ba63e32a320f67732292"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/es-object-atoms/README.md",
+      "size": 2603,
+      "sha256": "7ed12f453b83efdb7ace289312b40ff3eaf810d548347636b8274f56b4af9244"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/es-object-atoms/RequireObjectCoercible.js",
+      "size": 313,
+      "sha256": "52db42daa35deb84c5301c7dc5cd274593d72ad3ce77c64d2f9d71b46784b0c5"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/es-object-atoms/ToObject.js",
+      "size": 250,
+      "sha256": "deab7682047e003d3bdaa5c17ac4466783a6d4503aeb97724315936967ed860b"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/es-object-atoms/index.js",
+      "size": 67,
+      "sha256": "44ee7a57ed1c50c4c5fd2a6fcaee8772f4b7d0869326eed0aadcef87bc305212"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/es-object-atoms/isObject.js",
+      "size": 161,
+      "sha256": "c253c90b894493019432019026378b8fc6e65ba2617da6792e2e6634212f56c2"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/es-object-atoms/package.json",
+      "size": 2273,
+      "sha256": "9975f032714dd642d08c9b50129096f5daf878dbede1ca3544cdcdbf45b48eb0"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/es-set-tostringtag/.nycrc",
+      "size": 139,
+      "sha256": "997785c50b0773e5e18bf15550fbf57823c634fefe623cd37b3c83696402ad0a"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/es-set-tostringtag/LICENSE",
+      "size": 1073,
+      "sha256": "1a3aeb1f1398bd697d57c3c585faadf59d825aca6e3162cd7eeb72ff76eb2466"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/es-set-tostringtag/README.md",
+      "size": 2233,
+      "sha256": "d98d41a011e45ff71dce6038a0e357926f2968e2b2e99b70f873addec0f5d499"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/es-set-tostringtag/index.js",
+      "size": 1213,
+      "sha256": "12b5351b9d620ef78423e21bfd5d0202627b43a0a4b5bf46f7315a2772791fef"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/es-set-tostringtag/node_modules/get-intrinsic/.github/FUNDING.yml",
+      "size": 584,
+      "sha256": "24cafae83831c946115236f57f58e0d4797a3e7f6bcc8ad87b88a69d15a520c6"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/es-set-tostringtag/node_modules/get-intrinsic/.nycrc",
+      "size": 139,
+      "sha256": "997785c50b0773e5e18bf15550fbf57823c634fefe623cd37b3c83696402ad0a"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/es-set-tostringtag/node_modules/get-intrinsic/LICENSE",
+      "size": 1071,
+      "sha256": "39c5ec504cf6bd5cd782a7c695828e09189df79f5d94840e4f08feb97b9fd416"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/es-set-tostringtag/node_modules/get-intrinsic/README.md",
+      "size": 2791,
+      "sha256": "15f5365e3e1d4182780423363296e53408ff4254dc958a6e52a05a7dcee324b4"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/es-set-tostringtag/node_modules/get-intrinsic/index.js",
+      "size": 14439,
+      "sha256": "c3bc7278af37cede0da2db32724fa0b89a07c44205c44c4f5db0e4d8d497d49c"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/es-set-tostringtag/node_modules/get-intrinsic/node_modules/has-symbols/.github/FUNDING.yml",
+      "size": 582,
+      "sha256": "e777d06bafdcd1d459abcbdc03ac52357b59c248614dc6143d8d02ebfb4aef15"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/es-set-tostringtag/node_modules/get-intrinsic/node_modules/has-symbols/.nycrc",
+      "size": 139,
+      "sha256": "997785c50b0773e5e18bf15550fbf57823c634fefe623cd37b3c83696402ad0a"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/es-set-tostringtag/node_modules/get-intrinsic/node_modules/has-symbols/LICENSE",
+      "size": 1071,
+      "sha256": "206c1adcf206dc0031b11232f5b054ec5f1662407ab1ca415247921cab2068ab"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/es-set-tostringtag/node_modules/get-intrinsic/node_modules/has-symbols/README.md",
+      "size": 2044,
+      "sha256": "a062b27ee12e84e310041d05d10d69ac2d7076cba1fc698bae8a4e40a15897ec"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/es-set-tostringtag/node_modules/get-intrinsic/node_modules/has-symbols/index.js",
+      "size": 447,
+      "sha256": "fd9bef8dd0d913bc8beac3156a0019d1a83a6e091498d1af1cbdbd536776e189"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/es-set-tostringtag/node_modules/get-intrinsic/node_modules/has-symbols/package.json",
+      "size": 2974,
+      "sha256": "5190268c0e3308d7446d1f7c036238f329f786938453e6017cb90980b3612e7a"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/es-set-tostringtag/node_modules/get-intrinsic/node_modules/has-symbols/shams.js",
+      "size": 1922,
+      "sha256": "41277ab2db4a31094dc6f4ca2c3cbbe5576da5e5bddac4bda6c1f0d9c0e0c417"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/es-set-tostringtag/node_modules/get-intrinsic/package.json",
+      "size": 2576,
+      "sha256": "45b14763baacc59b0fd7b39e3ad983d5d2aaf7f5ed682f2fce9edb469826c999"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/es-set-tostringtag/node_modules/gopd/.github/FUNDING.yml",
+      "size": 575,
+      "sha256": "14a29231a020201285cec832f4d4c90b7296bc45f9117e3f2a28c5e51a430cae"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/es-set-tostringtag/node_modules/gopd/LICENSE",
+      "size": 1071,
+      "sha256": "d90bf0a089da4cf43d644ed240a0b3825dcdb705e64e38371d56995a4cc9e4c5"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/es-set-tostringtag/node_modules/gopd/README.md",
+      "size": 1562,
+      "sha256": "a5adda11eb1b5c4a225289ccc2e1f01bdc27e1635b85039ad327ec37082ad3d4"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/es-set-tostringtag/node_modules/gopd/gOPD.js",
+      "size": 97,
+      "sha256": "48a04dcb3fb5cccb6c8541a3a8227b8d9f881ea3ffef3177ac4bb0338556b839"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/es-set-tostringtag/node_modules/gopd/index.js",
+      "size": 206,
+      "sha256": "8f8092ee3aaa2932a71e9f264a9b273dc33f7c52f4cdb0815956fccf80230d8c"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/es-set-tostringtag/node_modules/gopd/package.json",
+      "size": 2070,
+      "sha256": "33ace32dc861f6da9d1fd9d0a44c66e8c6ff3b13358d070683c1c2978ff5f19f"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/es-set-tostringtag/node_modules/has-tostringtag/.github/FUNDING.yml",
+      "size": 586,
+      "sha256": "5af2fc8a34665542659d4ce1520f5df2054affc3754edc49001e65d0c200e2e5"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/es-set-tostringtag/node_modules/has-tostringtag/.nycrc",
+      "size": 216,
+      "sha256": "948366fea3b423a46366326d0bb2e54b08abd1cf0b243678ba6625740c40da5a"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/es-set-tostringtag/node_modules/has-tostringtag/LICENSE",
+      "size": 1067,
+      "sha256": "e2560e002e13281578c75c850061d9255c33d16d732939e8c2db64c2506642fa"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/es-set-tostringtag/node_modules/has-tostringtag/README.md",
+      "size": 2190,
+      "sha256": "bcf8eec2c348d4509573a3b85c98705b5bdf1b59e903a9f621fb5a33be0532cb"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/es-set-tostringtag/node_modules/has-tostringtag/index.js",
+      "size": 196,
+      "sha256": "14e192d4c15b0fc042629b25bc9c3f07aaf23b937ea46785f5e288a1a0f9beb9"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/es-set-tostringtag/node_modules/has-tostringtag/package.json",
+      "size": 2838,
+      "sha256": "30ab773c52021a6b800ea48f251abeeb1f6e378300f819204dfbb38d6e43f3ad"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/es-set-tostringtag/node_modules/has-tostringtag/shams.js",
+      "size": 189,
+      "sha256": "e5e0b7bbca35fa5911487361da2bc00b880d62114be6f3be87a876a59037020b"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/es-set-tostringtag/node_modules/hasown/.github/FUNDING.yml",
+      "size": 552,
+      "sha256": "4a8aadc5bb4e3fcb59ced104864f1440a8a0b82c57d7a69ef3845223590039cc"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/es-set-tostringtag/node_modules/hasown/.nycrc",
+      "size": 216,
+      "sha256": "948366fea3b423a46366326d0bb2e54b08abd1cf0b243678ba6625740c40da5a"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/es-set-tostringtag/node_modules/hasown/LICENSE",
+      "size": 1083,
+      "sha256": "bf9b0d665be2a689851eea667ca9f42066ea1d903b38349c51e6a44b2577680a"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/es-set-tostringtag/node_modules/hasown/README.md",
+      "size": 1613,
+      "sha256": "a922ab2a0abcdcbd99c1484c7bd83d69a04b5e11ab53064d2c9aa557df1c52b4"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/es-set-tostringtag/node_modules/hasown/index.js",
+      "size": 206,
+      "sha256": "8f875520f41a3d711566013882af290c840969316cc72cd6b35f7e81d7dfc6d2"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/es-set-tostringtag/node_modules/hasown/package.json",
+      "size": 2283,
+      "sha256": "e96d24e4dcec86a4f769f41174b1cc79f70b4ab77b83aac4dfe646242bf76abb"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/es-set-tostringtag/package.json",
+      "size": 2193,
+      "sha256": "c9506942c9ef472286aff079bb65b7f3edcaccbc7f59fac9f419787b570086e5"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/follow-redirects/LICENSE",
+      "size": 1136,
+      "sha256": "bfa8a54bb952ccda79f0f1889721d108f5b605babbb2b8a3705ffb52f4132eb7"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/follow-redirects/README.md",
+      "size": 6605,
+      "sha256": "190b2c4cce3593592f9661d1bff3ab398317e195425ef3f23758d1f52c42f6af"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/follow-redirects/debug.js",
+      "size": 315,
+      "sha256": "8dbf7e71a9292be180e3469a6b7a164171d3c39dec79e5dbc4aa1c9f09509faf"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/follow-redirects/http.js",
+      "size": 37,
+      "sha256": "754c0078c57625db7b55b4c3fb30ff5c207fc49284a5022742e81d0c595403c5"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/follow-redirects/https.js",
+      "size": 38,
+      "sha256": "7a28e323ffd91094e083a8954fe027839c06d948603d7f2719ed17c446885272"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/follow-redirects/index.js",
+      "size": 21194,
+      "sha256": "bdd5d91f6f088a3b73a8703e6fcf09fe92c5f24e5ad8b6b5aff5b26a95a2ace3"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/follow-redirects/package.json",
+      "size": 1289,
+      "sha256": "42d8d50f86a6a8ab62f2c9d9d69532fc51de63becfd1a96681812e479443960c"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/form-data/License",
+      "size": 1118,
+      "sha256": "e5b780d4f38d1d3328e3e53186c4e62d3fa149ea6f2bacd5de5ad0c30ac85343"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/form-data/README.md",
+      "size": 12034,
+      "sha256": "d196d63a7b2dbb92ba0a68e0c5dbfa11b824412a3bc2bd0fb3a6652be1fbbf35"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/form-data/lib/browser.js",
+      "size": 117,
+      "sha256": "2981e594dd48d8f48e7aad33d64c5a27d5b20a6adf78b0e1efef706dd189636f"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/form-data/lib/form_data.js",
+      "size": 14577,
+      "sha256": "ccf1c1077340212f58e39d6054c9822aaaef2ed6220c3a502bee446fa3fa6fb6"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/form-data/lib/populate.js",
+      "size": 232,
+      "sha256": "3c566ebe2e52a364120a665a6e7c7130a7c47503d61b36c74798b54d9414467f"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/form-data/node_modules/hasown/.github/FUNDING.yml",
+      "size": 552,
+      "sha256": "4a8aadc5bb4e3fcb59ced104864f1440a8a0b82c57d7a69ef3845223590039cc"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/form-data/node_modules/hasown/.nycrc",
+      "size": 216,
+      "sha256": "948366fea3b423a46366326d0bb2e54b08abd1cf0b243678ba6625740c40da5a"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/form-data/node_modules/hasown/LICENSE",
+      "size": 1083,
+      "sha256": "bf9b0d665be2a689851eea667ca9f42066ea1d903b38349c51e6a44b2577680a"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/form-data/node_modules/hasown/README.md",
+      "size": 1613,
+      "sha256": "a922ab2a0abcdcbd99c1484c7bd83d69a04b5e11ab53064d2c9aa557df1c52b4"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/form-data/node_modules/hasown/index.js",
+      "size": 206,
+      "sha256": "8f875520f41a3d711566013882af290c840969316cc72cd6b35f7e81d7dfc6d2"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/form-data/node_modules/hasown/package.json",
+      "size": 2283,
+      "sha256": "e96d24e4dcec86a4f769f41174b1cc79f70b4ab77b83aac4dfe646242bf76abb"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/form-data/node_modules/mime-types/LICENSE",
+      "size": 1167,
+      "sha256": "71f83c4c0621102a56d9853812777b85751bce7e9726f686f5b056c1f8a4b0e6"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/form-data/node_modules/mime-types/README.md",
+      "size": 3481,
+      "sha256": "19e8eaca7dc91f7ad8e46114ce1689e4976368435f41a0039f48aaf27e5e6a20"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/form-data/node_modules/mime-types/index.js",
+      "size": 3663,
+      "sha256": "8cfccaac306beb650d60c7f069ae0f4b39d648f1e3914696b18c133ab33e6419"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/form-data/node_modules/mime-types/package.json",
+      "size": 1149,
+      "sha256": "5053cc10259c3913ab6b6c8f13170a619c0d1836c1d9081238329a559fafeb3a"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/form-data/package.json",
+      "size": 3008,
+      "sha256": "5aa0a49ad333a05776c6c236fed575c73ec2290dd4204d3d79e749281baa8787"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/function-bind/.github/FUNDING.yml",
+      "size": 584,
+      "sha256": "728efc32ee016ce1b42d6b8848548b7f3540d5e0ba2966efca1774d132493d52"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/function-bind/.github/SECURITY.md",
+      "size": 157,
+      "sha256": "dd880fbe091e1b4fe671ef6e4879f7d144a64c0a3b21ce9b498c62c082ff3e50"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/function-bind/.nycrc",
+      "size": 216,
+      "sha256": "948366fea3b423a46366326d0bb2e54b08abd1cf0b243678ba6625740c40da5a"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/function-bind/LICENSE",
+      "size": 1052,
+      "sha256": "773e131a7684726005a7e4688a80b4620033bc08499bc1404dd1a1eb3bca725e"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/function-bind/README.md",
+      "size": 1755,
+      "sha256": "305fc05a184a5afa3766893be87d24e4c0f2e8561b66463a51aee4b196b1dc48"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/function-bind/implementation.js",
+      "size": 2043,
+      "sha256": "5c52eb40601e0716dafff9759cf28d8d4af3e2fc2e2c96384f43dbfd0f7370b5"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/function-bind/index.js",
+      "size": 126,
+      "sha256": "12fa1b92429db25599f6fe118cbbb877f7f62b83cb9bfe2fc896b2d6a8110647"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/function-bind/package.json",
+      "size": 2262,
+      "sha256": "edb1c4faf4148e6e3d74ed8dbac1a1dc359a647ff4207aad4851396dc7a3559a"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/get-proto/.github/FUNDING.yml",
+      "size": 580,
+      "sha256": "efc240256bdc771e8b442e1e88b40157e9fd51f5a1b2cb510da770087b77719c"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/get-proto/.nycrc",
+      "size": 139,
+      "sha256": "997785c50b0773e5e18bf15550fbf57823c634fefe623cd37b3c83696402ad0a"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/get-proto/LICENSE",
+      "size": 1071,
+      "sha256": "be46ce1e3b0479af9ce82d22b465a6d7d2ff084fca0aaf3d54172da2b5eb5781"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/get-proto/Object.getPrototypeOf.js",
+      "size": 156,
+      "sha256": "66d51243588d269eb28f5bc8236e111a9a36e010e9b5b9b496be2963882a9e28"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/get-proto/README.md",
+      "size": 1794,
+      "sha256": "5a3c611a2e47ccbe9b01df7ee9f6bce0a2035fd35acbff028e5ceef77a1331ee"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/get-proto/Reflect.getPrototypeOf.js",
+      "size": 150,
+      "sha256": "bab0332997a67c0eb3d2ab24ee9ae5d106d275a8ef5bde2a711faa1c96899c59"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/get-proto/index.js",
+      "size": 821,
+      "sha256": "ee310261ff252b6d90c1a9fc4b9eceb63ddb963e7eec5125631cf169daad38c1"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/get-proto/package.json",
+      "size": 2176,
+      "sha256": "73839e012ac7134a632c9d9fc6bdb700ac9ab5553cce39eb789ba2b65663e734"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/has-symbols/.github/FUNDING.yml",
+      "size": 582,
+      "sha256": "e777d06bafdcd1d459abcbdc03ac52357b59c248614dc6143d8d02ebfb4aef15"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/has-symbols/.nycrc",
+      "size": 139,
+      "sha256": "997785c50b0773e5e18bf15550fbf57823c634fefe623cd37b3c83696402ad0a"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/has-symbols/LICENSE",
+      "size": 1071,
+      "sha256": "206c1adcf206dc0031b11232f5b054ec5f1662407ab1ca415247921cab2068ab"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/has-symbols/README.md",
+      "size": 2044,
+      "sha256": "a062b27ee12e84e310041d05d10d69ac2d7076cba1fc698bae8a4e40a15897ec"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/has-symbols/index.js",
+      "size": 420,
+      "sha256": "2874f6cf003018e7b47626144b9f7cb2264a8519c71aaab88562815b2416d3d2"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/has-symbols/package.json",
+      "size": 2648,
+      "sha256": "2de994869bda3598116944312cfe5e2383f9cea9df05d12b499d704cbe20ec2d"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/has-symbols/shams.js",
+      "size": 1761,
+      "sha256": "5ba1a47350dce55be2c198c791df52fa013bac2ad8d7dcd7d67726c08a4231f1"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/https-proxy-agent/README.md",
+      "size": 4761,
+      "sha256": "32f0856d2c43df7d05cca960fdee84e1e38ab545bd7b2186433dfa41aa90a712"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/https-proxy-agent/dist/agent.js",
+      "size": 7841,
+      "sha256": "cdf5601776256dee031a1275186c409578ddba5aa441e66c0bea785f81e185e6"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/https-proxy-agent/dist/index.js",
+      "size": 579,
+      "sha256": "7f18e187a92bf3691b1728523ad5863f08ace4d25599535e1471f1f81e90f2cd"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/https-proxy-agent/dist/parse-proxy-response.js",
+      "size": 2460,
+      "sha256": "24c1737b73db4c109a4cb184ca768b4e85f6cc6cfcc74ed3836388a995b3e557"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/https-proxy-agent/node_modules/agent-base/README.md",
+      "size": 5056,
+      "sha256": "f1425c3b72330fe4fb2aa5a2fb152e939bdf534692a32b5f0b38f74147b98556"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/https-proxy-agent/node_modules/agent-base/dist/src/index.js",
+      "size": 7910,
+      "sha256": "13b6d658b492796461358e19fe1de30665ab2efb04c726b82530352cd364d4ac"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/https-proxy-agent/node_modules/agent-base/dist/src/promisify.js",
+      "size": 495,
+      "sha256": "7db1e28ac19b38be8cf3edecac66c7084bb00b65f6755a83309bcf10564b5771"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/https-proxy-agent/node_modules/agent-base/package.json",
+      "size": 1635,
+      "sha256": "05daa619e51686fd21d15f987f943f6692c56b9f489f555cbaf42a4263d5c5e8"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/https-proxy-agent/package.json",
+      "size": 1405,
+      "sha256": "d41d9127cbed43df8e2d404bfaf41361942a8afeb82eb57ccf8515e04eb33d1d"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/math-intrinsics/.github/FUNDING.yml",
+      "size": 561,
+      "sha256": "a038b7ce2a1e3b2a4dfb7956d262943a084f40d16ddd1a5c19e29a439409db50"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/math-intrinsics/LICENSE",
+      "size": 1073,
+      "sha256": "2b770a704c15de238c3f622b01b0044ddd60b49ee30608ea6991ebf19db7a7a1"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/math-intrinsics/README.md",
+      "size": 1884,
+      "sha256": "9ac2e749aed9f8259749e0fa1f8caebf3112340ac8d27ba88071744bde8f9b7e"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/math-intrinsics/abs.js",
+      "size": 73,
+      "sha256": "276961e4323370f3632410c6da81dda018b78c0cfb2a83ea72d48c80a3eaaeb1"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/math-intrinsics/constants/maxArrayLength.js",
+      "size": 110,
+      "sha256": "0f267bd9824ebe59456bd6bc6ba41a541ddf0a92c6b3d18201daefd0cc40613e"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/math-intrinsics/constants/maxSafeInteger.js",
+      "size": 231,
+      "sha256": "576a7c935f4154a6f2eaf69446560e36371afb55120774f05563f06ab261df85"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/math-intrinsics/constants/maxValue.js",
+      "size": 197,
+      "sha256": "a920a974645eca8557c75d4fecf745c68a272621a57d5ed4ca6ffc73ded366e2"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/math-intrinsics/floor.js",
+      "size": 77,
+      "sha256": "ea904c30b45d6fbbc1780f4db7d78c360bbecf98ecd789f0c817156102714c3f"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/math-intrinsics/isFinite.js",
+      "size": 262,
+      "sha256": "7045afb6184ca183449f97d519cf9dea5e46583121c01266ed4eedae3825650b"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/math-intrinsics/isInteger.js",
+      "size": 410,
+      "sha256": "22c5144c94c4da5be94fb4d3d735f5f65fe3b9fbe28b6d2cf4fe8541bc53e915"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/math-intrinsics/isNaN.js",
+      "size": 121,
+      "sha256": "1aa84179527aef8df84457dd8d4e828d76d58fd9170e7a9893ee7e0e774534e8"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/math-intrinsics/isNegativeZero.js",
+      "size": 143,
+      "sha256": "8b83fd56780ffb96eb5a31c073fd7ca24d03b1259b8aae90ef7eac311e1ded34"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/math-intrinsics/max.js",
+      "size": 73,
+      "sha256": "92326f3eab1e40148bd68fb65a85d2c3f18fc32a03be27353b2054ba27ba7409"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/math-intrinsics/min.js",
+      "size": 73,
+      "sha256": "b78c68ab96cb2764df12ff8038f5b05b05376b4c39608a7a25b3b0b168e7c2e2"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/math-intrinsics/mod.js",
+      "size": 218,
+      "sha256": "0a5d968b563d027bad91e35bd3b244a749c2bf8357f33f93e0abf8c8d3d4a625"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/math-intrinsics/package.json",
+      "size": 2670,
+      "sha256": "39d74aa5a354153130706286dd60a2d8409ce0c8f66546eff2edcac0afff17e1"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/math-intrinsics/pow.js",
+      "size": 73,
+      "sha256": "8dd625bd4c7b31b7656ab99babc9fea1617f36c35f5dbd339ebdc2d0f4bd97d2"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/math-intrinsics/round.js",
+      "size": 77,
+      "sha256": "1d4794c5869d554732cdc82208f954df348e4035f3cbd09ab758c553a207dc1e"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/math-intrinsics/sign.js",
+      "size": 214,
+      "sha256": "aef51335e4671ddd0f55a81e2e4395b1d96afee20102b50e33e2b485f7cd2598"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/mime-db/LICENSE",
+      "size": 1172,
+      "sha256": "cc1dfd4dafa27271e8212cd3b274eeb3f262e40a6fdab36ddc3f9696f706f58b"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/mime-db/README.md",
+      "size": 4091,
+      "sha256": "5cc863fd64953afa39d206b510378b73e8c767c5fd124bb8d4017db921c94855"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/mime-db/db.json",
+      "size": 185882,
+      "sha256": "85c8e1ba609079947c8df83c092900ab0226e1d7b60e5e7105fb7dd701833263"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/mime-db/index.js",
+      "size": 189,
+      "sha256": "2ccebf3d525708c915c6a86ffbb68e5023d34c9bc30b6b4021db9ebbc6ca9ecc"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/mime-db/package.json",
+      "size": 1624,
+      "sha256": "d03e37b915a050af548d543f4e45ff5de06ec767c19e745f18c431d9dc26b5bf"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/ms/index.js",
+      "size": 3024,
+      "sha256": "e5f0b6a946a9b2b356a28557728410717df54ea2f599edb619f9839df6b7b0e9"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/ms/license.md",
+      "size": 1079,
+      "sha256": "1662fae9b5314d11cf51284e2dcd1f006a354f7343f08712a730fcff9a359801"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/ms/package.json",
+      "size": 732,
+      "sha256": "1a6b4d9739790c0b94ab96c8cc0507e281c164c311ff4fbf5e57fb8d26290b40"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/node_modules/ms/readme.md",
+      "size": 1886,
+      "sha256": "8bf6c4f414b123ea2a9375b91982882d01d8561ce7d12e3bb4f448c23359f040"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/package.json",
+      "size": 906,
+      "sha256": "c3c97d6ae6c06c610a4bd1042342aa53c64fde795117fd21b9a4918db6401e04"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/plugins/wazuhCore/opensearch_dashboards.json",
+      "size": 256,
+      "sha256": "87c2b9a3722d82a545e00c8850b6088e0df8025f771b2c29922b9311d590684f"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/plugins/wazuhCore/package.json",
+      "size": 1750,
+      "sha256": "f821d11465c4538ada6c4ebc545a07ea9c943c46218f399609ac40f88657b5a4"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/plugins/wazuhCore/server/services/cookie.js",
+      "size": 2493,
+      "sha256": "a7833d76d164bf31ce2bade07f7004189260c6c46f6b398df9b8eab2481d1d90"
+    },
+    {
+      "path": "usr/share/wazuh-dashboard/plugins/wazuhCore/server/services/server-api-client.js",
+      "size": 29637,
+      "sha256": "25a23ee7db319777db5b6b6937d75b601afc7bfcda3da56bfc747f135469ba10"
+    }
+  ],
+  "compiled_patch": {
+    "client_path": "usr/share/wazuh-dashboard/plugins/wazuhCore/server/services/server-api-client.js",
+    "cookie_path": "usr/share/wazuh-dashboard/plugins/wazuhCore/server/services/cookie.js",
+    "axios_entry": "usr/share/wazuh-dashboard/node_modules/axios/dist/node/axios.cjs",
+    "original_sha256": "25a23ee7db319777db5b6b6937d75b601afc7bfcda3da56bfc747f135469ba10",
+    "original_size": 29637,
+    "old_anchor": "    const httpsAgent = new _https.default.Agent({\n      rejectUnauthorized: false\n    });\n    this._axios = _axios.default.create({\n      httpsAgent\n    });",
+    "new_anchor": "    const httpsAgent = new _https.default.Agent({\n      rejectUnauthorized: true\n    });\n    this._axios = _axios.default.create({\n      httpsAgent,\n      maxRedirects: 0,\n      proxy: false\n    });\n    this._axios.interceptors.request.use(config => {\n      if (typeof config.url !== 'string' || /[\\u0000-\\u0020\\u007f]/.test(config.url)) {\n        throw new Error('Verified HTTPS manager API URL required');\n      }\n      let target;\n      try {\n        target = new URL(config.url);\n      } catch {\n        throw new Error('Verified HTTPS manager API URL required');\n      }\n      if (target.protocol !== 'https:' || target.username || target.password || target.hash) {\n        throw new Error('Verified HTTPS manager API URL required');\n      }\n      return config;\n    });",
+    "modification_prefix": "// ResponseForge RF-07C3: verified HTTPS correction; modified 2026-11-19.\n",
+    "original_body_sha256": "ca4fd89a2257a3a4f9815776e2fe2e5a5101a5d7c3b2294dd430e6aa84ecec6f",
+    "corrected_body_sha256": "ca7b298f6d094fd9fd41f1bf836eb162f96f7f03d61da5c63ba519079333f3e7",
+    "corrected_body_bytes": 8380,
+    "patched_sha256": "ef991736de15e969faf8c16e7792254f15f8bec86fe5b1d658bda21c5a66fd80",
+    "patched_size": 8454,
+    "source_map_marker": "//# sourceMappingURL=data:application/json;charset=utf-8;base64,",
+    "inline_sources": [
+      "server-api-client.ts"
+    ],
+    "inline_source_sha256": "b55c5947bab7c9b0b1e97238edb4f2c26ceae8f6bd4d5a33801d8a8d5fde6ca5",
+    "source_map_removed": true,
+    "artifact_executed": false
+  },
+  "closure": {
+    "root": "usr/share/wazuh-dashboard/node_modules/axios/package.json",
+    "packages": [
+      {
+        "name": "axios",
+        "version": "1.18.1",
+        "root": "usr/share/wazuh-dashboard/node_modules/axios",
+        "package_json_sha256": "65f1d1513135840ca721900a56995a6fea13dc124c41a0873389ad4ac64c052e",
+        "dependencies": {
+          "follow-redirects": "^1.16.0",
+          "form-data": "^4.0.5",
+          "https-proxy-agent": "^5.0.1",
+          "proxy-from-env": "^2.1.0"
+        },
+        "license": "MIT"
+      },
+      {
+        "name": "follow-redirects",
+        "version": "1.16.0",
+        "root": "usr/share/wazuh-dashboard/node_modules/follow-redirects",
+        "package_json_sha256": "42d8d50f86a6a8ab62f2c9d9d69532fc51de63becfd1a96681812e479443960c",
+        "dependencies": {},
+        "license": "MIT"
+      },
+      {
+        "name": "form-data",
+        "version": "4.0.5",
+        "root": "usr/share/wazuh-dashboard/node_modules/form-data",
+        "package_json_sha256": "5aa0a49ad333a05776c6c236fed575c73ec2290dd4204d3d79e749281baa8787",
+        "dependencies": {
+          "asynckit": "^0.4.0",
+          "combined-stream": "^1.0.8",
+          "es-set-tostringtag": "^2.1.0",
+          "hasown": "^2.0.2",
+          "mime-types": "^2.1.12"
+        },
+        "license": "MIT"
+      },
+      {
+        "name": "https-proxy-agent",
+        "version": "5.0.1",
+        "root": "usr/share/wazuh-dashboard/node_modules/https-proxy-agent",
+        "package_json_sha256": "d41d9127cbed43df8e2d404bfaf41361942a8afeb82eb57ccf8515e04eb33d1d",
+        "dependencies": {
+          "agent-base": "6",
+          "debug": "4"
+        },
+        "license": "MIT"
+      },
+      {
+        "name": "proxy-from-env",
+        "version": "2.1.0",
+        "root": "usr/share/wazuh-dashboard/node_modules/axios/node_modules/proxy-from-env",
+        "package_json_sha256": "d01e73f0bf86e192e7eab7ff3f6f9e1284695ecc713ace22d982f9a35c9be451",
+        "dependencies": {},
+        "license": "MIT"
+      },
+      {
+        "name": "asynckit",
+        "version": "0.4.0",
+        "root": "usr/share/wazuh-dashboard/node_modules/asynckit",
+        "package_json_sha256": "63eb9ff63be2e241ee6e80434d4641d6e9b5157d88bd3bbb692fcb2dfc8da4a9",
+        "dependencies": {},
+        "license": "MIT"
+      },
+      {
+        "name": "combined-stream",
+        "version": "1.0.8",
+        "root": "usr/share/wazuh-dashboard/node_modules/combined-stream",
+        "package_json_sha256": "761adece21443081ae818fe0e18864d7fa03f387075b89afa6cc5dd98356fafa",
+        "dependencies": {
+          "delayed-stream": "~1.0.0"
+        },
+        "license": "MIT"
+      },
+      {
+        "name": "es-set-tostringtag",
+        "version": "2.1.0",
+        "root": "usr/share/wazuh-dashboard/node_modules/es-set-tostringtag",
+        "package_json_sha256": "c9506942c9ef472286aff079bb65b7f3edcaccbc7f59fac9f419787b570086e5",
+        "dependencies": {
+          "es-errors": "^1.3.0",
+          "get-intrinsic": "^1.2.6",
+          "has-tostringtag": "^1.0.2",
+          "hasown": "^2.0.2"
+        },
+        "license": "MIT"
+      },
+      {
+        "name": "hasown",
+        "version": "2.0.2",
+        "root": "usr/share/wazuh-dashboard/node_modules/form-data/node_modules/hasown",
+        "package_json_sha256": "e96d24e4dcec86a4f769f41174b1cc79f70b4ab77b83aac4dfe646242bf76abb",
+        "dependencies": {
+          "function-bind": "^1.1.2"
+        },
+        "license": "MIT"
+      },
+      {
+        "name": "mime-types",
+        "version": "2.1.35",
+        "root": "usr/share/wazuh-dashboard/node_modules/form-data/node_modules/mime-types",
+        "package_json_sha256": "5053cc10259c3913ab6b6c8f13170a619c0d1836c1d9081238329a559fafeb3a",
+        "dependencies": {
+          "mime-db": "1.52.0"
+        },
+        "license": "MIT"
+      },
+      {
+        "name": "agent-base",
+        "version": "6.0.2",
+        "root": "usr/share/wazuh-dashboard/node_modules/https-proxy-agent/node_modules/agent-base",
+        "package_json_sha256": "05daa619e51686fd21d15f987f943f6692c56b9f489f555cbaf42a4263d5c5e8",
+        "dependencies": {
+          "debug": "4"
+        },
+        "license": "MIT"
+      },
+      {
+        "name": "debug",
+        "version": "4.3.7",
+        "root": "usr/share/wazuh-dashboard/node_modules/debug",
+        "package_json_sha256": "7a60ed9b6b14aa67f2ffe975715aaa6a78303844a5b43d33bfd619812088fe4d",
+        "dependencies": {
+          "ms": "^2.1.3"
+        },
+        "license": "MIT"
+      },
+      {
+        "name": "delayed-stream",
+        "version": "1.0.0",
+        "root": "usr/share/wazuh-dashboard/node_modules/delayed-stream",
+        "package_json_sha256": "4f5bd886efbd8feda6ac04db6ac1aa8b2e8dfc159503b0652667e1bc88efd4cb",
+        "dependencies": {},
+        "license": "MIT"
+      },
+      {
+        "name": "es-errors",
+        "version": "1.3.0",
+        "root": "usr/share/wazuh-dashboard/node_modules/es-errors",
+        "package_json_sha256": "1a0a0bcccc76b915cb64073317312840cf6363e9144b96f406d0059774dd5278",
+        "dependencies": {},
+        "license": "MIT"
+      },
+      {
+        "name": "get-intrinsic",
+        "version": "1.3.0",
+        "root": "usr/share/wazuh-dashboard/node_modules/es-set-tostringtag/node_modules/get-intrinsic",
+        "package_json_sha256": "45b14763baacc59b0fd7b39e3ad983d5d2aaf7f5ed682f2fce9edb469826c999",
+        "dependencies": {
+          "call-bind-apply-helpers": "^1.0.2",
+          "es-define-property": "^1.0.1",
+          "es-errors": "^1.3.0",
+          "es-object-atoms": "^1.1.1",
+          "function-bind": "^1.1.2",
+          "get-proto": "^1.0.1",
+          "gopd": "^1.2.0",
+          "has-symbols": "^1.1.0",
+          "hasown": "^2.0.2",
+          "math-intrinsics": "^1.1.0"
+        },
+        "license": "MIT"
+      },
+      {
+        "name": "has-tostringtag",
+        "version": "1.0.2",
+        "root": "usr/share/wazuh-dashboard/node_modules/es-set-tostringtag/node_modules/has-tostringtag",
+        "package_json_sha256": "30ab773c52021a6b800ea48f251abeeb1f6e378300f819204dfbb38d6e43f3ad",
+        "dependencies": {
+          "has-symbols": "^1.0.3"
+        },
+        "license": "MIT"
+      },
+      {
+        "name": "hasown",
+        "version": "2.0.2",
+        "root": "usr/share/wazuh-dashboard/node_modules/es-set-tostringtag/node_modules/hasown",
+        "package_json_sha256": "e96d24e4dcec86a4f769f41174b1cc79f70b4ab77b83aac4dfe646242bf76abb",
+        "dependencies": {
+          "function-bind": "^1.1.2"
+        },
+        "license": "MIT"
+      },
+      {
+        "name": "function-bind",
+        "version": "1.1.2",
+        "root": "usr/share/wazuh-dashboard/node_modules/function-bind",
+        "package_json_sha256": "edb1c4faf4148e6e3d74ed8dbac1a1dc359a647ff4207aad4851396dc7a3559a",
+        "dependencies": {},
+        "license": "MIT"
+      },
+      {
+        "name": "mime-db",
+        "version": "1.52.0",
+        "root": "usr/share/wazuh-dashboard/node_modules/mime-db",
+        "package_json_sha256": "d03e37b915a050af548d543f4e45ff5de06ec767c19e745f18c431d9dc26b5bf",
+        "dependencies": {},
+        "license": "MIT"
+      },
+      {
+        "name": "ms",
+        "version": "2.1.3",
+        "root": "usr/share/wazuh-dashboard/node_modules/ms",
+        "package_json_sha256": "1a6b4d9739790c0b94ab96c8cc0507e281c164c311ff4fbf5e57fb8d26290b40",
+        "dependencies": {},
+        "license": "MIT"
+      },
+      {
+        "name": "call-bind-apply-helpers",
+        "version": "1.0.2",
+        "root": "usr/share/wazuh-dashboard/node_modules/call-bind-apply-helpers",
+        "package_json_sha256": "59639b628c6846f674857c6a613fd47e2e4d2a24036cdf0f7a62ac634f4c8a5f",
+        "dependencies": {
+          "es-errors": "^1.3.0",
+          "function-bind": "^1.1.2"
+        },
+        "license": "MIT"
+      },
+      {
+        "name": "es-define-property",
+        "version": "1.0.1",
+        "root": "usr/share/wazuh-dashboard/node_modules/es-define-property",
+        "package_json_sha256": "3a2cb30dae30a96705dcd9aa2d5fb190cf8200f27badccfa5a81a4374e5708b4",
+        "dependencies": {},
+        "license": "MIT"
+      },
+      {
+        "name": "es-object-atoms",
+        "version": "1.1.1",
+        "root": "usr/share/wazuh-dashboard/node_modules/es-object-atoms",
+        "package_json_sha256": "9975f032714dd642d08c9b50129096f5daf878dbede1ca3544cdcdbf45b48eb0",
+        "dependencies": {
+          "es-errors": "^1.3.0"
+        },
+        "license": "MIT"
+      },
+      {
+        "name": "get-proto",
+        "version": "1.0.1",
+        "root": "usr/share/wazuh-dashboard/node_modules/get-proto",
+        "package_json_sha256": "73839e012ac7134a632c9d9fc6bdb700ac9ab5553cce39eb789ba2b65663e734",
+        "dependencies": {
+          "dunder-proto": "^1.0.1",
+          "es-object-atoms": "^1.0.0"
+        },
+        "license": "MIT"
+      },
+      {
+        "name": "gopd",
+        "version": "1.2.0",
+        "root": "usr/share/wazuh-dashboard/node_modules/es-set-tostringtag/node_modules/gopd",
+        "package_json_sha256": "33ace32dc861f6da9d1fd9d0a44c66e8c6ff3b13358d070683c1c2978ff5f19f",
+        "dependencies": {},
+        "license": "MIT"
+      },
+      {
+        "name": "has-symbols",
+        "version": "1.1.0",
+        "root": "usr/share/wazuh-dashboard/node_modules/es-set-tostringtag/node_modules/get-intrinsic/node_modules/has-symbols",
+        "package_json_sha256": "5190268c0e3308d7446d1f7c036238f329f786938453e6017cb90980b3612e7a",
+        "dependencies": {},
+        "license": "MIT"
+      },
+      {
+        "name": "math-intrinsics",
+        "version": "1.1.0",
+        "root": "usr/share/wazuh-dashboard/node_modules/math-intrinsics",
+        "package_json_sha256": "39d74aa5a354153130706286dd60a2d8409ce0c8f66546eff2edcac0afff17e1",
+        "dependencies": {},
+        "license": "MIT"
+      },
+      {
+        "name": "has-symbols",
+        "version": "1.0.3",
+        "root": "usr/share/wazuh-dashboard/node_modules/has-symbols",
+        "package_json_sha256": "2de994869bda3598116944312cfe5e2383f9cea9df05d12b499d704cbe20ec2d",
+        "dependencies": {},
+        "license": "MIT"
+      },
+      {
+        "name": "dunder-proto",
+        "version": "1.0.1",
+        "root": "usr/share/wazuh-dashboard/node_modules/dunder-proto",
+        "package_json_sha256": "24df71008e4225c858f389dd2728b76cf66b752256d42a38ed7930aacae7fe2b",
+        "dependencies": {
+          "call-bind-apply-helpers": "^1.0.1",
+          "es-errors": "^1.3.0",
+          "gopd": "^1.2.0"
+        },
+        "license": "MIT"
+      },
+      {
+        "name": "gopd",
+        "version": "1.2.0",
+        "root": "usr/share/wazuh-dashboard/node_modules/dunder-proto/node_modules/gopd",
+        "package_json_sha256": "33ace32dc861f6da9d1fd9d0a44c66e8c6ff3b13358d070683c1c2978ff5f19f",
+        "dependencies": {},
+        "license": "MIT"
+      }
+    ],
+    "edges": [
+      {
+        "parent": "usr/share/wazuh-dashboard/node_modules/axios/package.json",
+        "name": "follow-redirects",
+        "range": "^1.16.0",
+        "resolved": "usr/share/wazuh-dashboard/node_modules/follow-redirects/package.json"
+      },
+      {
+        "parent": "usr/share/wazuh-dashboard/node_modules/axios/package.json",
+        "name": "form-data",
+        "range": "^4.0.5",
+        "resolved": "usr/share/wazuh-dashboard/node_modules/form-data/package.json"
+      },
+      {
+        "parent": "usr/share/wazuh-dashboard/node_modules/axios/package.json",
+        "name": "https-proxy-agent",
+        "range": "^5.0.1",
+        "resolved": "usr/share/wazuh-dashboard/node_modules/https-proxy-agent/package.json"
+      },
+      {
+        "parent": "usr/share/wazuh-dashboard/node_modules/axios/package.json",
+        "name": "proxy-from-env",
+        "range": "^2.1.0",
+        "resolved": "usr/share/wazuh-dashboard/node_modules/axios/node_modules/proxy-from-env/package.json"
+      },
+      {
+        "parent": "usr/share/wazuh-dashboard/node_modules/form-data/package.json",
+        "name": "asynckit",
+        "range": "^0.4.0",
+        "resolved": "usr/share/wazuh-dashboard/node_modules/asynckit/package.json"
+      },
+      {
+        "parent": "usr/share/wazuh-dashboard/node_modules/form-data/package.json",
+        "name": "combined-stream",
+        "range": "^1.0.8",
+        "resolved": "usr/share/wazuh-dashboard/node_modules/combined-stream/package.json"
+      },
+      {
+        "parent": "usr/share/wazuh-dashboard/node_modules/form-data/package.json",
+        "name": "es-set-tostringtag",
+        "range": "^2.1.0",
+        "resolved": "usr/share/wazuh-dashboard/node_modules/es-set-tostringtag/package.json"
+      },
+      {
+        "parent": "usr/share/wazuh-dashboard/node_modules/form-data/package.json",
+        "name": "hasown",
+        "range": "^2.0.2",
+        "resolved": "usr/share/wazuh-dashboard/node_modules/form-data/node_modules/hasown/package.json"
+      },
+      {
+        "parent": "usr/share/wazuh-dashboard/node_modules/form-data/package.json",
+        "name": "mime-types",
+        "range": "^2.1.12",
+        "resolved": "usr/share/wazuh-dashboard/node_modules/form-data/node_modules/mime-types/package.json"
+      },
+      {
+        "parent": "usr/share/wazuh-dashboard/node_modules/https-proxy-agent/package.json",
+        "name": "agent-base",
+        "range": "6",
+        "resolved": "usr/share/wazuh-dashboard/node_modules/https-proxy-agent/node_modules/agent-base/package.json"
+      },
+      {
+        "parent": "usr/share/wazuh-dashboard/node_modules/https-proxy-agent/package.json",
+        "name": "debug",
+        "range": "4",
+        "resolved": "usr/share/wazuh-dashboard/node_modules/debug/package.json"
+      },
+      {
+        "parent": "usr/share/wazuh-dashboard/node_modules/combined-stream/package.json",
+        "name": "delayed-stream",
+        "range": "~1.0.0",
+        "resolved": "usr/share/wazuh-dashboard/node_modules/delayed-stream/package.json"
+      },
+      {
+        "parent": "usr/share/wazuh-dashboard/node_modules/es-set-tostringtag/package.json",
+        "name": "es-errors",
+        "range": "^1.3.0",
+        "resolved": "usr/share/wazuh-dashboard/node_modules/es-errors/package.json"
+      },
+      {
+        "parent": "usr/share/wazuh-dashboard/node_modules/es-set-tostringtag/package.json",
+        "name": "get-intrinsic",
+        "range": "^1.2.6",
+        "resolved": "usr/share/wazuh-dashboard/node_modules/es-set-tostringtag/node_modules/get-intrinsic/package.json"
+      },
+      {
+        "parent": "usr/share/wazuh-dashboard/node_modules/es-set-tostringtag/package.json",
+        "name": "has-tostringtag",
+        "range": "^1.0.2",
+        "resolved": "usr/share/wazuh-dashboard/node_modules/es-set-tostringtag/node_modules/has-tostringtag/package.json"
+      },
+      {
+        "parent": "usr/share/wazuh-dashboard/node_modules/es-set-tostringtag/package.json",
+        "name": "hasown",
+        "range": "^2.0.2",
+        "resolved": "usr/share/wazuh-dashboard/node_modules/es-set-tostringtag/node_modules/hasown/package.json"
+      },
+      {
+        "parent": "usr/share/wazuh-dashboard/node_modules/form-data/node_modules/hasown/package.json",
+        "name": "function-bind",
+        "range": "^1.1.2",
+        "resolved": "usr/share/wazuh-dashboard/node_modules/function-bind/package.json"
+      },
+      {
+        "parent": "usr/share/wazuh-dashboard/node_modules/form-data/node_modules/mime-types/package.json",
+        "name": "mime-db",
+        "range": "1.52.0",
+        "resolved": "usr/share/wazuh-dashboard/node_modules/mime-db/package.json"
+      },
+      {
+        "parent": "usr/share/wazuh-dashboard/node_modules/https-proxy-agent/node_modules/agent-base/package.json",
+        "name": "debug",
+        "range": "4",
+        "resolved": "usr/share/wazuh-dashboard/node_modules/debug/package.json"
+      },
+      {
+        "parent": "usr/share/wazuh-dashboard/node_modules/debug/package.json",
+        "name": "ms",
+        "range": "^2.1.3",
+        "resolved": "usr/share/wazuh-dashboard/node_modules/ms/package.json"
+      },
+      {
+        "parent": "usr/share/wazuh-dashboard/node_modules/es-set-tostringtag/node_modules/get-intrinsic/package.json",
+        "name": "call-bind-apply-helpers",
+        "range": "^1.0.2",
+        "resolved": "usr/share/wazuh-dashboard/node_modules/call-bind-apply-helpers/package.json"
+      },
+      {
+        "parent": "usr/share/wazuh-dashboard/node_modules/es-set-tostringtag/node_modules/get-intrinsic/package.json",
+        "name": "es-define-property",
+        "range": "^1.0.1",
+        "resolved": "usr/share/wazuh-dashboard/node_modules/es-define-property/package.json"
+      },
+      {
+        "parent": "usr/share/wazuh-dashboard/node_modules/es-set-tostringtag/node_modules/get-intrinsic/package.json",
+        "name": "es-errors",
+        "range": "^1.3.0",
+        "resolved": "usr/share/wazuh-dashboard/node_modules/es-errors/package.json"
+      },
+      {
+        "parent": "usr/share/wazuh-dashboard/node_modules/es-set-tostringtag/node_modules/get-intrinsic/package.json",
+        "name": "es-object-atoms",
+        "range": "^1.1.1",
+        "resolved": "usr/share/wazuh-dashboard/node_modules/es-object-atoms/package.json"
+      },
+      {
+        "parent": "usr/share/wazuh-dashboard/node_modules/es-set-tostringtag/node_modules/get-intrinsic/package.json",
+        "name": "function-bind",
+        "range": "^1.1.2",
+        "resolved": "usr/share/wazuh-dashboard/node_modules/function-bind/package.json"
+      },
+      {
+        "parent": "usr/share/wazuh-dashboard/node_modules/es-set-tostringtag/node_modules/get-intrinsic/package.json",
+        "name": "get-proto",
+        "range": "^1.0.1",
+        "resolved": "usr/share/wazuh-dashboard/node_modules/get-proto/package.json"
+      },
+      {
+        "parent": "usr/share/wazuh-dashboard/node_modules/es-set-tostringtag/node_modules/get-intrinsic/package.json",
+        "name": "gopd",
+        "range": "^1.2.0",
+        "resolved": "usr/share/wazuh-dashboard/node_modules/es-set-tostringtag/node_modules/gopd/package.json"
+      },
+      {
+        "parent": "usr/share/wazuh-dashboard/node_modules/es-set-tostringtag/node_modules/get-intrinsic/package.json",
+        "name": "has-symbols",
+        "range": "^1.1.0",
+        "resolved": "usr/share/wazuh-dashboard/node_modules/es-set-tostringtag/node_modules/get-intrinsic/node_modules/has-symbols/package.json"
+      },
+      {
+        "parent": "usr/share/wazuh-dashboard/node_modules/es-set-tostringtag/node_modules/get-intrinsic/package.json",
+        "name": "hasown",
+        "range": "^2.0.2",
+        "resolved": "usr/share/wazuh-dashboard/node_modules/es-set-tostringtag/node_modules/hasown/package.json"
+      },
+      {
+        "parent": "usr/share/wazuh-dashboard/node_modules/es-set-tostringtag/node_modules/get-intrinsic/package.json",
+        "name": "math-intrinsics",
+        "range": "^1.1.0",
+        "resolved": "usr/share/wazuh-dashboard/node_modules/math-intrinsics/package.json"
+      },
+      {
+        "parent": "usr/share/wazuh-dashboard/node_modules/es-set-tostringtag/node_modules/has-tostringtag/package.json",
+        "name": "has-symbols",
+        "range": "^1.0.3",
+        "resolved": "usr/share/wazuh-dashboard/node_modules/has-symbols/package.json"
+      },
+      {
+        "parent": "usr/share/wazuh-dashboard/node_modules/es-set-tostringtag/node_modules/hasown/package.json",
+        "name": "function-bind",
+        "range": "^1.1.2",
+        "resolved": "usr/share/wazuh-dashboard/node_modules/function-bind/package.json"
+      },
+      {
+        "parent": "usr/share/wazuh-dashboard/node_modules/call-bind-apply-helpers/package.json",
+        "name": "es-errors",
+        "range": "^1.3.0",
+        "resolved": "usr/share/wazuh-dashboard/node_modules/es-errors/package.json"
+      },
+      {
+        "parent": "usr/share/wazuh-dashboard/node_modules/call-bind-apply-helpers/package.json",
+        "name": "function-bind",
+        "range": "^1.1.2",
+        "resolved": "usr/share/wazuh-dashboard/node_modules/function-bind/package.json"
+      },
+      {
+        "parent": "usr/share/wazuh-dashboard/node_modules/es-object-atoms/package.json",
+        "name": "es-errors",
+        "range": "^1.3.0",
+        "resolved": "usr/share/wazuh-dashboard/node_modules/es-errors/package.json"
+      },
+      {
+        "parent": "usr/share/wazuh-dashboard/node_modules/get-proto/package.json",
+        "name": "dunder-proto",
+        "range": "^1.0.1",
+        "resolved": "usr/share/wazuh-dashboard/node_modules/dunder-proto/package.json"
+      },
+      {
+        "parent": "usr/share/wazuh-dashboard/node_modules/get-proto/package.json",
+        "name": "es-object-atoms",
+        "range": "^1.0.0",
+        "resolved": "usr/share/wazuh-dashboard/node_modules/es-object-atoms/package.json"
+      },
+      {
+        "parent": "usr/share/wazuh-dashboard/node_modules/dunder-proto/package.json",
+        "name": "call-bind-apply-helpers",
+        "range": "^1.0.1",
+        "resolved": "usr/share/wazuh-dashboard/node_modules/call-bind-apply-helpers/package.json"
+      },
+      {
+        "parent": "usr/share/wazuh-dashboard/node_modules/dunder-proto/package.json",
+        "name": "es-errors",
+        "range": "^1.3.0",
+        "resolved": "usr/share/wazuh-dashboard/node_modules/es-errors/package.json"
+      },
+      {
+        "parent": "usr/share/wazuh-dashboard/node_modules/dunder-proto/package.json",
+        "name": "gopd",
+        "range": "^1.2.0",
+        "resolved": "usr/share/wazuh-dashboard/node_modules/dunder-proto/node_modules/gopd/package.json"
+      }
+    ]
+  },
+  "rights": [
+    {
+      "name": "axios",
+      "version": "1.18.1",
+      "root": "usr/share/wazuh-dashboard/node_modules/axios",
+      "declared_license": "MIT",
+      "license_files": [
+        {
+          "path": "usr/share/wazuh-dashboard/node_modules/axios/LICENSE",
+          "sha256": "82761059eaedacb3356803aea8a170d8298609f91b14fc32ee1bfb40d690183c"
+        }
+      ],
+      "MIT_terms_and_copyright_present": true
+    },
+    {
+      "name": "follow-redirects",
+      "version": "1.16.0",
+      "root": "usr/share/wazuh-dashboard/node_modules/follow-redirects",
+      "declared_license": "MIT",
+      "license_files": [
+        {
+          "path": "usr/share/wazuh-dashboard/node_modules/follow-redirects/LICENSE",
+          "sha256": "bfa8a54bb952ccda79f0f1889721d108f5b605babbb2b8a3705ffb52f4132eb7"
+        }
+      ],
+      "MIT_terms_and_copyright_present": true
+    },
+    {
+      "name": "form-data",
+      "version": "4.0.5",
+      "root": "usr/share/wazuh-dashboard/node_modules/form-data",
+      "declared_license": "MIT",
+      "license_files": [
+        {
+          "path": "usr/share/wazuh-dashboard/node_modules/form-data/License",
+          "sha256": "e5b780d4f38d1d3328e3e53186c4e62d3fa149ea6f2bacd5de5ad0c30ac85343"
+        }
+      ],
+      "MIT_terms_and_copyright_present": true
+    },
+    {
+      "name": "https-proxy-agent",
+      "version": "5.0.1",
+      "root": "usr/share/wazuh-dashboard/node_modules/https-proxy-agent",
+      "declared_license": "MIT",
+      "license_files": [
+        {
+          "path": "usr/share/wazuh-dashboard/node_modules/https-proxy-agent/README.md",
+          "sha256": "32f0856d2c43df7d05cca960fdee84e1e38ab545bd7b2186433dfa41aa90a712",
+          "section": "License (full MIT terms)",
+          "license_section_sha256": "5aa012c5c5e970177d1ff9144121a598fa082434391061504b2d77a70289097f"
+        }
+      ],
+      "MIT_terms_and_copyright_present": true,
+      "license_in_readme": {
+        "url": "https://raw.githubusercontent.com/TooTallNate/node-https-proxy-agent/d0d80cc0482f20495aa8595f802e1a9f3b1b3409/README.md",
+        "source_path": "README.md#license",
+        "source_revision": "d0d80cc0482f20495aa8595f802e1a9f3b1b3409",
+        "source_bytes": 4761,
+        "source_sha256": "32f0856d2c43df7d05cca960fdee84e1e38ab545bd7b2186433dfa41aa90a712",
+        "file": "https-proxy-agent-5.0.1-LICENSE-from-README",
+        "license_bytes": 1125,
+        "license_sha256": "5aa012c5c5e970177d1ff9144121a598fa082434391061504b2d77a70289097f",
+        "packaged_in_OCI": true,
+        "OCI_path": "usr/share/wazuh-dashboard/node_modules/https-proxy-agent/README.md",
+        "OCI_sha256": "32f0856d2c43df7d05cca960fdee84e1e38ab545bd7b2186433dfa41aa90a712",
+        "OCI_README_equals_source": true,
+        "transformation": "Extract unchanged License section through MIT terms, excluding subsequent Markdown reference links; original full README retained"
+      }
+    },
+    {
+      "name": "proxy-from-env",
+      "version": "2.1.0",
+      "root": "usr/share/wazuh-dashboard/node_modules/axios/node_modules/proxy-from-env",
+      "declared_license": "MIT",
+      "license_files": [
+        {
+          "path": "usr/share/wazuh-dashboard/node_modules/axios/node_modules/proxy-from-env/LICENSE",
+          "sha256": "f55828df4b8752c48e765a806465b76a103e3cb363379c569b15a1df2ba2d79e"
+        }
+      ],
+      "MIT_terms_and_copyright_present": true
+    },
+    {
+      "name": "asynckit",
+      "version": "0.4.0",
+      "root": "usr/share/wazuh-dashboard/node_modules/asynckit",
+      "declared_license": "MIT",
+      "license_files": [
+        {
+          "path": "usr/share/wazuh-dashboard/node_modules/asynckit/LICENSE",
+          "sha256": "1953150d5d4b10c7542cee6f6e0c613b2682545233f069d75cfff1936386ce10"
+        }
+      ],
+      "MIT_terms_and_copyright_present": true
+    },
+    {
+      "name": "combined-stream",
+      "version": "1.0.8",
+      "root": "usr/share/wazuh-dashboard/node_modules/combined-stream",
+      "declared_license": "MIT",
+      "license_files": [
+        {
+          "path": "usr/share/wazuh-dashboard/node_modules/combined-stream/License",
+          "sha256": "47eb8ca82c798246774946d1be0f9aa08f025fa8325ced0947aeeb4c05fe5547"
+        }
+      ],
+      "MIT_terms_and_copyright_present": true
+    },
+    {
+      "name": "es-set-tostringtag",
+      "version": "2.1.0",
+      "root": "usr/share/wazuh-dashboard/node_modules/es-set-tostringtag",
+      "declared_license": "MIT",
+      "license_files": [
+        {
+          "path": "usr/share/wazuh-dashboard/node_modules/es-set-tostringtag/LICENSE",
+          "sha256": "1a3aeb1f1398bd697d57c3c585faadf59d825aca6e3162cd7eeb72ff76eb2466"
+        }
+      ],
+      "MIT_terms_and_copyright_present": true
+    },
+    {
+      "name": "hasown",
+      "version": "2.0.2",
+      "root": "usr/share/wazuh-dashboard/node_modules/form-data/node_modules/hasown",
+      "declared_license": "MIT",
+      "license_files": [
+        {
+          "path": "usr/share/wazuh-dashboard/node_modules/form-data/node_modules/hasown/LICENSE",
+          "sha256": "bf9b0d665be2a689851eea667ca9f42066ea1d903b38349c51e6a44b2577680a"
+        }
+      ],
+      "MIT_terms_and_copyright_present": true
+    },
+    {
+      "name": "mime-types",
+      "version": "2.1.35",
+      "root": "usr/share/wazuh-dashboard/node_modules/form-data/node_modules/mime-types",
+      "declared_license": "MIT",
+      "license_files": [
+        {
+          "path": "usr/share/wazuh-dashboard/node_modules/form-data/node_modules/mime-types/LICENSE",
+          "sha256": "71f83c4c0621102a56d9853812777b85751bce7e9726f686f5b056c1f8a4b0e6"
+        }
+      ],
+      "MIT_terms_and_copyright_present": true
+    },
+    {
+      "name": "agent-base",
+      "version": "6.0.2",
+      "root": "usr/share/wazuh-dashboard/node_modules/https-proxy-agent/node_modules/agent-base",
+      "declared_license": "MIT",
+      "license_files": [
+        {
+          "path": "usr/share/wazuh-dashboard/node_modules/https-proxy-agent/node_modules/agent-base/README.md",
+          "sha256": "f1425c3b72330fe4fb2aa5a2fb152e939bdf534692a32b5f0b38f74147b98556",
+          "section": "License (full MIT terms)",
+          "license_section_sha256": "5aa012c5c5e970177d1ff9144121a598fa082434391061504b2d77a70289097f"
+        }
+      ],
+      "MIT_terms_and_copyright_present": true,
+      "license_in_readme": {
+        "url": "https://raw.githubusercontent.com/TooTallNate/node-agent-base/c4b8ea2e1a11bae023bb09b708050a50418204e9/README.md",
+        "source_path": "README.md#license",
+        "source_revision": "c4b8ea2e1a11bae023bb09b708050a50418204e9",
+        "source_bytes": 5056,
+        "source_sha256": "f1425c3b72330fe4fb2aa5a2fb152e939bdf534692a32b5f0b38f74147b98556",
+        "file": "agent-base-6.0.2-LICENSE-from-README",
+        "license_bytes": 1125,
+        "license_sha256": "5aa012c5c5e970177d1ff9144121a598fa082434391061504b2d77a70289097f",
+        "packaged_in_OCI": true,
+        "OCI_path": "usr/share/wazuh-dashboard/node_modules/https-proxy-agent/node_modules/agent-base/README.md",
+        "OCI_sha256": "f1425c3b72330fe4fb2aa5a2fb152e939bdf534692a32b5f0b38f74147b98556",
+        "OCI_README_equals_source": true,
+        "transformation": "Extract unchanged License section through MIT terms, excluding subsequent Markdown reference links; original full README retained"
+      }
+    },
+    {
+      "name": "debug",
+      "version": "4.3.7",
+      "root": "usr/share/wazuh-dashboard/node_modules/debug",
+      "declared_license": "MIT",
+      "license_files": [
+        {
+          "path": "usr/share/wazuh-dashboard/node_modules/debug/LICENSE",
+          "sha256": "3a61c6c96caf5c1d9b623fb9b04c822b783dfcb78aa7e49c76a3f643e6ed7f95"
+        }
+      ],
+      "MIT_terms_and_copyright_present": true
+    },
+    {
+      "name": "delayed-stream",
+      "version": "1.0.0",
+      "root": "usr/share/wazuh-dashboard/node_modules/delayed-stream",
+      "declared_license": "MIT",
+      "license_files": [
+        {
+          "path": "usr/share/wazuh-dashboard/node_modules/delayed-stream/License",
+          "sha256": "47eb8ca82c798246774946d1be0f9aa08f025fa8325ced0947aeeb4c05fe5547"
+        }
+      ],
+      "MIT_terms_and_copyright_present": true
+    },
+    {
+      "name": "es-errors",
+      "version": "1.3.0",
+      "root": "usr/share/wazuh-dashboard/node_modules/es-errors",
+      "declared_license": "MIT",
+      "license_files": [
+        {
+          "path": "usr/share/wazuh-dashboard/node_modules/es-errors/LICENSE",
+          "sha256": "5e325595b4ea8cfec3802f545b1def5d7b73e4a5b8e9ba63e32a320f67732292"
+        }
+      ],
+      "MIT_terms_and_copyright_present": true
+    },
+    {
+      "name": "get-intrinsic",
+      "version": "1.3.0",
+      "root": "usr/share/wazuh-dashboard/node_modules/es-set-tostringtag/node_modules/get-intrinsic",
+      "declared_license": "MIT",
+      "license_files": [
+        {
+          "path": "usr/share/wazuh-dashboard/node_modules/es-set-tostringtag/node_modules/get-intrinsic/LICENSE",
+          "sha256": "39c5ec504cf6bd5cd782a7c695828e09189df79f5d94840e4f08feb97b9fd416"
+        }
+      ],
+      "MIT_terms_and_copyright_present": true
+    },
+    {
+      "name": "has-tostringtag",
+      "version": "1.0.2",
+      "root": "usr/share/wazuh-dashboard/node_modules/es-set-tostringtag/node_modules/has-tostringtag",
+      "declared_license": "MIT",
+      "license_files": [
+        {
+          "path": "usr/share/wazuh-dashboard/node_modules/es-set-tostringtag/node_modules/has-tostringtag/LICENSE",
+          "sha256": "e2560e002e13281578c75c850061d9255c33d16d732939e8c2db64c2506642fa"
+        }
+      ],
+      "MIT_terms_and_copyright_present": true
+    },
+    {
+      "name": "hasown",
+      "version": "2.0.2",
+      "root": "usr/share/wazuh-dashboard/node_modules/es-set-tostringtag/node_modules/hasown",
+      "declared_license": "MIT",
+      "license_files": [
+        {
+          "path": "usr/share/wazuh-dashboard/node_modules/es-set-tostringtag/node_modules/hasown/LICENSE",
+          "sha256": "bf9b0d665be2a689851eea667ca9f42066ea1d903b38349c51e6a44b2577680a"
+        }
+      ],
+      "MIT_terms_and_copyright_present": true
+    },
+    {
+      "name": "function-bind",
+      "version": "1.1.2",
+      "root": "usr/share/wazuh-dashboard/node_modules/function-bind",
+      "declared_license": "MIT",
+      "license_files": [
+        {
+          "path": "usr/share/wazuh-dashboard/node_modules/function-bind/LICENSE",
+          "sha256": "773e131a7684726005a7e4688a80b4620033bc08499bc1404dd1a1eb3bca725e"
+        }
+      ],
+      "MIT_terms_and_copyright_present": true
+    },
+    {
+      "name": "mime-db",
+      "version": "1.52.0",
+      "root": "usr/share/wazuh-dashboard/node_modules/mime-db",
+      "declared_license": "MIT",
+      "license_files": [
+        {
+          "path": "usr/share/wazuh-dashboard/node_modules/mime-db/LICENSE",
+          "sha256": "cc1dfd4dafa27271e8212cd3b274eeb3f262e40a6fdab36ddc3f9696f706f58b"
+        }
+      ],
+      "MIT_terms_and_copyright_present": true
+    },
+    {
+      "name": "ms",
+      "version": "2.1.3",
+      "root": "usr/share/wazuh-dashboard/node_modules/ms",
+      "declared_license": "MIT",
+      "license_files": [
+        {
+          "path": "usr/share/wazuh-dashboard/node_modules/ms/license.md",
+          "sha256": "1662fae9b5314d11cf51284e2dcd1f006a354f7343f08712a730fcff9a359801"
+        }
+      ],
+      "MIT_terms_and_copyright_present": true
+    },
+    {
+      "name": "call-bind-apply-helpers",
+      "version": "1.0.2",
+      "root": "usr/share/wazuh-dashboard/node_modules/call-bind-apply-helpers",
+      "declared_license": "MIT",
+      "license_files": [
+        {
+          "path": "usr/share/wazuh-dashboard/node_modules/call-bind-apply-helpers/LICENSE",
+          "sha256": "5e325595b4ea8cfec3802f545b1def5d7b73e4a5b8e9ba63e32a320f67732292"
+        }
+      ],
+      "MIT_terms_and_copyright_present": true
+    },
+    {
+      "name": "es-define-property",
+      "version": "1.0.1",
+      "root": "usr/share/wazuh-dashboard/node_modules/es-define-property",
+      "declared_license": "MIT",
+      "license_files": [
+        {
+          "path": "usr/share/wazuh-dashboard/node_modules/es-define-property/LICENSE",
+          "sha256": "5e325595b4ea8cfec3802f545b1def5d7b73e4a5b8e9ba63e32a320f67732292"
+        }
+      ],
+      "MIT_terms_and_copyright_present": true
+    },
+    {
+      "name": "es-object-atoms",
+      "version": "1.1.1",
+      "root": "usr/share/wazuh-dashboard/node_modules/es-object-atoms",
+      "declared_license": "MIT",
+      "license_files": [
+        {
+          "path": "usr/share/wazuh-dashboard/node_modules/es-object-atoms/LICENSE",
+          "sha256": "5e325595b4ea8cfec3802f545b1def5d7b73e4a5b8e9ba63e32a320f67732292"
+        }
+      ],
+      "MIT_terms_and_copyright_present": true
+    },
+    {
+      "name": "get-proto",
+      "version": "1.0.1",
+      "root": "usr/share/wazuh-dashboard/node_modules/get-proto",
+      "declared_license": "MIT",
+      "license_files": [
+        {
+          "path": "usr/share/wazuh-dashboard/node_modules/get-proto/LICENSE",
+          "sha256": "be46ce1e3b0479af9ce82d22b465a6d7d2ff084fca0aaf3d54172da2b5eb5781"
+        }
+      ],
+      "MIT_terms_and_copyright_present": true
+    },
+    {
+      "name": "gopd",
+      "version": "1.2.0",
+      "root": "usr/share/wazuh-dashboard/node_modules/es-set-tostringtag/node_modules/gopd",
+      "declared_license": "MIT",
+      "license_files": [
+        {
+          "path": "usr/share/wazuh-dashboard/node_modules/es-set-tostringtag/node_modules/gopd/LICENSE",
+          "sha256": "d90bf0a089da4cf43d644ed240a0b3825dcdb705e64e38371d56995a4cc9e4c5"
+        }
+      ],
+      "MIT_terms_and_copyright_present": true
+    },
+    {
+      "name": "has-symbols",
+      "version": "1.1.0",
+      "root": "usr/share/wazuh-dashboard/node_modules/es-set-tostringtag/node_modules/get-intrinsic/node_modules/has-symbols",
+      "declared_license": "MIT",
+      "license_files": [
+        {
+          "path": "usr/share/wazuh-dashboard/node_modules/es-set-tostringtag/node_modules/get-intrinsic/node_modules/has-symbols/LICENSE",
+          "sha256": "206c1adcf206dc0031b11232f5b054ec5f1662407ab1ca415247921cab2068ab"
+        }
+      ],
+      "MIT_terms_and_copyright_present": true
+    },
+    {
+      "name": "math-intrinsics",
+      "version": "1.1.0",
+      "root": "usr/share/wazuh-dashboard/node_modules/math-intrinsics",
+      "declared_license": "MIT",
+      "license_files": [
+        {
+          "path": "usr/share/wazuh-dashboard/node_modules/math-intrinsics/LICENSE",
+          "sha256": "2b770a704c15de238c3f622b01b0044ddd60b49ee30608ea6991ebf19db7a7a1"
+        }
+      ],
+      "MIT_terms_and_copyright_present": true
+    },
+    {
+      "name": "has-symbols",
+      "version": "1.0.3",
+      "root": "usr/share/wazuh-dashboard/node_modules/has-symbols",
+      "declared_license": "MIT",
+      "license_files": [
+        {
+          "path": "usr/share/wazuh-dashboard/node_modules/has-symbols/LICENSE",
+          "sha256": "206c1adcf206dc0031b11232f5b054ec5f1662407ab1ca415247921cab2068ab"
+        }
+      ],
+      "MIT_terms_and_copyright_present": true
+    },
+    {
+      "name": "dunder-proto",
+      "version": "1.0.1",
+      "root": "usr/share/wazuh-dashboard/node_modules/dunder-proto",
+      "declared_license": "MIT",
+      "license_files": [
+        {
+          "path": "usr/share/wazuh-dashboard/node_modules/dunder-proto/LICENSE",
+          "sha256": "2b770a704c15de238c3f622b01b0044ddd60b49ee30608ea6991ebf19db7a7a1"
+        }
+      ],
+      "MIT_terms_and_copyright_present": true
+    },
+    {
+      "name": "gopd",
+      "version": "1.2.0",
+      "root": "usr/share/wazuh-dashboard/node_modules/dunder-proto/node_modules/gopd",
+      "declared_license": "MIT",
+      "license_files": [
+        {
+          "path": "usr/share/wazuh-dashboard/node_modules/dunder-proto/node_modules/gopd/LICENSE",
+          "sha256": "d90bf0a089da4cf43d644ed240a0b3825dcdb705e64e38371d56995a4cc9e4c5"
+        }
+      ],
+      "MIT_terms_and_copyright_present": true
+    }
+  ],
+  "source_correspondence": {
+    "plugin_revision": "5005c3e2213abeb5c7798f489a7304a6abb7c6d1",
+    "source_ts_sha256": "b55c5947bab7c9b0b1e97238edb4f2c26ceae8f6bd4d5a33801d8a8d5fde6ca5",
+    "original_compiled_body_sha256": "ca4fd89a2257a3a4f9815776e2fe2e5a5101a5d7c3b2294dd430e6aa84ecec6f",
+    "corrected_compiled_body_sha256": "ca7b298f6d094fd9fd41f1bf836eb162f96f7f03d61da5c63ba519079333f3e7"
+  },
+  "redirect_host": "production.cloudfront.docker.com"
+}
