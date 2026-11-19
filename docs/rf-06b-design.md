@@ -1,6 +1,6 @@
 # RF-06B recorded scenario mapping and qualification
 
-Issue [#6](https://github.com/TravisMa07/ResponseForge/issues/6), [shared design](rf-06-design.md). RF-06A #19 merged as `6e3ecb4ad0bec2d476529b5c3f89a276c493ed1b`; actual unchanged merge passes1,547 tests/all checks on macOS ARM64/Python3.12.12/SQLite3.50.4/uv0.13.6. Issue#6 was closed despite partial delivery; reopened because genuine five-scenario acceptance remains incomplete. Preserve all private sources, original handoffs, cases, volumes, journals and published history.
+Issue [#6](https://github.com/TravisMa07/ResponseForge/issues/6), [shared design](rf-06-design.md), [RF-06B1 PR #20](https://github.com/TravisMa07/ResponseForge/pull/20). RF-06A #19 merged as `6e3ecb4ad0bec2d476529b5c3f89a276c493ed1b`; actual unchanged merge passes1,547 tests/all checks on macOS ARM64/Python3.12.12/SQLite3.50.4/uv0.13.6. Issue#6 was closed despite partial delivery; reopened because genuine five-scenario acceptance remains incomplete. Preserve all private sources, original handoffs, cases, volumes, journals and published history.
 
 ## Review boundaries
 

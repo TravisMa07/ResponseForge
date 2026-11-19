@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0",
   "work_id": "RF-06B1",
-  "revision": "2caf9c42c1d3965dc1c13c06a0eb1139ab031a29-dirty",
-  "observed_at": "2026-11-19T05:51:46.764865+00:00",
+  "revision": "b1b172b8af557cf6826ef0c7f638d85a56cf5302",
+  "observed_at": "2026-11-19T05:54:54.716206+00:00",
   "environment": {
     "host": "macOS ARM64",
     "python": "3.12.12",
@@ -136,5 +136,7 @@
       }
     }
   ],
-  "limitations": "Projection and narrow source-selected policy decisions only. No actual recorded-source core/Shuffle execution, readiness/action timing, source response effect, complete lineage, credential theft, task execution, encryption, network session, C2, analyst savings or detection accuracy claim. Source negatives are rule negatives; ransom-note negative is a context subset without a file-create record. Original synthetic CI tests separately exercise core approval, simulated effects, recovery and redaction."
+  "limitations": "Projection and narrow source-selected policy decisions only. No actual recorded-source core/Shuffle execution, readiness/action timing, source response effect, complete lineage, credential theft, task execution, encryption, network session, C2, analyst savings or detection accuracy claim. Source negatives are rule negatives; ransom-note negative is a context subset without a file-create record. Original synthetic CI tests separately exercise core approval, simulated effects, recovery and redaction.",
+  "expectation_freeze": "2caf9c42c1d3965dc1c13c06a0eb1139ab031a29",
+  "mode": "replay"
 }
