@@ -43,3 +43,21 @@ its unique sentinel key and foreign project value before/after lifecycle tests.
 Observed fixture error: inherited lab label made the original sentinel invalid
 as an unrelated-resource oracle. Regression first failed1 before correction;
 that diagnostic attempt was interrupted and is not a qualification pass.
+
+### Native action outcome and vendor completion
+
+Actual success passed. Actual deliberately failing native action returned FAILURE,
+but the vendor workflow status was FINISHED even with exit_on_error. FINISHED
+therefore proves completion, not action success. Before implementation, require
+three agreeing observations: bound terminal executed graph, exactly one native
+result for the reviewed responseforge_callback1.0.0/callback node (matching action
+ID/metadata), and authenticated core node outcome. Expose callback_status
+SUCCESS|FAILURE|null in VendorExecution/DeliveryRecord. Missing, duplicate,
+unknown or mismatched native callback results cannot finalize a run. Terminal
+FINISHED/SUCCESS plus nativeSUCCESS/core succeeded can finish; terminal vendor
+completion plus nativeFAILURE/core failed|timeout can fail. NativeFAILURE/core
+succeeded (real post-commit acknowledgement loss) remains uncertain/running,
+including when vendor status is FINISHED. FAILURE/ABORTED with nativeSUCCESS
+remains conflicting/uncertain. Keep vendor_status unchanged; never relabel vendor
+FINISHED as FAILURE to fit the expectation. Update positive synthetic fixtures to
+include explicit native results, retaining negative missing-result tests.
