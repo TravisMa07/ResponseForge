@@ -198,3 +198,8 @@ Freezecfb118c precedes implementation8d70ed0 and644new tests; full offline quali
 ## RF-06B2 final qualification
 
 Clean candidate `c99da291f70ece08883d96ec7cb2aae206a4278c` passes2,371offline tests/all checks and a new source-bound build after README metadata correction. Fresh20native phases/14 cases/five recorded observations/three graphs pass with3 verified simulated effects, two expected uncertain faults and0 duplicate/forbidden effects. [Owning ledger](rf-06-ledger.md)/[aggregate](evidence/rf-06b2-runtime.json) bind exact source/wheel/images/modules, independently checked plans/audits/receipts/reports/metrics and scoped recovery. The prior qualified candidate and all private legacy state remain preserved; pilot is stopped. Owner acceptance/merge and actual merged-revision verification remain separate.
+
+
+## RF-06B2 merged / RF-07A start
+
+Owner-merged #21 head9311159 is2f5e204243469fa0fe67ac596cde3fd66d05f1bd; issue#6 closed and actual merged make qualify passes2,371 tests/all checks. [RF-07 design](rf-07-design.md)/[ledger](rf-07-ledger.md) split native authenticated intake/private evidence from later upstream deployment/enrollment. Primary owns shared integration; independent source/expectation and later puremapper lanes receive exactbases/disjointpaths. No Wazuh startup or endpoint authority is inferred.

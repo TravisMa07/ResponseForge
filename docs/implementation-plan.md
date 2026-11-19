@@ -75,3 +75,8 @@ The [RF-04 runtime successor](rf-04-runtime-design.md) starts at owner-authorize
 
 
 RF-06B2 implementation and genuine Desktop recorded-source qualification are now observed in the [ledger](rf-06-ledger.md) and [aggregate](evidence/rf-06b2-runtime.json):20 phases/14 cases/five narrowed observations with source/rights/missing-evidence boundaries, full approval/audit/receipt/report proof and retained recovery. Separate B1/B2 review kept source interpretation distinct from changed execution artifacts. Offline checks need no downloads. Owner acceptance/merge and merged-revision verification remain open; next feature lane RF-07 requires its own design/expectation freeze and explicit live lab authority before endpoint work.
+
+
+## RF-07 staged delivery
+
+[Design](rf-07-design.md), [A expectations](expectations/rf-07a.md) and [ledger](rf-07-ledger.md) start from merged/verified RF-06B2. A reviews native JSON authentication, configured manager/agent identity, atomic common-core intake, immutable private source evidence and no-dispatch reports. B owns the separately reviewed optional upstream manager profile and signed/hash-checked Windows enrollment bundle. Both use Refs#7 until full acceptance passes; actual enrolled endpoint/sensor/live Shuffle/effect and recovery remain separately authorized RF-08. Offline A tests use original synthetic JSON and never need downloads or deployment.
