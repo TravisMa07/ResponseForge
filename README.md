@@ -2,7 +2,7 @@
 
 SOAR-first incident response automation with offline attack replay and an optional live Wazuh endpoint path. ResponseForge connects evidence, analyst approval, response providers and auditable case reports through real Shuffle workflows.
 
-**Status: RF-01–03 are merged; the offline replay/evidence/simulated-response/report slice is verified. RF-04A transport/planning is merged and verified; RF-04B callback/safety corrections are locally verified, while genuine Shuffle runtime remains open; see the [RF-04B ledger](docs/rf-04b-ledger.md). Real Shuffle, recorded attack corpus coverage and live endpoint integration remain unqualified.**
+**Status: RF-01–03 and RF-04A/B are merged and verified offline. RF-04 Docker Desktop transport passed five genuine execution/recovery scenarios and is ready for review in [PR #16](https://github.com/TravisMa07/ResponseForge/pull/16); see the [runtime ledger](docs/rf-04-runtime-ledger.md) and [operator runbook](docs/rf-04-operator.md). The pilot is stopped with data retained. Three domain workflows, recorded attack corpus coverage and live endpoint integration remain unqualified.**
 
 The public engineering requirements are captured in the [architecture](docs/architecture.md) and acceptance documentation. The [implementation plan](docs/implementation-plan.md) defines bounded delivery packages and parallel-agent ownership; the [acceptance matrix](docs/acceptance.md) keeps implementation separate from verification.
 
@@ -33,7 +33,7 @@ uv run --locked --offline python -m responseforge \
   --replay datasets/fixtures/suspicious.jsonl --source-id rf03-suspicious
 ```
 
-This uses the authenticated API in process, writes ignored local state/reports and stops for approval. Add `--decision approve` explicitly to apply one **simulated** effect; repeat delivery retains one case/effect. No TCP listener, real Shuffle workflow or endpoint action runs. See the [replay runbook](docs/replay.md) for benign/incomplete cases, denial, recovery, formats and report redaction. For the next integration stage, [Shuffle target comparison and preparation](docs/shuffle.md) evaluates Docker Desktop and a dedicated VM without starting either.
+This uses the authenticated API in process, writes ignored local state/reports and stops for approval. Add `--decision approve` explicitly to apply one **simulated** effect; repeat delivery retains one case/effect. No TCP listener, real Shuffle workflow or endpoint action runs. See the [replay runbook](docs/replay.md) for benign/incomplete cases, denial, recovery, formats and report redaction. The [Shuffle target comparison](docs/shuffle.md) retains Docker Desktop and dedicated-VM options; the [runtime runbook](docs/rf-04-operator.md) owns the authorized pilot.
 
 ## Local case API
 

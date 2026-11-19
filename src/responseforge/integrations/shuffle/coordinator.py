@@ -14,7 +14,7 @@ from responseforge.integrations.shuffle.models import (
     WorkflowBinding,
     canonical_uuid,
 )
-from responseforge.runtime import Principal
+from responseforge.runtime import NodeObservation, Principal
 from responseforge.storage import Transaction
 
 
@@ -191,7 +191,12 @@ class ShuffleCoordinator:
             return self._save(record, state, None, actor)
 
     def _save(
-        self, original: DeliveryRecord, state: str, vendor_status: str | None, actor: Principal
+        self,
+        original: DeliveryRecord,
+        state: str,
+        vendor_status: str | None,
+        actor: Principal,
+        callback_status: str | None = None,
     ) -> DeliveryRecord:
         with self.service.store.transaction() as tx:
             argument = self._argument(
@@ -214,7 +219,12 @@ class ShuffleCoordinator:
                 return current
             result = DeliveryRecord.model_validate(
                 current.model_dump(mode="json")
-                | {"state": state, "vendor_status": vendor_status, "updated_at": now}
+                | {
+                    "state": state,
+                    "vendor_status": vendor_status,
+                    "callback_status": callback_status,
+                    "updated_at": now,
+                }
             )
             run_data = tx.get("workflows", argument.run_id)
             if run_data is None:
@@ -235,6 +245,30 @@ class ShuffleCoordinator:
                 if state in {"failed", "rejected"}
                 else "running"
             )
+            if state in {"finished", "failed"} and vendor_status is not None:
+                # Vendor graph completion and authenticated node receipt are
+                # separate observations; neither one can finalize the run alone.
+                node_data = tx.get("callbacks", "shuffle-node:" + argument.run_id)
+                try:
+                    node = NodeObservation.model_validate(node_data)
+                    item = node.callback
+                    if (
+                        item.run_id != argument.run_id
+                        or item.incident_id != argument.incident_id
+                        or item.workflow_id != original.workflow_id
+                        or item.correlation_id != argument.correlation_id
+                        or node.mode != argument.mode
+                        or not run.started_at <= node.received_at <= now
+                        or (state == "finished" and item.status != "succeeded")
+                        or (state == "failed" and item.status not in {"failed", "timeout"})
+                    ):
+                        raise ValueError
+                    target = item.status
+                except (ValueError, TypeError):
+                    result = DeliveryRecord.model_validate(
+                        result.model_dump(mode="json") | {"state": "uncertain"}
+                    )
+                    target = "running"
             if run.status != "running" and target != "running" and run.status != target:
                 raise ServiceError(409, "Workflow terminal observations conflict")
             if run.status == "running" and target != "running":
@@ -283,10 +317,15 @@ class ShuffleCoordinator:
                 state = (
                     "finished"
                     if status in {"FINISHED", "SUCCESS"}
+                    and observation.callback_status == "SUCCESS"
                     else "failed"
-                    if status in {"FAILURE", "ABORTED"}
+                    if status in {"FINISHED", "SUCCESS", "FAILURE", "ABORTED"}
+                    and observation.callback_status == "FAILURE"
+                    else "uncertain"
+                    if status in {"FINISHED", "SUCCESS", "FAILURE", "ABORTED"}
                     else "accepted"
                 )
+                callback_status = observation.callback_status
             except ShuffleError:
-                state, status = "uncertain", None
-            return self._save(original, state, status, actor)
+                state, status, callback_status = "uncertain", None, None
+            return self._save(original, state, status, actor, callback_status)

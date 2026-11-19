@@ -82,3 +82,7 @@ RF-03 promotes HTTPX 0.28.1 to runtime for authenticated ASGI replay (no listene
 ## RF-04A candidate metadata and runtime gates
 
 [Maintained source evidence](shuffle-source-evidence.md) and [candidate image lock](../deploy/shuffle/images.lock.json) record inspected API/orchestrator/app revisions, exact file hashes and five registry indexes with AMD64/ARM64 children. Latest-tag observations were converted to immutable digest references, not represented as proven v2.3.0 builds. Backend ARM64 config had no source-revision labels. No image was pulled or started. [Target plans](shuffle.md) remain blocked for binary/source correlation, app inventory, credential-safe callbacks, CA/bootstrap, artifact license review and actual resource/runtime evidence. No dependency versions changed in RF-04A.
+
+## RF-04 source-built runtime successor
+
+The [runtime design](rf-04-runtime-design.md), [runbook](rf-04-operator.md) and [ledger](rf-04-runtime-ledger.md) supersede RF-04A's unexecuted candidate status for the separately authorized pilot. `deploy/shuffle/runtime` records exact minimal source inputs, base indexes/platform manifests and component-specific Go module locks. The reviewed licensed monorepo Orborus is used instead of inferring rights for its later standalone repository. Source/patch/module/wheel hashes and built image IDs are retained privately and summarized in the ledger. Python dependencies are unchanged. Full vulnerability/transitive-license scans and release distribution obligations remain release gates, distinct from bounded runtime proof.

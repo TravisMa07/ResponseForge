@@ -13,6 +13,7 @@ from responseforge.core import CaseService, ServiceError
 from responseforge.integrations.shuffle.client import ShuffleTransport
 from responseforge.integrations.shuffle.coordinator import ShuffleCoordinator
 from responseforge.integrations.shuffle.models import WorkflowBinding
+from responseforge.runtime import WorkflowCallback
 from responseforge.storage import Store
 from tests.rf02.helpers import ENDPOINT, SimulatedCrash, alert, world
 from tests.rf04.helpers import (
@@ -22,6 +23,7 @@ from tests.rf04.helpers import (
     WF,
     config,
     fingerprint,
+    native_result,
     workflow,
 )
 from tests.rf04.test_client import wire_response
@@ -59,6 +61,26 @@ def reopened(v, *, settings=None, cfg=None, bindings=None, handler=None):
         handler = httpx.MockTransport(handler)
     service = CaseService(Store(settings.database_path), settings, clock=v.w.clock)
     return ShuffleCoordinator(service, ShuffleTransport(cfg, transport=handler), bindings)
+
+
+def authenticated_node(v, *, status="succeeded", nonce="explicit-recovery-node"):
+    """RF-04 runtime refinement: a positive poll also needs real core receipt."""
+    with v.service.store.transaction() as tx:
+        run = tx.get("workflows", RUN)
+    acknowledgement = v.service.callback(
+        WorkflowCallback(
+            run_id=RUN,
+            incident_id=v.incident_id,
+            workflow_id=WF,
+            correlation_id=run["correlation_id"],
+            status=status,
+        ),
+        v.w.actors["workflow"],
+        nonce=nonce,
+        sent_at=v.w.clock(),
+    )
+    assert acknowledgement.accepted is True and acknowledgement.vendor_verified is False
+    return acknowledgement
 
 
 def test_start_is_durable_and_duplicate_reopen_never_posts_again(tmp_path: Path) -> None:
@@ -147,6 +169,7 @@ def test_ambiguous_launch_reconciles_original_uuid_without_second_start(
                 "execution_id": RUN,
                 "workflow_id": WF,
                 "workflow": workflow(),
+                "results": native_result(),
                 "execution_argument": encoded[0],
                 "status": "FINISHED",
                 "authorization": EXECUTION_SECRET,
@@ -162,6 +185,7 @@ def test_ambiguous_launch_reconciles_original_uuid_without_second_start(
         assert first.state == "uncertain"
     duplicate = asyncio.run(reopened(v).start(v.incident_id, WF, RUN, v.actor))
     assert duplicate.state in {"reserved", "uncertain"}
+    authenticated_node(v)
     recovered = asyncio.run(reopened(v).reconcile(v.incident_id, RUN, v.actor))
     assert recovered.state == "finished" and recovered.vendor_status == "FINISHED"
     assert len(starts) == 1 and len(lookup) == 1
@@ -288,6 +312,9 @@ def test_stale_concurrent_failed_lookup_cannot_overwrite_finished_run(tmp_path: 
                 "workflow": workflow(),
                 "execution_argument": encoded[0],
                 "status": status,
+                "results": native_result(
+                    "FAILURE" if status in {"FAILURE", "ABORTED"} else "SUCCESS"
+                ),
             },
         )
 
@@ -297,6 +324,7 @@ def test_stale_concurrent_failed_lookup_cannot_overwrite_finished_run(tmp_path: 
         nonlocal waiting, release
         waiting, release = asyncio.Event(), asyncio.Event()
         await v.coordinator.start(v.incident_id, WF, RUN, v.actor)
+        authenticated_node(v)
         slow = asyncio.create_task(v.coordinator.reconcile(v.incident_id, RUN, v.actor))
         await waiting.wait()
         final = await reopened(v).reconcile(v.incident_id, RUN, v.actor)
@@ -359,6 +387,7 @@ asyncio.run(v.coordinator.start(v.incident_id,WF,RUN,v.actor))
                 "execution_id": RUN,
                 "workflow_id": WF,
                 "workflow": workflow(),
+                "results": native_result(),
                 "execution_argument": marker.read_text(),
                 "status": "FINISHED",
             },
@@ -367,6 +396,7 @@ asyncio.run(v.coordinator.start(v.incident_id,WF,RUN,v.actor))
     restart = reopened(v, handler=lookup)
     duplicate = asyncio.run(restart.start(v.incident_id, WF, RUN, v.actor))
     assert duplicate.state == "reserved" and not calls
+    authenticated_node(v)
     observed = asyncio.run(restart.reconcile(v.incident_id, RUN, v.actor))
     assert observed.state == "finished" and len(calls) == 1
 

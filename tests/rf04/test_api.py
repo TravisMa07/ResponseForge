@@ -7,7 +7,7 @@ from fastapi.testclient import TestClient
 
 from responseforge.api import create_app
 from tests.rf02.helpers import TOKENS
-from tests.rf04.helpers import EXECUTION_SECRET, KEY, RUN, WF, workflow
+from tests.rf04.helpers import EXECUTION_SECRET, KEY, RUN, WF, native_result, workflow
 from tests.rf04.test_client import wire_response
 from tests.rf04.test_coordinator import case_world
 
@@ -35,6 +35,7 @@ def test_api_authenticated_launch_reconcile_restart_and_report_excludes_private_
                 "execution_id": RUN,
                 "workflow_id": WF,
                 "workflow": workflow(),
+                "results": native_result(),
                 "execution_argument": arguments[0],
                 "status": "FINISHED",
                 "authorization": EXECUTION_SECRET,
@@ -60,6 +61,25 @@ def test_api_authenticated_launch_reconcile_restart_and_report_excludes_private_
     accepted = client.post(base + "/start", json=body, headers=auth)
     assert accepted.status_code == 200, accepted.text
     assert accepted.json()["state"] == "accepted"
+    # A vendor terminal poll no longer proves a node callback was received.
+    # Deliver through the actual authenticated core route before positive poll.
+    node = client.post(
+        "/v1/integrations/shuffle/callback",
+        json={
+            "run_id": RUN,
+            "incident_id": v.incident_id,
+            "workflow_id": WF,
+            "correlation_id": accepted.json()["argument"]["correlation_id"],
+            "status": "succeeded",
+        },
+        headers={
+            "Authorization": "Bearer " + TOKENS["workflow"],
+            "X-Request-Timestamp": v.w.clock().isoformat(),
+            "X-Request-Nonce": "explicit-api-positive-node",
+        },
+    )
+    assert node.status_code == 200
+    assert node.json()["accepted"] is True and node.json()["vendor_verified"] is False
     completed = client.post(base + "/reconcile", json={"run_id": RUN}, headers=auth)
     assert completed.status_code == 200 and completed.json()["state"] == "finished"
     reopened = TestClient(

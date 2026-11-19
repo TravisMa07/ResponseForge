@@ -39,6 +39,55 @@ def _object(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
     return result
 
 
+def _callback_status(result: dict[str, Any]) -> Literal["SUCCESS", "FAILURE"] | None:
+    """Project one native receipt for the exact reviewed callback node, never its body."""
+    graph = result.get("workflow")
+    if not isinstance(graph, dict) or not isinstance(graph.get("actions"), list):
+        return None
+    nodes = [
+        node
+        for node in graph["actions"]
+        if isinstance(node, dict)
+        and node.get("app_name") == "responseforge_callback"
+        and node.get("app_version") == "1.0.0"
+        and node.get("name") == "callback"
+    ]
+    results = result.get("results")
+    if len(nodes) != 1 or not isinstance(results, list):
+        return None
+    node = nodes[0]
+    try:
+        canonical_uuid(node["id"])
+    except (KeyError, ValueError, TypeError):
+        return None
+    receipts = [
+        item
+        for item in results
+        if isinstance(item, dict)
+        and isinstance(item.get("action"), dict)
+        and (
+            item["action"].get("id") == node.get("id")
+            or item["action"].get("app_name") == "responseforge_callback"
+        )
+    ]
+    if len(receipts) != 1:
+        return None
+    receipt = receipts[0]
+    if receipt["action"].get("app_id") not in (None, "", node.get("app_id")):
+        return None
+    if receipt.get("execution_id") != result.get("execution_id") or any(
+        receipt["action"].get(key) != node.get(key)
+        for key in ("id", "app_name", "app_version", "name")
+    ):
+        return None
+    status = receipt.get("status")
+    if status == "SUCCESS":
+        return "SUCCESS"
+    if status == "FAILURE":
+        return "FAILURE"
+    return None
+
+
 class ShuffleTransport:
     """Bounded transport only; a successful workflow is not endpoint proof."""
 
@@ -294,6 +343,7 @@ class ShuffleTransport:
                 runtime_hash = workflow_artifact(runtime_workflow).sha256
             return VendorExecution(
                 workflow_sha256=runtime_hash,
+                callback_status=_callback_status(result),
                 workflow_id=workflow_id,
                 execution_id=execution_id,
                 argument=argument,

@@ -121,6 +121,7 @@ class VendorExecution(Contract):
     execution_id: UUIDString
     argument: ShuffleArgument
     workflow_sha256: Sha256 | None = None
+    callback_status: Literal["SUCCESS", "FAILURE"] | None = None
     vendor_status: Literal["EXECUTING", "WAITING", "FINISHED", "FAILURE", "ABORTED", "SUCCESS"]
 
     @model_validator(mode="after")
@@ -142,6 +143,7 @@ class DeliveryRecord(Contract):
     workflow_version: Id
     workflow_sha256: Sha256
     origin: Id
+    callback_status: Literal["SUCCESS", "FAILURE"] | None = None
     state: Literal["reserved", "accepted", "uncertain", "rejected", "finished", "failed"]
     created_at: UtcDateTime
     updated_at: UtcDateTime
@@ -153,10 +155,19 @@ class DeliveryRecord(Contract):
     def chronology(self) -> Self:
         if self.updated_at < self.created_at:
             raise ValueError("Delivery update precedes reservation")
+        if self.state == "finished" and self.callback_status != "SUCCESS":
+            raise ValueError("Finished delivery requires native callback success")
+        if self.state == "failed" and self.callback_status != "FAILURE":
+            raise ValueError("Failed delivery requires native callback failure")
         if self.state == "finished" and self.vendor_status not in {"FINISHED", "SUCCESS"}:
             raise ValueError("Finished delivery requires a finished workflow status")
-        if self.state == "failed" and self.vendor_status not in {"FAILURE", "ABORTED"}:
-            raise ValueError("Failed delivery requires a failed workflow status")
+        if self.state == "failed" and self.vendor_status not in {
+            "FINISHED",
+            "SUCCESS",
+            "FAILURE",
+            "ABORTED",
+        }:
+            raise ValueError("Failed delivery requires a terminal workflow status")
         return self
 
 
@@ -169,6 +180,17 @@ class ShuffleReconcileRequest(Contract):
     run_id: UUIDString
 
 
+def _json_numbers(value: Any) -> Any:
+    """Normalize Go/Python integral JSON round trips without dropping graph fields."""
+    if isinstance(value, float) and value.is_integer():
+        return int(value)
+    if isinstance(value, list):
+        return [_json_numbers(item) for item in value]
+    if isinstance(value, dict):
+        return {key: _json_numbers(item) for key, item in value.items()}
+    return value
+
+
 def workflow_artifact(document: dict[str, Any]) -> WorkflowArtifact:
     try:
         workflow_id = canonical_uuid(document["id"])
@@ -179,7 +201,17 @@ def workflow_artifact(document: dict[str, Any]) -> WorkflowArtifact:
             or any(not isinstance(x, dict) for x in actions)
         ):
             raise ValueError
-        projection = {"id": workflow_id, "actions": actions}
+        # Shuffle rewrites diagram coordinates between storage and execution.
+        # Bind every executable field, excluding only top-level action UI layout.
+        if len(json.dumps(actions, allow_nan=False).encode()) > 1048576:
+            raise ValueError
+        projection = {
+            "id": workflow_id,
+            "actions": [
+                {key: value for key, value in action.items() if key != "position"}
+                for action in actions
+            ],
+        }
         for name in ("branches", "triggers", "workflow_variables", "execution_variables"):
             value = document.get(name, [])
             if not isinstance(value, list):
@@ -192,7 +224,7 @@ def workflow_artifact(document: dict[str, Any]) -> WorkflowArtifact:
         ):
             raise ValueError
         raw = json.dumps(
-            projection, sort_keys=True, separators=(",", ":"), allow_nan=False
+            _json_numbers(projection), sort_keys=True, separators=(",", ":"), allow_nan=False
         ).encode()
         if len(raw) > 1048576:
             raise ValueError

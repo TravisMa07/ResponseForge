@@ -16,7 +16,7 @@ import httpx
 
 from responseforge.contracts import Contract, PlaybookRun
 from responseforge.integrations.shuffle.models import ShuffleConfig, ShuffleError, canonical_uuid
-from responseforge.runtime import WorkflowCallback
+from responseforge.runtime import CallbackAcknowledgement, WorkflowCallback
 
 
 def _now() -> datetime:
@@ -158,9 +158,14 @@ class CallbackTransport:
             )
             if not isinstance(document, dict):
                 return "uncertain"
-            echoed = PlaybookRun.model_validate(document)
-            if echoed.ended_at is None:
-                return "uncertain"
+            if "accepted" in document or "vendor_verified" in document:
+                echoed: PlaybookRun | CallbackAcknowledgement = (
+                    CallbackAcknowledgement.model_validate(document)
+                )
+            else:
+                echoed = PlaybookRun.model_validate(document)
+                if echoed.ended_at is None:
+                    return "uncertain"
             for name in ("run_id", "incident_id", "workflow_id", "correlation_id", "status"):
                 if getattr(echoed, name) != getattr(item, name):
                     return "uncertain"

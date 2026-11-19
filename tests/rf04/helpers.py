@@ -47,7 +47,14 @@ def workflow(**changes: Any) -> dict[str, Any]:
     return {
         "id": WF,
         "name": "Original qualification stub",
-        "actions": [{"id": RUN, "app_name": "original-test-only", "name": "no_runtime_execution"}],
+        "actions": [
+            {
+                "id": RUN,
+                "app_name": "responseforge_callback",
+                "app_version": "1.0.0",
+                "name": "callback",
+            }
+        ],
         "branches": [],
         "triggers": [],
         "start": RUN,
@@ -88,3 +95,8 @@ def execution(**changes: Any) -> dict[str, Any]:
         "authorization": EXECUTION_SECRET,
         "results": [{"raw": "PRIVATE_RESULT"}],
     } | changes
+
+
+def native_result(status: str = "SUCCESS") -> list[dict[str, Any]]:
+    """Explicit synthetic native receipt, independent of authenticated core node."""
+    return [{"action": workflow()["actions"][0], "status": status, "execution_id": RUN}]
