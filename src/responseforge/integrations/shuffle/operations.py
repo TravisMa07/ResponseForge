@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import json
 import os
 import re
@@ -294,7 +295,11 @@ class DockerRuntime:
             inventory = value.get("images")
             if not isinstance(inventory, dict):
                 raise ValueError
-            render_runtime(inventory, self.state_dir.resolve())
+            render_runtime(
+                inventory,
+                self.state_dir.resolve(),
+                playbooks_enabled=value.get("playbooks_enabled", False),
+            )
             return dict(value)
         except (OSError, ValueError, TypeError):
             raise ValueError("Invalid private pilot state") from None
@@ -327,6 +332,16 @@ class DockerRuntime:
         state = self._state()
         if mutate and state.get("authorized") is not True:
             raise ValueError("Pilot engine/socket/loopback scope is not authorized")
+        if mutate and state.get("playbooks_enabled") is True:
+            source = self.state_dir / "replay.jsonl"
+            if (
+                source.is_symlink()
+                or not source.is_file()
+                or source.stat().st_size > 4 * 1048576
+                or hashlib.sha256(source.read_bytes()).hexdigest()
+                != state.get("playbook_source_sha256")
+            ):
+                raise ValueError("Pilot replay source differs from the reviewed snapshot")
         if mutate:
             try:
                 path = self.state_dir / "compose.json"
@@ -334,7 +349,10 @@ class DockerRuntime:
                     path.is_symlink()
                     or json.loads(path.read_text())
                     != render_runtime(
-                        state["images"], self.state_dir.resolve(), engine_authorized=True
+                        state["images"],
+                        self.state_dir.resolve(),
+                        engine_authorized=True,
+                        playbooks_enabled=state.get("playbooks_enabled", False),
                     )["compose"]
                 ):
                     raise ValueError

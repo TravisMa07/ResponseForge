@@ -253,8 +253,16 @@ func deployApp(cli *dockerclient.Client, image string, identifier string, env []
     assert patched.index('os.Getenv("SHUFFLE_SWARM_CONFIG")') < patched.index(
         "executeNativeWorkflowMarker()"
     )
-    assert 'action.AppName != "responseforge_callback"' in patched
-    assert 'action.AppVersion != "1.0.0"' in patched and 'action.Name != "callback"' in patched
+    assert (
+        'allowedCallback := action.AppName == "responseforge_callback" && action.Name == "callback"'
+        in patched
+    )
+    assert 'action.AppVersion != "1.0.0" || (!allowedCallback && !allowedTask)' in patched
+    assert 'action.AppName == "responseforge_tasks"' in patched
+    assert (
+        'action.Name == "prepare" || action.Name == "gate" || action.Name == "dispatch"' in patched
+    )
+    assert 'action.AppName == "responseforge_callback" && action.Name == "callback"' in patched
     assert (
         'Source: os.Getenv("RF_CALLBACK_VOLUME")' in patched
         and 'Target: "/run/responseforge"' in patched
