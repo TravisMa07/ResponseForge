@@ -1,0 +1,25 @@
+# RF-07C2: platform-bound client build compatibility
+
+Issue [#7](https://github.com/TravisMa07/ResponseForge/issues/7); base actual merged C1 `dacd8a7dbf34d0e63f29d65137443b3d16671af9`. Independent [expectations](expectations/rf-07c2.md).
+
+## Bounded behavior
+
+The pinned dashboard platform is `4a81e59ee597c0014e1d72666aa32423a964ba27`, version2.19.6/Wazuh4.14.10. Its source requires Node18.19.0/Yarn1.22.19, locks Axios1.18.1, and writes server files with Babel, not semantic TypeScript compilation. C1 tested a separate Node24/TypeScript5/Axios1.17 candidate. C2 closes that specific component compatibility gap, without claiming a full plugin build, packaged dependency resolution, Linux image or running manager.
+
+Retain the complete original/corrected client and cookie helper from C1. Emit both using actual hash-verified upstream node_preset.js/common_preset.js and helper options babelrc:false, configFile:false, sourceMaps:inline, filename, presets:[node_preset]. The preset's target Node14 differs from execution Node18.19.0 and remains unchanged. Do not remove upstream duplicate _axios declarations or silently use an alternate compiler if Babel fails. Keep raw sources, presets/notices, inline maps, dependencies, binaries and reports private/untracked.
+
+## Frozen interfaces and limits
+
+`platform_source.py`: frozen PlatformLock(revision,members:tuple[SourceMember,...]); load_platform_lock() reads the public source lock; fetch_platform_source(output,lock,allow_download=False,transport=None)->Path; prepare_platform_source(source,output,lock)->Path. Trusted Python callers may inject synthetic policies with the same fixed paths/names; CLI uses only the reviewed public lock. Eleven exact named source members, each <=1MiB, total <=2MiB, fixed raw.githubusercontent.com/wazuh/wazuh-dashboard revision URLs, no redirects/proxies/encoded bodies. Preserve exact source bytes and Apache LICENSE/NOTICE, require literal download opt-in and private no-replace publication. Prepared output preserves all11 members and adds package.json (reviewed minimal manifest), RESPONSEFORGE_CHANGES.txt and manifest.json with ready/runtime/full-plugin false. The source lock fixes all paths, sizes and hashes.
+
+Reuse C1 acquisition in a shared reviewed helper, preserving C1's existing fixed-source validation. No user-supplied URL/repository/lock CLI option. `scripts/wazuh_platform.py fetch --output DIR --allow-download` and `prepare --source DIR --output DIR` are preparation only.
+
+The public minimal manifest selects existing root-yarn-lock selectors and preserves the platform root resolutions. Explicit private Yarn1.22.19 installation uses the exact original root lock with frozen lockfile, lifecycle scripts disabled and default user configuration ignored. Check its hash before/after installation; record actual package closure. Do not substitute a newly resolved npm graph or equate minimum workspace layout with final plugin packaging/hoisting. Node18.19.0 Darwin ARM64 is an explicitly fetched, SHA256-verified private portable test binary; no system installation or Docker action.
+
+C1 `tools/wazuh-tls/qualify.cjs` exports a shared main(profile) plus trustedDirectory/snapshot helpers while retaining its direct CLI behavior. Profile provides nodeVersion, axiosVersion, compilerName/compilerVersion, argv, createCompiler(state)->{compile(bytes,filename):Promise<string>,metadata}. Default profile preserves C1 TypeScript behavior. New `tools/wazuh-platform/qualify.cjs --bundle DIR --state-dir DIR --platform-source DIR` validates actual platform-source identities before executing verified preset snapshots in private state, validates selected dependency versions, and supplies actual Babel compilation. No arbitrary caller-selected code/profile is accepted by either CLI. Report retains C1 scenarios and binds compiler options, preset/dependency/source identities and actual emitted code. Node18 proxy tests establish Axios environment-variable rejection, not Node24's newer global proxy support.
+
+## Ownership and qualification
+
+Root owns shared acquisition/harness contracts, source/dependency manifests, production CLI, integration status and sole qualification. Independent expectation/test lane owns docs/expectations/rf-07c2.md and tests/rf07c2 only after freeze. Source lane owns private inspection only. New read-only review inspects actual verified preset snapshots, installed closure, complete emitted modules and native reports. Meaningful scaffold red precedes production GO; offline tests remain independent of downloads. Native runs must reproduce original insecure acceptance and all corrected TLS successes/refusals on the platform profile, then rerun C1 to cover shared-harness changes.
+
+Full plugin bootstrap/build/frontend/packaging, semantic TypeScript, deployed wazuh-core resolution, Linux image/runtime/TLS/bootstrap/capacity, captured manager data, native Windows and live endpoint gates remain open. Deployment ready stays false. No container build/start, host privilege change or endpoint operation is authorized by C2.
