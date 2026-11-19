@@ -11,7 +11,7 @@ from typing import Any
 from responseforge.contracts import Alert
 from responseforge.core import CaseService
 from responseforge.replay import make_alerts
-from responseforge.replay_contracts import ReplayBatch, digest
+from responseforge.replay_contracts import digest
 from responseforge.runtime import Principal
 
 _FREE_TEXT = frozenset(
@@ -96,10 +96,9 @@ def _redact(value: Any, secrets: tuple[str, ...], key: str = "") -> Any:
 def _source_scope(service: CaseService, alert: Alert) -> tuple[str, str]:
     """Expose fixed scope labels only when the registered source matches this case."""
     try:
-        batch = service.settings.replay_batch
-        if batch is None or alert.mode != "replay":
+        if alert.mode != "replay":
             return "unavailable", "unavailable"
-        batch = ReplayBatch.model_validate(batch.model_dump(mode="json", warnings=False))
+        batch = service.settings.source_for_alert(alert)
         if not any(value == alert for value in make_alerts(batch, ingested_at=alert.ingested_at)):
             return "unavailable", "unavailable"
         selected = batch.origin is not None and batch.origin.selected_event_ids is not None

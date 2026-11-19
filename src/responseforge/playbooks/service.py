@@ -77,9 +77,11 @@ class PlaybookService:
             raise ServiceError(409, "Playbook path differs from request")
         if settings.mode != Mode.REPLAY or request.mode != Mode.REPLAY:
             raise ServiceError(409, "No qualified playbook source for this mode")
-        if settings.shuffle_config is None or settings.replay_batch is None:
+        if settings.shuffle_config is None or (settings.replay_batch is None and not settings.replay_sources):
             raise ServiceError(503, "Playbook source and transport are not configured")
-        if settings.evidence_provider is None or settings.playbook_provider is None:
+        if settings.evidence_provider is None or (
+            settings.playbook_provider is None and settings.recorded_playbook_provider is None
+        ):
             raise ServiceError(503, "Playbook evidence and response providers are required")
         try:
             value = settings.playbook_bindings[request.workflow_id]
@@ -100,10 +102,6 @@ class PlaybookService:
                     raise KeyError
                 core._principal(principal, {role})
                 principals[role] = principal
-            provider = settings.playbook_provider
-            version = settings.provider_versions[provider]
-            if not version or provider not in settings.providers:
-                raise KeyError
         except (KeyError, ValueError, TypeError):
             raise ServiceError(
                 403, "Playbook binding or technical actor is not authorized"
@@ -143,8 +141,12 @@ class PlaybookService:
             or not run.started_at <= delivery.created_at <= delivery.updated_at <= now
         ):
             raise ServiceError(409, "Original playbook run scope cannot change")
-        batch = _read(ReplayBatch, settings.replay_batch.model_dump(mode="json", warnings=False))
         try:
+            batch = settings.source_for_alert(alert)
+            provider = settings.provider_for_source(batch)
+            if provider is None or provider not in settings.providers:
+                raise ValueError("Missing source provider")
+            version = settings.provider_versions[provider]
             expected = next(
                 (
                     a
@@ -153,7 +155,7 @@ class PlaybookService:
                 ),
                 None,
             )
-        except (ValueError, TypeError):
+        except (ValueError, TypeError, KeyError):
             raise ServiceError(409, "Registered playbook replay source is invalid") from None
         if expected != alert:
             raise ServiceError(409, "Playbook alert differs from registered source")
@@ -533,6 +535,16 @@ class PlaybookService:
             **common, status="ready" if approval.decision == "approved" else "denied"
         )
 
+    def inspect(
+        self, incident_id: str, request: PlaybookStepRequest, actor: Principal
+    ) -> PlaybookPlan:
+        """Read an existing bound plan without preparing or auditing another step."""
+        context = self._context(incident_id, request, actor)
+        plan = self._cached(context)
+        if plan is None:
+            raise ServiceError(409, "Original playbook plan is unavailable")
+        return plan
+
     def gate(
         self, incident_id: str, request: PlaybookStepRequest, actor: Principal
     ) -> PlaybookProgress:
@@ -555,15 +567,20 @@ class PlaybookService:
             raise ServiceError(403, "Workflow authority changed before dispatch")
         binding = settings.shuffle_bindings.get(request.workflow_id)
         cfg = settings.shuffle_config
+        try:
+            current_source = settings.source_for_alert(context.alert)
+            current_provider = settings.provider_for_source(current_source)
+        except (ValueError, TypeError, KeyError):
+            raise ServiceError(409, "Original source changed before dispatch") from None
         if (
             cfg is None
             or binding is None
             or request.workflow_id not in cfg.workflow_ids
             or settings.playbook_bindings.get(request.workflow_id) != context.kind
-            or settings.playbook_provider != context.provider
+            or current_provider != context.provider
             or settings.provider_versions.get(context.provider) != context.provider_version
             or settings.mode != Mode.REPLAY
-            or settings.replay_batch != context.batch
+            or current_source != context.batch
             or settings.playbook_actors.get("analyst") != context.analyst.actor_id
             or settings.playbook_actors.get("executor") != context.executor.actor_id
         ):

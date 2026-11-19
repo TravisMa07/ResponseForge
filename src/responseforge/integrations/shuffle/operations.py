@@ -299,6 +299,7 @@ class DockerRuntime:
                 inventory,
                 self.state_dir.resolve(),
                 playbooks_enabled=value.get("playbooks_enabled", False),
+                recorded_enabled=value.get("recorded_enabled", False),
             )
             return dict(value)
         except (OSError, ValueError, TypeError):
@@ -342,6 +343,12 @@ class DockerRuntime:
                 != state.get("playbook_source_sha256")
             ):
                 raise ValueError("Pilot replay source differs from the reviewed snapshot")
+        if mutate and state.get("recorded_enabled") is True:
+            from responseforge.integrations.shuffle.recorded_bootstrap import (
+                recorded_bundle_fingerprint,
+            )
+            if recorded_bundle_fingerprint(self.state_dir / "recorded") != state.get("recorded_source_sha256"):
+                raise ValueError("Recorded source/case binding changed")
         if mutate:
             try:
                 path = self.state_dir / "compose.json"
@@ -353,6 +360,7 @@ class DockerRuntime:
                         self.state_dir.resolve(),
                         engine_authorized=True,
                         playbooks_enabled=state.get("playbooks_enabled", False),
+                        recorded_enabled=state.get("recorded_enabled", False),
                     )["compose"]
                 ):
                     raise ValueError

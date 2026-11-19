@@ -63,6 +63,8 @@ class Settings:
     provider_versions: dict[str, str] = field(default_factory=dict)
     evidence_provider: EvidenceProvider | None = field(default=None, repr=False)
     replay_batch: ReplayBatch | None = field(default=None, repr=False)
+    replay_sources: tuple[ReplayBatch, ...] = field(default=(), repr=False)
+    recorded_playbook_provider: str | None = None
     shuffle_config: ShuffleConfig | None = field(default=None, repr=False)
     shuffle_bindings: dict[str, WorkflowBinding] = field(default_factory=dict)
     playbook_bindings: dict[str, str] = field(default_factory=dict)
@@ -93,6 +95,22 @@ class Settings:
                     self.replay_batch.model_dump(mode="json", warnings=False)
                 ),
             )
+        sources = tuple(ReplayBatch.model_validate(
+            source.model_dump(mode="json", warnings=False)
+        ) for source in self.replay_sources)
+        if sources:
+            if (
+                self.mode != Mode.REPLAY or len(sources) > 32
+                or any(source.origin is None or source.origin.transformation != "windows-events-v1"
+                       for source in sources)
+                or self.recorded_playbook_provider not in self.providers
+            ):
+                raise ValueError("Complete replay-only recorded source/provider configuration required")
+            from responseforge.replay.registry import ReplayRegistry
+            ReplayRegistry(((self.replay_batch,) if self.replay_batch is not None else ()) + sources)
+        elif self.recorded_playbook_provider is not None:
+            raise ValueError("Recorded provider requires registered sources")
+        object.__setattr__(self, "replay_sources", sources)
         endpoints = tuple(
             EndpointRef.model_validate(x.model_dump(mode="json")) for x in self.endpoints
         )
@@ -125,7 +143,7 @@ class Settings:
                     for kind in playbooks.values()
                 )
                 or set(playbook_actors) != {"analyst", "executor"}
-                or self.playbook_provider not in self.providers
+                or (self.playbook_provider or self.recorded_playbook_provider) not in self.providers
             ):
                 raise ValueError("Complete reviewed playbook configuration required")
             for role, identity in playbook_actors.items():
@@ -144,6 +162,27 @@ class Settings:
             "resource_allowlist",
             {key: frozenset(value) for key, value in self.resource_allowlist.items()},
         )
+
+
+    def source_for_alert(self, alert: Alert) -> ReplayBatch:
+        from responseforge.replay import ReplayError, make_alerts
+        batches = ((self.replay_batch,) if self.replay_batch is not None else ()) + self.replay_sources
+        if not batches:
+            raise ReplayError("No registered source")
+        if len(batches) == 1 and not self.replay_sources:
+            batch = ReplayBatch.model_validate(batches[0].model_dump(mode="json", warnings=False))
+            if sum(value == alert for value in make_alerts(batch, ingested_at=alert.ingested_at)) != 1:
+                raise ReplayError("Original alert source unavailable")
+            return batch
+        from responseforge.replay.registry import ReplayRegistry
+        return ReplayRegistry(batches).resolve(alert)
+
+    def provider_for_source(self, batch: ReplayBatch) -> str | None:
+        if any(source == batch for source in self.replay_sources):
+            return self.recorded_playbook_provider
+        if batch == self.replay_batch:
+            return self.playbook_provider
+        raise ValueError("Original source provider unavailable")
 
 
 class IntakeResult(Contract):

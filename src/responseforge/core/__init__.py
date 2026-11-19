@@ -988,8 +988,10 @@ class CaseService:
                 or request.endpoint != incident.endpoint
             ):
                 raise ServiceError(409, "Collection scope differs from case")
-            provider, batch = self.settings.evidence_provider, self.settings.replay_batch
-            if incident.mode != Mode.REPLAY or provider is None or batch is None:
+            provider = self.settings.evidence_provider
+            if incident.mode != Mode.REPLAY or provider is None or (
+                self.settings.replay_batch is None and not self.settings.replay_sources
+            ):
                 raise ServiceError(503, "No qualified evidence provider for this mode")
             # An endpoint/scenario match is insufficient: bind the case to the
             # registered source bytes and normalized observation before provider I/O.
@@ -997,6 +999,10 @@ class CaseService:
 
             with self.store.transaction() as tx:
                 stored_alert = _read(Alert, tx.get("alerts", incident_id))
+            try:
+                batch = self.settings.source_for_alert(stored_alert)
+            except (ValueError, TypeError, AttributeError):
+                raise ServiceError(409, "Case alert source is unavailable") from None
             expected_alert = next(
                 (
                     item
