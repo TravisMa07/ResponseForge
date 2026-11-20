@@ -148,7 +148,8 @@ async function main(profile = defaultProfile) {
   const axiosVersion = profile.parentAxiosMetadataOnly ? profile.axiosVersion : require(profile.axiosEntry || 'axios').VERSION;
   assert.equal(axiosVersion, profile.axiosVersion);
   const materials = path.join(state,'materials'); fs.mkdirSync(materials,{mode:0o700});
-  certs(materials);
+  if (profile.prepareMaterials) await profile.prepareMaterials(materials);
+  else certs(materials);
   const modules = {};
   for (const [kind, filename] of [['original','upstream-server-api-client.ts'],['corrected','server-api-client.ts']]) {
     const dir = path.join(state,kind); fs.mkdirSync(dir,{mode:0o700});
@@ -158,6 +159,10 @@ async function main(profile = defaultProfile) {
       fs.writeFileSync(path.join(dir,output),code,{mode:0o600});
     }
     modules[kind] = path.join(dir,'server-api-client.js');
+  }
+  if (profile.correctedModule) {
+    assert.equal(hash(snapshot(profile.correctedModule,65536)),hash(snapshot(modules.corrected,65536)),'Installed correction differs from verified bytes');
+    modules.corrected = profile.correctedModule;
   }
   const servers = [], counters = {}, records = {};
   async function listen(name, tlsName, redirect) {
@@ -179,7 +184,7 @@ async function main(profile = defaultProfile) {
   const baseEnv = {...process.env};
   for (const key of ['HTTPS_PROXY','HTTP_PROXY','ALL_PROXY','https_proxy','http_proxy','all_proxy','NO_PROXY','no_proxy','NODE_EXTRA_CA_CERTS','NODE_TLS_REJECT_UNAUTHORIZED','NODE_OPTIONS','NODE_USE_ENV_PROXY']) delete baseEnv[key];
   if (profile.nodePath !== undefined) baseEnv.NODE_PATH = profile.nodePath;
-  const report = {schema_version:'1.0',claim:profile.claim || 'complete-transpiled-ServerAPIClient synthetic native TLS component only',revision:lock.revision,source_sha256:lock.members[0].sha256,patched_sha256:lock.patched_sha256,cookie_sha256:lock.members[1].sha256,node:process.version,openssl:execFileSync('openssl',['version'],{encoding:'utf8'}).trim(),axios:axiosVersion,compiler:profile.compilerName,compiler_version:profile.compilerVersion,...compiler.metadata,harness_sha256:hash(fs.readFileSync(__filename)),compiled_sha256:Object.fromEntries(Object.entries(modules).map(([name,file])=>[name,hash(fs.readFileSync(file))])),cookie_compiled_sha256:hash(fs.readFileSync(path.join(state,'corrected/cookie.js'))),semantic_typecheck:false,full_plugin_build:false,manager_runtime:false,scenarios:records};
+  const report = {schema_version:'1.0',claim:profile.claim || 'complete-transpiled-ServerAPIClient synthetic native TLS component only',revision:lock.revision,source_sha256:lock.members[0].sha256,patched_sha256:lock.patched_sha256,cookie_sha256:lock.members[1].sha256,node:process.version,openssl:profile.opensslVersion || execFileSync('openssl',['version'],{encoding:'utf8'}).trim(),axios:axiosVersion,compiler:profile.compilerName,compiler_version:profile.compilerVersion,...compiler.metadata,harness_sha256:hash(fs.readFileSync(__filename)),compiled_sha256:Object.fromEntries(Object.entries(modules).map(([name,file])=>[name,hash(fs.readFileSync(file))])),cookie_compiled_sha256:hash(fs.readFileSync(path.join(state,'corrected/cookie.js'))),semantic_typecheck:false,full_plugin_build:false,manager_runtime:false,scenarios:records};
   try {
     const good = await listen('good','good');
     const bad = await listen('untrusted','untrusted');
@@ -233,7 +238,8 @@ async function main(profile = defaultProfile) {
     assert.equal(counters.proxy.auth+counters.proxy.request,0,'Proxy received credentials');
     report.passed = true;
     fs.writeFileSync(path.join(state,'report.json'),JSON.stringify(report,null,2)+'\n',{mode:0o600});
-    process.stdout.write(JSON.stringify({passed:true,scenarios:Object.keys(records).length,report:path.join(state,'report.json')})+'\n');
+    if (profile.onReport) await profile.onReport(report);
+    else process.stdout.write(JSON.stringify({passed:true,scenarios:Object.keys(records).length,report:path.join(state,'report.json')})+'\n');
   } catch (error) {
     report.passed = false; report.failure = error.message;
     fs.writeFileSync(path.join(state,'report.json'),JSON.stringify(report,null,2)+'\n',{mode:0o600});
@@ -243,7 +249,7 @@ async function main(profile = defaultProfile) {
   }
 }
 
-module.exports = {main, trustedDirectory, snapshot, installModuleGuard};
+module.exports = {main, trustedDirectory, snapshot, installModuleGuard, createFixtureMaterials:certs};
 
 if (require.main === module) (async()=>{
   if (process.argv[2] === '--child') await child(JSON.parse(process.argv[3]));

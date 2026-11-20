@@ -1,0 +1,66 @@
+{
+  "schema_version": "1.0",
+  "work_id": "RF-07C4",
+  "evaluated_revision": "25741ccce7bf53ee6aa667668b44fa61eb586171",
+  "expectation_freeze": "c430963",
+  "environment": {
+    "platform": "macOS ARM64",
+    "python": "3.12.12",
+    "docker": "29.8.0; read-only observation only"
+  },
+  "offline": {
+    "repository_tests": 3102,
+    "c4_tests": 198,
+    "all_checks_passed": true,
+    "qualification_log_sha256": "053630b58bfdde047d20576e90fb0ee71b61e6bc73ce28fadb318608ac7e7c96",
+    "original_node_loader_vectors": 9
+  },
+  "host_regressions": {
+    "c1": {
+      "report_sha256": "0f756f19515ecf00a5f8109becb006fa0550e980c7eb026c1859e400b8f5918c",
+      "node": "v24.21.0",
+      "scenarios": 13,
+      "passed": true,
+      "claim": "host component regression only"
+    },
+    "c2": {
+      "report_sha256": "90c7da91f35cc40618d2fa2afd02c0bbeabb0927a7e18bdcec053c53414294ec",
+      "node": "v18.19.0",
+      "scenarios": 13,
+      "passed": true,
+      "claim": "host component regression only"
+    },
+    "c3": {
+      "report_sha256": "c49357abb1d64b55e31efbce72805eee11599afe30984a5b88c3b6ee8d201788",
+      "node": "v18.19.0",
+      "scenarios": 13,
+      "passed": true,
+      "claim": "host component regression only"
+    }
+  },
+  "prepared_packet": {
+    "source_fingerprint": "f9c0663329cadfc70a7eb9849dc6818aeefa459ac126bfcc7c055fc9c8a13889",
+    "plan_sha256": "2670a9bce475f125f5ea0a85558f315ed79ea28956b707ba8e232987e71315d5",
+    "fixture_sha256": "f97914173f454e199bfb1ff3d36752690ae1c1f69f3686746a0cf268d4a63563",
+    "read_only_preflight_passed": true,
+    "native_adapter": true,
+    "execution_authorized": false,
+    "qualified": false
+  },
+  "image_built": false,
+  "image_executed": false,
+  "bundled_linux_node_version_observed": false,
+  "dashboard_started": false,
+  "manager_started": false,
+  "live_endpoint_verified": false,
+  "deployment_ready": false,
+  "remaining_gates": [
+    "separate owner grant for fixed local parent pull/build/isolated Node fixture",
+    "actual derived image and primary Linux Node proof, all13 cases, exit and owned cleanup",
+    "independent review of actual native image artifacts",
+    "full plugin/platform/dashboard/manager bootstrap and capacity",
+    "whole-image licensing/security/source-offer review",
+    "captured manager/Windows/live endpoint proof",
+    "owner PR acceptance/merge and actual merged verification"
+  ]
+}

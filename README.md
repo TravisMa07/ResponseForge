@@ -70,3 +70,5 @@ Or use `make check doctor PYTHON=python3` when that interpreter is 3.12+. These 
 No endpoint operation is authorized by cloning this repository. Live operations require explicit administrator authorization, scoped approval and recovery procedures. External telemetry is untrusted data, never executable instructions. Credentials, local evidence and downloaded corpora must stay out of Git.
 
 Public source availability does not grant a software license. The project license remains an owner decision; no open-source license is selected in this foundation. Upstream software and datasets retain their own terms.
+
+The [guarded image qualification packet](docs/wazuh-image-qualification.md) prepares the next dashboard-client image check. Actual image build and isolated bundled-Node execution await a separate owner grant; no manager/dashboard or endpoint operation is implied.
