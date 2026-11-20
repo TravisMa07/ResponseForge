@@ -89,3 +89,6 @@ RF-07C1 [design](rf-07c1-design.md)/[expectations](expectations/rf-07c1.md) now 
 RF-07C2 [design](rf-07c2-design.md)/[expectations](expectations/rf-07c2.md) follows actual merged/verified C1. It resolves the platform Node18/Babel/Axios component compatibility gap with original lock-backed private tooling and real native TLS regressions. Full plugin packaging/deployed resolution and image/manager runtime remain separate gates; no Wazuh Docker or endpoint authority is inferred.
 
 RF-07C3 [design](rf-07c3-design.md)/[expectations](expectations/rf-07c3.md) starts from actual merged/verified C2. It qualifies a hash-bound shipped-client correction using actual packaged dependency paths and prepares a minimal private context for a separately authorized image build. No Docker image/service execution, live credentials/bootstrap or endpoint authority is inferred.
+
+
+RF-07C4 [design](rf-07c4-design.md)/[expectations](expectations/rf-07c4.md) implements the next guarded image execution packet. Separate owner approval and genuine bundled Linux Node/image proof remain required before draft promotion; [operator controls](wazuh-image-qualification.md) preserve no host mounts/ports/default entrypoint and ownership-only recovery.

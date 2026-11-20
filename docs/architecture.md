@@ -68,3 +68,6 @@ The [RF-03 design](rf-03-design.md) binds replay alerts/evidence to source bytes
 [RF-07C2](rf-07c2-design.md) checks the complete client with actual platform Node/Babel/Axios metadata and verified private presets. It audits a minimum original-lock-backed dependency closure while preserving full-plugin/deployed-resolution/image/runtime gates. [Platform runbook](wazuh-platform-client.md) separates source preparation and native checks from offline CI.
 
 [RF-07C3](rf-07c3-design.md) binds the shipped compiled client and actual nested dependency files to the immutable dashboard payload and prepares a private source-noticed overlay/build context. Host component execution and context generation remain separate from an image build, running manager or live endpoint proof.
+
+
+[RF-07C4](rf-07c4-design.md) adds a guarded local image/isolated bundled-Node qualification controller. Its [execution packet](wazuh-image-qualification.md) binds fixed source/target/inputs and requires a separate owner grant; offline test doubles never qualify an image. No Docker mutation or manager/endpoint readiness is inferred.

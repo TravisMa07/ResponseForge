@@ -33,3 +33,9 @@ Image qualifier verifies Linux/ARM64 uid1000, primary executable digest/license,
 Root owns target/policy/controller/Node hooks/scripts/locks/CI/shared docs and sole genuine Docker qualification. Independent expectations/tests own tests/rf07c4. A disjoint process-runner writer may own process_runner.py only after semantic red and freeze. New independent readers inspect actual code, private packet and source/input/argv/containment/ownership/proof limits. Offline control-plane tests use original child programs and Docker test doubles, explicitly unqualified; CI downloads/starts nothing.
 
 No Docker image mutation is authorized in this implementation turn yet. Complete and review the execution packet, then request the remaining scoped owner approval. Even a future passing image Node fixture does not start/qualify the dashboard, manager TLS/credentials/certificates/security-index/bootstrap/capacity, full plugin/frontend/source build, whole-image license/security clearance, captured alerts, native Windows or live endpoint actions. Deployment ready stays false.
+
+## Review refinement
+
+Independent review reproduced a resealed/partial input-manifest bypass. The controller now requires exactly four staged inputs and independently recomputes the fixed recipe, policy client digest and repository bootstrap bytes; fixture code/source identities remain independently checked. Verified inputs are frozen in memory before any mutation. A deterministic two-file TAR is retained and streamed to Docker build stdin; runtime stdin is retained before create. No later directory/input read can substitute executable build or fixture material. Focused regressions retain the original red and exercise concurrent post-validation packet changes.
+
+[Operator packet](wazuh-image-qualification.md) specifies the remaining exact owner grant and recovery boundary. Actual image execution remains pending.
